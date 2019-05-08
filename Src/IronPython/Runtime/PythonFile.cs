@@ -25,6 +25,7 @@ using System.IO.Pipes;
 #endif
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime {
     #region Readers
@@ -1511,7 +1512,7 @@ namespace IronPython.Runtime {
                 case "\n":
                     return PythonFileMode.TextLf;
                 default:
-                    throw new NotImplementedException("Unsupported Environment.NewLine value");
+                    throw new NotImplementedException(ResourceManager.Default.GetResource("UnsupportedEnvironmentNewLinevalue", "Unsupported Environment.NewLine value"));
             }
         }
 

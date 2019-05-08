@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using IronPython.Runtime;
+using Microsoft.Scripting;
 
 #if FEATURE_PROCESS
 
@@ -26,7 +27,7 @@ namespace IronPython.Modules {
                         break;
 
                     default:
-                        throw new InvalidOperationException("unreachable");
+                        throw new InvalidOperationException(ResourceManager.Default.GetResource("unreachable", "unreachable"));
                 }
                 
                 lock (PySignalToPyHandler) {
@@ -41,7 +42,7 @@ namespace IronPython.Modules {
                             e.Cancel = false;
                             return;
                         } else {
-                            throw new Exception("unreachable");
+                            throw new Exception(ResourceManager.Default.GetResource("unreachable", "unreachable"));
                         }
                     } else if (PySignalToPyHandler[pySignal] == default_int_handler) {
                         if (pySignal != SIGINT) {

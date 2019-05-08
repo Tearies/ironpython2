@@ -9,6 +9,7 @@ using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
 using IronPython.Runtime.Exceptions;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime {
     /// <summary>
@@ -55,7 +56,7 @@ namespace IronPython.Runtime {
                 return _value;
             }
             set {
-                if (_value == NotCaching) throw new ValueErrorException("Cannot change non-caching value.");
+                if (_value == NotCaching) throw new ValueErrorException(ResourceManager.Default.GetResource("Cannotchangenon-cachingvalue", "Cannot change non-caching value."));
                 _value = value;
             }
         }

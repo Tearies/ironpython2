@@ -68,7 +68,7 @@ namespace IronPython.Modules {
             if (thread != null) {
                 thread.Abort(new KeyboardInterruptException(""));
             } else {
-                throw PythonOps.SystemError("no main thread has been registered");
+                throw PythonOps.SystemError(ResourceManager.Default.GetResource("nomainthreadhasbeenregistered", "no main thread has been registered"));
             }
         }
 #endif

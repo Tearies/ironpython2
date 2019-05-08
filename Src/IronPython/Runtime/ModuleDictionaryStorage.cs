@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Reflection;
 using IronPython.Compiler;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Actions;
 using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
@@ -120,7 +121,7 @@ namespace IronPython.Runtime {
                             if (fieldInfo.IsStatic) {
                                 value = ((FieldInfo)members[0]).GetValue(null);
                             } else {
-                                throw new InvalidOperationException("instance field declared on module.  Fields should stored as PythonGlobals, should be static readonly, or marked as PythonHidden.");
+                                throw new InvalidOperationException(ResourceManager.Default.GetResource("instancefielddeclaredonmodule.", "instance field declared on module.  Fields should stored as PythonGlobals, should be static readonly, or marked as PythonHidden."));
                             }
 
                             if (publish) {
@@ -168,7 +169,7 @@ namespace IronPython.Runtime {
                             if ((propInfo.GetGetMethod() ?? propInfo.GetSetMethod()).IsStatic) {
                                 value = ((PropertyInfo)members[0]).GetValue(null, ArrayUtils.EmptyObjects);
                             } else {
-                                throw new InvalidOperationException("instance property declared on module.  Propreties should be declared as static, marked as PythonHidden, or you should use a PythonGlobal.");
+                                throw new InvalidOperationException(ResourceManager.Default.GetResource("instancepropertydeclaredonmodule", "instance property declared on module.  Propreties should be declared as static, marked as PythonHidden, or you should use a PythonGlobal."));
                             }
 
                             if (publish) {

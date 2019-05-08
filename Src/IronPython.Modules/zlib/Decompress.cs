@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using ComponentAce.Compression.Libs.ZLib;
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
@@ -70,7 +71,7 @@ no longer than max_length.  Unconsumed input data will be stored in
 the unconsumed_tail attribute.")]
         public string decompress([BytesConversion]IList<byte> value, int max_length=0)
         {
-            if(max_length < 0) throw new ArgumentException("max_length must be greater than zero");
+            if(max_length < 0) throw new ArgumentException(ResourceManager.Default.GetResource("maxlengthmustbegreaterthanzero", "max_length must be greater than zero"));
 
             byte[] input = value.ToArray();
             byte[] output = new byte[max_length > 0 && ZlibModule.DEFAULTALLOC > max_length ? max_length : ZlibModule.DEFAULTALLOC];

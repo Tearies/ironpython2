@@ -640,7 +640,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                 }
 
                 if (!UnderlyingSystemType.IsGenericTypeDefinition()) {
-                    throw new InvalidOperationException("MakeGenericType on non-generic type");
+                    throw new InvalidOperationException(ResourceManager.Default.GetResource("MakeGenericTypeonnongenerictype", "MakeGenericType on non-generic type"));
                 }
 
                 return DynamicHelpers.GetPythonTypeFromType(UnderlyingSystemType.MakeGenericType(args));
@@ -1136,7 +1136,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
             set {
                 // validate input...
                 foreach (PythonType pt in value) {
-                    if (pt == null) throw new ArgumentNullException("value", "a PythonType was null while assigning base classes");
+                    if (pt == null) throw new ArgumentNullException("value", ResourceManager.Default.GetResource("PythonTypewasnullwhileassigningbaseclasses", "a PythonType was null while assigning base classes"));
                 }
 
                 // first update our sub-type list
@@ -1992,14 +1992,14 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
         private void InitializeUserType(CodeContext/*!*/ context, string name, PythonTuple bases, PythonDictionary vars, string selfNames) {
             // we don't support overriding __mro__
             if (vars.ContainsKey("__mro__"))
-                throw new NotImplementedException("Overriding __mro__ of built-in types is not implemented");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("Overridingmroofbuiltintypesisnotimplemented", "Overriding __mro__ of built-in types is not implemented"));
 
             // cannot override mro when inheriting from type
             if (vars.ContainsKey("mro")) {
                 foreach (object o in bases) {
                     PythonType dt = o as PythonType;
                     if (dt != null && dt.IsSubclassOf(TypeCache.PythonType)) {
-                        throw new NotImplementedException("Overriding type.mro is not implemented");
+                        throw new NotImplementedException(ResourceManager.Default.GetResource("Overridingtypemroisnotimplemented", "Overriding type.mro is not implemented"));
                     }
                 }
             }

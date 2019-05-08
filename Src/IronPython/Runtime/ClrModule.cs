@@ -120,8 +120,8 @@ Assembly object, a full assembly name, or a partial assembly name. After the
 load the assemblies namespaces and top-level types will be available via 
 import Namespace.")]
         public static void AddReference(CodeContext/*!*/ context, params object[] references) {
-            if (references == null) throw new TypeErrorException("Expected string or Assembly, got NoneType");
-            if (references.Length == 0) throw new ValueErrorException("Expected at least one name, got none");
+            if (references == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringorAssemblygotNoneType", "Expected string or Assembly, got NoneType"));
+            if (references.Length == 0) throw new ValueErrorException(ResourceManager.Default.GetResource("Expectedatleastonenamegotnone", "Expected at least one name, got none"));
             ContractUtils.RequiresNotNull(context, "context");
 
             foreach (object reference in references) {
@@ -136,8 +136,8 @@ name should be the filename on disk without a directory specifier and
 optionally including the .EXE or .DLL extension. After the load the assemblies 
 namespaces and top-level types will be available via import Namespace.")]
         public static void AddReferenceToFile(CodeContext/*!*/ context, params string[] files) {
-            if (files == null) throw new TypeErrorException("Expected string, got NoneType");
-            if (files.Length == 0) throw new ValueErrorException("Expected at least one name, got none");
+            if (files == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringgotNoneType", "Expected string, got NoneType"));
+            if (files.Length == 0) throw new ValueErrorException(ResourceManager.Default.GetResource("Expectedatleastonenamegotnone", "Expected at least one name, got none"));
             ContractUtils.RequiresNotNull(context, "context");
 
             foreach (string file in files) {
@@ -149,8 +149,8 @@ namespaces and top-level types will be available via import Namespace.")]
 After the load the assemblies namespaces and top-level types will be available via 
 import Namespace.")]
         public static void AddReferenceByName(CodeContext/*!*/ context, params string[] names) {
-            if (names == null) throw new TypeErrorException("Expected string, got NoneType");
-            if (names.Length == 0) throw new ValueErrorException("Expected at least one name, got none");
+            if (names == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringgotNoneType", "Expected string, got NoneType"));
+            if (names.Length == 0) throw new ValueErrorException(ResourceManager.Default.GetResource("Expectedatleastonenamegotnone", "Expected at least one name, got none"));
             ContractUtils.RequiresNotNull(context, "context");
 
             foreach (string name in names) {
@@ -163,8 +163,8 @@ import Namespace.")]
 After the load the assemblies namespaces and top-level types will be available via 
 import Namespace.")]
         public static void AddReferenceByPartialName(CodeContext/*!*/ context, params string[] names) {
-            if (names == null) throw new TypeErrorException("Expected string, got NoneType");
-            if (names.Length == 0) throw new ValueErrorException("Expected at least one name, got none");
+            if (names == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringgotNoneType", "Expected string, got NoneType"));
+            if (names.Length == 0) throw new ValueErrorException(ResourceManager.Default.GetResource("Expectedatleastonenamegotnone", "Expected at least one name, got none"));
             ContractUtils.RequiresNotNull(context, "context");
 
             foreach (string name in names) {
@@ -178,16 +178,16 @@ import Namespace.")]
 assembly on disk. After the load the assemblies namespaces and top-level types 
 will be available via import Namespace.")]
         public static Assembly/*!*/ LoadAssemblyFromFileWithPath(CodeContext/*!*/ context, string/*!*/ file) {
-            if (file == null) throw new TypeErrorException("LoadAssemblyFromFileWithPath: arg 1 must be a string.");
+            if (file == null) throw new TypeErrorException(ResourceManager.Default.GetResource("LoadAssemblyFromFileWithPatharg1mustbeastring", "LoadAssemblyFromFileWithPath: arg 1 must be a string."));
             
             Assembly res;
             if (!context.LanguageContext.TryLoadAssemblyFromFileWithPath(file, out res)) {
                 if (!Path.IsPathRooted(file)) {
-                    throw new ValueErrorException("LoadAssemblyFromFileWithPath: path must be rooted");
+                    throw new ValueErrorException(ResourceManager.Default.GetResource("LoadAssemblyFromFileWithPathpathmustberooted", "LoadAssemblyFromFileWithPath: path must be rooted"));
                 } else if (!File.Exists(file)) {
-                    throw new ValueErrorException("LoadAssemblyFromFileWithPath: file not found");
+                    throw new ValueErrorException(ResourceManager.Default.GetResource("LoadAssemblyFromFileWithPathfilenotfound", "LoadAssemblyFromFileWithPath: file not found"));
                 } else {
-                    throw new ValueErrorException("LoadAssemblyFromFileWithPath: error loading assembly");
+                    throw new ValueErrorException(ResourceManager.Default.GetResource("LoadAssemblyFromFileWithPatherrorloadingassembly", "LoadAssemblyFromFileWithPath: error loading assembly"));
                 }
             }
             return res;
@@ -197,12 +197,12 @@ will be available via import Namespace.")]
 object.  Namespaces or types in the assembly can be accessed directly from 
 the assembly object.")]
         public static Assembly/*!*/ LoadAssemblyFromFile(CodeContext/*!*/ context, string/*!*/ file) {
-            if (file == null) throw new TypeErrorException("Expected string, got NoneType");
-            if (file.Length == 0) throw new ValueErrorException("assembly name must not be empty string");
+            if (file == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringgotNoneType", "Expected string, got NoneType"));
+            if (file.Length == 0) throw new ValueErrorException(ResourceManager.Default.GetResource("assemblynamemustnotbeemptystring", "assembly name must not be empty string"));
             ContractUtils.RequiresNotNull(context, "context");
 
             if (file.IndexOf(System.IO.Path.DirectorySeparatorChar) != -1) {
-                throw new ValueErrorException("filenames must not contain full paths, first add the path to sys.path");
+                throw new ValueErrorException(ResourceManager.Default.GetResource("filenamesmustnotcontainfullpaths", "filenames must not contain full paths, first add the path to sys.path"));
             }
 
             return context.LanguageContext.LoadAssemblyFromFile(file);
@@ -216,7 +216,7 @@ from the assembly object.")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.Reflection.Assembly.LoadWithPartialName")]
         public static Assembly/*!*/ LoadAssemblyByPartialName(string/*!*/ name) {
             if (name == null) {
-                throw new TypeErrorException("LoadAssemblyByPartialName: arg 1 must be a string");
+                throw new TypeErrorException(ResourceManager.Default.GetResource("LoadAssemblyByPartialNamearg1mustbeastring", "LoadAssemblyByPartialName: arg 1 must be a string"));
             }
 
 #pragma warning disable 618, 612 // csc
@@ -229,7 +229,7 @@ object.  Namespaces or types in the assembly can be accessed directly from
 the assembly object.")]
         public static Assembly/*!*/ LoadAssemblyByName(CodeContext/*!*/ context, string/*!*/ name) {
             if (name == null) {
-                throw new TypeErrorException("LoadAssemblyByName: arg 1 must be a string");
+                throw new TypeErrorException(ResourceManager.Default.GetResource("LoadAssemblyByNamearg1mustbeastring", "LoadAssemblyByName: arg 1 must be a string"));
             }
 
             return context.LanguageContext.DomainManager.Platform.LoadAssembly(name);
@@ -244,12 +244,12 @@ the assembly object.")]
             ContractUtils.RequiresNotNull(context, "context");
 
             if (name == null) {
-                throw new TypeErrorException("Use: arg 1 must be a string");
+                throw new TypeErrorException(ResourceManager.Default.GetResource("Usearg1mustbeastring", "Use: arg 1 must be a string"));
             }
 
             var scope = Importer.TryImportSourceFile(context.LanguageContext, name);
             if (scope == null) {
-                throw new ValueErrorException(String.Format("couldn't find module {0} to use", name));
+                throw new ValueErrorException(String.Format(ResourceManager.Default.GetResource("couldntfindmodule", "couldn't find module {0} to use"), name));
             }
             return scope;
         }
@@ -288,16 +288,16 @@ the assembly object.")]
             ContractUtils.RequiresNotNull(context, "context");
 
             if (path == null) {
-                throw new TypeErrorException("Use: arg 1 must be a string");
+                throw new TypeErrorException(ResourceManager.Default.GetResource("Usearg1mustbeastring", "Use: arg 1 must be a string"));
             }
 
             if (language == null) {
-                throw new TypeErrorException("Use: arg 2 must be a string");
+                throw new TypeErrorException(ResourceManager.Default.GetResource("Usearg2mustbeastring", "Use: arg 2 must be a string"));
             }
 
             var manager = context.LanguageContext.DomainManager;
             if (!manager.Platform.FileExists(path)) {
-                throw new ValueErrorException(String.Format("couldn't load module at path '{0}' in language '{1}'", path, language));
+                throw new ValueErrorException(String.Format(ResourceManager.Default.GetResource("couldntloadmodule", "couldn't load module at path '{0}' in language '{1}'"), path, language));
             }
 
             var sourceUnit = manager.GetLanguageByName(language).CreateFileUnit(path);
@@ -417,7 +417,7 @@ the assembly object.")]
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes")] // TODO: fix
         private static void AddReference(CodeContext/*!*/ context, string name) {
-            if (name == null) throw new TypeErrorException("Expected string, got NoneType");
+            if (name == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringgotNoneType", "Expected string, got NoneType"));
 
             Assembly asm = null;
 
@@ -441,7 +441,7 @@ the assembly object.")]
         }
 
         private static void AddReferenceToFile(CodeContext/*!*/ context, string file) {
-            if (file == null) throw new TypeErrorException("Expected string, got NoneType");
+            if (file == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringgotNoneType", "Expected string, got NoneType"));
 
 #if FEATURE_FILESYSTEM
             Assembly asm = LoadAssemblyFromFile(context, file);
@@ -457,7 +457,7 @@ the assembly object.")]
 
 #if FEATURE_LOADWITHPARTIALNAME
         private static void AddReferenceByPartialName(CodeContext/*!*/ context, string name) {
-            if (name == null) throw new TypeErrorException("Expected string, got NoneType");
+            if (name == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringgotNoneType", "Expected string, got NoneType"));
             ContractUtils.RequiresNotNull(context, "context");
 
             Assembly asm = LoadAssemblyByPartialName(name);
@@ -469,7 +469,7 @@ the assembly object.")]
         }
 #endif
         private static void AddReferenceByName(CodeContext/*!*/ context, string name) {
-            if (name == null) throw new TypeErrorException("Expected string, got NoneType");
+            if (name == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringgotNoneType", "Expected string, got NoneType"));
 
             Assembly asm = LoadAssemblyByName(context, name);
 
@@ -528,7 +528,7 @@ directory is added to sys.path and AddReferenceToFile is then called. After the
 load the assemblies namespaces and top-level types will be available via 
 import Namespace.")]
         public static void AddReferenceToFileAndPath(CodeContext/*!*/ context, params string[] files) {
-            if (files == null) throw new TypeErrorException("Expected string, got NoneType");
+            if (files == null) throw new TypeErrorException(ResourceManager.Default.GetResource("ExpectedstringgotNoneType", "Expected string, got NoneType"));
             ContractUtils.RequiresNotNull(context, "context");
 
             foreach (string file in files) {

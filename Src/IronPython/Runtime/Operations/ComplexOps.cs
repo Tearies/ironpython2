@@ -11,6 +11,7 @@ using IronPython.Runtime.Exceptions;
 using IronPython.Runtime.Types;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Operations {
     public class ExtensibleComplex : Extensible<Complex> {
@@ -114,7 +115,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static Complex Divide(Complex x, Complex y) {
             if (y.IsZero()) {
-                throw new DivideByZeroException("complex division by zero");
+                throw new DivideByZeroException(ResourceManager.Default.GetResource("complexdivisionbyzero", "complex division by zero"));
             }
 
             return x / y;
@@ -227,7 +228,7 @@ namespace IronPython.Runtime.Operations {
             Complex right;
             if (Converter.TryConvertToComplex(y, out right)) {
                 if (double.IsInfinity(right.Real) && (y is BigInteger || y is Extensible<BigInteger>)) {
-                    throw new OverflowException("long int too large to convert to float");
+                    throw new OverflowException(ResourceManager.Default.GetResource("long int too large to convert to float", "long int too large to convert to float"));
                 }
                 return PythonTuple.MakeTuple(x, right);
             }

@@ -56,6 +56,7 @@
 
 using System;
 using System.IO;
+using Microsoft.Scripting;
 
 namespace Ionic.BZip2
 {
@@ -211,7 +212,7 @@ namespace Ionic.BZip2
                                                                  offset, count, buffer.Length));
 
             if (this.input == null)
-                throw new IOException("the stream is not open");
+                throw new IOException(ResourceManager.Default.GetResource("thestreamisnotopen", "the stream is not open"));
 
 
             int hi = offset + count;
@@ -254,10 +255,10 @@ namespace Ionic.BZip2
                     return -1;
 
                 case CState.START_BLOCK:
-                    throw new IOException("bad state");
+                    throw new IOException(ResourceManager.Default.GetResource("badstate", "bad state"));
 
                 case CState.RAND_PART_A:
-                    throw new IOException("bad state");
+                    throw new IOException(ResourceManager.Default.GetResource("badstate", "bad state"));
 
                 case CState.RAND_PART_B:
                     SetupRandPartB();
@@ -268,7 +269,7 @@ namespace Ionic.BZip2
                     break;
 
                 case CState.NO_RAND_PART_A:
-                    throw new IOException("bad state");
+                    throw new IOException(ResourceManager.Default.GetResource("badstate", "bad state"));
 
                 case CState.NO_RAND_PART_B:
                     SetupNoRandPartB();
@@ -279,7 +280,7 @@ namespace Ionic.BZip2
                     break;
 
                 default:
-                    throw new IOException("bad state");
+                    throw new IOException(ResourceManager.Default.GetResource("badstate", "bad state"));
             }
 
             return retChar;
@@ -298,7 +299,7 @@ namespace Ionic.BZip2
         {
             get
             {
-                if (_disposed) throw new ObjectDisposedException("BZip2Stream");
+                if (_disposed) throw new ObjectDisposedException(ResourceManager.Default.GetResource("BZip2Stream", "BZip2Stream"));
                 return this.input.CanRead;
             }
         }
@@ -326,7 +327,7 @@ namespace Ionic.BZip2
         {
             get
             {
-                if (_disposed) throw new ObjectDisposedException("BZip2Stream");
+                if (_disposed) throw new ObjectDisposedException(ResourceManager.Default.GetResource("BZip2Stream", "BZip2Stream"));
                 return input.CanWrite;
             }
         }
@@ -336,7 +337,7 @@ namespace Ionic.BZip2
         /// </summary>
         public override void Flush()
         {
-            if (_disposed) throw new ObjectDisposedException("BZip2Stream");
+            if (_disposed) throw new ObjectDisposedException(ResourceManager.Default.GetResource("BZip2Stream", "BZip2Stream"));
             input.Flush();
         }
 
@@ -432,10 +433,10 @@ namespace Ionic.BZip2
         void init()
         {
             if (null == this.input)
-                throw new IOException("No input Stream");
+                throw new IOException(ResourceManager.Default.GetResource("NoinputStream", "No input Stream"));
 
             if (!this.input.CanRead)
-                throw new IOException("Unreadable input Stream");
+                throw new IOException(ResourceManager.Default.GetResource("UnreadableinputStream", "Unreadable input Stream"));
 
             CheckMagicChar('B', 0);
             CheckMagicChar('Z', 1);
@@ -444,8 +445,7 @@ namespace Ionic.BZip2
             int blockSize = this.input.ReadByte();
 
             if ((blockSize < '1') || (blockSize > '9'))
-                throw new IOException("Stream is not BZip2 formatted: illegal "
-                                      + "blocksize " + (char) blockSize);
+                throw new IOException(string.Format(ResourceManager.Default.GetResource("StreamisnotBZip2formatted", "Stream is not BZip2 formatted: illegal blocksize {0}"), (char) blockSize));
 
             this.blockSize100k = blockSize - '0';
 
@@ -579,7 +579,7 @@ namespace Ionic.BZip2
                     int thech = this.input.ReadByte();
 
                     if (thech < 0)
-                        throw new IOException("unexpected end of stream");
+                        throw new IOException(ResourceManager.Default.GetResource("unexpectedendofstream", "unexpected end of stream"));
 
                     // Console.WriteLine("R {0:X2}", thech);
 
@@ -821,9 +821,9 @@ namespace Ionic.BZip2
             this.origPtr = GetBits(24);
 
             if (this.origPtr < 0)
-                throw new IOException("BZ_DATA_ERROR");
+                throw new IOException(ResourceManager.Default.GetResource("BZ_DATA_ERROR", "BZ_DATA_ERROR"));
             if (this.origPtr > 10 + BZip2.BlockSizeMultiple * this.blockSize100k)
-                throw new IOException("BZ_DATA_ERROR");
+                throw new IOException(ResourceManager.Default.GetResource("BZ_DATA_ERROR", "BZ_DATA_ERROR"));
 
             recvDecodingTables();
 
@@ -904,7 +904,7 @@ namespace Ionic.BZip2
                             }
                             else
                             {
-                                throw new IOException("unexpected end of stream");
+                                throw new IOException(ResourceManager.Default.GetResource("unexpectedendofstream", "unexpected end of stream"));
                             }
                         }
                         int zvec = (bsBuffShadow >> (bsLiveShadow - zn))
@@ -925,7 +925,7 @@ namespace Ionic.BZip2
                                 }
                                 else
                                 {
-                                    throw new IOException("unexpected end of stream");
+                                    throw new IOException(ResourceManager.Default.GetResource("unexpectedendofstream", "unexpected end of stream"));
                                 }
                             }
                             bsLiveShadow--;
@@ -944,12 +944,12 @@ namespace Ionic.BZip2
                     }
 
                     if (lastShadow >= limitLast)
-                        throw new IOException("block overrun");
+                        throw new IOException(ResourceManager.Default.GetResource("blockoverrun", "block overrun"));
                 }
                 else
                 {
                     if (++lastShadow >= limitLast)
-                        throw new IOException("block overrun");
+                        throw new IOException(ResourceManager.Default.GetResource("blockoverrun", "block overrun"));
 
                     byte tmp = yy[nextSym - 1];
                     s.unzftab[s.seqToUnseq[tmp] & 0xff]++;
@@ -1003,7 +1003,7 @@ namespace Ionic.BZip2
                         }
                         else
                         {
-                            throw new IOException("unexpected end of stream");
+                            throw new IOException(ResourceManager.Default.GetResource("unexpectedendofstream", "unexpected end of stream"));
                         }
                     }
                     int zvec = (bsBuffShadow >> (bsLiveShadow - zn))
@@ -1024,7 +1024,7 @@ namespace Ionic.BZip2
                             }
                             else
                             {
-                                throw new IOException("unexpected end of stream");
+                                throw new IOException(ResourceManager.Default.GetResource("unexpectedendofstream", "unexpected end of stream"));
                             }
                         }
                         bsLiveShadow--;
@@ -1065,7 +1065,7 @@ namespace Ionic.BZip2
                     }
                     else
                     {
-                        throw new IOException("unexpected end of stream");
+                        throw new IOException(ResourceManager.Default.GetResource("unexpectedendofstream", "unexpected end of stream"));
                     }
                 }
                 bsLiveShadow--;
@@ -1094,7 +1094,7 @@ namespace Ionic.BZip2
             for (i = 0; i <= 255; i++)
             {
                 if (s.unzftab[i] < 0 || s.unzftab[i] > this.last)
-                    throw new Exception("BZ_DATA_ERROR");
+                    throw new Exception(ResourceManager.Default.GetResource("BZ_DATA_ERROR", "BZ_DATA_ERROR"));
             }
 
             /* Actually generate cftab. */
@@ -1106,7 +1106,7 @@ namespace Ionic.BZip2
             {
                 if (s.cftab[i] < 0 || s.cftab[i] > this.last+1)
                 {
-                    var msg = String.Format("BZ_DATA_ERROR: cftab[{0}]={1} last={2}",
+                    var msg = String.Format(ResourceManager.Default.GetResource("BZ_DATA_ERROR:cftab", "BZ_DATA_ERROR: cftab[{0}]={1} last={2}"),
                                             i, s.cftab[i], this.last);
                     throw new Exception(msg);
                 }
@@ -1115,7 +1115,7 @@ namespace Ionic.BZip2
             for (i = 1; i <= 256; i++)
             {
                 if (s.cftab[i-1] > s.cftab[i])
-                    throw new Exception("BZ_DATA_ERROR");
+                    throw new Exception(ResourceManager.Default.GetResource("BZ_DATA_ERROR", "BZ_DATA_ERROR"));
             }
 
             int lastShadow;
@@ -1125,7 +1125,7 @@ namespace Ionic.BZip2
             }
 
             if ((this.origPtr < 0) || (this.origPtr >= tt.Length))
-                throw new IOException("stream corrupted");
+                throw new IOException(ResourceManager.Default.GetResource("streamcorrupted", "stream corrupted"));
 
             this.su_tPos = tt[this.origPtr];
             this.su_count = 0;

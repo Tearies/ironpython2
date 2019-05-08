@@ -11,7 +11,7 @@ using Microsoft.Scripting.Utils;
 using System.Text;
 
 using IronPython.Runtime.Types;
-
+using Microsoft.Scripting;
 using SpecialNameAttribute = System.Runtime.CompilerServices.SpecialNameAttribute;
 
 namespace IronPython.Runtime.Operations {
@@ -23,7 +23,7 @@ namespace IronPython.Runtime.Operations {
             if (data1 == null) throw PythonOps.TypeError("expected array for 1st argument, got None");
             if (data2 == null) throw PythonOps.TypeError("expected array for 2nd argument, got None");
 
-            if (data1.Rank > 1 || data2.Rank > 1) throw new NotImplementedException("can't add multidimensional arrays");
+            if (data1.Rank > 1 || data2.Rank > 1) throw new NotImplementedException(ResourceManager.Default.GetResource("cantaddmultidimensionalarrays", "can't add multidimensional arrays"));
 
             Type type1 = data1.GetType();
             Type type2 = data2.GetType();
@@ -75,7 +75,7 @@ namespace IronPython.Runtime.Operations {
         /// </summary>
         [SpecialName]
         public static Array Multiply(Array data, int count) {
-            if (data.Rank > 1) throw new NotImplementedException("can't multiply multidimensional arrays");
+            if (data.Rank > 1) throw new NotImplementedException(ResourceManager.Default.GetResource("cantmultiplymultidimensionalarrays", "can't multiply multidimensional arrays"));
 
             Type elemType = data.GetType().GetElementType();
             if (count <= 0) return Array.CreateInstance(elemType, 0);

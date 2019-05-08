@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Dynamic;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Binding {
     using Ast = Expression;
@@ -128,7 +129,7 @@ namespace IronPython.Runtime.Binding {
         /// </summary>
         public DynamicMetaObject/*!*/ GetMetaObject(params DynamicMetaObject/*!*/[]/*!*/ types) {
             if (_body == null) {
-                throw new InvalidOperationException("FinishCondition not called before GetMetaObject");
+                throw new InvalidOperationException(ResourceManager.Default.GetResource("FinishConditionnotcalledbeforeGetMetaObject", "FinishCondition not called before GetMetaObject"));
             }
 
             Expression body = _body;
@@ -154,7 +155,7 @@ namespace IronPython.Runtime.Binding {
         /// </summary>
         public void AddVariable(ParameterExpression/*!*/ var) {
             if (_body != null) {
-                throw new InvalidOperationException("Variables must be added before calling FinishCondition");
+                throw new InvalidOperationException(ResourceManager.Default.GetResource("VariablesmustbeaddedbeforecallingFinishCondition", "Variables must be added before calling FinishCondition"));
             }
 
             _variables.Add(var);

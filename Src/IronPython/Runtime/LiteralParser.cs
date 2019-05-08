@@ -15,6 +15,7 @@ using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime {
     /// <summary>
@@ -296,7 +297,7 @@ namespace IronPython.Runtime {
         private static int HexValue(char ch) {
             int value;
             if (!HexValue(ch, out value)) {
-                throw new ValueErrorException("bad char for integer value: " + ch);
+                throw new ValueErrorException(string.Format(ResourceManager.Default.GetResource("Badcharforintegervalue", "bad char for integer value: {0}") ,ch));
             }
             return value;
         }
@@ -364,7 +365,7 @@ namespace IronPython.Runtime {
             short sign = 1;
 
             if (b < 0 || b == 1 || b > 36) {
-                throw new ValueErrorException("base must be >= 2 and <= 36");
+                throw new ValueErrorException(ResourceManager.Default.GetResource("basemustbetwen2and36", "base must be >= 2 and <= 36"));
             }
 
             ParseIntegerStart(text, ref b, ref start, end, ref sign);
@@ -460,7 +461,7 @@ namespace IronPython.Runtime {
             while (start < end && Char.IsWhiteSpace(text, start)) start++;
 
             if (start < end) {
-                throw new ValueErrorException("invalid integer number literal");
+                throw new ValueErrorException(ResourceManager.Default.GetResource("invalidintegernumberliteral", "invalid integer number literal"));
             }
         }
 
@@ -499,7 +500,7 @@ namespace IronPython.Runtime {
             short sign = 1;
 
             if (b < 0 || b == 1 || b > 36) {
-                throw new ValueErrorException("base must be >= 2 and <= 36");
+                throw new ValueErrorException(ResourceManager.Default.GetResource("basemustbetwen2and36", "base must be >= 2 and <= 36"));
             }
 
             ParseIntegerStart(text, ref b, ref start, end, ref sign);

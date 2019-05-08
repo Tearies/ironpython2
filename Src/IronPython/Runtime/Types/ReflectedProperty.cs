@@ -108,7 +108,7 @@ namespace IronPython.Runtime.Types {
             }
 
             if (Getter.Length == 0) {
-                throw new MissingMemberException("unreadable property");
+                throw new MissingMemberException(ResourceManager.Default.GetResource("unreadableproperty", "unreadable property"));
             }
 
             if (owner == null) {
@@ -220,7 +220,7 @@ namespace IronPython.Runtime.Types {
             if (TryGetValue(context, instance, DynamicHelpers.GetPythonType(instance), out value)) {
                 return value;
             }
-            throw new InvalidOperationException("cannot get property");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("cannotgetproperty", "cannot get property"));
         }
 
         /// <summary>
@@ -229,7 +229,7 @@ namespace IronPython.Runtime.Types {
         [PythonHidden]
         public void SetValue(CodeContext context, object instance, object value) {
             if (!TrySetValue(context, instance, DynamicHelpers.GetPythonType(instance), value)) {
-                throw new InvalidOperationException("cannot set property");
+                throw new InvalidOperationException(ResourceManager.Default.GetResource("cannotsetproperty", "cannot set property"));
             }
         }
 

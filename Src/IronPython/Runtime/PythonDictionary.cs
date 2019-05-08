@@ -752,7 +752,7 @@ namespace IronPython.Runtime {
         #region ICollection Members
 
         void ICollection.CopyTo(Array array, int index) {
-            throw new NotImplementedException("The method or operation is not implemented.");
+            throw new NotImplementedException(ResourceManager.Default.GetResource("Themethodoroperationisnotimplemented", "The method or operation is not implemented."));
         }
 
         bool ICollection.IsSynchronized {
@@ -1134,11 +1134,11 @@ namespace IronPython.Runtime {
         #region ICollection<object> Members
 
         void ICollection<object>.Add(object key) {
-            throw new NotSupportedException("Collection is read-only");
+            throw new NotSupportedException(ResourceManager.Default.GetResource("Collectionisreadonly", "Collection is read-only"));
         }
 
         void ICollection<object>.Clear() {
-            throw new NotSupportedException("Collection is read-only");
+            throw new NotSupportedException(ResourceManager.Default.GetResource("Collectionisreadonly", "Collection is read-only"));
         }
 
         [PythonHidden]
@@ -1168,7 +1168,7 @@ namespace IronPython.Runtime {
         }
 
         bool ICollection<object>.Remove(object item) {
-            throw new NotSupportedException("Collection is read-only");
+            throw new NotSupportedException(ResourceManager.Default.GetResource("Collectionisreadonly", "Collection is read-only"));
         }
 
         #endregion
@@ -1490,11 +1490,11 @@ namespace IronPython.Runtime {
         #region ICollection<object> Members
 
         void ICollection<object>.Add(object item) {
-            throw new NotSupportedException("Collection is read-only");
+            throw new NotSupportedException(ResourceManager.Default.GetResource("Collectionisreadonly", "Collection is read-only"));
         }
 
         void ICollection<object>.Clear() {
-            throw new NotSupportedException("Collection is read-only");
+            throw new NotSupportedException(ResourceManager.Default.GetResource("Collectionisreadonly", "Collection is read-only"));
         }
 
         [PythonHidden]
@@ -1530,7 +1530,7 @@ namespace IronPython.Runtime {
         }
 
         bool ICollection<object>.Remove(object item) {
-            throw new NotSupportedException("Collection is read-only");
+            throw new NotSupportedException(ResourceManager.Default.GetResource("Collectionisreadonly", "Collection is read-only"));
         }
 
         #endregion

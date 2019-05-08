@@ -632,7 +632,7 @@ namespace IronPython.Modules {
             }
 
             void IEnumerator.Reset() {
-                throw new NotImplementedException("The method or operation is not implemented.");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("Themethodoroperationisnotimplemented", "The method or operation is not implemented."));
             }
 
             public object __iter__() {
@@ -708,7 +708,7 @@ namespace IronPython.Modules {
             }
 
             void IEnumerator.Reset() {
-                throw new NotImplementedException("The method or operation is not implemented.");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("Themethodoroperationisnotimplemented", "The method or operation is not implemented."));
             }
 
             public object __iter__() {
@@ -1151,7 +1151,7 @@ namespace IronPython.Modules {
             }
 
             void IEnumerator.Reset() {
-                throw new NotImplementedException("The method or operation is not implemented.");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("Themethodoroperationisnotimplemented", "The method or operation is not implemented."));
             }
 
             public object __iter__() {

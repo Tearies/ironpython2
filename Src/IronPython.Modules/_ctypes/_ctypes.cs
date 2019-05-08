@@ -2,8 +2,9 @@
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-#if FEATURE_CTYPES
 
+using Microsoft.Scripting;
+#if FEATURE_CTYPES
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -160,7 +161,7 @@ namespace IronPython.Modules {
         }
 
         public static int CopyComPointer(object src, object dest) {
-            throw new NotImplementedException("CopyComPointer");
+            throw new NotImplementedException(ResourceManager.Default.GetResource("CopyComPointer", "CopyComPointer"));
         }
 
         public static string FormatError() {

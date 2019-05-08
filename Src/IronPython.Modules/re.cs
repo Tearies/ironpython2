@@ -499,7 +499,7 @@ namespace IronPython.Modules {
             if (scope is PythonModule && ((PythonModule)scope).__dict__.TryGetValue("compile", out object compile)) {
                 return PythonTuple.MakeTuple(compile, PythonTuple.MakeTuple(pattern.pattern, pattern.flags));
             }
-            throw new InvalidOperationException("couldn't find compile method");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("couldntfindcompilemethod", "couldn't find compile method"));
         }
 
         [PythonType]

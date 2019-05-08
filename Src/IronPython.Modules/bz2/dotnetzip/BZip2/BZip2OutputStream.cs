@@ -81,6 +81,7 @@
 
 using System;
 using System.IO;
+using Microsoft.Scripting;
 
 
 namespace Ionic.BZip2
@@ -186,7 +187,7 @@ namespace Ionic.BZip2
             if (blockSize < BZip2.MinBlockSize ||
                 blockSize > BZip2.MaxBlockSize)
             {
-                var msg = String.Format("blockSize={0} is out of range; must be between {1} and {2}",
+                var msg = String.Format(ResourceManager.Default.GetResource("blockSizeisoutofrange", "blockSize={0} is out of range; must be between {1} and {2}"),
                                         blockSize,
                                         BZip2.MinBlockSize, BZip2.MaxBlockSize);
                 throw new ArgumentException(msg, "blockSize");
@@ -194,7 +195,7 @@ namespace Ionic.BZip2
 
             this.output = output;
             if (!this.output.CanWrite)
-                throw new ArgumentException("The stream is not writable.", "output");
+                throw new ArgumentException(ResourceManager.Default.GetResource("Thestreamisnotwritable", "The stream is not writable."), "output");
 
             this.bw = new BitWriter(this.output);
             this.blockSize100k = blockSize;
@@ -341,7 +342,7 @@ namespace Ionic.BZip2
                 throw new IndexOutOfRangeException(String.Format("offset({0}) count({1}) bLength({2})",
                                                                  offset, count, buffer.Length));
             if (this.output == null)
-                throw new IOException("the stream is not open");
+                throw new IOException(ResourceManager.Default.GetResource("thestreamisnotopen", "the stream is not open"));
 
             if (count == 0) return;  // nothing to do
 
@@ -421,7 +422,7 @@ namespace Ionic.BZip2
         {
             get
             {
-                if (this.output == null) throw new ObjectDisposedException("BZip2Stream");
+                if (this.output == null) throw new ObjectDisposedException(ResourceManager.Default.GetResource("BZip2Stream", "BZip2Stream"));
                 return this.output.CanWrite;
             }
         }

@@ -2,8 +2,9 @@
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
-#if FEATURE_REGISTRY //Registry not available in silverlight and we require .NET 4.0 APIs for implementing this.
 
+using Microsoft.Scripting;
+#if FEATURE_REGISTRY //Registry not available in silverlight and we require .NET 4.0 APIs for implementing this.
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -206,7 +207,7 @@ namespace IronPython.Modules {
             HKEYType rootKey = GetRootKey(key);
 
             if (key is BigInteger && string.IsNullOrEmpty(subKeyName))
-                throw new InvalidCastException("DeleteKey() argument 2 must be string, not None");
+                throw new InvalidCastException(ResourceManager.Default.GetResource("DeleteKeyargument2mustbestring", "DeleteKey() argument 2 must be string, not None"));
 
             // the .NET APIs don't work with a key name of length 256, use a PInvoke instead
             if (subKeyName.Length == 256) {
@@ -396,7 +397,7 @@ namespace IronPython.Modules {
                                    newKey = nativeRootKey.OpenSubKey(subKeyName, false);
                                }
                 } else {
-                    throw new Win32Exception("Unexpected mode");
+                    throw new Win32Exception(ResourceManager.Default.GetResource("Unexpectedmode", "Unexpected mode"));
                 }
             } catch (SecurityException) {
                 throw PythonExceptions.CreateThrowable(PythonExceptions.WindowsError, PythonExceptions._WindowsError.ERROR_ACCESS_DENIED, "Access is denied");
@@ -529,7 +530,7 @@ namespace IronPython.Modules {
             HKEYType rootKey = GetRootKey(key);
 
             if (!Environment.Is64BitOperatingSystem) {
-                throw new NotImplementedException("not implemented on this platform");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("notimplementedonthisplatform", "not implemented on this platform"));
             }
 
             int dwRet = RegDisableReflectionKey(rootKey.GetKey().Handle);
@@ -542,7 +543,7 @@ namespace IronPython.Modules {
             HKEYType rootKey = GetRootKey(key);
 
             if (!Environment.Is64BitOperatingSystem) {
-                throw new NotImplementedException("not implemented on this platform");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("notimplementedonthisplatform", "not implemented on this platform"));
             }
 
             int dwRet = RegEnableReflectionKey(rootKey.GetKey().Handle);
@@ -556,7 +557,7 @@ namespace IronPython.Modules {
             bool isDisabled;
             
             if(!Environment.Is64BitOperatingSystem) {
-                throw new NotImplementedException("not implemented on this platform");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("notimplementedonthisplatform", "not implemented on this platform"));
             }
 
             int dwRet = RegQueryReflectionKey(rootKey.GetKey().Handle, out isDisabled);
@@ -576,7 +577,7 @@ namespace IronPython.Modules {
                 if (key is BigInteger) {
                     rootKey = new HKEYType(RegistryKey.OpenBaseKey(MapSystemKey((BigInteger)key), RegistryView.Default), (BigInteger)key);
                 } else {
-                    throw new InvalidCastException("The object is not a PyHKEY object");
+                    throw new InvalidCastException(ResourceManager.Default.GetResource("TheobjectisnotaPyHKEYobject", "The object is not a PyHKEY object"));
                 }
             }
             return rootKey;
@@ -599,7 +600,7 @@ namespace IronPython.Modules {
             else if (hKey == HKEY_USERS)
                 return RegistryHive.Users;
             else
-                throw new ValueErrorException("Unknown system key");
+                throw new ValueErrorException(ResourceManager.Default.GetResource("Unknownsystemkey", "Unknown system key"));
         }
 
         private static int MapRegistryValueKind(RegistryValueKind registryValueKind) {

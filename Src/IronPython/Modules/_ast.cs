@@ -103,7 +103,7 @@ namespace IronPython.Modules
                 case "single":
                     return new Interactive(suite);
                 default:
-                    throw new ArgumentException("kind must be 'exec' or 'eval' or 'single'");
+                    throw new ArgumentException(ResourceManager.Default.GetResource("KindError", "kind must be 'exec' or 'eval' or 'single'"));
             }
         }
 
@@ -205,7 +205,7 @@ namespace IronPython.Modules
                     if (allowNull)
                         return PythonOps.MakeEmptyList(0);
                     else
-                        throw new ArgumentNullException("stmt");
+                        throw new ArgumentNullException(ResourceManager.Default.GetResource("stmt","stmt"));
 
                 if (stmt is SuiteStatement) {
                     SuiteStatement suite = (SuiteStatement)stmt;
@@ -272,7 +272,7 @@ namespace IronPython.Modules
                 else if (stmt is EmptyStatement)
                     ast = new Pass();
                 else
-                    throw new ArgumentTypeException("Unexpected statement type: " + stmt.GetType());
+                    throw new ArgumentTypeException(string.Format(ResourceManager.Default.GetResource("Unexpectedstatementtype", "Unexpected statement type: {0}") , stmt.GetType()));
 
                 ast.GetSourceLocation(stmt);
                 return ast;
@@ -381,7 +381,7 @@ namespace IronPython.Modules
                 else if (expr is SetComprehension)
                     ast = new SetComp((SetComprehension)expr);
                 else
-                    throw new ArgumentTypeException("Unexpected expression type: " + expr.GetType());
+                    throw new ArgumentTypeException(string.Format(ResourceManager.Default.GetResource("Unexpectedexpressiontype", "Unexpected expression type:{0} ") ,expr.GetType()));
 
                 ast.GetSourceLocation(expr);
                 return ast;
@@ -401,7 +401,7 @@ namespace IronPython.Modules
                     ast = new Str(Converter.ConvertToString(expr.Value));
 
                 else
-                    throw new ArgumentTypeException("Unexpected constant type: " + expr.Value.GetType());
+                    throw new ArgumentTypeException(string.Format(ResourceManager.Default.GetResource("Unexpectedconstanttype", "Unexpected constant type:{0} ") ,expr.Value.GetType()));
 
                 return ast;
             }
@@ -416,7 +416,7 @@ namespace IronPython.Modules
                     }
                 }
 
-                throw new ArgumentTypeException("Unexpected operator type: " + op.GetType());
+                throw new ArgumentTypeException(string.Format(ResourceManager.Default.GetResource("Unexpectedoperatortype", "Unexpected operator type: {0}") ,op.GetType()));
             }
 
             internal static AST Convert(Node node) {
@@ -425,7 +425,7 @@ namespace IronPython.Modules
                 if (node is TryStatementHandler)
                     ast = new ExceptHandler((TryStatementHandler)node);
                 else
-                    throw new ArgumentTypeException("Unexpected node type: " + node.GetType());
+                    throw new ArgumentTypeException(string.Format(ResourceManager.Default.GetResource("Unexpectednodetype", "Unexpected node type: {0}") , node.GetType()));
 
                 ast.GetSourceLocation(node);
                 return ast;
@@ -537,7 +537,7 @@ namespace IronPython.Modules
                     case PythonOperator.Xor:
                         return BitXor.Instance;
                     default:
-                        throw new ArgumentException("Unexpected PythonOperator: " + op, "op");
+                        throw new ArgumentException(string.Format(ResourceManager.Default.GetResource("UnexpectedPythonOperator", "Unexpected PythonOperator: {0}") , op), "op");
                 }
             }
         }

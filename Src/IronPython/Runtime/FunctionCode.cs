@@ -623,7 +623,7 @@ namespace IronPython.Runtime {
             var code = PythonContext.CompilePythonCode(sourceUnit, options, ThrowingErrorSink.Default);
             if (sourceUnit.CodeProperties == ScriptCodeParseResult.Empty) {
                 // source span is made up
-                throw new SyntaxErrorException("unexpected EOF while parsing",
+                throw new SyntaxErrorException(ResourceManager.Default.GetResource("unexpectedEOFwhileparsing", "unexpected EOF while parsing"),
                     sourceUnit, new SourceSpan(new SourceLocation(0, 1, 1), new SourceLocation(0, 1, 1)), 0, Severity.Error);
             }
             return ((RunnableScriptCode)code).GetFunctionCode(register);

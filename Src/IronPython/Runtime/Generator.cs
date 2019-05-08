@@ -198,7 +198,7 @@ namespace IronPython.Runtime {
                 }
 
                 // Generator should not have exited normally. 
-                return LightExceptions.Throw(new RuntimeException("generator ignored GeneratorExit"));
+                return LightExceptions.Throw(new RuntimeException(ResourceManager.Default.GetResource("generatorignoredGeneratorExit", "generator ignored GeneratorExit")));
             } catch (StopIterationException) {
                 // Ignore, clear any stack frames we built up
             } catch (GeneratorExitException) {

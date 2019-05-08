@@ -1452,7 +1452,7 @@ namespace IronPython.Runtime {
         int IStructuralComparable.CompareTo(object other, IComparer comparer) {
             List l = other as List;
             if (l == null) {
-                throw new ValueErrorException("expected List");
+                throw new ValueErrorException(ResourceManager.Default.GetResource("expectedList", "expected List"));
             }
 
             return CompareTo(l, comparer);

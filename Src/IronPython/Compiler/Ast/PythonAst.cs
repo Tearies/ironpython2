@@ -138,7 +138,7 @@ namespace IronPython.Compiler.Ast {
             ContractUtils.RequiresNotNull(body, "body");
 
             if (_body != null) {
-                throw new InvalidOperationException("cannot set body twice");
+                throw new InvalidOperationException(ResourceManager.Default.GetResource("cannotsetbodytwice", "cannot set body twice"));
             }
 
             _body = body;

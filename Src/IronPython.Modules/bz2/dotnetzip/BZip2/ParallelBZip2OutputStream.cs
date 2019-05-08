@@ -132,6 +132,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Threading;
+using Microsoft.Scripting;
 
 namespace Ionic.BZip2
 {
@@ -295,7 +296,7 @@ namespace Ionic.BZip2
         {
             if (blockSize < BZip2.MinBlockSize || blockSize > BZip2.MaxBlockSize)
             {
-                var msg = String.Format("blockSize={0} is out of range; must be between {1} and {2}",
+                var msg = String.Format(ResourceManager.Default.GetResource("blockSizeisoutofrange", "blockSize={0} is out of range; must be between {1} and {2}"),
                                         blockSize,
                                         BZip2.MinBlockSize, BZip2.MaxBlockSize);
                 throw new ArgumentException(msg, "blockSize");
@@ -303,7 +304,7 @@ namespace Ionic.BZip2
 
             this.output = output;
             if (!this.output.CanWrite)
-                throw new ArgumentException("The stream is not writable.", "output");
+                throw new ArgumentException(ResourceManager.Default.GetResource("Thestreamisnotwritable", "The stream is not writable."), "output");
 
             this.bw = new BitWriter(this.output);
             this.blockSize100k = blockSize;
@@ -566,7 +567,7 @@ namespace Ionic.BZip2
             //   3. if more data to be written,  goto step 1
 
             if (this.output == null)
-                throw new IOException("the stream is not open");
+                throw new IOException(ResourceManager.Default.GetResource("thestreamisnotopen", "the stream is not open"));
 
             // dispense any exceptions that occurred on the BG threads
             if (this.pendingException != null)
@@ -635,7 +636,7 @@ namespace Ionic.BZip2
                 if (n != bytesRemaining)
                 {
                     if (!ThreadPool.QueueUserWorkItem( CompressOne, workitem ))
-                        throw new Exception("Cannot enqueue workitem");
+                        throw new Exception(ResourceManager.Default.GetResource("Cannotenqueueworkitem", "Cannot enqueue workitem"));
 
                     this.currentlyFilling = -1; // will get a new buffer next time
                     offset += n;
@@ -883,7 +884,7 @@ namespace Ionic.BZip2
         {
             get
             {
-                if (this.output == null) throw new ObjectDisposedException("BZip2Stream");
+                if (this.output == null) throw new ObjectDisposedException(ResourceManager.Default.GetResource("BZip2Stream", "BZip2Stream"));
                 return this.output.CanWrite;
             }
         }

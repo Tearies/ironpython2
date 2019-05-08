@@ -275,11 +275,11 @@ namespace IronPython {
                 } else if (value is string) {
                     _version = new Version((string)value);
                 } else {
-                    throw new ValueErrorException("Expected string or Version for PythonVersion");
+                    throw new ValueErrorException(ResourceManager.Default.GetResource("ExpectedstringorVersionforPythonVersion", "Expected string or Version for PythonVersion"));
                 }
 
                 if (_version != new Version(2, 7) && _version != new Version(3, 0)) {
-                    throw new ValueErrorException("Expected Version to be 2.7 or 3.0");
+                    throw new ValueErrorException(ResourceManager.Default.GetResource("ExpectedVersiontobe27or30", "Expected Version to be 2.7 or 3.0"));
                 }
             } else {
                 _version = new Version(2, 7);

@@ -123,7 +123,7 @@ namespace IronPython.Modules {
             }
 
             public object in_dll(object library, string name) {
-                throw new NotImplementedException("in dll");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("indll", "in dll"));
             }
 
             public new virtual void __setattr__(CodeContext/*!*/ context, string name, object value) {
@@ -194,7 +194,7 @@ namespace IronPython.Modules {
                         data._memHolder.CopyTo(address, offset, data.Size);
                         return data._memHolder.EnsureObjects();
                     } else {
-                        throw new NotImplementedException("set value");
+                        throw new NotImplementedException(ResourceManager.Default.GetResource("setvalue", "set value"));
                     }
                 }
                 return null;

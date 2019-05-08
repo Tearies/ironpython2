@@ -8,6 +8,7 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using IronPython.Runtime.Exceptions;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Actions;
 using Microsoft.Scripting.Generation;
 using Microsoft.Scripting.Utils;
@@ -176,7 +177,7 @@ namespace IronPython.Runtime.Types {
                     || context.LanguageContext.DomainManager.Configuration.PrivateBinding) {
                     _event.Tracker.AddHandler(_instance, func, context.LanguageContext.DelegateCreator);
                 } else {
-                    throw new TypeErrorException("Cannot add handler to a private event.");
+                    throw new TypeErrorException(ResourceManager.Default.GetResource("Cannotaddhandlertoaprivateevent", "Cannot add handler to a private event."));
                 }
 
                 return this;
@@ -202,7 +203,7 @@ namespace IronPython.Runtime.Types {
                     || context.LanguageContext.DomainManager.Configuration.PrivateBinding) {
                     _event.Tracker.RemoveHandler(_instance, func, context.LanguageContext.EqualityComparer);
                 } else {
-                    throw new TypeErrorException("Cannot remove handler from a private event.");
+                    throw new TypeErrorException(ResourceManager.Default.GetResource("Cannotremovehandlerfromaprivateevent", "Cannot remove handler from a private event."));
                 }
                 return this;
             }

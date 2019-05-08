@@ -169,7 +169,7 @@ namespace IronPython.Compiler {
             ContractUtils.RequiresNotNull(reader, "reader");
 
             if (state != null) {
-                if (!(state is State)) throw new ValueErrorException("bad state provided");
+                if (!(state is State)) throw new ValueErrorException(ResourceManager.Default.GetResource("badstateprovided", "bad state provided"));
                 _state = new State((State)state);
             } else {
                 _state = new State(null);
@@ -204,7 +204,7 @@ namespace IronPython.Compiler {
 
         public override TokenInfo ReadToken() {
             if (_buffer == null) {
-                throw new InvalidOperationException("Uninitialized");
+                throw new InvalidOperationException(ResourceManager.Default.GetResource("Uninitialized", "Uninitialized"));
             }
 
             Token token = GetNextToken();

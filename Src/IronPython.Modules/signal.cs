@@ -137,17 +137,17 @@ the first is the signal number, the second is the interrupted stack frame.")]
         public static object signal(CodeContext/*!*/ context, int sig, object action) {
             //Negative scenarios - sig
             if (sig < 1 || sig >= NSIG) {
-                throw PythonOps.ValueError("signal number out of range");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("signalnumberoutofrange", "signal number out of range"));
             } else if (Array.IndexOf(_PySupportedSignals, sig) == -1) {
-                throw new RuntimeException("no IronPython support for given signal");
+                throw new RuntimeException(ResourceManager.Default.GetResource("noIronPythonsupportforgivensignal", "no IronPython support for given signal"));
             }
             //Negative scenarios - action
             if (action == null) {
-                throw PythonOps.TypeError("signal handler must be signal.SIG_IGN, signal.SIG_DFL, or a callable object");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("signal andlerError", "signal handler must be signal.SIG_IGN, signal.SIG_DFL, or a callable object"));
             } else if (action.GetType() == typeof(int)) {
                 int tempAction = (int)action;
                 if (tempAction != SIG_DFL && tempAction != SIG_IGN) {
-                    throw PythonOps.TypeError("signal handler must be signal.SIG_IGN, signal.SIG_DFL, or a callable object");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("signal andlerError", "signal handler must be signal.SIG_IGN, signal.SIG_DFL, or a callable object"));
                 }
             } else if (action == default_int_handler) {
                 //no-op

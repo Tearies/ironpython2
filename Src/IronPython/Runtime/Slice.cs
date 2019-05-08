@@ -72,7 +72,7 @@ namespace IronPython.Runtime {
 
         int IComparable.CompareTo(object obj) {
             Slice other = obj as Slice;
-            if (other == null) throw new ValueErrorException("expected slice");
+            if (other == null) throw new ValueErrorException(ResourceManager.Default.GetResource("expectedslice", "expected slice"));
             return __cmp__(other);
         }
 

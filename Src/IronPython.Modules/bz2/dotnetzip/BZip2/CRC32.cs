@@ -27,6 +27,7 @@
 
 
 using System;
+using Microsoft.Scripting;
 using Interop = System.Runtime.InteropServices;
 
 namespace Ionic.Crc
@@ -86,7 +87,7 @@ namespace Ionic.Crc
         public Int32 GetCrc32AndCopy(System.IO.Stream input, System.IO.Stream output)
         {
             if (input == null)
-                throw new Exception("The input stream must not be null.");
+                throw new Exception(ResourceManager.Default.GetResource("Theinputstreammustnotbenull", "The input stream must not be null."));
 
             unchecked
             {
@@ -138,7 +139,7 @@ namespace Ionic.Crc
         public void SlurpBlock(byte[] block, int offset, int count)
         {
             if (block == null)
-                throw new Exception("The data buffer must not be null.");
+                throw new Exception(ResourceManager.Default.GetResource("Thedatabuffermustnotbenull", "The data buffer must not be null."));
 
             // bzip algorithm
             for (int i = 0; i < count; i++)
@@ -554,7 +555,7 @@ namespace Ionic.Crc
             : this(true, length, stream, null)
         {
             if (length < 0)
-                throw new ArgumentException("length");
+                throw new ArgumentException(ResourceManager.Default.GetResource("length", "length"));
         }
 
         /// <summary>
@@ -576,7 +577,7 @@ namespace Ionic.Crc
             : this(leaveOpen, length, stream, null)
         {
             if (length < 0)
-                throw new ArgumentException("length");
+                throw new ArgumentException(ResourceManager.Default.GetResource("length", "length"));
         }
 
         /// <summary>
@@ -600,7 +601,7 @@ namespace Ionic.Crc
             : this(leaveOpen, length, stream, crc32)
         {
             if (length < 0)
-                throw new ArgumentException("length");
+                throw new ArgumentException(ResourceManager.Default.GetResource("length", "length"));
         }
 
 

@@ -9,6 +9,7 @@ using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Generation;
 using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
@@ -110,7 +111,7 @@ namespace IronPython.Runtime.Types {
             }
 
             if (Getter.Length == 0) {
-                throw new MissingMemberException("unreadable property");
+                throw new MissingMemberException(ResourceManager.Default.GetResource("unreadableproperty", "unreadable property"));
             }
 
             if (_getfunc == null) {

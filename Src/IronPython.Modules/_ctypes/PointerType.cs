@@ -76,7 +76,7 @@ namespace IronPython.Modules {
             /// Access an instance at the specified address
             /// </summary>
             public object from_address(object obj) {
-                throw new NotImplementedException("pointer from address");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("pointerfromaddress","pointer from address"));
             }
 
             public void set_type(PythonType type) {

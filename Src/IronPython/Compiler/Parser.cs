@@ -3301,7 +3301,7 @@ namespace IronPython.Compiler {
 
         private void StartParsing() {
             if (_parsingStarted)
-                throw new InvalidOperationException("Parsing already started. Use Restart to start again.");
+                throw new InvalidOperationException(ResourceManager.Default.GetResource("ParsingalreadystartedUseRestarttostartagain", "Parsing already started. Use Restart to start again."));
 
             _parsingStarted = true;
 

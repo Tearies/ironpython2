@@ -1010,9 +1010,9 @@ namespace IronPython.Runtime
 
             if (gotEncoding && isUtf8 && encodingName != "utf-8") {
                 // we have both a BOM & an encoding type, throw an error
-                throw new IOException("file has both Unicode marker and PEP-263 file encoding.  You can only use \"utf-8\" as the encoding name when a BOM is present.");
+                throw new IOException(ResourceManager.Default.GetResource("filehasbothUnicodemarkerandPEP263fileencoding", "file has both Unicode marker and PEP-263 file encoding.  You can only use \"utf-8\" as the encoding name when a BOM is present."));
             } else if (encoding == null) {
-                throw new IOException("unknown encoding type");
+                throw new IOException(ResourceManager.Default.GetResource("unknownencodingtype", "unknown encoding type"));
             }
 
             // if we didn't get an encoding seek back to the beginning...
@@ -2260,7 +2260,7 @@ namespace IronPython.Runtime
                 case UnaryOperators.Length: symbol = "__len__"; break;
                 case UnaryOperators.Hash: symbol = "__hash__"; break;
                 case UnaryOperators.String: symbol = "__str__"; break;
-                default: throw new ValueErrorException("unknown unary symbol");
+                default: throw new ValueErrorException(ResourceManager.Default.GetResource("unknownunarysymbol", "unknown unary symbol"));
             }
             return symbol;
         }
@@ -2309,7 +2309,7 @@ namespace IronPython.Runtime
             switch (oper) {
                 case TernaryOperators.SetDescriptor: symbol = "__set__"; break;
                 case TernaryOperators.GetDescriptor: symbol = "__get__"; break;
-                default: throw new ValueErrorException("unknown ternary operator");
+                default: throw new ValueErrorException(ResourceManager.Default.GetResource("unknownternaryoperator", "unknown ternary operator"));
             }
             return symbol;
         }

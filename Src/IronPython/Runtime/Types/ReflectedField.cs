@@ -57,7 +57,7 @@ namespace IronPython.Runtime.Types {
             if (TryGetValue(context, instance, DynamicHelpers.GetPythonType(instance), out value)) {
                 return value;
             }
-            throw new InvalidOperationException("cannot get field");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("cannotgetfield", "cannot get field"));
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace IronPython.Runtime.Types {
         /// </summary>
         public void SetValue(CodeContext context, object instance, object value) {
             if (!TrySetValueWorker(context, instance, DynamicHelpers.GetPythonType(instance), value, true)) {
-                throw new InvalidOperationException("cannot set field");
+                throw new InvalidOperationException(ResourceManager.Default.GetResource("cannotsetfield", "cannot set field"));
             }            
         }
 

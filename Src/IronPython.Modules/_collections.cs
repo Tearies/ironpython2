@@ -433,7 +433,7 @@ namespace IronPython.Modules {
             int IComparable.CompareTo(object obj) {
                 deque otherDeque = obj as deque;
                 if (otherDeque == null) {
-                    throw new ValueErrorException("expected deque");
+                    throw new ValueErrorException(ResourceManager.Default.GetResource("expecteddeque", "expected deque"));
                 }
 
                 return CompareToWorker(otherDeque);
@@ -505,7 +505,7 @@ namespace IronPython.Modules {
             int IStructuralComparable.CompareTo(object other, IComparer comparer) {
                 deque otherDeque = other as deque;
                 if (otherDeque == null) {
-                    throw new ValueErrorException("expected deque");
+                    throw new ValueErrorException(ResourceManager.Default.GetResource("expecteddeque", "expected deque"));
                 }
 
                 return CompareToWorker(otherDeque, comparer);

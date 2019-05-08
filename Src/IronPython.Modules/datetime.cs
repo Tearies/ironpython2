@@ -903,7 +903,7 @@ namespace IronPython.Modules {
                 try {
                     return new datetime(date.InternalDateTime.Add(delta.TimeSpanWithDaysAndSeconds), delta._microseconds + date._lostMicroseconds, date._tz);
                 } catch (ArgumentException) {
-                    throw new OverflowException("date value out of range");
+                    throw new OverflowException(ResourceManager.Default.GetResource("datevalueoutofrange", "date value out of range"));
                 }
             }
 
@@ -911,7 +911,7 @@ namespace IronPython.Modules {
                 try {
                     return new datetime(date.InternalDateTime.Add(delta.TimeSpanWithDaysAndSeconds), delta._microseconds + date._lostMicroseconds, date._tz);
                 } catch (ArgumentException) {
-                    throw new OverflowException("date value out of range");
+                    throw new OverflowException(ResourceManager.Default.GetResource("datevalueoutofrange", "date value out of range"));
                 }
             }
 
@@ -1549,7 +1549,7 @@ namespace IronPython.Modules {
             }
 
             public virtual string tzname(object dt) {
-                throw new NotImplementedException("a tzinfo subclass must implement tzname()");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("atzinfosubclassmustimplementtzname", "a tzinfo subclass must implement tzname()"));
             }
 
             public virtual timedelta utcoffset(object dt) {

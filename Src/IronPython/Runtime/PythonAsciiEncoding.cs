@@ -9,6 +9,7 @@ using System.Runtime.Serialization;
 using System.Text;
 
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime {
     /// <summary>
@@ -108,7 +109,7 @@ namespace IronPython.Runtime {
                             outputChars += dfb.Remaining;
                         }
                     } catch(DecoderFallbackException ex) {
-                        var dfe = new DecoderFallbackException("ordinal out of range(128)", ex.BytesUnknown, ex.Index);
+                        var dfe = new DecoderFallbackException(ResourceManager.Default.GetResource("ordinaloutofrange128", "ordinal out of range(128)"), ex.BytesUnknown, ex.Index);
                         dfe.Data.Add("encoding", EncodingName);
                         throw dfe;
                     }
@@ -139,7 +140,7 @@ namespace IronPython.Runtime {
                             }
                         }
                     } catch(DecoderFallbackException ex) {
-                        var dfe = new DecoderFallbackException("ordinal out of range(128)", ex.BytesUnknown, ex.Index);
+                        var dfe = new DecoderFallbackException(ResourceManager.Default.GetResource("ordinaloutofrange128", "ordinal out of range(128)"), ex.BytesUnknown, ex.Index);
                         dfe.Data.Add("encoding", EncodingName);
                         throw dfe;
                     }

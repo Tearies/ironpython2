@@ -72,7 +72,7 @@ namespace IronPython.Modules {
                     case 'v': _type = SimpleTypeKind.VariantBool; break;
                     case 'X': _type = SimpleTypeKind.BStr; break;
                     default:
-                        throw new NotImplementedException("simple type " + sVal);
+                        throw new NotImplementedException(string.Format(ResourceManager.Default.GetResource("simpletype", "simple type {0}") ,sVal));
                 }
 
                 if (!name.EndsWith("_be") && !name.EndsWith("_le") && swappedTypes.IndexOf(_charType) != -1) {
@@ -456,7 +456,7 @@ namespace IronPython.Modules {
                         method.MarkLabel(done);
                         break;
                     case SimpleTypeKind.BStr:
-                        throw new NotImplementedException("BSTR marshalling");
+                        throw new NotImplementedException(ResourceManager.Default.GetResource("BSTRmarshalling", "BSTR marshalling"));
                 }
 
                 method.MarkLabel(marshalled);

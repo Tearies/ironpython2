@@ -8,6 +8,7 @@ using IronPython.Runtime.Operations;
 using Microsoft.Scripting.Utils;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 [assembly: PythonModule("cmath", typeof(IronPython.Modules.ComplexMath))]
 namespace IronPython.Modules {
@@ -413,7 +414,7 @@ namespace IronPython.Modules {
             if (num != null) {
                 complexNum = Converter.ConvertToComplex(num);
             } else {
-                throw new NullReferenceException("The input was null");
+                throw new NullReferenceException(ResourceManager.Default.GetResource("Theinputwasnull", "The input was null"));
             }
 
             return complexNum;

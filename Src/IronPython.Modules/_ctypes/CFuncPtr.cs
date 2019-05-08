@@ -532,7 +532,7 @@ namespace IronPython.Modules {
                     }
 
                     if (PythonOps.TryGetBoundAttr(value, "_as_parameter_", out object val)) {
-                        throw new NotImplementedException("_as_parameter");
+                        throw new NotImplementedException(ResourceManager.Default.GetResource("_as_parameter", "_as_parameter"));
                         //return new UserDefinedMarshaller(GetMarshaller(..., value, index));                    
                     }
 

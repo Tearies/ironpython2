@@ -5,6 +5,7 @@
 using System;
 using System.Runtime.InteropServices;
 using IronPython.Runtime;
+using Microsoft.Scripting;
 
 #if FEATURE_PROCESS
 
@@ -42,7 +43,7 @@ namespace IronPython.Modules {
                         pySignal = SIGBREAK;
                         break;
                     default:
-                        throw new Exception("unreachable");
+                        throw new Exception(ResourceManager.Default.GetResource("unreachable", "unreachable"));
                 }
 
                 lock (PySignalToPyHandler) {
@@ -56,7 +57,7 @@ namespace IronPython.Modules {
                             //SIG_IGN - we do nothing, but tell Windows we handled the signal
                             retVal = true;
                         } else {
-                            throw new Exception("unreachable");
+                            throw new Exception(ResourceManager.Default.GetResource("unreachable", "unreachable"));
                         }
                     } else if (PySignalToPyHandler[pySignal] == default_int_handler) {
                         if (pySignal != SIGINT) {

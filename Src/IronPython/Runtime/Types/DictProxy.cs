@@ -10,6 +10,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
@@ -131,7 +132,7 @@ namespace IronPython.Runtime.Types {
 
         [PythonHidden]
         public void Clear() {
-            throw new InvalidOperationException("dictproxy is read-only");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("dictproxyisreadonly", "dictproxy is read-only"));
         }
 
         IDictionaryEnumerator IDictionary.GetEnumerator() {
@@ -159,7 +160,7 @@ namespace IronPython.Runtime.Types {
         }
 
         void IDictionary.Remove(object key) {
-            throw new InvalidOperationException("dictproxy is read-only");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("dictproxyisreadonly", "dictproxy is read-only"));
         }
 
         ICollection IDictionary.Values {
@@ -209,7 +210,7 @@ namespace IronPython.Runtime.Types {
         }
 
         bool IDictionary<object, object>.Remove(object key) {
-            throw new InvalidOperationException("dictproxy is read-only");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("dictproxyisreadonly", "dictproxy is read-only"));
         }
 
         bool IDictionary<object, object>.TryGetValue(object key, out object value) {

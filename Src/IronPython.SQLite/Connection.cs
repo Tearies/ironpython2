@@ -522,7 +522,7 @@ namespace IronPython.SQLite
 
             public object iterdump(CodeContext context)
             {
-                throw new NotImplementedException("Not supported with C#-sqlite for unknown reasons.");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("NotsupportedwithCsqliteforunknownreasons", "Not supported with C#-sqlite for unknown reasons."));
 
                 //var ops = context.LanguageContext.Operations;
 

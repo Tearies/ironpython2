@@ -121,7 +121,7 @@ namespace IronPython.Modules {
                         data._memHolder.CopyTo(address, offset, data.Size);
                         return data._memHolder.EnsureObjects();
                     } else {
-                        throw new NotImplementedException("Union set value");
+                        throw new NotImplementedException(ResourceManager.Default.GetResource("Unionsetvalue", "Union set value"));
                     }
                 }
                 return null;

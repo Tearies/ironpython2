@@ -345,11 +345,11 @@ namespace IronPython.Runtime {
         }
 
         void IList<object>.Insert(int index, object item) {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         void IList<object>.RemoveAt(int index) {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         object IList<object>.this[int index] {
@@ -357,7 +357,7 @@ namespace IronPython.Runtime {
                 return this[index];
             }
             set {
-                throw new InvalidOperationException("Tuple is readonly");
+                throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
             }
         }
 
@@ -366,11 +366,11 @@ namespace IronPython.Runtime {
         #region ICollection<object> Members
 
         void ICollection<object>.Add(object item) {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         void ICollection<object>.Clear() {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         [PythonHidden]
@@ -396,7 +396,7 @@ namespace IronPython.Runtime {
         }
 
         bool ICollection<object>.Remove(object item) {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         #endregion
@@ -430,7 +430,7 @@ namespace IronPython.Runtime {
         int IStructuralComparable.CompareTo(object obj, IComparer comparer) {
             PythonTuple other = obj as PythonTuple;
             if (other == null) {
-                throw new ValueErrorException("expected tuple");
+                throw new ValueErrorException(ResourceManager.Default.GetResource("expectedtuple", "expected tuple"));
             }
 
             return PythonOps.CompareArrays(_data, _data.Length, other._data, other._data.Length, comparer);
@@ -564,15 +564,15 @@ namespace IronPython.Runtime {
         #region IList Members
 
         int IList.Add(object value) {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         void IList.Clear() {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         void IList.Insert(int index, object value) {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         bool IList.IsFixedSize {
@@ -584,11 +584,11 @@ namespace IronPython.Runtime {
         }
 
         void IList.Remove(object value) {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         void IList.RemoveAt(int index) {
-            throw new InvalidOperationException("Tuple is readonly");
+            throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
         }
 
         object IList.this[int index] {
@@ -596,7 +596,7 @@ namespace IronPython.Runtime {
                 return this[index];
             }
             set {
-                throw new InvalidOperationException("Tuple is readonly");
+                throw new InvalidOperationException(ResourceManager.Default.GetResource("Tupleisreadonly", "Tuple is readonly"));
             }
         }
 

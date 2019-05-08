@@ -70,7 +70,7 @@ namespace IronPython.Runtime {
         /// </summary>
         public PythonFunction(CodeContext context, FunctionCode code, PythonDictionary globals, string name, PythonTuple defaults, PythonTuple closure) {
             if (closure != null && closure.__len__() != 0) {
-                throw new NotImplementedException("non empty closure argument is not supported");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("nonemptyclosureargumentisnotsupported", "non empty closure argument is not supported"));
             }
 
             if (globals == context.GlobalDict) {
@@ -89,7 +89,7 @@ namespace IronPython.Runtime {
 
             var scopeStatement = _code.PythonCode;
             if (scopeStatement.IsClosure) {
-                throw new NotImplementedException("code containing closures is not supported");
+                throw new NotImplementedException(ResourceManager.Default.GetResource("codecontainingclosuresisnotsupported", "code containing closures is not supported"));
             }
             scopeStatement.RewriteBody(FunctionDefinition.ArbitraryGlobalsVisitorInstance);
 

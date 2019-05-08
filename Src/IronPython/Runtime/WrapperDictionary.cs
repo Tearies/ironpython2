@@ -22,7 +22,7 @@ namespace IronPython.Runtime {
         }
 
         private static InvalidOperationException CannotModifyNamespaceDict() {
-            return new InvalidOperationException("cannot modify namespace dictionary");
+            return new InvalidOperationException(ResourceManager.Default.GetResource("cannotmodifynamespacedictionary", "cannot modify namespace dictionary"));
         }
 
         public override bool Contains(object key) {

@@ -18,6 +18,7 @@ using IronPython.Modules;
 using IronPython.Runtime.Types;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Operations {
 
@@ -756,7 +757,7 @@ namespace IronPython.Runtime.Operations {
             if (self.AsInt32(out res) && res <= Char.MaxValue && res >= Char.MinValue) {
                 return (char)res;
             }
-            throw new OverflowException("big integer won't fit into char");
+            throw new OverflowException(ResourceManager.Default.GetResource("bigintegerwontfitintochar", "big integer won't fit into char"));
         }
 
         [PythonHidden]

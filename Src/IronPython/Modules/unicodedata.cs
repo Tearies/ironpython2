@@ -18,6 +18,7 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 
 [assembly: PythonModule("unicodedata", typeof(IronPython.Modules.unicodedata))]
 
@@ -301,7 +302,7 @@ namespace IronPython.Modules {
                         break;
 
                     default:
-                        throw new ArgumentException("Invalid normalization form " + form, "form");
+                        throw new ArgumentException(string.Format(ResourceManager.Default.GetResource("Invalidnormalization", "Invalid normalization form {0}") , form), "form");
                 }
 
                 return unistr.Normalize(nf);
