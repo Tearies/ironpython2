@@ -105,7 +105,7 @@ namespace IronPython.Runtime.Types {
             }
             [PythonHidden]
             set {
-                throw PythonOps.TypeError("cannot assign to dictproxy");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotassigntodictproxy", "cannot assign to dictproxy"));
             }
         }
 

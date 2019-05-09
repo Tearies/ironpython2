@@ -14,6 +14,7 @@ using IronPython.Runtime;
 using IronPython.Runtime.Exceptions;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 
 [assembly: PythonModule("cStringIO", typeof(IronPython.Modules.PythonStringIO))]
 namespace IronPython.Modules {
@@ -131,7 +132,7 @@ namespace IronPython.Modules {
             if (size > _data.Length) {
                 size = _data.Length;
             } else if (size < 0) {
-                throw PythonOps.IOError("(22, 'Negative size not allowed')");
+                throw PythonOps.IOError(ResourceManager.Default.GetResource("22negativesizenotallowed", "(22, 'Negative size not allowed')"));
             }
             _data.Length = size;
             _position = size;
@@ -286,7 +287,7 @@ namespace IronPython.Modules {
 
             private void ThrowIfClosed() {
                 if (closed) {
-                    throw PythonOps.ValueError("I/O operation on closed file");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("iooperationonclosedfile", "I/O operation on closed file"));
                 }
             }
 
@@ -459,7 +460,7 @@ namespace IronPython.Modules {
 
             public void write(string s) {
                 if (s == null) {
-                    throw PythonOps.TypeError("write argument must be a string or read-only character buffer, not None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("writeargumentmustbeastringorreadonlycharacterbuffernotnone", "write argument must be a string or read-only character buffer, not None"));
                 }
 
                 ThrowIfClosed();
@@ -475,7 +476,7 @@ namespace IronPython.Modules {
                 while (e.MoveNext()) {
                     string s = e.Current as string;
                     if (s == null) {
-                        throw PythonOps.TypeError("string expected");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("stringexpected", "string expected"));
                     }
                     write(s);
                 }
@@ -483,7 +484,7 @@ namespace IronPython.Modules {
 
             private void ThrowIfClosed() {
                 if (closed) {
-                    throw PythonOps.ValueError("I/O operation on closed file");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("iooperationonclosedfile", "I/O operation on closed file"));
                 }
             }
 

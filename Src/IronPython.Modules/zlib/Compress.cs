@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 //
@@ -12,6 +12,7 @@ using System.Runtime.InteropServices;
 using ComponentAce.Compression.Libs.ZLib;
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
@@ -37,7 +38,7 @@ namespace IronPython.Zlib
                     break;
 
                 case ZlibModule.Z_STREAM_ERROR:
-                    throw PythonOps.ValueError("Invalid initialization option");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidinitializationoption", "Invalid initialization option"));
 
                 default:
                     throw ZlibModule.zlib_error(this.zst, err, "while creating compression object");

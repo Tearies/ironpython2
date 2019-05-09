@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -113,7 +113,7 @@ anything else -- the callable Python object used as a handler")]
             lock (GetPythonSignalState(context).PySignalToPyHandler) {
                 //Negative Scenarios
                 if (signalnum < 1 || signalnum > 22) {
-                    throw PythonOps.ValueError("signal number out of range");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("signalnumberoutofrange", "signal number out of range"));
                 } else if (!GetPythonSignalState(context).PySignalToPyHandler.ContainsKey(signalnum)) {
                     //Handles the special case of SIG_IGN. This is not really a signal,
                     //but CPython returns null for it any ways
@@ -157,7 +157,7 @@ the first is the signal number, the second is the interrupted stack frame.")]
                 if (result == null) {
                     //It could still be something like a type that implements __call__
                     if (! PythonOps.IsCallable(context, action)) {
-                        throw PythonOps.TypeError("signal handler must be signal.SIG_IGN, signal.SIG_DFL, or a callable object");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("signalhandlermustbesignalsigignsignalsigdfloracallableobject", "signal handler must be signal.SIG_IGN, signal.SIG_DFL, or a callable object"));
                     }
                 }
             }

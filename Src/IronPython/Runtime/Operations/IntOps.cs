@@ -17,7 +17,7 @@ using IronPython.Modules;
 using IronPython.Runtime.Types;
 
 using System.Numerics;
-
+using Microsoft.Scripting;
 using SpecialNameAttribute = System.Runtime.CompilerServices.SpecialNameAttribute;
 
 namespace IronPython.Runtime.Operations {
@@ -48,7 +48,7 @@ namespace IronPython.Runtime.Operations {
 
             if (o is float) return DoubleOps.__int__((double)(float)o);
 
-            if (o is Complex) throw PythonOps.TypeError("can't convert complex to int; use int(abs(z))");
+            if (o is Complex) throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantconvertcomplextointuseintabsz", "can't convert complex to int; use int(abs(z))"));
 
             if (o is Int64) {
                 Int64 val = (Int64)o;
@@ -144,7 +144,7 @@ namespace IronPython.Runtime.Operations {
 
         private static void ValidateType(PythonType cls) {
             if (cls == TypeCache.Boolean)
-                throw PythonOps.TypeError("int.__new__(bool) is not safe, use bool.__new__()");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("intnewboolisnotsafeuseboolnew", "int.__new__(bool) is not safe, use bool.__new__()"));
         }
 
         [StaticExtensionMethod]
@@ -261,7 +261,7 @@ namespace IronPython.Runtime.Operations {
             if (qmod == null) return Power(x, power);
             int mod = (int)qmod;
 
-            if (power < 0) throw PythonOps.TypeError("power", power, "power must be >= 0");
+            if (power < 0) throw PythonOps.TypeError( "power", power, ResourceManager.Default.GetResource("powermustbe0", "power must be >= 0"));
 
             if (mod == 0) {
                 throw PythonOps.ZeroDivisionError();
@@ -288,7 +288,7 @@ namespace IronPython.Runtime.Operations {
             if (power == 0) return 1;
             if (power < 0) {
                 if (x == 0)
-                    throw PythonOps.ZeroDivisionError("0.0 cannot be raised to a negative power");
+                    throw PythonOps.ZeroDivisionError(ResourceManager.Default.GetResource("00cannotberaisedtoanegativepower", "0.0 cannot be raised to a negative power"));
                 return DoubleOps.Power(x, power);
             }
             int factor = x;
@@ -313,7 +313,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static object LeftShift(int x, int y) {
             if (y < 0) {
-                throw PythonOps.ValueError("negative shift count");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativeshiftcount", "negative shift count"));
             }
             if (y > 31 ||
                 (x > 0 && x > (Int32.MaxValue >> y)) ||
@@ -326,7 +326,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static int RightShift(int x, int y) {
             if (y < 0) {
-                throw PythonOps.ValueError("negative shift count");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativeshiftcount", "negative shift count"));
             }
             if (y > 31) {
                 return x >= 0 ? 0 : -1;
@@ -415,7 +415,7 @@ namespace IronPython.Runtime.Operations {
             StringFormatSpec spec = StringFormatSpec.FromString(formatSpec);
 
             if (spec.Precision != null) {
-                throw PythonOps.ValueError("Precision not allowed in integer format specifier");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("precisionnotallowedinintegerformatspecifier", "Precision not allowed in integer format specifier"));
             }
 
             string digits;
@@ -524,11 +524,11 @@ namespace IronPython.Runtime.Operations {
                     break;
                 case 'c': // single char
                     if (spec.Sign != null) {
-                        throw PythonOps.ValueError("Sign not allowed with integer format specifier 'c'");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("signnotallowedwithintegerformatspecifierc", "Sign not allowed with integer format specifier 'c'"));
                     }
                     
                     if (self < 0 || self > 0xFF) {
-                        throw PythonOps.OverflowError("%c arg not in range(0x10000)");
+                        throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cargnotinrange0x10000", "%c arg not in range(0x10000)"));
                     }
 
                     digits = ScriptingRuntimeHelpers.CharToString((char)self);

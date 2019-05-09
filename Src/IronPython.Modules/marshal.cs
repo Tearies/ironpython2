@@ -14,6 +14,7 @@ using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 [assembly: PythonModule("marshal", typeof(IronPython.Modules.PythonMarshal))]
 namespace IronPython.Modules {
@@ -26,13 +27,13 @@ namespace IronPython.Modules {
         }
 
         public static void dump(object value, PythonFile/*!*/ file, int version) {
-            if (file == null) throw PythonOps.TypeError("expected file, found None");
+            if (file == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedfilefoundnone", "expected file, found None"));
 
             file.write(dumps(value, version));
         }
 
         public static object load(PythonFile/*!*/ file) {
-            if (file == null) throw PythonOps.TypeError("expected file, found None");
+            if (file == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedfilefoundnone", "expected file, found None"));
 
             return MarshalOps.GetObject(FileEnumerator (file));
         }

@@ -29,7 +29,7 @@ using Microsoft.Scripting;
  *     object a = Uninitialized.instance; // explicit initialization because of the uninitialized use
  *     // print statement
  *     if(a == Uninitialized.instance)
- *       throw ThrowUnboundLocalError("a");
+ *       throw ThrowUnboundLocalError(ResourceManager.Default.GetResource("a", "a"));
  *     else
  *       Ops.Print(a);
  *     // a = 10
@@ -49,7 +49,7 @@ using Microsoft.Scripting;
  *     object a = 10;                        // a = 10
  *     a = Uninitialized.instance;           // del a
  *     if(a == Uninitialized.instance)       // print a
- *       throw ThrowUnboundLocalError("a");
+ *       throw ThrowUnboundLocalError(ResourceManager.Default.GetResource("a", "a"));
  *     else
  *       Ops.Print(a);
  * }

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime {
     class TwoObjects {
@@ -40,7 +41,7 @@ namespace IronPython.Runtime {
         internal static void Push(object o) {
             Stack<object> infinite = GetInfiniteCmp();
             if (infinite.Contains(o)) {
-                throw PythonOps.RuntimeError("maximum recursion depth exceeded in cmp");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("maximumrecursiondepthexceededincmp", "maximum recursion depth exceeded in cmp"));
             }
             CmpStack.Push(o);
         }
@@ -49,7 +50,7 @@ namespace IronPython.Runtime {
             Stack<object> infinite = GetInfiniteCmp();
             TwoObjects to = new TwoObjects(o1, o2);
             if (infinite.Contains(to)) {
-                throw PythonOps.RuntimeError("maximum recursion depth exceeded in cmp");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("maximumrecursiondepthexceededincmp", "maximum recursion depth exceeded in cmp"));
             }
             CmpStack.Push(to);
         }

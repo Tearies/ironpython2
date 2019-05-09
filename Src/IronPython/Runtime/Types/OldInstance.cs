@@ -279,7 +279,7 @@ namespace IronPython.Runtime.Types {
                 return PythonOps.CallWithContext(context, value);
             }
 
-            throw PythonOps.TypeError("object cannot be converted to an index");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("objectcannotbeconvertedtoanindex", "object cannot be converted to an index"));
         }
 
         public object __neg__(CodeContext context) {
@@ -531,7 +531,7 @@ namespace IronPython.Runtime.Types {
         private void SetDict(CodeContext/*!*/ context, object value) {
             PythonDictionary dict = value as PythonDictionary;
             if (dict == null) {
-                throw PythonOps.TypeError("__dict__ must be set to a dictionary");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("dictmustbesettoadictionary", "__dict__ must be set to a dictionary"));
             }
             if (HasFinalizer() && !_class.HasFinalizer) {
                 if (!dict.ContainsKey("__del__")) {
@@ -547,14 +547,14 @@ namespace IronPython.Runtime.Types {
         private void SetClass(object value) {
             OldClass oc = value as OldClass;
             if (oc == null) {
-                throw PythonOps.TypeError("__class__ must be set to class");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("classmustbesettoclass", "__class__ must be set to class"));
             }
             _class = oc;
         }
 
         internal bool DeleteCustomMember(CodeContext context, string name) {
-            if (name == "__class__") throw PythonOps.TypeError("__class__ must be set to class");
-            if (name == "__dict__") throw PythonOps.TypeError("__dict__ must be set to a dictionary");
+            if (name == "__class__") throw PythonOps.TypeError(ResourceManager.Default.GetResource("classmustbesettoclass", "__class__ must be set to class"));
+            if (name == "__dict__") throw PythonOps.TypeError(ResourceManager.Default.GetResource("dictmustbesettoadictionary", "__dict__ must be set to a dictionary"));
 
             object delFunc;
             if (_class.HasDelAttr && _class.TryLookupSlot("__delattr__", out delFunc)) {
@@ -734,7 +734,7 @@ namespace IronPython.Runtime.Types {
 
             if (TryGetBoundCustomMember(context, "__cmp__", out func) ||
                 TryGetBoundCustomMember(context, "__eq__", out func)) {
-                throw PythonOps.TypeError("unhashable instance");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("unhashableinstance", "unhashable instance"));
             }
 
             return base.GetHashCode();

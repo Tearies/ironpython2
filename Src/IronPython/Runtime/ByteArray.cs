@@ -123,7 +123,7 @@ namespace IronPython.Runtime {
         public int pop() {
             lock (this) {
                 if (Count == 0) {
-                    throw PythonOps.IndexError("pop off of empty bytearray");
+                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("popoffofemptybytearray", "pop off of empty bytearray"));
                 }
 
                 int res = _bytes[_bytes.Count - 1];
@@ -135,7 +135,7 @@ namespace IronPython.Runtime {
         public int pop(int index) {
             lock (this) {
                 if (Count == 0) {
-                    throw PythonOps.IndexError("pop off of empty bytearray");
+                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("popoffofemptybytearray", "pop off of empty bytearray"));
                 }
 
                 index = PythonOps.FixIndex(index, Count);
@@ -155,7 +155,7 @@ namespace IronPython.Runtime {
         public void remove(object value) {
             lock (this) {
                 if (value is ByteArray) {
-                    throw PythonOps.TypeError("an integer or string of size 1 is required");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerorstringofsize1isrequired", "an integer or string of size 1 is required"));
                 }
                 _bytes.RemoveAt(_bytes.IndexOfByte(GetByte(value), 0, _bytes.Count));
             }
@@ -339,7 +339,7 @@ namespace IronPython.Runtime {
             lock (this) {
                 int res = find(item, start, stop);
                 if (res == -1) {
-                    throw PythonOps.ValueError("bytearray.index(item): item not in bytearray");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("bytearrayindexitemitemnotinbytearray", "bytearray.index(item): item not in bytearray"));
                 }
 
                 return res;
@@ -503,9 +503,9 @@ namespace IronPython.Runtime {
 
         public PythonTuple/*!*/ partition(IList<byte>/*!*/ sep) {
             if (sep == null) {
-                throw PythonOps.TypeError("expected string, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             } else if (sep.Count == 0) {
-                throw PythonOps.ValueError("empty separator");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptyseparator", "empty separator"));
             }
 
             object[] obj = new object[3] { new ByteArray(), new ByteArray(), new ByteArray() };
@@ -530,7 +530,7 @@ namespace IronPython.Runtime {
 
         public ByteArray/*!*/ replace([BytesConversion]IList<byte>/*!*/ old, [BytesConversion]IList<byte> @new) {
             if (old == null) {
-                throw PythonOps.TypeError("expected bytes or bytearray, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbytesorbytearraygotnonetype", "expected bytes or bytearray, got NoneType"));
             }
 
             return replace(old, @new, _bytes.Count);
@@ -538,7 +538,7 @@ namespace IronPython.Runtime {
 
         public ByteArray/*!*/ replace([BytesConversion]IList<byte>/*!*/ old, [BytesConversion]IList<byte>/*!*/ @new, int count) {
             if (old == null) {
-                throw PythonOps.TypeError("expected bytes or bytearray, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbytesorbytearraygotnonetype", "expected bytes or bytearray, got NoneType"));
             } else if (count == 0) {
                 return CopyThis();
             }
@@ -611,9 +611,9 @@ namespace IronPython.Runtime {
 
         public PythonTuple/*!*/ rpartition(IList<byte>/*!*/ sep) {
             if (sep == null) {
-                throw PythonOps.TypeError("expected string, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             } else if (sep.Count == 0) {
-                throw PythonOps.ValueError("empty separator");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptyseparator", "empty separator"));
             }
 
             lock (this) {
@@ -786,7 +786,7 @@ namespace IronPython.Runtime {
             lock (this) {
                 if (table != null) {
                     if (table.Count != 256) {
-                        throw PythonOps.ValueError("translation table must be 256 characters long");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("translationtablemustbe256characterslong", "translation table must be 256 characters long"));
                     }
                     else if (Count == 0) {
                         return CopyThis();
@@ -800,10 +800,10 @@ namespace IronPython.Runtime {
 
         public ByteArray/*!*/ translate([BytesConversion]IList<byte>/*!*/ table, [BytesConversion]IList<byte>/*!*/ deletechars) {
             if (table == null && deletechars == null) {
-                throw PythonOps.TypeError("expected bytearray or bytes, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbytearrayorbytesgotnonetype", "expected bytearray or bytes, got NoneType"));
             }
             else if (deletechars == null) {
-                throw PythonOps.TypeError("expected bytes or bytearray, got None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbytesorbytearraygotnone", "expected bytes or bytearray, got None"));
             }
             
             lock (this) {
@@ -876,7 +876,7 @@ namespace IronPython.Runtime {
 
         public static ByteArray operator +(ByteArray self, ByteArray other) {
             if (self == null) {
-                throw PythonOps.TypeError("expected ByteArray, got None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbytearraygotnone", "expected ByteArray, got None"));
             }
             
             List<byte> bytes;
@@ -925,7 +925,7 @@ namespace IronPython.Runtime {
             }
             
             if(!other.TryMakeByteArray(out byte[] data)) {
-                throw PythonOps.TypeError("can't concat unicode to bytearray");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantconcatunicodetobytearray", "can't concat unicode to bytearray"));
             }
 
             bytes.AddRange(data);
@@ -1040,7 +1040,7 @@ namespace IronPython.Runtime {
                     return this[iVal];
                 }
 
-                throw PythonOps.IndexError("cannot fit long in index");
+                throw PythonOps.IndexError(ResourceManager.Default.GetResource("cannotfitlonginindex", "cannot fit long in index"));
             }
             set {
                 int iVal;
@@ -1049,7 +1049,7 @@ namespace IronPython.Runtime {
                     return;
                 }
 
-                throw PythonOps.IndexError("cannot fit long in index");
+                throw PythonOps.IndexError(ResourceManager.Default.GetResource("cannotfitlonginindex", "cannot fit long in index"));
             }
         }
 
@@ -1066,7 +1066,7 @@ namespace IronPython.Runtime {
             }
             set {
                 if (slice == null) {
-                    throw PythonOps.TypeError("bytearray indices must be integer or slice, not None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("bytearrayindicesmustbeintegerorslicenotnone", "bytearray indices must be integer or slice, not None"));
                 }
                 
                 // get a list of the bytes we're going to assign into the slice.  We accept:
@@ -1155,7 +1155,7 @@ namespace IronPython.Runtime {
         [SpecialName]
         public void DeleteItem(Slice/*!*/ slice) {
             if (slice == null) {
-                throw PythonOps.TypeError("list indices must be integers or slices");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("listindicesmustbeintegersorslices", "list indices must be integers or slices"));
             }
 
             lock (this) {
@@ -1220,7 +1220,7 @@ namespace IronPython.Runtime {
 
         private static ByteArray/*!*/ JoinOne(object/*!*/ curVal) {
             if (!(curVal is IList<byte>)) {
-                throw PythonOps.TypeError("can only join an iterable of bytes");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlyjoinaniterableofbytes", "can only join an iterable of bytes"));
             }
 
             return new ByteArray(new List<byte>(curVal as IList<byte>));
@@ -1284,7 +1284,7 @@ namespace IronPython.Runtime {
 
         private static byte GetByte(object/*!*/ value) {
             if (value is double || value is Extensible<double> || value is float) {
-                throw PythonOps.TypeError("an integer or string of size 1 is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerorstringofsize1isrequired", "an integer or string of size 1 is required"));
             }
             return ByteOps.GetByteListOk(value);
         }

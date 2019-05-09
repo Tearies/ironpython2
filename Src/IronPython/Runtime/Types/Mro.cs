@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using IronPython.Runtime.Operations;
 using System;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Types {
     /// <summary>
@@ -102,7 +103,7 @@ namespace IronPython.Runtime.Types {
 
                         if (!inTail) {
                             if (mro.Contains(head)) {
-                                throw PythonOps.TypeError("a __bases__ item causes an inheritance cycle");
+                                throw PythonOps.TypeError(ResourceManager.Default.GetResource("abasesitemcausesaninheritancecycle", "a __bases__ item causes an inheritance cycle"));
                             }
                             // add it to the linearization, and remove
                             // it from our lists

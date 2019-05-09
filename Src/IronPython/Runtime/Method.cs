@@ -32,7 +32,7 @@ namespace IronPython.Runtime {
 
         public Method(object function, object instance) {
             if (instance == null) {
-                throw PythonOps.TypeError("unbound methods must have a class provided");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("unboundmethodsmusthaveaclassprovided", "unbound methods must have a class provided"));
             }
 
             _func = function;

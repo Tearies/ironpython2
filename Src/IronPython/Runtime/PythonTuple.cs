@@ -69,7 +69,7 @@ namespace IronPython.Runtime {
         }
 
         public static PythonTuple __new__(CodeContext context, PythonType cls, object sequence) {
-            if (sequence == null) throw PythonOps.TypeError("iteration over a non-sequence");
+            if (sequence == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("iterationoveranonsequence", "iteration over a non-sequence"));
 
             if (cls == TypeCache.PythonTuple) {
                 if (sequence.GetType() == typeof(PythonTuple)) return (PythonTuple)sequence;
@@ -106,7 +106,7 @@ namespace IronPython.Runtime {
                 }
             }
 
-            throw PythonOps.ValueError("tuple.index(x): x not in list");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("tupleindexxxnotinlist", "tuple.index(x): x not in list"));
         }
 
         public int count(object obj) {

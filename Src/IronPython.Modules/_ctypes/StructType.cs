@@ -51,7 +51,7 @@ namespace IronPython.Modules {
 
                 if (members.TryGetValue("_pack_", out object pack)) {
                     if (!(pack is int) || ((int)pack < 0)) {
-                        throw PythonOps.ValueError("pack must be a non-negative integer");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("packmustbeanonnegativeinteger", "pack must be a non-negative integer"));
                     }
                     _pack = (int)pack;
                 }
@@ -130,7 +130,7 @@ namespace IronPython.Modules {
                 if (name == "_fields_") {
                     lock (this) {
                         if (_fields != null) {
-                            throw PythonOps.AttributeError("_fields_ is final");
+                            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("fieldsisfinal", "_fields_ is final"));
                         }
 
                         SetFields(value);
@@ -182,7 +182,7 @@ namespace IronPython.Modules {
                 IList<object> init = value as IList<object>;
                 if (init != null) {
                     if (init.Count > _fields.Length) {
-                        throw PythonOps.TypeError("too many initializers");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("toomanyinitializers", "too many initializers"));
                     }
 
                     for (int i = 0; i < init.Count; i++) {
@@ -319,7 +319,7 @@ namespace IronPython.Modules {
                 if (type.TryGetBoundAttr(type.Context.SharedContext, type, "_anonymous_", out anonymous)) {
                     anonFields = anonymous as IList<object>;
                     if (anonFields == null) {
-                        throw PythonOps.TypeError("_anonymous_ must be a sequence");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("anonymousmustbeasequence", "_anonymous_ must be a sequence"));
                     }
                 }
                 return anonFields;
@@ -332,7 +332,7 @@ namespace IronPython.Modules {
                 } else if (cdata is UnionType) {
                     childFields = ((UnionType)cdata)._fields;
                 } else {
-                    throw PythonOps.TypeError("anonymous field must be struct or union");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("anonymousfieldmustbestructorunion", "anonymous field must be struct or union"));
                 }
 
                 foreach (Field existingField in childFields) {

@@ -195,7 +195,7 @@ namespace IronPython.Runtime.Binding {
             // This can happen when a class does not define __init__ and therefore does not take any arguments.
             // Beware that calls like F(*(), **{}) have 2 arguments but they're empty and so it should still
             // match against def F(). 
-            throw PythonOps.TypeError("this constructor takes no arguments");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("thisconstructortakesnoarguments", "this constructor takes no arguments"));
         }
 
         #endregion

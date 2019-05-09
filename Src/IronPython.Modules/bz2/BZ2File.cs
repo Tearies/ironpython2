@@ -13,6 +13,7 @@ using Ionic.BZip2;
 using IronPython.Runtime;
 using Microsoft.Scripting.Runtime;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Utils;
 
 namespace IronPython.Modules.Bz2 {
@@ -115,12 +116,12 @@ The optional size argument, if given, is an approximate bound on the
 total number of bytes in the lines returned.
 ")]
             public new List readlines() {
-                if (this.closed) throw PythonOps.ValueError("I/O operation on closed file");
+                if (this.closed) throw PythonOps.ValueError(ResourceManager.Default.GetResource("iooperationonclosedfile", "I/O operation on closed file"));
                 return base.readlines();
             }
 
             public new List readlines(int sizehint) {
-                if (this.closed) throw PythonOps.ValueError("I/O operation on closed file");
+                if (this.closed) throw PythonOps.ValueError(ResourceManager.Default.GetResource("iooperationonclosedfile", "I/O operation on closed file"));
                 return base.readlines(sizehint);
             }
 
@@ -147,7 +148,7 @@ the operation may be extremely slow.
             public new void seek(long offset, [DefaultParameterValue(0)]int whence) {
                 throw new NotImplementedException();
 
-                //if (this.closed) throw PythonOps.ValueError("I/O operation on closed file");
+                //if (this.closed) throw PythonOps.ValueError(ResourceManager.Default.GetResource("iooperationonclosedfile", "I/O operation on closed file"));
                 //base.seek(offset, whence);
             }
 
@@ -158,7 +159,7 @@ Return the current file position, an integer (may be a long integer).
             public new object tell() {
                 throw new NotImplementedException();
 
-                //if (this.closed) throw PythonOps.ValueError("I/O operation on closed file");
+                //if (this.closed) throw PythonOps.ValueError(ResourceManager.Default.GetResource("iooperationonclosedfile", "I/O operation on closed file"));
                 //return base.tell();
             }
 

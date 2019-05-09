@@ -155,7 +155,7 @@ namespace IronPython.Modules {
         [PythonType("basestring"), PythonHidden]
         public class _basestring {
             public static void __new__(CodeContext/*!*/ context, object cls, [ParamDictionary]IDictionary<object, object> kwargs, params object[] args) {
-                throw PythonOps.TypeError("The basestring type cannot be instantiated");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("thebasestringtypecannotbeinstantiated", "The basestring type cannot be instantiated"));
             }
         }
 
@@ -253,7 +253,7 @@ namespace IronPython.Modules {
                 }
             }
 
-            throw PythonOps.TypeError("coercion failed");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("coercionfailed", "coercion failed"));
         }
 
         [Documentation("compile a unit of source code.\n\nThe source can be compiled either as exec, eval, or single.\nexec compiles the code as if it were a file\neval compiles the code as if were an expression\nsingle compiles a single statement\n\nsource can either be a string or an AST object")]
@@ -267,7 +267,7 @@ namespace IronPython.Modules {
             }
 
             if (mode != "exec" && mode != "eval" && mode != "single") {
-                throw PythonOps.ValueError("compile() arg 3 must be 'exec' or 'eval' or 'single'");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("compilearg3mustbeexecorevalorsingle", "compile() arg 3 must be 'exec' or 'eval' or 'single'"));
             }
             if (source is _ast.AST) {
                 if (astOnly) {
@@ -294,7 +294,7 @@ namespace IronPython.Modules {
                 throw PythonOps.TypeError("source can be either AST or string, actual argument: {0}", source.GetType());
             
             if (text.IndexOf('\0') != -1) {
-                throw PythonOps.TypeError("compile() expected string without null bytes");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("compileexpectedstringwithoutnullbytes", "compile() expected string without null bytes"));
             }
 
             text = RemoveBom(text);
@@ -437,7 +437,7 @@ namespace IronPython.Modules {
 
         public static object eval(CodeContext/*!*/ context, FunctionCode code, PythonDictionary globals, object locals) {
             Debug.Assert(context != null);
-            if (code == null) throw PythonOps.TypeError("eval() argument 1 must be string or code object");
+            if (code == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("evalargument1mustbestringorcodeobject", "eval() argument 1 must be string or code object"));
 
             return code.Call(GetExecEvalScopeOptional(context, globals, locals, false));
         }
@@ -463,10 +463,10 @@ namespace IronPython.Modules {
         [LightThrowing]
         public static object eval(CodeContext/*!*/ context, string expression, PythonDictionary globals, object locals) {
             Debug.Assert(context != null);
-            if (expression == null) throw PythonOps.TypeError("eval() argument 1 must be string or code object");
+            if (expression == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("evalargument1mustbestringorcodeobject", "eval() argument 1 must be string or code object"));
 
             if (locals != null && PythonOps.IsMappingType(context, locals) == ScriptingRuntimeHelpers.False) {
-                throw PythonOps.TypeError("locals must be mapping");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("localsmustbemapping", "locals must be mapping"));
             }
 
             expression = RemoveBom(expression);
@@ -496,17 +496,17 @@ namespace IronPython.Modules {
         [Python3Warning("execfile() not supported in 3.x; use exec()")]
         public static void execfile(CodeContext/*!*/ context, object/*!*/ filename, object globals, object locals) {
             if (filename == null) {
-                throw PythonOps.TypeError("execfile() argument 1 must be string, not None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("execfileargument1mustbestringnotnone", "execfile() argument 1 must be string, not None"));
             }
             
             PythonDictionary g = globals as PythonDictionary;
             if (g == null && globals != null) {
-                throw PythonOps.TypeError("execfile() arg 2 must be dictionary");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("execfilearg2mustbedictionary", "execfile() arg 2 must be dictionary"));
             }
 
             PythonDictionary l = locals as PythonDictionary;
             if (l == null && locals != null) {
-                throw PythonOps.TypeError("execfile() arg 3 must be dictionary");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("execfilearg3mustbedictionary", "execfile() arg 3 must be dictionary"));
             }
 
             if (l == null) {
@@ -517,7 +517,7 @@ namespace IronPython.Modules {
             string path = Converter.ConvertToString(filename);
             PythonContext pc = context.LanguageContext;
             if (!pc.DomainManager.Platform.FileExists(path)) {
-                throw PythonOps.IOError("execfile: specified file doesn't exist");
+                throw PythonOps.IOError(ResourceManager.Default.GetResource("execfilespecifiedfiledoesntexist", "execfile: specified file doesn't exist"));
             }
 
             SourceUnit sourceUnit = pc.CreateFileUnit(path, pc.DefaultEncoding, SourceCodeKind.Statements);
@@ -545,7 +545,7 @@ namespace IronPython.Modules {
 
         public static string filter(CodeContext/*!*/ context, object function, [NotNull]string list) {
             if (function == null) return list;
-            if (list == null) throw PythonOps.TypeError("NoneType is not iterable");
+            if (list == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("nonetypeisnotiterable", "NoneType is not iterable"));
 
             StringBuilder sb = new StringBuilder();
             foreach (char c in list) {
@@ -589,7 +589,7 @@ namespace IronPython.Modules {
         }
 
         public static List filter(CodeContext/*!*/ context, object function, object list) {
-            if (list == null) throw PythonOps.TypeError("NoneType is not iterable");
+            if (list == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("nonetypeisnotiterable", "NoneType is not iterable"));
             List ret = new List();
 
             IEnumerator i = PythonOps.GetEnumerator(list);
@@ -927,7 +927,7 @@ namespace IronPython.Modules {
         public static string intern(object o) {
             string s = o as string;
             if (s == null) {
-                throw PythonOps.TypeError("intern: argument must be string");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("internargumentmustbestring", "intern: argument must be string"));
             }
             return string.Intern(s);
         }
@@ -981,7 +981,7 @@ namespace IronPython.Modules {
             PythonTuple tupleBases;
 
             if (!PythonOps.TryGetBoundAttr(o, "__bases__", out bases) || (tupleBases = bases as PythonTuple) == null) {
-                return LightExceptions.Throw(PythonOps.TypeError("issubclass() arg 1 must be a class"));
+                return LightExceptions.Throw(PythonOps.TypeError(ResourceManager.Default.GetResource("issubclassarg1mustbeaclass", "issubclass() arg 1 must be a class")));
             }
 
             if (o == typeinfo) {
@@ -1020,7 +1020,7 @@ namespace IronPython.Modules {
 
         public static object iter(CodeContext/*!*/ context, object func, object sentinel) {
             if (!PythonOps.IsCallable(context, func)) {
-                throw PythonOps.TypeError("iter(v, w): v must be callable");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("itervwvmustbecallable", "iter(v, w): v must be callable"));
             }
             return new SentinelIterator(context, func, sentinel);
         }
@@ -1245,7 +1245,7 @@ namespace IronPython.Modules {
 
         public static List map(CodeContext/*!*/ context, params object[] param) {
             if (param == null || param.Length < 2) {
-                throw PythonOps.TypeError("at least 2 arguments required to map");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("atleast2argumentsrequiredtomap", "at least 2 arguments required to map"));
             }
             List ret = new List();
             object func = param[0];
@@ -1284,7 +1284,7 @@ namespace IronPython.Modules {
         public static object max(CodeContext/*!*/ context, object x) {
             IEnumerator i = PythonOps.GetEnumerator(x);
             if (!i.MoveNext())
-                throw PythonOps.ValueError("max() arg is an empty sequence");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("maxargisanemptysequence", "max() arg is an empty sequence"));
             object ret = i.Current;
             PythonContext pc = context.LanguageContext;
             while (i.MoveNext()) {
@@ -1312,7 +1312,7 @@ namespace IronPython.Modules {
                 }
                 return ret;
             } else {
-                throw PythonOps.TypeError("max expecting 1 arguments, got 0");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("maxexpecting1argumentsgot0", "max expecting 1 arguments, got 0"));
             }
 
         }
@@ -1320,7 +1320,7 @@ namespace IronPython.Modules {
         public static object max(CodeContext/*!*/ context, object x, [ParamDictionary]IDictionary<object, object> dict) {
             IEnumerator i = PythonOps.GetEnumerator(x);
             if (!i.MoveNext())
-                throw PythonOps.ValueError(" max() arg is an empty sequence");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("maxargisanemptysequence", " max() arg is an empty sequence"));
             object method = GetMaxKwArg(dict);
             object ret = i.Current;
             object retValue = PythonCalls.Call(context, method, i.Current);
@@ -1359,7 +1359,7 @@ namespace IronPython.Modules {
                 }
                 return args[retIndex];
             } else {
-                throw PythonOps.TypeError("max expecting 1 arguments, got 0");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("maxexpecting1argumentsgot0", "max expecting 1 arguments, got 0"));
             }
         }
 
@@ -1373,7 +1373,7 @@ namespace IronPython.Modules {
         public static object min(CodeContext/*!*/ context, object x) {
             IEnumerator i = PythonOps.GetEnumerator(x);
             if (!i.MoveNext()) {
-                throw PythonOps.ValueError("empty sequence");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptysequence", "empty sequence"));
             }
             object ret = i.Current;
             PythonContext pc = context.LanguageContext;
@@ -1400,14 +1400,14 @@ namespace IronPython.Modules {
                 }
                 return ret;
             } else {
-                throw PythonOps.TypeError("min expecting 1 arguments, got 0");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("minexpecting1argumentsgot0", "min expecting 1 arguments, got 0"));
             }
         }
 
         public static object min(CodeContext/*!*/ context, object x, [ParamDictionary]IDictionary<object, object> dict) {
             IEnumerator i = PythonOps.GetEnumerator(x);
             if (!i.MoveNext())
-                throw PythonOps.ValueError(" min() arg is an empty sequence");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("minargisanemptysequence", " min() arg is an empty sequence"));
             object method = GetMinKwArg(dict);
             object ret = i.Current;
             object retValue = PythonCalls.Call(context, method, i.Current);
@@ -1448,7 +1448,7 @@ namespace IronPython.Modules {
                 }
                 return args[retIndex];
             } else {
-                throw PythonOps.TypeError("min expecting 1 arguments, got 0");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("minexpecting1argumentsgot0", "min expecting 1 arguments, got 0"));
             }
         }
 
@@ -1544,7 +1544,7 @@ namespace IronPython.Modules {
         }
 
         public static PythonFile open(CodeContext context, string name, [DefaultParameterValue("r")]string mode, double buffering) {
-            throw PythonOps.TypeError("integer argument expected, got float");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerargumentexpectedgotfloat", "integer argument expected, got float"));
         }
 
         /// <summary>
@@ -1594,7 +1594,7 @@ namespace IronPython.Modules {
             try {
                 return PythonOps.PowerMod(context, x, y, z);
             } catch (DivideByZeroException) {
-                throw PythonOps.ValueError("3rd argument cannot be 0");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("3rdargumentcannotbe0", "3rd argument cannot be 0"));
             }
         }
 
@@ -1642,7 +1642,7 @@ namespace IronPython.Modules {
                 file = pc.SystemStandardOut;
             }
             if (file == null) {
-                throw PythonOps.RuntimeError("lost sys.std_out");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("lostsysstdout", "lost sys.std_out"));
             }
 
             if (args == null) {
@@ -1726,7 +1726,7 @@ namespace IronPython.Modules {
             if (stop.AsInt32(out istop)) {
                 return range(istop);
             }
-            throw PythonOps.OverflowError("too many items in the range");
+            throw PythonOps.OverflowError(ResourceManager.Default.GetResource("toomanyitemsintherange", "too many items in the range"));
         }
 
         [return: SequenceTypeInfo(typeof(int))]
@@ -1750,7 +1750,7 @@ namespace IronPython.Modules {
                 for (int i = start; i < stop; i++) ret.AddNoLock(ScriptingRuntimeHelpers.Int32ToObject(i));
                 return ret;
             }
-            throw PythonOps.OverflowError("too many items in the list");
+            throw PythonOps.OverflowError(ResourceManager.Default.GetResource("toomanyitemsinthelist", "too many items in the list"));
         }
 
         private static List rangeWorker(BigInteger start, BigInteger stop) {
@@ -1766,7 +1766,7 @@ namespace IronPython.Modules {
                 }
                 return ret;
             }
-            throw PythonOps.OverflowError("too many items in the range");
+            throw PythonOps.OverflowError(ResourceManager.Default.GetResource("toomanyitemsintherange", "too many items in the range"));
         }
 
         [return: SequenceTypeInfo(typeof(int))]
@@ -1781,7 +1781,7 @@ namespace IronPython.Modules {
 
         private static List rangeWorker(int start, int stop, int step) {
             if (step == 0) {
-                throw PythonOps.ValueError("step of 0");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("stepof0", "step of 0"));
             }
 
             List ret;
@@ -1803,7 +1803,7 @@ namespace IronPython.Modules {
 
         private static List rangeWorker(BigInteger start, BigInteger stop, BigInteger step) {
             if (step == BigInteger.Zero) {
-                throw PythonOps.ValueError("step of 0");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("stepof0", "step of 0"));
             }
             BigInteger length;
             if (step > BigInteger.Zero) {
@@ -1823,7 +1823,7 @@ namespace IronPython.Modules {
                 }
                 return ret;
             }
-            throw PythonOps.OverflowError("too many items for list");
+            throw PythonOps.OverflowError(ResourceManager.Default.GetResource("toomanyitemsforlist", "too many items for list"));
         }
 
         /// <summary>
@@ -1887,7 +1887,7 @@ namespace IronPython.Modules {
             object Conversion;
             if (PythonOps.TryGetBoundAttr(context, arg, "__int__", out Conversion)) {
                 if (!FastGetRangeInt(PythonOps.CallWithContext(context, Conversion), out res)) {
-                    throw PythonOps.TypeError("__int__ should return int object");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("intshouldreturnintobject", "__int__ should return int object"));
                 }
                 return res;
             } else if (arg is OldInstance) {
@@ -1939,7 +1939,7 @@ namespace IronPython.Modules {
         public static object reduce(CodeContext/*!*/ context, SiteLocalStorage<CallSite<Func<CallSite, CodeContext, object, object, object, object>>> siteData, object func, object seq) {
             IEnumerator i = PythonOps.GetEnumerator(seq);
             if (!i.MoveNext()) {
-                throw PythonOps.TypeError("reduce() of empty sequence with no initial value");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("reduceofemptysequencewithnoinitialvalue", "reduce() of empty sequence with no initial value"));
             }
             EnsureReduceData(context, siteData);
 
@@ -1983,7 +1983,7 @@ namespace IronPython.Modules {
         [Python3Warning("In 3.x, reload() is renamed to imp.reload()")]
         public static object reload(CodeContext/*!*/ context, PythonModule/*!*/ module) {
             if (module == null) {
-                throw PythonOps.TypeError("unexpected type: NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("unexpectedtypenonetype", "unexpected type: NoneType"));
             }
 
             if (_reloadStack == null) {
@@ -2038,7 +2038,7 @@ namespace IronPython.Modules {
         }
 
         public static double round(double number, double ndigits) {
-            throw PythonOps.TypeError("'float' object cannot be interpreted as an index");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("floatobjectcannotbeinterpretedasanindex", "'float' object cannot be interpreted as an index"));
         }
 
         public static void setattr(CodeContext/*!*/ context, object o, string name, object val) {
@@ -2306,7 +2306,7 @@ namespace IronPython.Modules {
         public static object vars(CodeContext/*!*/ context, object @object) {
             object value;
             if (!PythonOps.TryGetBoundAttr(@object, "__dict__", out value)) {
-                throw PythonOps.TypeError("vars() argument must have __dict__ attribute");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("varsargumentmusthavedictattribute", "vars() argument must have __dict__ attribute"));
             }
             return value;
         }
@@ -2339,7 +2339,7 @@ namespace IronPython.Modules {
 
         //??? should we fastpath the 1,2,3 item cases???
         public static List zip(params object[] seqs) {
-            if (seqs == null) throw PythonOps.TypeError("zip argument must support iteration, got None");
+            if (seqs == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("zipargumentmustsupportiterationgotnone", "zip argument must support iteration, got None"));
 
             int N = seqs.Length;
             if (N == 2) return zip(seqs[0], seqs[1]);
@@ -2414,7 +2414,7 @@ namespace IronPython.Modules {
             if ((cflags & ~(CompileFlags.CO_NESTED | CompileFlags.CO_GENERATOR_ALLOWED | CompileFlags.CO_FUTURE_DIVISION | CompileFlags.CO_DONT_IMPLY_DEDENT | 
                 CompileFlags.CO_FUTURE_ABSOLUTE_IMPORT | CompileFlags.CO_FUTURE_WITH_STATEMENT | CompileFlags.CO_FUTURE_PRINT_FUNCTION | 
                 CompileFlags.CO_FUTURE_UNICODE_LITERALS)) != 0) {
-                throw PythonOps.ValueError("unrecognized flags");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("unrecognizedflags", "unrecognized flags"));
             }
 
             return cflags;

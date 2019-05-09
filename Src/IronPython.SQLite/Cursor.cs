@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 //
@@ -13,6 +13,7 @@ using Community.CsharpSqlite;
 using IronPython.Runtime;
 using IronPython.Runtime.Exceptions;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
@@ -168,7 +169,7 @@ namespace IronPython.SQLite
 
                         case StatementType.Select:
                             if(multiple)
-                                throw MakeProgrammingError("You cannot execute SELECT statements in executemany().");
+                                throw MakeProgrammingError(ResourceManager.Default.GetResource("youcannotexecuteselectstatementsinexecutemany", "You cannot execute SELECT statements in executemany()."));
                             break;
 
                         default:
@@ -214,7 +215,7 @@ namespace IronPython.SQLite
                     }
 
                     if(!buildRowCastMap())
-                        throw MakeOperationalError("Error while building row_cast_map");
+                        throw MakeOperationalError(ResourceManager.Default.GetResource("errorwhilebuildingrowcastmap", "Error while building row_cast_map"));
 
                     if(rc == Sqlite3.SQLITE_ROW || (rc == Sqlite3.SQLITE_DONE && this.statement.StatementType == StatementType.Select))
                     {
@@ -247,7 +248,7 @@ namespace IronPython.SQLite
                     if(rc == Sqlite3.SQLITE_ROW)
                     {
                         if(multiple)
-                            throw MakeProgrammingError("executemany() can only execute DML statements.");
+                            throw MakeProgrammingError(ResourceManager.Default.GetResource("executemanycanonlyexecutedmlstatements", "executemany() can only execute DML statements."));
 
                         this.next_row = fetchOneRow(context);
                     }
@@ -406,7 +407,7 @@ namespace IronPython.SQLite
                 }
 
                 if(!statement_completed)
-                    throw MakeProgrammingError("you did not provide a complete SQL statement");
+                    throw MakeProgrammingError(ResourceManager.Default.GetResource("youdidnotprovideacompletesqlstatement", "you did not provide a complete SQL statement"));
 
                 return this;
             }

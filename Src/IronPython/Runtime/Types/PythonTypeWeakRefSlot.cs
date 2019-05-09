@@ -6,6 +6,7 @@
 using System;
 using Microsoft.Scripting.Runtime;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Types {
     [PythonType("getset_descriptor")]
@@ -46,7 +47,7 @@ namespace IronPython.Runtime.Types {
         }
 
         internal override bool TryDeleteValue(CodeContext context, object instance, PythonType owner) {
-            throw PythonOps.TypeError("__weakref__ attribute cannot be deleted");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("weakrefattributecannotbedeleted", "__weakref__ attribute cannot be deleted"));
         }
        
         public override string ToString() {

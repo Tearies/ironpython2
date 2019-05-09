@@ -390,7 +390,7 @@ namespace IronPython.Compiler {
 
             NameToken n = t as NameToken;
             if (n == null) {
-                ReportSyntaxError("syntax error");
+                ReportSyntaxError(ResourceManager.Default.GetResource("syntaxerror", "syntax error"));
                 return null;
             }
 
@@ -486,14 +486,14 @@ namespace IronPython.Compiler {
                     return FinishSmallStmt(new EmptyStatement());
                 case TokenKind.KeywordBreak:
                     if (!_inLoop) {
-                        ReportSyntaxError("'break' outside loop");
+                        ReportSyntaxError(ResourceManager.Default.GetResource("breakoutsideloop", "'break' outside loop"));
                     }
                     return FinishSmallStmt(new BreakStatement());
                 case TokenKind.KeywordContinue:
                     if (!_inLoop) {
-                        ReportSyntaxError("'continue' not properly in loop");
+                        ReportSyntaxError(ResourceManager.Default.GetResource("continuenotproperlyinloop", "'continue' not properly in loop"));
                     } else if (_inFinally && !_inFinallyLoop) {
-                        ReportSyntaxError("'continue' not supported inside 'finally' clause");
+                        ReportSyntaxError(ResourceManager.Default.GetResource("continuenotsupportedinsidefinallyclause", "'continue' not supported inside 'finally' clause"));
                     }
                     return FinishSmallStmt(new ContinueStatement());
                 case TokenKind.KeywordReturn:
@@ -552,7 +552,7 @@ namespace IronPython.Compiler {
             if (expr != null) {
                 _returnWithValue = true;
                 if (_isGenerator) {
-                    ReportSyntaxError("'return' with argument inside generator");
+                    ReportSyntaxError(ResourceManager.Default.GetResource("returnwithargumentinsidegenerator", "'return' with argument inside generator"));
                 }
             }
 
@@ -578,7 +578,7 @@ namespace IronPython.Compiler {
 
             _isGenerator = true;
             if (_returnWithValue) {
-                ReportSyntaxError("'return' with argument inside generator");
+                ReportSyntaxError(ResourceManager.Default.GetResource("returnwithargumentinsidegenerator", "'return' with argument inside generator"));
             }
 
             Eat(TokenKind.KeywordYield);
@@ -1798,7 +1798,7 @@ namespace IronPython.Compiler {
                     l.Add(s);
                     if (MaybeEat(TokenKind.Dedent)) break;
                     if (PeekToken().Kind == TokenKind.EndOfFile) {
-                        ReportSyntaxError("unexpected end of file");
+                        ReportSyntaxError(ResourceManager.Default.GetResource("unexpectedendoffile", "unexpected end of file"));
                         break; // error handling
                     }
                 }
@@ -2091,7 +2091,7 @@ namespace IronPython.Compiler {
                         t = PeekToken();
                         continue;
                     } else {
-                        ReportSyntaxError("invalid syntax");
+                        ReportSyntaxError(ResourceManager.Default.GetResource("invalidsyntax", "invalid syntax"));
                     }
                 }
                 break;
@@ -2110,7 +2110,7 @@ namespace IronPython.Compiler {
                         t = PeekToken();
                         continue;
                     } else {
-                        ReportSyntaxError("invalid syntax");
+                        ReportSyntaxError(ResourceManager.Default.GetResource("invalidsyntax", "invalid syntax"));
                     }
                 }
                 break;
@@ -2160,7 +2160,7 @@ namespace IronPython.Compiler {
                             break;
                         case TokenKind.Constant:
                             // abc.1, abc"", abc 1L, abc 0j
-                            ReportSyntaxError("invalid syntax");
+                            ReportSyntaxError(ResourceManager.Default.GetResource("invalidsyntax", "invalid syntax"));
                             return Error();
                         default:
                             return ret;
@@ -2410,7 +2410,7 @@ namespace IronPython.Compiler {
             List<Expression> l = ParseOldExpressionList(out trailingComma);
             //  the case when no expression was parsed e.g. when we have an empty expression list
             if (l.Count == 0 && !trailingComma) {
-                ReportSyntaxError("invalid syntax");
+                ReportSyntaxError(ResourceManager.Default.GetResource("invalidsyntax", "invalid syntax"));
             }
             return MakeTupleOrExpr(l, trailingComma);
         }
@@ -2719,7 +2719,7 @@ namespace IronPython.Compiler {
                     Expression e1 = ParseExpression();
                     if (MaybeEat(TokenKind.Colon)) { // dict literal
                         if (setMembers != null) {
-                            ReportSyntaxError("invalid syntax");
+                            ReportSyntaxError(ResourceManager.Default.GetResource("invalidsyntax", "invalid syntax"));
                         } else if (dictMembers == null) {
                             dictMembers = new List<SliceExpression>();
                             first = true;
@@ -2728,7 +2728,7 @@ namespace IronPython.Compiler {
 
                         if (PeekToken(Tokens.KeywordForToken)) {
                             if (!first) {
-                                ReportSyntaxError("invalid syntax");
+                                ReportSyntaxError(ResourceManager.Default.GetResource("invalidsyntax", "invalid syntax"));
                             }
                             return FinishDictComp(e1, e2, oStart, oEnd);
                         }
@@ -2738,7 +2738,7 @@ namespace IronPython.Compiler {
                         dictMembers.Add(se);
                     } else { // set literal
                         if (dictMembers != null) {
-                            ReportSyntaxError("invalid syntax");
+                            ReportSyntaxError(ResourceManager.Default.GetResource("invalidsyntax", "invalid syntax"));
                         } else if (setMembers == null) {
                             setMembers = new List<Expression>();
                             first = true;
@@ -2746,7 +2746,7 @@ namespace IronPython.Compiler {
 
                         if (PeekToken(Tokens.KeywordForToken)) {
                             if (!first) {
-                                ReportSyntaxError("invalid syntax");
+                                ReportSyntaxError(ResourceManager.Default.GetResource("invalidsyntax", "invalid syntax"));
                             }
                             return FinishSetComp(e1, oStart, oEnd);
                         }

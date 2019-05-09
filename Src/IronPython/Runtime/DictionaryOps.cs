@@ -124,7 +124,7 @@ namespace IronPython.Runtime {
                 self.Remove(key);
                 return PythonTuple.MakeTuple(key, val);
             }
-            throw PythonOps.KeyError("dictionary is empty");
+            throw PythonOps.KeyError(ResourceManager.Default.GetResource("dictionaryisempty", "dictionary is empty"));
         }
 
         public static object setdefault(PythonDictionary self, object key) {

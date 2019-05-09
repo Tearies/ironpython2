@@ -37,7 +37,7 @@ namespace IronPython.Modules {
         [Documentation("start_new_thread(function, [args, [kwDict]]) -> thread id\nCreates a new thread running the given function")]
         public static object start_new_thread(CodeContext/*!*/ context, object function, object args, object kwDict) {
             PythonTuple tupArgs = args as PythonTuple;
-            if (tupArgs == null) throw PythonOps.TypeError("2nd arg must be a tuple");
+            if (tupArgs == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("2ndargmustbeatuple", "2nd arg must be a tuple"));
 
             Thread t = CreateThread(context, new ThreadObj(context, function, tupArgs, kwDict).Start);
             t.Start();
@@ -48,7 +48,7 @@ namespace IronPython.Modules {
         [Documentation("start_new_thread(function, args, [kwDict]) -> thread id\nCreates a new thread running the given function")]
         public static object start_new_thread(CodeContext/*!*/ context, object function, object args) {
             PythonTuple tupArgs = args as PythonTuple;
-            if (tupArgs == null) throw PythonOps.TypeError("2nd arg must be a tuple");
+            if (tupArgs == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("2ndargmustbeatuple", "2nd arg must be a tuple"));
 
             Thread t = CreateThread(context, new ThreadObj(context, function, tupArgs, null).Start);
             t.IsBackground = true;

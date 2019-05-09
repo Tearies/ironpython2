@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -1324,7 +1324,7 @@ namespace IronPython.Runtime {
             Debug.Assert(_buckets != null);
 
             if (_buckets.Length >= 0x40000000) {
-                throw PythonOps.MemoryError("set has reached its maximum size");
+                throw PythonOps.MemoryError(ResourceManager.Default.GetResource("sethasreacheditsmaximumsize", "set has reached its maximum size"));
             }
 
             Bucket[] newBuckets = new Bucket[_buckets.Length << 1];

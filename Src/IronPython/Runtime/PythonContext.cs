@@ -361,7 +361,7 @@ namespace IronPython.Runtime
             }
             set {
                 if (value < 0) {
-                    throw PythonOps.ValueError("recursion limit must be positive");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("recursionlimitmustbepositive", "recursion limit must be positive"));
                 }
 
                 lock (_codeUpdateLock) {
@@ -1269,7 +1269,7 @@ namespace IronPython.Runtime
 
             object name;
             if (!module.__dict__._storage.TryGetName(out name) || !(name is string)) {
-                throw PythonOps.SystemError("nameless module");
+                throw PythonOps.SystemError(ResourceManager.Default.GetResource("namelessmodule", "nameless module"));
             }
 
             if (!SystemStateModules.ContainsKey(name)) {

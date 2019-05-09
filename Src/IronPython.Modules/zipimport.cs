@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -90,7 +90,7 @@ to Zip archives.";
                 string prefix, input, path;
 
                 if (pathObj == null) {
-                    throw PythonOps.TypeError("must be string, not None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbestringnotnone", "must be string, not None"));
                 }
 
                 if (!(pathObj is string)) {
@@ -98,7 +98,7 @@ to Zip archives.";
                 }
 
                 if (kwArgs.Count > 0) {
-                    throw PythonOps.TypeError("zipimporter() does not take keyword arguments");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("zipimporterdoesnottakekeywordarguments", "zipimporter() does not take keyword arguments"));
                 }
 
                 path = pathObj as string;
@@ -404,7 +404,7 @@ contain the module, but has no source for it.")]
                     try {
                         raw_data = fp.ReadBytes(compress == 0 ? data_size : data_size + 1);
                     } catch {
-                        throw PythonOps.IOError("zipimport: can't read data");
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("zipimportcantreaddata", "zipimport: can't read data"));
                     }
 
                     if (compress != 0) {
@@ -482,7 +482,7 @@ contain the module, but has no source for it.")]
                 byte[] endof_central_dir = new byte[22];
 
                 if (archive.Length > MAXPATHLEN) {
-                    throw PythonOps.OverflowError("Zip path name is too long");
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("zippathnameistoolong", "Zip path name is too long"));
                 }
 
                 path = archive;

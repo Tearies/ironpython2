@@ -161,7 +161,7 @@ namespace IronPython.Runtime.Operations {
         
         public StringBufferProtocol(string wrapped) {
             if(wrapped.Any(x => x > 255)) {
-                throw PythonOps.TypeError("cannot make memory view because object does not have the buffer interface");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotmakememoryviewbecauseobjectdoesnothavethebufferinterface", "cannot make memory view because object does not have the buffer interface"));
             }
             _wrapped = wrapped;
         }
@@ -194,11 +194,11 @@ namespace IronPython.Runtime.Operations {
         }
 
         void IBufferProtocol.SetItem(int index, object value) {
-            throw PythonOps.TypeError("cannot modify read-only memory");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotmodifyreadonlymemory", "cannot modify read-only memory"));
         }
 
         void IBufferProtocol.SetSlice(Slice index, object value) {
-            throw PythonOps.TypeError("cannot modify read-only memory");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotmodifyreadonlymemory", "cannot modify read-only memory"));
         }
 
         Bytes IBufferProtocol.ToBytes(int start, int? end) {
@@ -470,7 +470,7 @@ namespace IronPython.Runtime.Operations {
 
         [SpecialName]
         public static string GetItem(string s, Slice slice) {
-            if (slice == null) throw PythonOps.TypeError("string indices must be slices or integers");
+            if (slice == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("stringindicesmustbeslicesorintegers", "string indices must be slices or integers"));
             int start, stop, step;
             slice.indices(s.Length, out start, out stop, out step);
             if (step == 1) {
@@ -544,7 +544,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static int count(this string self, [BytesConversion]string ssub, int start, int end) {
-            if (ssub == null) throw PythonOps.TypeError("expected string for 'sub' argument, got NoneType");
+            if (ssub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringforsubargumentgotnonetype", "expected string for 'sub' argument, got NoneType"));
 
             if (start > self.Length) {
                 return 0;
@@ -660,7 +660,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static int find(this string self, [BytesConversion]string sub) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (sub.Length == 1) return self.IndexOf(sub[0]);
 
             CompareInfo c = CultureInfo.InvariantCulture.CompareInfo;
@@ -668,7 +668,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static int find(this string self, [BytesConversion]string sub, int start) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (start > self.Length) return -1;
             start = PythonOps.FixSliceIndex(start, self.Length);
 
@@ -677,13 +677,13 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static int find(this string self, [BytesConversion]string sub, BigInteger start) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (start > self.Length) return -1;
             return find(self, sub, (int)start);
         }
 
         public static int find(this string self, [BytesConversion]string sub, int start, int end) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (start > self.Length) return -1;
             start = PythonOps.FixSliceIndex(start, self.Length);
             end = PythonOps.FixSliceIndex(end, self.Length);
@@ -694,7 +694,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static int find(this string self, [BytesConversion]string sub, BigInteger start, BigInteger end) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (start > self.Length) return -1;
             return find(self, sub, (int)start, (int)end);
         }
@@ -704,17 +704,17 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static int index(this string self, [BytesConversion]string sub) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             return index(self, sub, 0, self.Length);
         }
 
         public static int index(this string self, [BytesConversion]string sub, int start) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             return index(self, sub, start, self.Length);
         }
 
         public static int index(this string self, [BytesConversion]string sub, int start, int end) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             int ret = find(self, sub, start, end);
             if (ret == -1) throw PythonOps.ValueError("substring {0} not found in {1}", sub, self);
             return ret;
@@ -928,9 +928,9 @@ namespace IronPython.Runtime.Operations {
         [return: SequenceTypeInfo(typeof(string))]
         public static PythonTuple partition(this string self, [BytesConversion]string sep) {
             if (sep == null)
-                throw PythonOps.TypeError("expected string, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (sep.Length == 0)
-                throw PythonOps.ValueError("empty separator");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptyseparator", "empty separator"));
 
             object[] obj = new object[3] { "", "", "" };
 
@@ -951,7 +951,7 @@ namespace IronPython.Runtime.Operations {
             [DefaultParameterValue(-1)]int count) {
 
             if (old == null) {
-                throw PythonOps.TypeError("expected a character buffer object"); // cpython message
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedacharacterbufferobject", "expected a character buffer object")); // cpython message
             }
             if (old.Length == 0) return ReplaceEmpty(self, @new, count);
 
@@ -977,24 +977,24 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static int rfind(this string self, [BytesConversion]string sub) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             return rfind(self, sub, 0, self.Length);
         }
 
         public static int rfind(this string self, [BytesConversion]string sub, int start) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (start > self.Length) return -1;
             return rfind(self, sub, start, self.Length);
         }
 
         public static int rfind(this string self, [BytesConversion]string sub, BigInteger start) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (start > self.Length) return -1;
             return rfind(self, sub, (int)start, self.Length);
         }
 
         public static int rfind(this string self, [BytesConversion]string sub, int start, int end) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (start > self.Length) return -1;
 
             start = PythonOps.FixSliceIndex(start, self.Length);
@@ -1009,7 +1009,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static int rfind(this string self, [BytesConversion]string sub, BigInteger start, BigInteger end) {
-            if (sub == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (start > self.Length) return -1;
             return rfind(self, sub, (int)start, (int)end);
         }
@@ -1053,9 +1053,9 @@ namespace IronPython.Runtime.Operations {
         [return: SequenceTypeInfo(typeof(string))]
         public static PythonTuple rpartition(this string self, [BytesConversion]string sep) {
             if (sep == null)
-                throw PythonOps.TypeError("expected string, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (sep.Length == 0)
-                throw PythonOps.ValueError("empty separator");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptyseparator", "empty separator"));
 
             object[] obj = new object[3] { "", "", "" };
             if (self.Length != 0) {
@@ -1131,7 +1131,7 @@ namespace IronPython.Runtime.Operations {
             }
 
             if (sep.Length == 0) {
-                throw PythonOps.ValueError("empty separator");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptyseparator", "empty separator"));
             } else if (sep.Length == 1) {
                 return SplitInternal(self, new char[] { sep[0] }, maxsplit);
             } else {
@@ -1256,13 +1256,13 @@ namespace IronPython.Runtime.Operations {
                     if (mapped is int) {
                         var mappedInt = (int)mapped;
                         if (mappedInt > 0xFFFF) {
-                            throw PythonOps.TypeError("character mapping must be in range(0x%lx)");
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("charactermappingmustbeinrange0xlx", "character mapping must be in range(0x%lx)"));
                         }
                         ret.Append((char)(int)mapped);
                     } else if (mapped is String) {
                         ret.Append(mapped);
                     } else {
-                        throw PythonOps.TypeError("character mapping must return integer, None or unicode");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("charactermappingmustreturnintegernoneorunicode", "character mapping must return integer, None or unicode"));
                     }
                 } else {
                     ret.Append(self[i]);
@@ -1277,7 +1277,7 @@ namespace IronPython.Runtime.Operations {
 
         public static string translate(this string self, [BytesConversion]string table, [BytesConversion]string deletechars) {
             if (table != null && table.Length != 256) {
-                throw PythonOps.ValueError("translation table must be 256 characters long");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("translationtablemustbe256characterslong", "translation table must be 256 characters long"));
             } else if (self.Length == 0) {
                 return self;
             }
@@ -1411,7 +1411,7 @@ namespace IronPython.Runtime.Operations {
             if (count == 1) return s;
 
             long size = (long)s.Length * (long)count;
-            if (size > Int32.MaxValue) throw PythonOps.OverflowError("repeated string is too long");
+            if (size > Int32.MaxValue) throw PythonOps.OverflowError(ResourceManager.Default.GetResource("repeatedstringistoolong", "repeated string is too long"));
 
             int sz = s.Length;
             if (sz == 1) return new string(s[0], count);
@@ -1596,7 +1596,7 @@ namespace IronPython.Runtime.Operations {
             if (index == null) {
                 res = defaultValue;
             } else if (!Converter.TryConvertToIndex(index, out res)) {
-                throw PythonOps.TypeError("slice indices must be integers or None or have an __index__ method");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("sliceindicesmustbeintegersornoneorhaveanindexmethod", "slice indices must be integers or None or have an __index__ method"));
             }
 
             return res;
@@ -2134,7 +2134,7 @@ namespace IronPython.Runtime.Operations {
 
         private static void TryStringOrTuple(object prefix) {
             if (prefix == null) {
-                throw PythonOps.TypeError("expected string or Tuple, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringortuplegotnonetype", "expected string or Tuple, got NoneType"));
             }
             if (!(prefix is string) && !(prefix is PythonTuple) && !(prefix is Extensible<string>)) {
                 throw PythonOps.TypeError("expected string or Tuple, got {0} Type", prefix.GetType());
@@ -2304,9 +2304,9 @@ namespace IronPython.Runtime.Operations {
             public string Current {
                 get {
                     if (_index < 0) {
-                        throw PythonOps.SystemError("Enumeration has not started. Call MoveNext.");
+                        throw PythonOps.SystemError(ResourceManager.Default.GetResource("enumerationhasnotstartedcallmovenext", "Enumeration has not started. Call MoveNext."));
                     } else if (_index >= _s.Length) {
-                        throw PythonOps.SystemError("Enumeration already finished.");
+                        throw PythonOps.SystemError(ResourceManager.Default.GetResource("enumerationalreadyfinished", "Enumeration already finished."));
                     }
                     return ScriptingRuntimeHelpers.CharToString(_s[_index]);
                 }

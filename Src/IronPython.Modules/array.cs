@@ -66,14 +66,14 @@ namespace IronPython.Modules {
                     case 'f': data = new ArrayData<float>(); break;
                     case 'd': data = new ArrayData<double>(); break;
                     default:
-                        throw PythonOps.ValueError("Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("badtypecodeexpectedoneofcbbuhhiillfd", "Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')"));
                 }
                 return data;
             }
 
             [SpecialName]
             public array InPlaceAdd(array other) {
-                if (typecode != other.typecode) throw PythonOps.TypeError("cannot add different typecodes");
+                if (typecode != other.typecode) throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotadddifferenttypecodes", "cannot add different typecodes"));
 
                 if (other._data.Length != 0) {
                     extend(other);
@@ -83,7 +83,7 @@ namespace IronPython.Modules {
             }
 
             public static array operator +(array self, array other) {
-                if (self.typecode != other.typecode) throw PythonOps.TypeError("cannot add different typecodes");
+                if (self.typecode != other.typecode) throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotadddifferenttypecodes", "cannot add different typecodes"));
 
                 array res = new array(self.typecode, Missing.Value);
                 foreach (object o in self) {
@@ -113,7 +113,7 @@ namespace IronPython.Modules {
 
             public static array operator *(array array, int value) {
                 if ((BigInteger)value * array.__len__() * array.itemsize > SysModule.maxsize) {
-                    throw PythonOps.MemoryError("");
+                    throw PythonOps.MemoryError(ResourceManager.Default.GetResource("", ""));
                 }
 
                 if (value <= 0) {
@@ -126,9 +126,9 @@ namespace IronPython.Modules {
             public static array operator *(array array, BigInteger value) {
                 int intValue;
                 if (!value.AsInt32(out intValue)) {
-                    throw PythonOps.OverflowError("cannot fit 'long' into an index-sized integer");
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cannotfitlongintoanindexsizedinteger", "cannot fit 'long' into an index-sized integer"));
                 } else if (value * array.__len__() * array.itemsize > SysModule.maxsize) {
-                    throw PythonOps.MemoryError("");
+                    throw PythonOps.MemoryError(ResourceManager.Default.GetResource("", ""));
                 }
 
                 return array * intValue;
@@ -186,7 +186,7 @@ namespace IronPython.Modules {
                 array pa = iterable as array;
                 if (pa != null) {
                     if (typecode != pa.typecode) {
-                        throw PythonOps.TypeError("cannot extend with different typecode");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotextendwithdifferenttypecode", "cannot extend with different typecode"));
                     }
                     int l = pa._data.Length;
                     for (int i = 0; i < l; i++) {
@@ -238,19 +238,19 @@ namespace IronPython.Modules {
             public void fromfile(PythonFile f, int n) {
                 int bytesNeeded = n * itemsize;
                 string bytes = f.read(bytesNeeded);
-                if (bytes.Length < bytesNeeded) throw PythonOps.EofError("file not large enough");
+                if (bytes.Length < bytesNeeded) throw PythonOps.EofError(ResourceManager.Default.GetResource("filenotlargeenough", "file not large enough"));
 
                 fromstring(bytes);
             }
 
             public void fromstring([NotNull]Bytes b) {
-                if ((b.Count % itemsize) != 0) throw PythonOps.ValueError("string length not a multiple of itemsize");
+                if ((b.Count % itemsize) != 0) throw PythonOps.ValueError(ResourceManager.Default.GetResource("stringlengthnotamultipleofitemsize", "string length not a multiple of itemsize"));
                 
                 FromStream(new MemoryStream(b._bytes, false));
             }
 
             public void fromstring([NotNull]string s) {
-                if ((s.Length % itemsize) != 0) throw PythonOps.ValueError("string length not a multiple of itemsize");
+                if ((s.Length % itemsize) != 0) throw PythonOps.ValueError(ResourceManager.Default.GetResource("stringlengthnotamultipleofitemsize", "string length not a multiple of itemsize"));
                 byte[] bytes = new byte[s.Length];
                 for (int i = 0; i < bytes.Length; i++) {
                     bytes[i] = checked((byte)s[i]);
@@ -261,16 +261,16 @@ namespace IronPython.Modules {
             }
 
             public void fromstring([NotNull]PythonBuffer buf) {
-                if ((buf.Size % itemsize) != 0) throw PythonOps.ValueError("string length not a multiple of itemsize");
+                if ((buf.Size % itemsize) != 0) throw PythonOps.ValueError(ResourceManager.Default.GetResource("stringlengthnotamultipleofitemsize", "string length not a multiple of itemsize"));
 
                 FromStream(new MemoryStream(buf.byteCache, false));
             }
 
             public void fromunicode(CodeContext/*!*/ context, string s) {
                 if (s == null) {
-                    throw PythonOps.TypeError("expected string");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstring", "expected string"));
                 } else if (_typeCode != 'u') {
-                    throw PythonOps.ValueError("fromunicode() may only be called on type 'u' arrays");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("fromunicodemayonlybecalledontypeuarrays", "fromunicode() may only be called on type 'u' arrays"));
                 }
                 
                 ArrayData<char> data = (ArrayData<char>)_data;
@@ -282,10 +282,10 @@ namespace IronPython.Modules {
             }
 
             public int index(object x) {
-                if (x == null) throw PythonOps.ValueError("got None, expected value");
+                if (x == null) throw PythonOps.ValueError(ResourceManager.Default.GetResource("gotnoneexpectedvalue", "got None, expected value"));
 
                 int res = _data.Index(x);
-                if (res == -1) throw PythonOps.ValueError("x not found");
+                if (res == -1) throw PythonOps.ValueError(ResourceManager.Default.GetResource("xnotfound", "x not found"));
                 return res;
             }
 
@@ -346,7 +346,7 @@ namespace IronPython.Modules {
             }
 
             public void remove(object value) {
-                if (value == null) throw PythonOps.ValueError("got None, expected value");
+                if (value == null) throw PythonOps.ValueError(ResourceManager.Default.GetResource("gotnoneexpectedvalue", "got None, expected value"));
 
                 _data.Remove(value);
             }
@@ -378,7 +378,7 @@ namespace IronPython.Modules {
                         case 'f': return (double)(float)val;
                         case 'd': return val;
                         default:
-                            throw PythonOps.ValueError("Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')");
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("badtypecodeexpectedoneofcbbuhhiillfd", "Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')"));
                     }
                 }
                 set {
@@ -411,7 +411,7 @@ namespace IronPython.Modules {
             }
 
             public void __delitem__(Slice slice) {
-                if (slice == null) throw PythonOps.TypeError("expected Slice, got None");
+                if (slice == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedslicegotnone", "expected Slice, got None"));
 
                 int start, stop, step;
                 // slice is sealed, indices can't be user code...
@@ -478,7 +478,7 @@ namespace IronPython.Modules {
 
             public object this[Slice index] {
                 get {
-                    if (index == null) throw PythonOps.TypeError("expected Slice, got None");
+                    if (index == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedslicegotnone", "expected Slice, got None"));
 
                     int start, stop, step;
                     index.indices(_data.Length, out start, out stop, out step);
@@ -496,7 +496,7 @@ namespace IronPython.Modules {
                     return pa;
                 }
                 set {
-                    if (index == null) throw PythonOps.TypeError("expected Slice, got None");
+                    if (index == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedslicegotnone", "expected Slice, got None"));
 
                     CheckSliceAssignType(value);
 
@@ -519,9 +519,9 @@ namespace IronPython.Modules {
             private void CheckSliceAssignType(object value) {
                 array pa = value as array;
                 if (pa == null) {
-                    throw PythonOps.TypeError("can only assign array (not \"{0}\") to array slice", PythonTypeOps.GetName(value));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlyassignarraynot0", "can only assign array (not \"{0}\")) to array slice"), PythonTypeOps.GetName(value));
                 } else if (pa != null && pa._typeCode != _typeCode) {
-                    throw PythonOps.TypeError("bad argument type for built-in operation");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("badargumenttypeforbuiltinoperation", "bad argument type for built-in operation"));
                 }
             }
 
@@ -618,7 +618,7 @@ namespace IronPython.Modules {
             }
 
             public string tounicode(CodeContext/*!*/ context) {
-                if (_typeCode != 'u') throw PythonOps.ValueError("only 'u' arrays can be converted to unicode");
+                if (_typeCode != 'u') throw PythonOps.ValueError(ResourceManager.Default.GetResource("onlyuarrayscanbeconvertedtounicode", "only 'u' arrays can be converted to unicode"));
 
                 return new string(((ArrayData<char>)_data).Data, 0, _data.Length);
             }
@@ -818,7 +818,7 @@ namespace IronPython.Modules {
                     case 'f': return BitConverter.GetBytes((float)_data.GetData(index)); 
                     case 'd': return BitConverter.GetBytes((double)_data.GetData(index)); 
                     default:
-                        throw PythonOps.ValueError("Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("badtypecodeexpectedoneofcbbuhhiillfd", "Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')"));
                 }
             }
 
@@ -837,7 +837,7 @@ namespace IronPython.Modules {
                     case 'f': return BitConverter.ToSingle(bytes, 0);
                     case 'd': return BitConverter.ToDouble(bytes, 0);
                     default:
-                        throw PythonOps.ValueError("Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("badtypecodeexpectedoneofcbbuhhiillfd", "Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')"));
                 }
             }
 
@@ -955,7 +955,7 @@ namespace IronPython.Modules {
                             return;
                         }
                     }
-                    throw PythonOps.ValueError("couldn't find value to remove");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("couldntfindvaluetoremove", "couldn't find value to remove"));
                 }
 
                 public override void RemoveAt(int index) {
@@ -1048,7 +1048,7 @@ namespace IronPython.Modules {
                     case 'f': dataTuple = PythonTuple.MakeTuple(((ArrayData<float>)_data).Data); break;
                     case 'd': dataTuple = PythonTuple.MakeTuple(((ArrayData<double>)_data).Data); break;
                     default:
-                        throw PythonOps.ValueError("Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("badtypecodeexpectedoneofcbbuhhiillfd", "Bad type code (expected one of 'c', 'b', 'B', 'u', 'H', 'h', 'i', 'I', 'l', 'L', 'f', 'd')"));
                 }
 
                 return dataTuple.GetHashCode(comparer);

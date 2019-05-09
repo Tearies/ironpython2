@@ -206,7 +206,7 @@ namespace IronPython.Runtime {
                     _index = end + 1;
                     if (_index == _str.Length) {
                         // This error could happen with a format string like '%((key))'
-                        throw PythonOps.ValueError("incomplete format");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("incompleteformat", "incomplete format"));
                     }
                     _curCh = _str[_index++];
                     return key;
@@ -217,7 +217,7 @@ namespace IronPython.Runtime {
 
             // Error: missing closing ')'.
             // This could happen with '%((key)s'
-            throw PythonOps.ValueError("incomplete format key");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("incompleteformatkey", "incomplete format key"));
         }
 
         private void ReadConversionFlags() {
@@ -242,7 +242,7 @@ namespace IronPython.Runtime {
         private int ReadNumberOrStar(int noValSpecified) {
             int res = noValSpecified;
             if (_curCh == '*') {
-                if (!(_data is PythonTuple)) { throw PythonOps.TypeError("* requires a tuple for values"); }
+                if (!(_data is PythonTuple)) { throw PythonOps.TypeError(ResourceManager.Default.GetResource("requiresatupleforvalues", "* requires a tuple for values")); }
                 _curCh = _str[_index++];
                 res = _context.LanguageContext.ConvertToInt32(GetData(_dataIndex++));
             } else {
@@ -267,7 +267,7 @@ namespace IronPython.Runtime {
             }
 
             if (_opts.FieldWidth == Int32.MaxValue) {
-                throw PythonOps.MemoryError("not enough memory for field width");
+                throw PythonOps.MemoryError(ResourceManager.Default.GetResource("notenoughmemoryforfieldwidth", "not enough memory for field width"));
             }
         }
 
@@ -276,7 +276,7 @@ namespace IronPython.Runtime {
                 _curCh = _str[_index++];
                 // possibility: "8.f", "8.0f", or "8.2f"
                 _opts.Precision = ReadNumberOrStar();
-                if (_opts.Precision > 116) throw PythonOps.OverflowError("formatted integer is too long (precision too large?)");
+                if (_opts.Precision > 116) throw PythonOps.OverflowError(ResourceManager.Default.GetResource("formattedintegeristoolongprecisiontoolarge", "formatted integer is too long (precision too large?)"));
             } else {
                 _opts.Precision = UnspecifiedPrecision;
             }
@@ -342,7 +342,7 @@ namespace IronPython.Runtime {
                 }
             }
 
-            throw PythonOps.TypeError("not enough arguments for format string");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("notenoughargumentsforformatstring", "not enough arguments for format string"));
         }
 
         private object GetKey(string key) {
@@ -354,7 +354,7 @@ namespace IronPython.Runtime {
                         return PythonOps.GetIndex(_context, _data, key);
                     }
 
-                    throw PythonOps.TypeError("format requires a mapping");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("formatrequiresamapping", "format requires a mapping"));
                 }
 
                 object res;
@@ -382,7 +382,7 @@ namespace IronPython.Runtime {
                     val = bigInt;
                     fPos = bigInt >= BigInteger.Zero;
                 } else {
-                    throw PythonOps.TypeError("int argument required");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("intargumentrequired", "int argument required"));
                 }
             }
             return val;
@@ -407,7 +407,7 @@ namespace IronPython.Runtime {
             if (PythonOps.IsMappingType(DefaultContext.Default, _data) == ScriptingRuntimeHelpers.False) {
                 if ((!(_data is PythonTuple) && _dataIndex != 1) ||
                     (_data is PythonTuple && _dataIndex != ((PythonTuple)_data).__len__())) {
-                    throw PythonOps.TypeError("not all arguments converted during string formatting");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("notallargumentsconvertedduringstringformatting", "not all arguments converted during string formatting"));
                 }
             }
         }
@@ -501,7 +501,7 @@ namespace IronPython.Runtime {
         private void AppendFloat(char type) {
             double v;
             if (!Converter.TryConvertToDouble(_opts.Value, out v))
-                throw PythonOps.TypeError("float argument required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("floatargumentrequired", "float argument required"));
 
             // scientific exponential format 
             Debug.Assert(type == 'E' || type == 'e' ||

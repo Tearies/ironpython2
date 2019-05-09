@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Numerics;
 using System.Text;
-
+using Microsoft.Scripting;
 using Microsoft.Scripting.Utils;
 
 namespace IronPython.Runtime.Operations {
@@ -189,7 +189,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static int IndexOf(this IList<byte>/*!*/ self, IList<byte>/*!*/ ssub, int start, int length) {
             if (ssub == null) {
-                throw PythonOps.TypeError("cannot do None in bytes or bytearray");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotdononeinbytesorbytearray", "cannot do None in bytes or bytearray"));
             } else if (ssub.Count == 0) {
                 return 0;
             }
@@ -403,7 +403,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static List<byte>/*!*/ Replace(this IList<byte>/*!*/ bytes, IList<byte>/*!*/ old, IList<byte>/*!*/ @new, int count) {
             if (@new == null) {
-                throw PythonOps.TypeError("expected bytes or bytearray, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbytesorbytearraygotnonetype", "expected bytes or bytearray, got NoneType"));
             }
 
             if (count == -1) {
@@ -449,7 +449,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static int ReverseFind(this IList<byte>/*!*/ bytes, IList<byte>/*!*/ sub, int? start, int? end) {
             if (sub == null) {
-                throw PythonOps.TypeError("expected string, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             } else if (start > bytes.Count) {
                 return -1;
             }
@@ -564,7 +564,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static int CountOf(this IList<byte>/*!*/ bytes, IList<byte>/*!*/ ssub, int start, int end) {
             if (ssub == null) {
-                throw PythonOps.TypeError("expected bytes or byte array, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbytesorbytearraygotnonetype", "expected bytes or byte array, got NoneType"));
             }
 
             if (start > bytes.Count) {
@@ -628,7 +628,7 @@ namespace IronPython.Runtime.Operations {
                 }
             }
 
-            throw PythonOps.ValueError("bytearray.index(item): item not in bytearray");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("bytearrayindexitemitemnotinbytearray", "bytearray.index(item): item not in bytearray"));
         }
 
         internal static string/*!*/ BytesRepr(this IList<byte>/*!*/ bytes) {
@@ -830,7 +830,7 @@ namespace IronPython.Runtime.Operations {
             }
 
             if (sep.Count == 0) {
-                throw PythonOps.ValueError("empty separator");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptyseparator", "empty separator"));
             } else if (sep.Count == 1) {
                 return SplitInternal(bytes, new byte[] { sep[0] }, maxsplit, ctor);
             } else {
@@ -947,7 +947,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static List<byte> Slice(this IList<byte>/*!*/ bytes, Slice/*!*/ slice) {
             if (slice == null) {
-                throw PythonOps.TypeError("indices must be slices or integers");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("indicesmustbeslicesorintegers", "indices must be slices or integers"));
             }
 
             int start, stop, step;
@@ -1109,7 +1109,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static int Find(this IList<byte>/*!*/ bytes, IList<byte>/*!*/ sub) {
             if (sub == null) {
-                throw PythonOps.TypeError("expected byte or byte array, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbyteorbytearraygotnonetype", "expected byte or byte array, got NoneType"));
             }
 
             return bytes.IndexOf(sub, 0);
@@ -1118,7 +1118,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static int Find(this IList<byte>/*!*/ bytes, IList<byte>/*!*/ sub, int? start) {
             if (sub == null) {
-                throw PythonOps.TypeError("expected byte or byte array, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbyteorbytearraygotnonetype", "expected byte or byte array, got NoneType"));
             } else if (start > bytes.Count) {
                 return -1;
             }
@@ -1137,7 +1137,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static int Find(this IList<byte>/*!*/ bytes, IList<byte>/*!*/ sub, int? start, int? end) {
             if (sub == null) {
-                throw PythonOps.TypeError("expected byte or byte array, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbyteorbytearraygotnonetype", "expected byte or byte array, got NoneType"));
             } else if (start > bytes.Count) {
                 return -1;
             }
@@ -1197,7 +1197,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static List<byte>/*!*/ FromHex(string/*!*/ @string) {
             if(@string == null) {
-                throw PythonOps.TypeError("expected str, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstrgotnonetype", "expected str, got NoneType"));
             }
 
             List<byte> res = new List<byte>();
@@ -1261,9 +1261,9 @@ namespace IronPython.Runtime.Operations {
             public T Current {
                 get {
                     if (_index < 0) {
-                        throw PythonOps.SystemError("Enumeration has not started. Call MoveNext.");
+                        throw PythonOps.SystemError(ResourceManager.Default.GetResource("enumerationhasnotstartedcallmovenext", "Enumeration has not started. Call MoveNext."));
                     } else if (_index >= _bytes.Count) {
-                        throw PythonOps.SystemError("Enumeration already finished.");
+                        throw PythonOps.SystemError(ResourceManager.Default.GetResource("enumerationalreadyfinished", "Enumeration already finished."));
                     }
                     return _conversion(_bytes[_index]);
                 }
@@ -1364,11 +1364,11 @@ namespace IronPython.Runtime.Operations {
         }
 
         void IBufferProtocol.SetItem(int index, object value) {
-            throw PythonOps.TypeError("cannot modify read-only memory");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotmodifyreadonlymemory", "cannot modify read-only memory"));
         }
 
         void IBufferProtocol.SetSlice(Slice index, object value) {
-            throw PythonOps.TypeError("cannot modify read-only memory");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotmodifyreadonlymemory", "cannot modify read-only memory"));
         }
 
         Bytes IBufferProtocol.ToBytes(int start, int? end) {

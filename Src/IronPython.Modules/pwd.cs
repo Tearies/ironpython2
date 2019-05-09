@@ -14,6 +14,7 @@ using IronPython.Runtime;
 using IronPython.Runtime.Operations;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 [assembly: PythonModule("pwd", typeof(IronPython.Modules.PythonPwd), PlatformsAttribute.PlatformFamily.Unix)]
 namespace IronPython.Modules {
@@ -128,7 +129,7 @@ or via the object attributes as named in the above tuple.")]
             }
 
             if(uid is long || uid is BigInteger) {
-                throw PythonOps.KeyError("getpwuid(): uid not found");
+                throw PythonOps.KeyError(ResourceManager.Default.GetResource("getpwuiduidnotfound", "getpwuid(): uid not found"));
             }
 
             throw PythonOps.TypeError($"integer argument expected, got {PythonOps.GetPythonTypeName(uid)}");

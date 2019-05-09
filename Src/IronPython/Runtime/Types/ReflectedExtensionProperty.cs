@@ -8,6 +8,7 @@ using System.Reflection;
 using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Types {
     /// <summary>
@@ -69,7 +70,7 @@ namespace IronPython.Runtime.Types {
 
         public void __set__(CodeContext context, object instance, object value) {
             if (!TrySetValue(context, instance, DynamicHelpers.GetPythonType(instance), value)) {
-                throw PythonOps.TypeError("readonly attribute");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
             }
         }
 

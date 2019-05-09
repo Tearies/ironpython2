@@ -227,7 +227,7 @@ namespace IronPython.Runtime.Exceptions {
             }
             set {
                 if (!(value is int)) {
-                    throw PythonOps.ValueError("lineno must be an integer");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("linenomustbeaninteger", "lineno must be an integer"));
                 }
 
                 SetLineNumber((int)value);
@@ -237,7 +237,7 @@ namespace IronPython.Runtime.Exceptions {
         private void SetLineNumber(int newLineNum) {
             var pyThread = PythonOps.GetFunctionStackNoCreate();
             if (_traceAdapter == null || !IsTopMostFrame(pyThread)) {
-                throw PythonOps.ValueError("f_lineno can only be set by a trace function on the topmost frame");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("flinenocanonlybesetbyatracefunctiononthetopmostframe", "f_lineno can only be set by a trace function on the topmost frame"));
             }
 
             FunctionCode funcCode = _debugProperties.Code;
@@ -262,7 +262,7 @@ namespace IronPython.Runtime.Exceptions {
                 // Check if we're jumping onto a handler
                 bool handlerIsFinally;
                 if (handlerLocations != null && handlerLocations.TryGetValue(newLineNum, out handlerIsFinally)) {
-                    throw PythonOps.ValueError("can't jump to 'except' line");                    
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("cantjumptoexceptline", "can't jump to 'except' line"));                    
                 }
 
                 // Check if we're jumping into a for-loop
@@ -282,7 +282,7 @@ namespace IronPython.Runtime.Exceptions {
                 } else if (currentLoopIds != null) {
                     foreach (bool isFinally in currentLoopIds.Values) {
                         if (isFinally) {
-                            throw PythonOps.ValueError("can't jump out of 'finally block'");
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("cantjumpoutoffinallyblock", "can't jump out of 'finally block'"));
                         }
                     }
                 }

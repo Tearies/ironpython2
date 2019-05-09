@@ -88,7 +88,7 @@ namespace IronPython.Runtime.Operations {
             if (x is int) return ReturnObject(context, cls, (BigInteger)(int)x);
             if (x is BigInteger) return ReturnObject(context, cls, x);
             
-            if (x is Complex) throw PythonOps.TypeError("can't convert complex to long; use long(abs(z))");
+            if (x is Complex) throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantconvertcomplextolonguselongabsz", "can't convert complex to long; use long(abs(z))"));
 
             if (x is decimal) {
                 return ReturnObject(context, cls, (BigInteger)(decimal)x);
@@ -190,7 +190,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static object Power(BigInteger x, int y, BigInteger z) {
             if (y < 0) {
-                throw PythonOps.TypeError("power", y, "power must be >= 0");
+                throw PythonOps.TypeError("power", y, ResourceManager.Default.GetResource("powermustbe0", "power must be >= 0"));
             }
             if (z == BigInteger.Zero) {
                 throw PythonOps.ZeroDivisionError();
@@ -209,7 +209,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static object Power(BigInteger x, BigInteger y, BigInteger z) {
             if (y < BigInteger.Zero) {
-                throw PythonOps.TypeError("power", y, "power must be >= 0");
+                throw PythonOps.TypeError("power", y, ResourceManager.Default.GetResource("powermustbe0", "power must be >= 0"));
             }
             if (z == BigInteger.Zero) {
                 throw PythonOps.ZeroDivisionError();
@@ -254,12 +254,12 @@ namespace IronPython.Runtime.Operations {
             } else {
                 if (x == BigInteger.Zero) {
                     if (y.Sign < 0)
-                        throw PythonOps.ZeroDivisionError("0.0 cannot be raised to a negative power");
+                        throw PythonOps.ZeroDivisionError(ResourceManager.Default.GetResource("00cannotberaisedtoanegativepower", "0.0 cannot be raised to a negative power"));
                     return BigInteger.Zero;
                 } else if (x == BigInteger.One) {
                     return BigInteger.One;
                 } else {
-                    throw PythonOps.ValueError("Number too big");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("numbertoobig", "Number too big"));
                 }
             }
         }
@@ -347,7 +347,7 @@ namespace IronPython.Runtime.Operations {
             }            
 
             // otherwise report an error
-            throw PythonOps.OverflowError("long/long too large for a float");
+            throw PythonOps.OverflowError(ResourceManager.Default.GetResource("longlongtoolargeforafloat", "long/long too large for a float"));
         }
 
         // The op_* nomenclature is required here to avoid name collisions with the
@@ -369,7 +369,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static BigInteger op_LeftShift(BigInteger x, int y) {
             if (y < 0) {
-                throw PythonOps.ValueError("negative shift count");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativeshiftcount", "negative shift count"));
             }
             return x << y;
         }
@@ -377,7 +377,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static BigInteger op_RightShift(BigInteger x, int y) {
             if (y < 0) {
-                throw PythonOps.ValueError("negative shift count");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativeshiftcount", "negative shift count"));
             }
             return x >> y;
         }
@@ -909,7 +909,7 @@ namespace IronPython.Runtime.Operations {
             StringFormatSpec spec = StringFormatSpec.FromString(formatSpec);
 
             if (spec.Precision != null) {
-                throw PythonOps.ValueError("Precision not allowed in integer format specifier");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("precisionnotallowedinintegerformatspecifier", "Precision not allowed in integer format specifier"));
             }
 
             BigInteger val = self;
@@ -1010,11 +1010,11 @@ namespace IronPython.Runtime.Operations {
                 case 'c': // single char
                     int iVal;
                     if (spec.Sign != null) {
-                        throw PythonOps.ValueError("Sign not allowed with integer format specifier 'c'");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("signnotallowedwithintegerformatspecifierc", "Sign not allowed with integer format specifier 'c'"));
                     } else if (!self.AsInt32(out iVal)) {
-                        throw PythonOps.OverflowError("long int too large to convert to int");
+                        throw PythonOps.OverflowError(ResourceManager.Default.GetResource("longinttoolargetoconverttoint", "long int too large to convert to int"));
                     } else if(iVal < 0 || iVal > 0xFF) {
-                        throw PythonOps.OverflowError("%c arg not in range(0x10000)");
+                        throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cargnotinrange0x10000", "%c arg not in range(0x10000)"));
                     }
 
                     digits = ScriptingRuntimeHelpers.CharToString((char)iVal);

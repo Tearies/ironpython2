@@ -152,7 +152,7 @@ namespace IronPython.Runtime.Operations {
 
             lock (errorHandlers) {
                 if (!PythonOps.IsCallable(context, handler))
-                    throw PythonOps.TypeError("handler must be callable");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("handlermustbecallable", "handler must be callable"));
 
                 errorHandlers[name] = handler;
             }
@@ -164,7 +164,7 @@ namespace IronPython.Runtime.Operations {
             List<object> searchFunctions = context.LanguageContext.SearchFunctions;
             string normalized = encoding.ToLower().Replace(' ', '-');
             if (normalized.IndexOf(Char.MinValue) != -1) {
-                throw PythonOps.TypeError("lookup string cannot contain null character");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("lookupstringcannotcontainnullcharacter", "lookup string cannot contain null character"));
             }
             lock (searchFunctions) {
                 for (int i = 0; i < searchFunctions.Count; i++) {
@@ -178,7 +178,7 @@ namespace IronPython.Runtime.Operations {
 
         internal static void RegisterEncoding(CodeContext/*!*/ context, object search_function) {
             if (!PythonOps.IsCallable(context, search_function))
-                throw PythonOps.TypeError("search_function must be callable");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("searchfunctionmustbecallable", "search_function must be callable"));
 
             List<object> searchFunctions = context.LanguageContext.SearchFunctions;
 
@@ -279,7 +279,7 @@ namespace IronPython.Runtime.Operations {
                 return ret;
             }
 
-            throw PythonOps.TypeError("bad operand type for unary +");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("badoperandtypeforunary", "bad operand type for unary +"));
         }
 
         public static object Negate(object o) {
@@ -297,7 +297,7 @@ namespace IronPython.Runtime.Operations {
                 return ret;
             }
 
-            throw PythonOps.TypeError("bad operand type for unary -");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("badoperandtypeforunary", "bad operand type for unary -"));
         }
 
         public static bool IsSubClass(PythonType/*!*/ c, PythonType/*!*/ typeinfo) {
@@ -317,8 +317,8 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static bool IsSubClass(CodeContext/*!*/ context, PythonType c, object typeinfo) {
-            if (c == null) throw PythonOps.TypeError("issubclass: arg 1 must be a class");
-            if (typeinfo == null) throw PythonOps.TypeError("issubclass: arg 2 must be a class");
+            if (c == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("issubclassarg1mustbeaclass", "issubclass: arg 1 must be a class"));
+            if (typeinfo == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("issubclassarg2mustbeaclass", "issubclass: arg 2 must be a class"));
 
             PythonTuple pt = typeinfo as PythonTuple;
             PythonContext pyContext = context.LanguageContext;
@@ -413,7 +413,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static bool IsInstance(CodeContext/*!*/ context, object o, object typeinfo) {
-            if (typeinfo == null) throw PythonOps.TypeError("isinstance: arg 2 must be a class, type, or tuple of classes and types");
+            if (typeinfo == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("isinstancearg2mustbeaclasstypeortupleofclassesandtypes", "isinstance: arg 2 must be a class, type, or tuple of classes and types"));
 
             PythonTuple tt = typeinfo as PythonTuple;
             if (tt != null) {
@@ -490,7 +490,7 @@ namespace IronPython.Runtime.Operations {
                 return ret;
 
 
-            throw PythonOps.TypeError("bad operand type for unary ~");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("badoperandtypeforunary", "bad operand type for unary ~"));
         }
 
         public static bool Not(object o) {
@@ -798,7 +798,7 @@ namespace IronPython.Runtime.Operations {
             }
 
             if (x is Complex || y is Complex || z is Complex) {
-                throw PythonOps.ValueError("complex modulo");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("complexmodulo", "complex modulo"));
             }
 
             if (PythonTypeOps.TryInvokeTernaryOperator(context, x, y, z, "__pow__", out ret)) {
@@ -806,7 +806,7 @@ namespace IronPython.Runtime.Operations {
                     return ret;
                 } else if (!IsNumericObject(y) || !IsNumericObject(z)) {
                     // special error message in this case...
-                    throw TypeError("pow() 3rd argument not allowed unless all arguments are integers");
+                    throw TypeError(ResourceManager.Default.GetResource("pow3rdargumentnotallowedunlessallargumentsareintegers", "pow() 3rd argument not allowed unless all arguments are integers"));
                 }
             }
 
@@ -853,7 +853,7 @@ namespace IronPython.Runtime.Operations {
 
                 return hex;
             }
-            throw TypeError("hex() argument cannot be converted to hex");
+            throw TypeError(ResourceManager.Default.GetResource("hexargumentcannotbeconvertedtohex", "hex() argument cannot be converted to hex"));
         }
 
         public static object Oct(object o) {
@@ -874,7 +874,7 @@ namespace IronPython.Runtime.Operations {
 
                 return octal;
             }
-            throw TypeError("oct() argument cannot be converted to octal");
+            throw TypeError(ResourceManager.Default.GetResource("octargumentcannotbeconvertedtooctal", "oct() argument cannot be converted to octal"));
         }
 
         public static object Index(object o) {
@@ -981,7 +981,7 @@ namespace IronPython.Runtime.Operations {
         [Obsolete("Use ObjectOpertaions instead")]
         public static object CallWithArgsTupleAndKeywordDictAndContext(CodeContext/*!*/ context, object func, object[] args, string[] names, object argsTuple, object kwDict) {
             IDictionary kws = kwDict as IDictionary;
-            if (kws == null && kwDict != null) throw PythonOps.TypeError("argument after ** must be a dictionary");
+            if (kws == null && kwDict != null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("argumentaftermustbeadictionary", "argument after ** must be a dictionary"));
 
             if ((kws == null || kws.Count == 0) && names.Length == 0) {
                 List<object> largs = new List<object>(args);
@@ -1242,9 +1242,9 @@ namespace IronPython.Runtime.Operations {
 
         public static double CheckMath(double v) {
             if (double.IsInfinity(v)) {
-                throw PythonOps.OverflowError("math range error");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("mathrangeerror", "math range error"));
             } else if (double.IsNaN(v)) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             } else {
                 return v;
             }
@@ -1308,7 +1308,7 @@ namespace IronPython.Runtime.Operations {
             } else {
                 ostep = Converter.ConvertToIndex(step);
                 if (ostep == 0) {
-                    throw PythonOps.ValueError("step cannot be zero");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("stepcannotbezero", "step cannot be zero"));
                 }
             }
 
@@ -1348,7 +1348,7 @@ namespace IronPython.Runtime.Operations {
             if (step == null) {
                 ostep = 1;
             } else if (step == 0) {
-                throw PythonOps.ValueError("step cannot be zero");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("stepcannotbezero", "step cannot be zero"));
             } else {
                 ostep = step.Value;
             }
@@ -1512,7 +1512,7 @@ namespace IronPython.Runtime.Operations {
                 throw PythonOps.CreateThrowable(DynamicHelpers.GetPythonType(obj));
             }
 
-            throw PythonOps.AssertionError("");
+            throw PythonOps.AssertionError(ResourceManager.Default.GetResource("", ""));
         }
 
 
@@ -1688,7 +1688,7 @@ namespace IronPython.Runtime.Operations {
                 f = pc.SystemStandardOut;
             }
             if (f == null || f == Uninitialized.Instance) {
-                throw PythonOps.RuntimeError("lost sys.stdout");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("lostsysstdout", "lost sys.stdout"));
             }
 
             PythonFile pf = f as PythonFile;
@@ -1707,7 +1707,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         private static object ReadLine(CodeContext/*!*/ context, object f) {
-            if (f == null || f == Uninitialized.Instance) throw PythonOps.RuntimeError("lost sys.std_in");
+            if (f == null || f == Uninitialized.Instance) throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("lostsysstdin", "lost sys.std_in"));
             return PythonOps.Invoke(context, f, "readline");
         }
 
@@ -1973,12 +1973,12 @@ namespace IronPython.Runtime.Operations {
 
                 if (codeTuple.__len__() > 1 && codeTuple[1] != null) {
                     globals = codeTuple[1] as PythonDictionary;
-                    if (globals == null) throw PythonOps.TypeError("globals must be dictionary or none");
+                    if (globals == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("globalsmustbedictionaryornone", "globals must be dictionary or none"));
                 }
 
                 if (codeTuple.__len__() > 2 && codeTuple[2] != null) {
                     locals = codeTuple[2] as PythonDictionary;
-                    if (locals == null) throw PythonOps.TypeError("locals must be dictionary or none");
+                    if (locals == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("localsmustbedictionaryornone", "locals must be dictionary or none"));
                 } else {
                     locals = globals;
                 }
@@ -2040,14 +2040,14 @@ namespace IronPython.Runtime.Operations {
 
             FunctionCode fc = code as FunctionCode;
             if (fc == null) {
-                throw PythonOps.TypeError("exec: arg 1 must be a string, file, Stream, or code object");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("execarg1mustbeastringfilestreamorcodeobject", "exec: arg 1 must be a string, file, Stream, or code object"));
             }
 
             if (locals == null) locals = globals;
             if (globals == null) globals = context.GlobalDict;
 
             if (locals != null && PythonOps.IsMappingType(context, locals) != ScriptingRuntimeHelpers.True) {
-                throw PythonOps.TypeError("exec: arg 3 must be mapping or None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("execarg3mustbemappingornone", "exec: arg 3 must be mapping or None"));
             }
 
             CodeContext execContext = Builtin.GetExecEvalScope(context, globals, Builtin.GetAttrLocals(context, locals), true, false);
@@ -2471,7 +2471,7 @@ namespace IronPython.Runtime.Operations {
             if (traceback != null) {
                 if (!forRethrow) {
                     TraceBack tb = traceback as TraceBack;
-                    if (tb == null) throw PythonOps.TypeError("traceback argument must be a traceback object");
+                    if (tb == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("tracebackargumentmustbeatracebackobject", "traceback argument must be a traceback object"));
 
                     throwable.SetTraceBack(tb);
                 }
@@ -2723,7 +2723,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static void PythonFunctionDeleteDict() {
-            throw PythonOps.TypeError("function's dictionary may not be deleted");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("functionsdictionarymaynotbedeleted", "function's dictionary may not be deleted"));
         }
 
         public static void PythonFunctionDeleteDoc(PythonFunction function) {
@@ -2774,7 +2774,7 @@ namespace IronPython.Runtime.Operations {
         public static object GetInitSlotMember(CodeContext/*!*/ context, PythonType type, PythonTypeSlot slot, object instance) {
             object value;
             if (!slot.TryGetValue(context, instance, type, out value)) {
-                throw PythonOps.TypeError("bad __init__");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("badinit", "bad __init__"));
             }
 
             return value;
@@ -3288,7 +3288,7 @@ namespace IronPython.Runtime.Operations {
 
         public static void FunctionPushFrame(PythonContext context) {
             if (PythonFunction.AddRecursionDepth(1) > context.RecursionLimit) {
-                throw PythonOps.RuntimeError("maximum recursion depth exceeded");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("maximumrecursiondepthexceeded", "maximum recursion depth exceeded"));
             }
         }
 
@@ -4332,7 +4332,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static Exception ZeroDivisionError() {
-            return ZeroDivisionError("Attempted to divide by zero.");
+            return ZeroDivisionError(ResourceManager.Default.GetResource("attemptedtodividebyzero", "Attempted to divide by zero."));
         }
 
         // If you do "(a, b) = (1, 2, 3, 4)"
@@ -4342,7 +4342,7 @@ namespace IronPython.Runtime.Operations {
             if (left > right)
                 return ValueError("need more than {0} values to unpack", right);
             else
-                return ValueError("too many values to unpack");
+                return ValueError(ResourceManager.Default.GetResource("toomanyvaluestounpack", "too many values to unpack"));
         }
 
         public static Exception NameError(string name) {
@@ -4396,7 +4396,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static Exception TypeErrorForNonStringAttribute() {
-            return TypeError("attribute name must be string");
+            return TypeError(ResourceManager.Default.GetResource("attributenamemustbestring", "attribute name must be string"));
         }
 
         internal static Exception TypeErrorForBadInstance(string template, object instance) {
@@ -4427,7 +4427,7 @@ namespace IronPython.Runtime.Operations {
         public static Exception AttributeErrorForReadonlyAttribute(string typeName, string attributeName) {
             // CPython uses AttributeError for all attributes except "__class__"
             if (attributeName == "__class__")
-                return PythonOps.TypeError("can't delete __class__ attribute");
+                return PythonOps.TypeError(ResourceManager.Default.GetResource("cantdeleteclassattribute", "can't delete __class__ attribute"));
 
             return PythonOps.AttributeError("'{1}' object attribute '{0}' is read-only", attributeName, typeName);
         }
@@ -4493,12 +4493,12 @@ namespace IronPython.Runtime.Operations {
         public static Exception TypeErrorForUnIndexableObject(object o) {
             IPythonObject ipo;
             if (o == null) {
-                return PythonOps.TypeError("'NoneType' object cannot be interpreted as an index");
+                return PythonOps.TypeError(ResourceManager.Default.GetResource("nonetypeobjectcannotbeinterpretedasanindex", "'NoneType' object cannot be interpreted as an index"));
             } else if ((ipo = o as IPythonObject) != null) {
                 return TypeError("'{0}' object cannot be interpreted as an index", ipo.PythonType.Name);
             }
 
-            return TypeError("object cannot be interpreted as an index");
+            return TypeError(ResourceManager.Default.GetResource("objectcannotbeinterpretedasanindex", "object cannot be interpreted as an index"));
         }
 
         [Obsolete("no longer used anywhere")]
@@ -4511,16 +4511,16 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static Exception/*!*/ UnreadableProperty() {
-            return PythonOps.AttributeError("unreadable attribute");
+            return PythonOps.AttributeError(ResourceManager.Default.GetResource("unreadableattribute", "unreadable attribute"));
         }
 
 
         public static Exception/*!*/ UnsetableProperty() {
-            return PythonOps.AttributeError("readonly attribute");
+            return PythonOps.AttributeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
         }
 
         public static Exception/*!*/ UndeletableProperty() {
-            return PythonOps.AttributeError("undeletable attribute");
+            return PythonOps.AttributeError(ResourceManager.Default.GetResource("undeletableattribute", "undeletable attribute"));
         }
 
         public static Exception Warning(string format, params object[] args) {

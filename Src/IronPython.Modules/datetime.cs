@@ -309,38 +309,38 @@ namespace IronPython.Modules {
             switch (kind) {
                 case InputKind.Year:
                     if (value > DateTime.MaxValue.Year || value < DateTime.MinValue.Year) {
-                        throw PythonOps.ValueError("year is out of range");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("yearisoutofrange", "year is out of range"));
                     }
                     break;
                 case InputKind.Month:
                     if (value > 12 || value < 1) {
-                        throw PythonOps.ValueError("month must be in 1..12");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("monthmustbein112", "month must be in 1..12"));
                     }
                     break;
                 case InputKind.Day:
                     // TODO: changing upper bound
                     if (value > 31 || value < 1) {
-                        throw PythonOps.ValueError("day is out of range for month");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("dayisoutofrangeformonth", "day is out of range for month"));
                     }
                     break;
                 case InputKind.Hour:
                     if (value > 23 || value < 0) {
-                        throw PythonOps.ValueError("hour must be in 0..23");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("hourmustbein023", "hour must be in 0..23"));
                     }
                     break;
                 case InputKind.Minute:
                     if (value > 59 || value < 0) {
-                        throw PythonOps.ValueError("minute must be in 0..59");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("minutemustbein059", "minute must be in 0..59"));
                     }
                     break;
                 case InputKind.Second:
                     if (value > 59 || value < 0) {
-                        throw PythonOps.ValueError("second must be in 0..59");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("secondmustbein059", "second must be in 0..59"));
                     }
                     break;
                 case InputKind.Microsecond:
                     if (value > 999999 || value < 0) {
-                        throw PythonOps.ValueError("microsecond must be in 0..999999");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("microsecondmustbein0999999", "microsecond must be in 0..999999"));
                     }
                     break;
             }
@@ -396,7 +396,7 @@ namespace IronPython.Modules {
 
             public static date fromordinal(int d) {
                 if (d < 1) {
-                    throw PythonOps.ValueError("ordinal must be >= 1");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("ordinalmustbe1", "ordinal must be >= 1"));
                 }
                 return new date(min._dateTime.AddDays(d - 1));
             }
@@ -435,14 +435,14 @@ namespace IronPython.Modules {
                 try {
                     return new date(self._dateTime.AddDays(other.days));
                 } catch {
-                    throw PythonOps.OverflowError("date value out of range");
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("datevalueoutofrange", "date value out of range"));
                 }
             }
             public static date operator +([NotNull]timedelta other, [NotNull]date self) {
                 try {
                     return new date(self._dateTime.AddDays(other.days));
                 } catch {
-                    throw PythonOps.OverflowError("date value out of range");
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("datevalueoutofrange", "date value out of range"));
                 }
             }
 
@@ -450,7 +450,7 @@ namespace IronPython.Modules {
                 try {
                     return new date(self._dateTime.AddDays(-1 * delta.days));
                 } catch {
-                    throw PythonOps.OverflowError("date value out of range");
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("datevalueoutofrange", "date value out of range"));
                 }
             }
 
@@ -727,13 +727,13 @@ namespace IronPython.Modules {
 
             public datetime([NotNull]string str) {
                 if (str.Length != 10) {
-                    throw PythonOps.TypeError("an integer is required");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
                 }
 
                 int microSeconds = (((int)str[7]) << 16) | ((int)str[8] << 8) | (int)str[9];
                 int month = (int)str[2];
                 if (month == 0 || month > 12) {
-                    throw PythonOps.TypeError("invalid month");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("invalidmonth", "invalid month"));
                 }
                 InternalDateTime = new DateTime(
                     (((int)str[0]) << 8) | (int)str[1], 
@@ -774,7 +774,7 @@ namespace IronPython.Modules {
                 
                 for (int i = 0; i < args.Length && i < 7; i++) {    // 8 is offsetof tzinfo
                     if (!(args[i] is int)) {
-                        throw PythonOps.TypeError("an integer is required");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
                     }
                 }
 
@@ -796,7 +796,7 @@ namespace IronPython.Modules {
                     try {
                         InternalDateTime = InternalDateTime.AddMilliseconds(_lostMicroseconds / 1000 - 1);
                     } catch {
-                        throw PythonOps.OverflowError("date value out of range");
+                        throw PythonOps.OverflowError(ResourceManager.Default.GetResource("datevalueoutofrange", "date value out of range"));
                     }
                     _lostMicroseconds = _lostMicroseconds % 1000 + 1000;
                 }
@@ -805,7 +805,7 @@ namespace IronPython.Modules {
                     try {
                         InternalDateTime = InternalDateTime.AddMilliseconds(_lostMicroseconds / 1000);
                     } catch {
-                        throw PythonOps.OverflowError("date value out of range");
+                        throw PythonOps.OverflowError(ResourceManager.Default.GetResource("datevalueoutofrange", "date value out of range"));
                     }
                     _lostMicroseconds = _lostMicroseconds % 1000;
                 }
@@ -849,7 +849,7 @@ namespace IronPython.Modules {
 
             public new static datetime fromordinal(int d) {
                 if (d < 1) {
-                    throw PythonOps.ValueError("ordinal must be >= 1");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("ordinalmustbe1", "ordinal must be >= 1"));
                 }
                 return new datetime(DateTime.MinValue + new TimeSpan(d - 1, 0, 0, 0), 0, null);
             }
@@ -990,10 +990,10 @@ namespace IronPython.Modules {
 
             public object astimezone(tzinfo tz) {
                 if (tz == null)
-                    throw PythonOps.TypeError("astimezone() argument 1 must be datetime.tzinfo, not None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("astimezoneargument1mustbedatetimetzinfonotnone", "astimezone() argument 1 must be datetime.tzinfo, not None"));
 
                 if (_tz == null)
-                    throw PythonOps.ValueError("astimezone() cannot be applied to a naive datetime");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("astimezonecannotbeappliedtoanaivedatetime", "astimezone() cannot be applied to a naive datetime"));
 
                 if (tz == _tz)
                     return this;
@@ -1059,7 +1059,7 @@ namespace IronPython.Modules {
                     timedelta offset2 = other.utcoffset();
 
                     if ((offset1 == null && offset2 != null) || (offset1 != null && offset2 == null))
-                        throw PythonOps.TypeError("can't compare offset-naive and offset-aware times");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantcompareoffsetnaiveandoffsetawaretimes", "can't compare offset-naive and offset-aware times"));
 
                     return false;
                 } else {
@@ -1121,7 +1121,7 @@ namespace IronPython.Modules {
 
             internal override int CompareTo(object other) {
                 if (other == null)
-                    throw PythonOps.TypeError("can't compare datetime.datetime to NoneType");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantcomparedatetimedatetimetononetype", "can't compare datetime.datetime to NoneType"));
 
                 datetime combo = other as datetime;
                 if (combo == null)
@@ -1399,7 +1399,7 @@ namespace IronPython.Modules {
                     timedelta offset2 = other.utcoffset();
 
                     if ((offset1 == null && offset2 != null) || (offset1 != null && offset2 == null))
-                        throw PythonOps.TypeError("can't compare offset-naive and offset-aware times");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantcompareoffsetnaiveandoffsetawaretimes", "can't compare offset-naive and offset-aware times"));
 
                     return false;
                 } else {
@@ -1531,11 +1531,11 @@ namespace IronPython.Modules {
             public virtual object fromutc(datetime dt) {
                 timedelta dtOffset = utcoffset(dt);
                 if (dtOffset == null)
-                    throw PythonOps.ValueError("fromutc: non-None utcoffset() result required");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("fromutcnonnoneutcoffsetresultrequired", "fromutc: non-None utcoffset() result required"));
 
                 timedelta dtDst = dst(dt);
                 if (dtDst == null)
-                    throw PythonOps.ValueError("fromutc: non-None dst() result required");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("fromutcnonnonedstresultrequired", "fromutc: non-None dst() result required"));
 
                 timedelta delta = dtOffset - dtDst;
                 dt = dt + delta; // convert to standard LOCAL time

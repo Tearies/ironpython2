@@ -16,7 +16,7 @@ using Microsoft.Scripting.Utils;
 using IronPython.Runtime.Types;
 
 using System.Numerics;
-
+using Microsoft.Scripting;
 using SpecialNameAttribute = System.Runtime.CompilerServices.SpecialNameAttribute;
 
 namespace IronPython.Runtime.Operations {
@@ -43,7 +43,7 @@ namespace IronPython.Runtime.Operations {
             } else if (x is char) {
                 value = ParseFloat(ScriptingRuntimeHelpers.CharToString((char)x));
             } else if (x is Complex) {
-                throw PythonOps.TypeError("can't convert complex to float; use abs(z)");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantconvertcomplextofloatuseabsz", "can't convert complex to float; use abs(z)"));
             } else {
                 object d = PythonOps.CallWithContext(context, PythonOps.GetBoundAttr(context, x, "__float__"));
                 if (d is double) {
@@ -82,9 +82,9 @@ namespace IronPython.Runtime.Operations {
 
         public static PythonTuple as_integer_ratio(double self) {
             if (Double.IsInfinity(self)) {
-                throw PythonOps.OverflowError("Cannot pass infinity to float.as_integer_ratio.");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cannotpassinfinitytofloatasintegerratio", "Cannot pass infinity to float.as_integer_ratio."));
             } else if (Double.IsNaN(self)) {
-                throw PythonOps.ValueError("Cannot pass nan to float.as_integer_ratio.");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotpassnantofloatasintegerratio", "Cannot pass nan to float.as_integer_ratio."));
             }
 
             BigInteger dem = 1;
@@ -100,7 +100,7 @@ namespace IronPython.Runtime.Operations {
         [ClassMethod, StaticExtensionMethod]
         public static object fromhex(CodeContext/*!*/ context, PythonType/*!*/ cls, string self) {
             if (String.IsNullOrEmpty(self)) {
-                throw PythonOps.ValueError("expected non empty string");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("expectednonemptystring", "expected non empty string"));
             }
 
             self = self.Trim(_whitespace);
@@ -300,11 +300,11 @@ namespace IronPython.Runtime.Operations {
         }
 
         private static Exception HexStringOverflow() {
-            return PythonOps.OverflowError("hexadecimal value too large to represent as a float");
+            return PythonOps.OverflowError(ResourceManager.Default.GetResource("hexadecimalvaluetoolargetorepresentasafloat", "hexadecimal value too large to represent as a float"));
         }
 
         private static Exception InvalidHexString() {
-            return PythonOps.ValueError("invalid hexadecimal floating-point string");
+            return PythonOps.ValueError(ResourceManager.Default.GetResource("invalidhexadecimalfloatingpointstring", "invalid hexadecimal floating-point string"));
         }
 
         public static string hex(double self) {
@@ -419,7 +419,7 @@ namespace IronPython.Runtime.Operations {
                 } else if (double.IsNegativeInfinity(y)) {
                     return double.PositiveInfinity;
                 }
-                throw PythonOps.ZeroDivisionError("0.0 cannot be raised to a negative power");
+                throw PythonOps.ZeroDivisionError(ResourceManager.Default.GetResource("00cannotberaisedtoanegativepower", "0.0 cannot be raised to a negative power"));
             } else if (double.IsPositiveInfinity(y)) {
                 if (x > 1.0 || x < -1.0) {
                     return double.PositiveInfinity;
@@ -442,7 +442,7 @@ namespace IronPython.Runtime.Operations {
                     return y > 0 ? double.PositiveInfinity : 0.0;
                 }
             } else if (x < 0 && (Math.Floor(y) != y)) {
-                throw PythonOps.ValueError("negative number cannot be raised to fraction");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativenumbercannotberaisedtofraction", "negative number cannot be raised to fraction"));
             }
 
             return PythonOps.CheckMath(x, y, Math.Pow(x, y));
@@ -454,7 +454,7 @@ namespace IronPython.Runtime.Operations {
             double d = (double)__new__(context, TypeCache.Double, o);
 
             if (Double.IsInfinity(d)) {
-                throw PythonOps.OverflowError("number too big");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("numbertoobig", "number too big"));
             }
 
             return PythonTuple.MakeTuple(x, d);
@@ -466,9 +466,9 @@ namespace IronPython.Runtime.Operations {
             if (Int32.MinValue <= d && d <= Int32.MaxValue) {
                 return (int)d;
             } else if (double.IsInfinity(d)) {
-                throw PythonOps.OverflowError("cannot convert float infinity to integer");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cannotconvertfloatinfinitytointeger", "cannot convert float infinity to integer"));
             } else if (double.IsNaN(d)) {
-                throw PythonOps.ValueError("cannot convert float NaN to integer");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotconvertfloatnantointeger", "cannot convert float NaN to integer"));
             } else {
                 return (BigInteger)d;
             }
@@ -732,9 +732,9 @@ namespace IronPython.Runtime.Operations {
 
         public static BigInteger/*!*/ __long__(double self) {
             if (double.IsInfinity(self)) {
-                throw PythonOps.OverflowError("cannot convert float infinity to integer");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cannotconvertfloatinfinitytointeger", "cannot convert float infinity to integer"));
             } else if (double.IsNaN(self)) {
-                throw PythonOps.ValueError("cannot convert float NaN to integer");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotconvertfloatnantointeger", "cannot convert float NaN to integer"));
             } else {
                 return (BigInteger)self;
             }
@@ -754,7 +754,7 @@ namespace IronPython.Runtime.Operations {
                     res = context.LanguageContext.DoubleFormat;
                     break;
                 default:
-                    throw PythonOps.ValueError("__getformat__() argument 1 must be 'double' or 'float'");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("getformatargument1mustbedoubleorfloat", "__getformat__() argument 1 must be 'double' or 'float'"));
             }
 
             switch (res) {
@@ -981,18 +981,18 @@ namespace IronPython.Runtime.Operations {
                     break;
                 case "IEEE, little-endian":
                     if (!BitConverter.IsLittleEndian) {
-                        throw PythonOps.ValueError("can only set double format to 'unknown' or the detected platform value");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("canonlysetdoubleformattounknownorthedetectedplatformvalue", "can only set double format to 'unknown' or the detected platform value"));
                     }
                     format = FloatFormat.IEEE_LittleEndian;
                     break;
                 case "IEEE, big-endian":
                     if (BitConverter.IsLittleEndian) {
-                        throw PythonOps.ValueError("can only set double format to 'unknown' or the detected platform value");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("canonlysetdoubleformattounknownorthedetectedplatformvalue", "can only set double format to 'unknown' or the detected platform value"));
                     }
                     format = FloatFormat.IEEE_BigEndian;
                     break;
                 default:
-                    throw PythonOps.ValueError(" __setformat__() argument 2 must be 'unknown', 'IEEE, little-endian' or 'IEEE, big-endian'");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("setformatargument2mustbeunknownieeelittleendianorieeebigendian", " __setformat__() argument 2 must be 'unknown', 'IEEE, little-endian' or 'IEEE, big-endian'"));
             }
 
             switch (typestr) {
@@ -1003,7 +1003,7 @@ namespace IronPython.Runtime.Operations {
                     context.LanguageContext.DoubleFormat = format;
                     break;
                 default:
-                    throw PythonOps.ValueError("__setformat__() argument 1 must be 'double' or 'float'");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("setformatargument1mustbedoubleorfloat", "__setformat__() argument 1 must be 'double' or 'float'"));
             }
         }
     }
@@ -1090,7 +1090,7 @@ namespace IronPython.Runtime.Operations {
             double doubleVal;
             if (Converter.TryConvertToDouble(x, out doubleVal)) return (float)doubleVal;
 
-            if (x is Complex) throw PythonOps.TypeError("can't convert complex to Single; use abs(z)");
+            if (x is Complex) throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantconvertcomplextosingleuseabsz", "can't convert complex to Single; use abs(z)"));
 
             object d = PythonOps.CallWithContext(context, PythonOps.GetBoundAttr(context, x, "__float__"));
             if (d is double) return (float)(double)d;

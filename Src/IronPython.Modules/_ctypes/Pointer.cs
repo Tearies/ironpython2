@@ -10,6 +10,7 @@ using System.Text;
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 
 namespace IronPython.Modules {
     /// <summary>
@@ -43,7 +44,7 @@ namespace IronPython.Modules {
                     CData res = (CData)elementType.CreateInstance(elementType.Context.SharedContext);
                     res._memHolder = _memHolder.ReadMemoryHolder(0);
                     if(res._memHolder.UnsafeAddress == IntPtr.Zero) {
-                        throw PythonOps.ValueError("NULL value access");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("nullvalueaccess", "NULL value access"));
                     }
                     return res;
                 }
@@ -76,7 +77,7 @@ namespace IronPython.Modules {
             public object this[Slice index] {
                 get {
                     if (index.stop == null) {
-                        throw PythonOps.ValueError("slice stop is required");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("slicestopisrequired", "slice stop is required"));
                     }
 
                     int start = index.start != null ? (int)index.start : 0;
@@ -84,7 +85,7 @@ namespace IronPython.Modules {
                     int step = index.step != null ? (int)index.step : 1;
 
                     if (step < 0 && index.start == null) {
-                        throw PythonOps.ValueError("slice start is required for step < 0");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("slicestartisrequiredforstep0", "slice start is required for step < 0"));
                     }
 
                     if (start < 0) {

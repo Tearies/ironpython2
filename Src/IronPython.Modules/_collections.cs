@@ -118,14 +118,14 @@ namespace IronPython.Modules {
                     return -1;
                 } else if (value is int || value is BigInteger || value is double) {
                     int val = (int)value;
-                    if (val < 0) throw PythonOps.ValueError("maxlen must be non-negative");
+                    if (val < 0) throw PythonOps.ValueError(ResourceManager.Default.GetResource("maxlenmustbenonnegative", "maxlen must be non-negative"));
                     return val;
                 } else if (value is Extensible<int>) {
                     int val = ((Extensible<int>)value).Value;
-                    if (val < 0) throw PythonOps.ValueError("maxlen must be non-negative");
+                    if (val < 0) throw PythonOps.ValueError(ResourceManager.Default.GetResource("maxlenmustbenonnegative", "maxlen must be non-negative"));
                     return val;
                 }
-                throw PythonOps.TypeError("deque(): keyword argument 'maxlen' requires integer");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("dequekeywordargumentmaxlenrequiresinteger", "deque(): keyword argument 'maxlen' requires integer"));
             }
 
             #region core deque APIs
@@ -216,7 +216,7 @@ namespace IronPython.Modules {
             public object pop() {
                 lock (_lockObj) {
                     if (_itemCnt == 0) {
-                        throw PythonOps.IndexError("pop from an empty deque");
+                        throw PythonOps.IndexError(ResourceManager.Default.GetResource("popfromanemptydeque", "pop from an empty deque"));
                     }
 
                     _version++;
@@ -236,7 +236,7 @@ namespace IronPython.Modules {
             public object popleft() {
                 lock (_lockObj) {
                     if (_itemCnt == 0) {
-                        throw PythonOps.IndexError("pop from an empty deque");
+                        throw PythonOps.IndexError(ResourceManager.Default.GetResource("popfromanemptydeque", "pop from an empty deque"));
                     }
 
                     _version++;
@@ -265,7 +265,7 @@ namespace IronPython.Modules {
                         return true;
                     });
                     if (_version != startVersion) {
-                        throw PythonOps.IndexError("deque mutated during remove().");
+                        throw PythonOps.IndexError(ResourceManager.Default.GetResource("dequemutatedduringremove", "deque mutated during remove()."));
                     }
 
                     if (found == _head) {
@@ -273,7 +273,7 @@ namespace IronPython.Modules {
                     } else if (found == (_tail > 0 ? _tail - 1 : _data.Length - 1)) {
                         pop();
                     } else if (found == -1) {
-                        throw PythonOps.ValueError("deque.remove(value): value not in deque");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("dequeremovevaluevaluenotindeque", "deque.remove(value): value not in deque"));
                     } else {
                         // otherwise we're removing from the middle and need to slide the values over...
                         _version++;
@@ -543,7 +543,7 @@ namespace IronPython.Modules {
                 bool IEnumerator.MoveNext() {
                     lock (_deque._lockObj) {
                         if (_version != _deque._version) {
-                            throw PythonOps.RuntimeError("deque mutated during iteration");
+                            throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("dequemutatedduringiteration", "deque mutated during iteration"));
                         }
 
                         if (_moveCnt < _deque._itemCnt) {
@@ -606,7 +606,7 @@ namespace IronPython.Modules {
                 bool IEnumerator.MoveNext() {
                     lock (_deque._lockObj) {
                         if (_version != _deque._version) {
-                            throw PythonOps.RuntimeError("deque mutated during iteration");
+                            throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("dequemutatedduringiteration", "deque mutated during iteration"));
                         }
 
                         if (_moveCnt < _deque._itemCnt) {
@@ -662,13 +662,13 @@ namespace IronPython.Modules {
 
             private int IndexToSlot(CodeContext/*!*/ context, object index) {
                 if (_itemCnt == 0) {
-                    throw PythonOps.IndexError("deque index out of range");
+                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("dequeindexoutofrange", "deque index out of range"));
                 }
 
                 int intIndex = context.LanguageContext.ConvertToInt32(index);
                 if (intIndex >= 0) {
                     if (intIndex >= _itemCnt) {
-                        throw PythonOps.IndexError("deque index out of range");
+                        throw PythonOps.IndexError(ResourceManager.Default.GetResource("dequeindexoutofrange", "deque index out of range"));
                     }
 
                     int realIndex = _head + intIndex;
@@ -679,7 +679,7 @@ namespace IronPython.Modules {
                     return realIndex;
                 } else {
                     if ((intIndex * -1) > _itemCnt) {
-                        throw PythonOps.IndexError("deque index out of range");
+                        throw PythonOps.IndexError(ResourceManager.Default.GetResource("dequeindexoutofrange", "deque index out of range"));
                     }
 
                     int realIndex = _tail + intIndex;

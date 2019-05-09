@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 
 namespace IronPython.Runtime {
@@ -25,7 +26,7 @@ namespace IronPython.Runtime {
 
         private void Initialize(int start, int stop, int step) {
             if (step == 0) {
-                throw PythonOps.ValueError("step must not be zero");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("stepmustnotbezero", "step must not be zero"));
             } else if (step > 0) {
                 if (start > stop) stop = start;
             } else {
@@ -75,7 +76,7 @@ namespace IronPython.Runtime {
             }
 
             if (temp > Int32.MaxValue) {
-                throw PythonOps.OverflowError("xrange() result has too many items");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("xrangeresulthastoomanyitems", "xrange() result has too many items"));
             }
             return (int)temp;
         }
@@ -85,7 +86,7 @@ namespace IronPython.Runtime {
                 if (index < 0) index += _length;
 
                 if (index >= _length || index < 0)
-                    throw PythonOps.IndexError("xrange object index out of range");
+                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("xrangeobjectindexoutofrange", "xrange object index out of range"));
 
                 int ind = index * _step + _start;
                 return ScriptingRuntimeHelpers.Int32ToObject(ind);
@@ -101,7 +102,7 @@ namespace IronPython.Runtime {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public object this[Slice slice] {
             get {
-                throw PythonOps.TypeError("sequence index must be integer");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("sequenceindexmustbeinteger", "sequence index must be integer"));
             }
         }
 

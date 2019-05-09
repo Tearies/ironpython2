@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 //
@@ -38,7 +38,7 @@ namespace IronPython.Zlib
                     break;
 
                 case ZlibModule.Z_STREAM_ERROR:
-                    throw PythonOps.ValueError("Invalid initialization option");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidinitializationoption", "Invalid initialization option"));
 
                 default:
                     throw ZlibModule.zlib_error(this.zst, err, "while creating decompression object");
@@ -124,7 +124,7 @@ The decompressor object can no longer be used after this call.")]
         public string flush(int length=ZlibModule.DEFAULTALLOC)
         {
             if(length < 1)
-                throw PythonOps.ValueError("length must be greater than 0.");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("lengthmustbegreaterthan0", "length must be greater than 0."));
 
             byte[] output = new byte[length];
 

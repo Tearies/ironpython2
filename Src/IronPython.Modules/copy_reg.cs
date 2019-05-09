@@ -192,7 +192,7 @@ namespace IronPython.Modules {
             } catch (OverflowException) {
                 // throw below
             }
-            throw PythonOps.ValueError("code out of range");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("codeoutofrange", "code out of range"));
         }
 
         #endregion

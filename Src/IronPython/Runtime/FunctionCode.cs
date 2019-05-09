@@ -511,7 +511,7 @@ namespace IronPython.Runtime {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public object co_lnotab {
             get {
-                throw PythonOps.NotImplementedError("");
+                throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("", ""));
             }
         }
 
@@ -549,7 +549,7 @@ namespace IronPython.Runtime {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public object co_stacksize {
             get {
-                throw PythonOps.NotImplementedError("");
+                throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("", ""));
             }
         }
 

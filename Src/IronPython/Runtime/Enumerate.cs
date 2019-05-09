@@ -16,6 +16,7 @@ using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime {
     /* 
@@ -242,7 +243,7 @@ namespace IronPython.Runtime {
         public bool MoveNext() {
             if (_nextMethod == null) {
                 if (!PythonOps.TryGetBoundAttr(_baseObject, "next", out _nextMethod) || _nextMethod == null) {
-                    throw PythonOps.TypeError("instance has no next() method");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("instancehasnonextmethod", "instance has no next() method"));
                 }
             }
 

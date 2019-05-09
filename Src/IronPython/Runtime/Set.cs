@@ -219,7 +219,7 @@ namespace IronPython.Runtime {
             if (_items.Pop(out res)) {
                 return res;
             }
-            throw PythonOps.KeyError("pop from an empty set");
+            throw PythonOps.KeyError(ResourceManager.Default.GetResource("popfromanemptyset", "pop from an empty set"));
         }
 
         public void remove(object item) {
@@ -777,7 +777,7 @@ namespace IronPython.Runtime {
                 return items.IsStrictSubset(self._items);
             }
 
-            throw PythonOps.TypeError("can only compare to a set");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlycomparetoaset", "can only compare to a set"));
         }
 
         public static bool operator <(SetCollection self, object other) {
@@ -786,7 +786,7 @@ namespace IronPython.Runtime {
                 return self._items.IsStrictSubset(items);
             }
 
-            throw PythonOps.TypeError("can only compare to a set");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlycomparetoaset", "can only compare to a set"));
         }
 
         public static bool operator >=(SetCollection self, object other) {
@@ -795,7 +795,7 @@ namespace IronPython.Runtime {
                 return items.IsSubset(self._items);
             }
 
-            throw PythonOps.TypeError("can only compare to a set");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlycomparetoaset", "can only compare to a set"));
         }
 
         public static bool operator <=(SetCollection self, object other) {
@@ -804,18 +804,18 @@ namespace IronPython.Runtime {
                 return self._items.IsSubset(items);
             }
 
-            throw PythonOps.TypeError("can only compare to a set");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlycomparetoaset", "can only compare to a set"));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic") ,System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "o")]
         [SpecialName]
         public int Compare(object o) {
-            throw PythonOps.TypeError("cannot compare sets using cmp()");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotcomparesetsusingcmp", "cannot compare sets using cmp()"));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic") ,System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "o")]
         public int __cmp__(object o) {
-            throw PythonOps.TypeError("cannot compare sets using cmp()");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotcomparesetsusingcmp", "cannot compare sets using cmp()"));
         }
 
         #endregion
@@ -1331,7 +1331,7 @@ namespace IronPython.Runtime {
                 return items.IsStrictSubset(self._items);
             }
 
-            throw PythonOps.TypeError("can only compare to a set");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlycomparetoaset", "can only compare to a set"));
         }
 
         public static bool operator <(FrozenSetCollection self, object other) {
@@ -1340,7 +1340,7 @@ namespace IronPython.Runtime {
                 return self._items.IsStrictSubset(items);
             }
 
-            throw PythonOps.TypeError("can only compare to a set");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlycomparetoaset", "can only compare to a set"));
         }
 
         public static bool operator >=(FrozenSetCollection self, object other) {
@@ -1349,7 +1349,7 @@ namespace IronPython.Runtime {
                 return items.IsSubset(self._items);
             }
 
-            throw PythonOps.TypeError("can only compare to a set");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlycomparetoaset", "can only compare to a set"));
         }
 
         public static bool operator <=(FrozenSetCollection self, object other) {
@@ -1358,18 +1358,18 @@ namespace IronPython.Runtime {
                 return self._items.IsSubset(items);
             }
 
-            throw PythonOps.TypeError("can only compare to a set");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlycomparetoaset", "can only compare to a set"));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic") ,System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "o")]
         [SpecialName]
         public int Compare(object o) {
-            throw PythonOps.TypeError("cannot compare sets using cmp()");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotcomparesetsusingcmp", "cannot compare sets using cmp()"));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic") ,System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "o")]
         public int __cmp__(object o) {
-            throw PythonOps.TypeError("cannot compare sets using cmp()");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotcomparesetsusingcmp", "cannot compare sets using cmp()"));
         }
 
         #endregion
@@ -1470,7 +1470,7 @@ namespace IronPython.Runtime {
                 object res = _items._buckets[_index].Item;
 
                 if (_items.Version != _version) {
-                    throw PythonOps.RuntimeError("set changed during iteration");
+                    throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("setchangedduringiteration", "set changed during iteration"));
                 }
 
                 return res;

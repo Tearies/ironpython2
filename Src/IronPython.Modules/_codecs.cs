@@ -10,6 +10,7 @@ using System.Text;
 
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Utils;
 
 [assembly: PythonModule("_codecs", typeof(IronPython.Modules.PythonCodecs))]
@@ -31,7 +32,7 @@ namespace IronPython.Modules {
         #endregion
 
         public static object charbuffer_encode(string input) {
-            throw PythonOps.NotImplementedError("charbuffer_encode");
+            throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("charbufferencode", "charbuffer_encode"));
         }
 
         /// <summary>
@@ -39,7 +40,7 @@ namespace IronPython.Modules {
         /// </summary>
         public static EncodingMap charmap_build(string decoding_table) {
             if (decoding_table.Length != 256) {
-                throw PythonOps.TypeError("charmap_build expected 256 character string");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("charmapbuildexpected256characterstring", "charmap_build expected 256 character string"));
             }
 
             EncodingMap map = new EncodingMap();
@@ -117,7 +118,7 @@ namespace IronPython.Modules {
             for (int i = 0; i < text.Length; i++) {
 
                 if (text[i] == '\\') {
-                    if (i == text.Length - 1) throw PythonOps.ValueError("\\ at end of string");
+                    if (i == text.Length - 1) throw PythonOps.ValueError(ResourceManager.Default.GetResource("atendofstring", "\\ at end of string"));
 
                     switch (text[++i]) {
                         case 'a': res.Append((char)0x07); break;
@@ -135,9 +136,9 @@ namespace IronPython.Modules {
                                 switch (errors) {
                                     case "strict":
                                         if (i >= text.Length - 2) {
-                                            throw PythonOps.ValueError("invalid character value");
+                                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidcharactervalue", "invalid character value"));
                                         } else {
-                                            throw PythonOps.ValueError("invalid hexadecimal digit");
+                                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidhexadecimaldigit", "invalid hexadecimal digit"));
                                         }
                                     case "replace":
                                         res.Append("?");
@@ -264,9 +265,9 @@ namespace IronPython.Modules {
 
         #region Unicode Escape Encoding
 
-        public static PythonTuple unicode_escape_decode(string input) => throw PythonOps.NotImplementedError("unicode_escape_decode");
+        public static PythonTuple unicode_escape_decode(string input) => throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("unicodeescapedecode", "unicode_escape_decode"));
 
-        public static PythonTuple unicode_escape_encode(string input) => throw PythonOps.NotImplementedError("unicode_escape_encode");
+        public static PythonTuple unicode_escape_encode(string input) => throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("unicodeescapeencode", "unicode_escape_encode"));
 
         public static PythonTuple unicode_internal_decode(CodeContext context, object input, string errors = "strict") => utf_16_decode(context, input, errors, false);
 
@@ -627,7 +628,7 @@ namespace IronPython.Modules {
                 } else if (val is int) {
                     byteCount++;
                 } else {
-                    throw PythonOps.TypeError("charmap must be an int, str, or None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("charmapmustbeanintstrornone", "charmap must be an int, str, or None"));
                 }
                 index++;
             }
@@ -662,7 +663,7 @@ namespace IronPython.Modules {
                     bytes[byteIndex++] = (byte)(int)val;
                     outputBytes++;
                 } else {
-                    throw PythonOps.TypeError("charmap must be an int, str, or None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("charmapmustbeanintstrornone", "charmap must be an int, str, or None"));
                 }
                 charIndex++;
             }
@@ -688,7 +689,7 @@ namespace IronPython.Modules {
                 } else if (val is int) {
                     outputChars++;
                 } else {
-                    throw PythonOps.TypeError("charmap must be an int, str, or None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("charmapmustbeanintstrornone", "charmap must be an int, str, or None"));
                 }
                 index++;
             }
@@ -721,7 +722,7 @@ namespace IronPython.Modules {
                     chars[charIndex++] = (char)(int)val;
                     outputChars++;
                 } else {
-                    throw PythonOps.TypeError("charmap must be an int, str, or None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("charmapmustbeanintstrornone", "charmap must be an int, str, or None"));
                 }
                 byteIndex++;
             }

@@ -40,12 +40,12 @@ namespace IronPython.Modules {
                 : base(context, name, bases, dict) {
                 int iLen;
                 if (!dict.TryGetValue("_length_", out object len) || !(len is int) || (iLen = (int)len) < 0) {
-                    throw PythonOps.AttributeError("arrays must have _length_ attribute and it must be a positive integer");
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("arraysmusthavelengthattributeanditmustbeapositiveinteger", "arrays must have _length_ attribute and it must be a positive integer"));
                 }
 
                 object type;
                 if (!dict.TryGetValue("_type_", out type)) {
-                    throw PythonOps.AttributeError("class must define a '_type_' attribute");
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("classmustdefineatypeattribute", "class must define a '_type_' attribute"));
                 }
 
                 _length = iLen;
@@ -271,7 +271,7 @@ namespace IronPython.Modules {
 
                 if (arrArgs != null) {
                     if (arrArgs.Length > _length) {
-                        throw PythonOps.RuntimeError("invalid index");
+                        throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("invalidindex", "invalid index"));
                     }
 
                     for (int i = 0; i < arrArgs.Length; i++) {
@@ -375,7 +375,7 @@ namespace IronPython.Modules {
 
         private static ArrayType/*!*/ MakeArrayType(PythonType type, int count) {
             if (count < 0) {
-                throw PythonOps.ValueError("cannot multiply ctype by negative number");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotmultiplyctypebynegativenumber", "cannot multiply ctype by negative number"));
             }
 
             lock (_arrayTypes) {

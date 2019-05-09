@@ -71,7 +71,7 @@ namespace IronPython.Modules {
         public const string engine = "cli reg ex";
 
         public static string escape(string text) {
-            if (text == null) throw PythonOps.TypeError("text must not be None");
+            if (text == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("textmustnotbenone", "text must not be None"));
 
             for (int i = 0; i < text.Length; i++) {
                 if (!Char.IsLetterOrDigit(text[i])) {
@@ -354,7 +354,7 @@ namespace IronPython.Modules {
             }
 
             public string sub(CodeContext/*!*/ context, object repl, object @string, [DefaultParameterValue(0)]int count) {
-                if (repl == null) throw PythonOps.TypeError("NoneType is not valid repl");
+                if (repl == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("nonetypeisnotvalidrepl", "NoneType is not valid repl"));
                 //  if 'count' is omitted or 0, all occurrences are replaced
                 if (count == 0) count = Int32.MaxValue;
 
@@ -387,7 +387,7 @@ namespace IronPython.Modules {
             }
 
             public object subn(CodeContext/*!*/ context, object repl, object @string, [DefaultParameterValue(0)]int count) {
-                if (repl == null) throw PythonOps.TypeError("NoneType is not valid repl");
+                if (repl == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("nonetypeisnotvalidrepl", "NoneType is not valid repl"));
                 //  if 'count' is omitted or 0, all occurrences are replaced
                 if (count == 0) count = Int32.MaxValue;
 
@@ -794,7 +794,7 @@ namespace IronPython.Modules {
                     grpIndex = _pattern._re.GroupNumberFromName(ValidateString(group, "group"));
                 }
                 if (grpIndex < 0 || grpIndex >= _m.Groups.Count) {
-                    throw PythonOps.IndexError("no such group");
+                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("nosuchgroup", "no such group"));
                 }
                 return grpIndex;
             }
@@ -1144,13 +1144,13 @@ namespace IronPython.Modules {
                                             if (StringUtils.TryParseInt32(grp, out int num)) {
                                                 g = m.Groups[num];
                                                 if (String.IsNullOrEmpty(g.Value)) {
-                                                    throw PythonOps.IndexError("unknown group reference");
+                                                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("unknowngroupreference", "unknown group reference"));
                                                 }
                                                 sb.Append(g.Value);
                                             } else {
                                                 g = m.Groups[grp];
                                                 if (String.IsNullOrEmpty(g.Value)) {
-                                                    throw PythonOps.IndexError("unknown group reference");
+                                                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("unknowngroupreference", "unknown group reference"));
                                                 }
                                                 sb.Append(g.Value);
                                             }
@@ -1204,7 +1204,7 @@ namespace IronPython.Modules {
 
             if (pattern is RE_Pattern rep) return rep;
 
-            throw PythonOps.TypeError("pattern must be a string or compiled pattern");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("patternmustbeastringorcompiledpattern", "pattern must be a string or compiled pattern"));
         }
 
         private static string ValidatePatternAsString(object pattern) {
@@ -1218,7 +1218,7 @@ namespace IronPython.Modules {
 
             if (pattern is RE_Pattern rep) return rep._pre.UserPattern;
 
-            throw PythonOps.TypeError("pattern must be a string or compiled pattern");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("patternmustbeastringorcompiledpattern", "pattern must be a string or compiled pattern"));
         }
 
         private static string ValidateString(object str, string param) {

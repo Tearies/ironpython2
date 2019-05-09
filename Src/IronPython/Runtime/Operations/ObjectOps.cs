@@ -37,7 +37,7 @@ namespace IronPython.Runtime.Operations {
         /// </summary>
         public static void __delattr__(CodeContext/*!*/ context, object self, string name) {
             if (self is PythonType) {
-                throw PythonOps.TypeError("can't apply this __delattr__ to type object");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantapplythisdelattrtotypeobject", "can't apply this __delattr__ to type object"));
             }
 
             PythonOps.ObjectDeleteAttribute(context, self, name);
@@ -170,7 +170,7 @@ namespace IronPython.Runtime.Operations {
         /// </summary>
         public static void __setattr__(CodeContext/*!*/ context, object self, string name, object value) {
             if (self is PythonType) {
-                throw PythonOps.TypeError("can't apply this __setattr__ to type object");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantapplythissetattrtotypeobject", "can't apply this __setattr__ to type object"));
             }
 
             PythonOps.ObjectSetAttribute(context, self, name, value);
@@ -235,13 +235,13 @@ namespace IronPython.Runtime.Operations {
             if (spec.Type != null && spec.Type != 's') {
                 throw PythonOps.ValueError("Unknown format code '{0}' for object of type 'str'", spec.Type.Value.ToString());
             } else if (spec.Sign != null) {
-                throw PythonOps.ValueError("Sign not allowed in string format specifier");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("signnotallowedinstringformatspecifier", "Sign not allowed in string format specifier"));
             } else if (spec.Alignment == '=') {
-                throw PythonOps.ValueError("'=' alignment not allowed in string format specifier");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("alignmentnotallowedinstringformatspecifier", "'=' alignment not allowed in string format specifier"));
             } else if (spec.ThousandsComma) {
-                throw PythonOps.ValueError("Cannot specify ',' with 's'.");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotspecifywiths", "Cannot specify ',' with 's'."));
             } else if (spec.IncludeType) {
-                throw PythonOps.ValueError("Alternate form (#) not allowed in string format specifier");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("alternateformnotallowedinstringformatspecifier", "Alternate form (#) not allowed in string format specifier"));
             }
 
             // apply precision to shorten the string first
@@ -335,7 +335,7 @@ namespace IronPython.Runtime.Operations {
             object slots;
             if (PythonOps.TryGetBoundAttr(context, myType, "__slots__", out slots) && PythonOps.Length(slots) > 0 && !hasGetState) {
                 // ??? does this work with superclass slots?
-                throw PythonOps.TypeError("a class that defines __slots__ without defining __getstate__ cannot be pickled with protocols 0 or 1");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("aclassthatdefinesslotswithoutdefininggetstatecannotbepickledwithprotocols0or1", "a class that defines __slots__ without defining __getstate__ cannot be pickled with protocols 0 or 1"));
             }
 
             PythonType closestNonPythonBase = FindClosestNonPythonBase(myType); // PEP 307 calls this "B"
@@ -397,7 +397,7 @@ namespace IronPython.Runtime.Operations {
                 // TypeError will bubble up if __getnewargs__ isn't callable
                 PythonTuple newArgs = PythonOps.CallWithContext(context, getNewArgsCallable, self) as PythonTuple;
                 if (newArgs == null) {
-                    throw PythonOps.TypeError("__getnewargs__ should return a tuple");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("getnewargsshouldreturnatuple", "__getnewargs__ should return a tuple"));
                 }
                 funcArgs = new object[1 + newArgs.Count];
                 funcArgs[0] = myType;

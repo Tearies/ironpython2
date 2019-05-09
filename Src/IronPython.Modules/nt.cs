@@ -48,7 +48,7 @@ namespace IronPython.Modules {
         /// R_OK | W_OK | X_OK: Check for the specific permissions.  Only W_OK is respected.
         /// </summary>
         public static bool access(CodeContext/*!*/ context, string path, int mode) {
-            if (path == null) throw PythonOps.TypeError("expected string, got None");
+            if (path == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnone", "expected string, got None"));
 
 #if FEATURE_FILESYSTEM
             try {
@@ -548,7 +548,7 @@ namespace IronPython.Modules {
 
         public static PythonTuple popen2(CodeContext/*!*/ context, string command, string mode, int bufsize) {
             if (String.IsNullOrEmpty(mode)) mode = "t";
-            if (mode != "t" && mode != "b") throw PythonOps.ValueError("mode must be 't' or 'b' (default is t)");
+            if (mode != "t" && mode != "b") throw PythonOps.ValueError(ResourceManager.Default.GetResource("modemustbetorbdefaultist", "mode must be 't' or 'b' (default is t)"));
             if (mode == "t") mode = String.Empty;
 
             try {
@@ -575,7 +575,7 @@ namespace IronPython.Modules {
 
         public static PythonTuple popen3(CodeContext/*!*/ context, string command, string mode, int bufsize) {
             if (String.IsNullOrEmpty(mode)) mode = "t";
-            if (mode != "t" && mode != "b") throw PythonOps.ValueError("mode must be 't' or 'b' (default is t)");
+            if (mode != "t" && mode != "b") throw PythonOps.ValueError(ResourceManager.Default.GetResource("modemustbetorbdefaultist", "mode must be 't' or 'b' (default is t)"));
             if (mode == "t") mode = String.Empty;
 
             try {
@@ -756,7 +756,7 @@ namespace IronPython.Modules {
         private static void SetEnvironment(System.Collections.Specialized.StringDictionary currentEnvironment, object newEnvironment) {
             PythonDictionary env = newEnvironment as PythonDictionary;
             if (env == null) {
-                throw PythonOps.TypeError("env argument must be a dict");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("envargumentmustbeadict", "env argument must be a dict"));
             }
 
             currentEnvironment.Clear();
@@ -764,10 +764,10 @@ namespace IronPython.Modules {
             string strKey, strValue;
             foreach (object key in env.keys()) {
                 if (!Converter.TryConvertToString(key, out strKey)) {
-                    throw PythonOps.TypeError("env dict contains a non-string key");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("envdictcontainsanonstringkey", "env dict contains a non-string key"));
                 }
                 if (!Converter.TryConvertToString(env[key], out strValue)) {
-                    throw PythonOps.TypeError("env dict contains a non-string value");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("envdictcontainsanonstringvalue", "env dict contains a non-string value"));
                 }
                 currentEnvironment[strKey] = strValue;
             }
@@ -948,7 +948,7 @@ namespace IronPython.Modules {
             public static PythonTuple operator +(stat_result stat, object tuple) {
                 PythonTuple tupleObj = tuple as PythonTuple;
                 if (tupleObj == null) {
-                    throw PythonOps.TypeError("can only concatenate tuple (not \"{0}\") to tuple", PythonTypeOps.GetName(tuple));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("canonlyconcatenatetuplenot0", "can only concatenate tuple (not \"{0}\")) to tuple"), PythonTypeOps.GetName(tuple));
                 }
                 return stat.MakeTuple() + tupleObj;
             }
@@ -1247,7 +1247,7 @@ namespace IronPython.Modules {
         [LightThrowing]
         public static object stat([BytesConversion]string path) {
             if (path == null) {
-                return LightExceptions.Throw(PythonOps.TypeError("expected string, got NoneType"));
+                return LightExceptions.Throw(PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType")));
             }
 
             try {
@@ -1469,7 +1469,7 @@ namespace IronPython.Modules {
         }
 
         public static object urandom(double n) {
-            throw PythonOps.TypeError("integer argument expected, got float");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerargumentexpectedgotfloat", "integer argument expected, got float"));
         }
 
         private static readonly object _umaskKey = new object();
@@ -1489,7 +1489,7 @@ namespace IronPython.Modules {
         }
 
         public static int umask(double mask) {
-            throw PythonOps.TypeError("integer argument expected, got float");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerargumentexpectedgotfloat", "integer argument expected, got float"));
         }
 
 #if FEATURE_FILESYSTEM
@@ -1508,7 +1508,7 @@ namespace IronPython.Modules {
                     fi.LastAccessTime = atime;
                     fi.LastWriteTime = mtime;
                 } else {
-                    throw PythonOps.TypeError("times value must be a 2-value tuple (atime, mtime)");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("timesvaluemustbea2valuetupleatimemtime", "times value must be a 2-value tuple (atime, mtime)"));
                 }
             } catch (Exception e) {
                 throw ToPythonException(e, path);

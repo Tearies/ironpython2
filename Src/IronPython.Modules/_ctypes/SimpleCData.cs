@@ -13,6 +13,7 @@ using IronPython.Runtime;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
 using System.Numerics;
+using Microsoft.Scripting;
 
 namespace IronPython.Modules {
     /// <summary>
@@ -36,17 +37,17 @@ namespace IronPython.Modules {
 
             public void __init__(CodeContext/*!*/ context, object value) {
                 if(IsChar && !(value is string t && t.Length == 1)) {
-                    throw PythonOps.TypeError("one character string expected");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("onecharacterstringexpected", "one character string expected"));
                 }
 
                 if(IsIntegerType) {
                     object __int__ = null;
                     if(value is float || value is double) {
-                        throw PythonOps.TypeError("int expected instead of float");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("intexpectedinsteadoffloat", "int expected instead of float"));
                     }
 
                     if (!(value is int || value is BigInteger || PythonOps.TryGetBoundAttr(value, "__int__", out __int__))) {
-                        throw PythonOps.TypeError("an integer is required");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
                     }
 
                     if(__int__ != null) {
@@ -58,12 +59,12 @@ namespace IronPython.Modules {
                     object __float__ = null;
 
                     if (!(value is double || value is float || value is int || value is BigInteger || PythonOps.TryGetBoundAttr(value, "__float__", out __float__))) {
-                        throw PythonOps.TypeError("a float is required");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("afloatisrequired", "a float is required"));
                     }
 
                     if(value is BigInteger x) {
                         if(x > (BigInteger)double.MaxValue) {
-                            throw PythonOps.OverflowError("long int too large to convert to float");
+                            throw PythonOps.OverflowError(ResourceManager.Default.GetResource("longinttoolargetoconverttofloat", "long int too large to convert to float"));
                         }
                     }
 
@@ -95,7 +96,7 @@ namespace IronPython.Modules {
 
             [PropertyMethod, SpecialName]
             public void Deletevalue() {
-                throw PythonOps.TypeError("cannot delete value property from simple cdata");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotdeletevaluepropertyfromsimplecdata", "cannot delete value property from simple cdata"));
             }
 
             public override object _objects {

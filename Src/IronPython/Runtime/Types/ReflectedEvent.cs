@@ -187,7 +187,7 @@ namespace IronPython.Runtime.Types {
             public object InPlaceSubtract(CodeContext/*!*/ context, object func) {
                 Assert.NotNull(context);
                 if (func == null) {
-                    throw PythonOps.TypeError("event subtraction expected callable object, got None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("eventsubtractionexpectedcallableobjectgotnone", "event subtraction expected callable object, got None"));
                 }
 
                 if (_event.Tracker.IsStatic) {

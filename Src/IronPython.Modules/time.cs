@@ -100,7 +100,7 @@ namespace IronPython.Modules {
             } else if (time == null) {
                 dt = DateTime.Now;
             } else {
-                throw PythonOps.TypeError("expected struct_time or None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstructtimeornone", "expected struct_time or None"));
             }
 
             return dt.ToString("ddd MMM dd HH:mm:ss yyyy", CultureInfo.InvariantCulture);
@@ -198,7 +198,7 @@ namespace IronPython.Modules {
                     res = new DateTime(1900, 1, 1);
                     res = res.AddDays(Int32.Parse(@string) * 7);
                 } else {
-                    throw PythonOps.ValueError("cannot parse %j, %W, or %U w/ other values");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotparsejworuwothervalues", "cannot parse %j, %W, or %U w/ other values"));
                 }
             } else {
                 var fIdx = -1;
@@ -331,7 +331,7 @@ namespace IronPython.Modules {
 
             double dblVal;
             if (Converter.TryConvertToDouble(seconds, out dblVal)) {
-                if (dblVal > Int64.MaxValue || dblVal < Int64.MinValue) throw PythonOps.ValueError("unreasonable date/time");
+                if (dblVal > Int64.MaxValue || dblVal < Int64.MinValue) throw PythonOps.ValueError(ResourceManager.Default.GetResource("unreasonabledatetime", "unreasonable date/time"));
                 return dblVal;
             }
 
@@ -401,7 +401,7 @@ namespace IronPython.Modules {
 
             for (int i = 0; i < format.Length; i++) {
                 if (format[i] == '%') {
-                    if (i + 1 == format.Length) throw PythonOps.ValueError("badly formatted string");
+                    if (i + 1 == format.Length) throw PythonOps.ValueError(ResourceManager.Default.GetResource("badlyformattedstring", "badly formatted string"));
 
                     switch (format[++i]) {
                         case 'a':
@@ -582,9 +582,9 @@ namespace IronPython.Modules {
                     year += 2000;
                 }
             }
-            if (year < DateTime.MinValue.Year || year <= minYear) throw PythonOps.ValueError("year is too low");
-            if (year > DateTime.MaxValue.Year) throw PythonOps.ValueError("year is too high");
-            if (ints[WeekdayIndex] < 0 || ints[WeekdayIndex] >= 7) throw PythonOps.ValueError("day of week is outside of 0-6 range");
+            if (year < DateTime.MinValue.Year || year <= minYear) throw PythonOps.ValueError(ResourceManager.Default.GetResource("yearistoolow", "year is too low"));
+            if (year > DateTime.MaxValue.Year) throw PythonOps.ValueError(ResourceManager.Default.GetResource("yearistoohigh", "year is too high"));
+            if (ints[WeekdayIndex] < 0 || ints[WeekdayIndex] >= 7) throw PythonOps.ValueError(ResourceManager.Default.GetResource("dayofweekisoutsideof06range", "day of week is outside of 0-6 range"));
             return ints;
         }
 

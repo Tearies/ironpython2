@@ -52,7 +52,7 @@ namespace IronPython.Modules {
         }
 
         public static string a2b_uu(CodeContext/*!*/ context, string data) {
-            if (data == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (data == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (data.Length < 1) return new string(Char.MinValue, 32);
 
             int lenDec = (data[0] + 32) % 64; // decoded length in bytes
@@ -76,7 +76,7 @@ namespace IronPython.Modules {
         }
 
         public static string b2a_uu(CodeContext/*!*/ context, string data) {
-            if (data == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (data == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (data.Length > 45) throw Error(context, "At most 45 bytes at once");
 
             StringBuilder res = EncodeWorker(data, ' ', delegate(int val) {
@@ -106,7 +106,7 @@ namespace IronPython.Modules {
         }
 
         public static object a2b_base64(CodeContext/*!*/ context, [BytesConversion]string data) {
-            if (data == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (data == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             data = RemovePrefix(context, data, Base64DecFunc);
             if (data.Length == 0) return String.Empty;
 
@@ -115,7 +115,7 @@ namespace IronPython.Modules {
         }
 
         public static object b2a_base64([BytesConversion]string data) {
-            if (data == null) throw PythonOps.TypeError("expected string, got NoneType");
+            if (data == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             if (data.Length == 0) return String.Empty;
 
             StringBuilder res = EncodeWorker(data, '=', EncodeValue);
@@ -388,8 +388,8 @@ both encoded.  When quotetabs is set, space and tabs are encoded.")]
         }
 
         public static object a2b_hex(CodeContext/*!*/ context, [BytesConversion] string data) {
-            if (data == null) throw PythonOps.TypeError("expected string, got NoneType");
-            if ((data.Length & 0x01) != 0) throw PythonOps.TypeError("Odd-length string");
+            if (data == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
+            if ((data.Length & 0x01) != 0) throw PythonOps.TypeError(ResourceManager.Default.GetResource("oddlengthstring", "Odd-length string"));
             StringBuilder res = new StringBuilder(data.Length / 2);
 
             for (int i = 0; i < data.Length; i += 2) {

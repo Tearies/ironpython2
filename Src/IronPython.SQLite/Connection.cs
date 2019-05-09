@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 //
@@ -284,7 +284,7 @@ namespace IronPython.SQLite
                     null, null);
                 
                 if(rc != Sqlite3.SQLITE_OK)
-                    throw MakeOperationalError("Error creating function");
+                    throw MakeOperationalError(ResourceManager.Default.GetResource("errorcreatingfunction", "Error creating function"));
                 else
                     this.function_pinboard[func] = null;
             }
@@ -465,7 +465,7 @@ namespace IronPython.SQLite
                     thunk.finalCallback);
 
                 if(rc != Sqlite3.SQLITE_OK)
-                    throw MakeOperationalError("Error creating aggregate");
+                    throw MakeOperationalError(ResourceManager.Default.GetResource("errorcreatingaggregate", "Error creating aggregate"));
                 else
                     this.function_pinboard[aggregate_class] = null;
             }
@@ -538,7 +538,7 @@ namespace IronPython.SQLite
             internal void checkConnection()
             {
                 if(this.db == null)
-                    throw MakeProgrammingError("Cannot operate on a closed database.");
+                    throw MakeProgrammingError(ResourceManager.Default.GetResource("cannotoperateonacloseddatabase", "Cannot operate on a closed database."));
             }
 
             internal void checkThread()
@@ -558,7 +558,7 @@ namespace IronPython.SQLite
             internal static void verify(Connection connection, bool closed)
             {
                 if(!closed && (connection == null || connection.db == null))
-                    throw MakeProgrammingError("Cannot operate on a closed database.");
+                    throw MakeProgrammingError(ResourceManager.Default.GetResource("cannotoperateonacloseddatabase", "Cannot operate on a closed database."));
 
                 connection.checkThread();
             }

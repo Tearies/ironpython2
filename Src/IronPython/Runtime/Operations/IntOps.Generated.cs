@@ -11,6 +11,7 @@ using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 #pragma warning disable 675
 
@@ -30,7 +31,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(PythonType cls, object value) {
             if (cls != DynamicHelpers.GetPythonTypeFromType(typeof(SByte))) {
-                throw PythonOps.TypeError("SByte.__new__: first argument must be SByte type.");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("sbytenewfirstargumentmustbesbytetype", "SByte.__new__: first argument must be SByte type."));
             }
             IConvertible valueConvertible;
             if ((valueConvertible = value as IConvertible) != null) {
@@ -56,7 +57,7 @@ namespace IronPython.Runtime.Operations {
             } else if (value is Extensible<double>) {
                 return (SByte)((Extensible<double>)value).Value;
             }
-            throw PythonOps.ValueError("invalid value for SByte.__new__");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidvalueforsbytenew", "invalid value for SByte.__new__"));
         }
         // Unary Operations
         [SpecialName]
@@ -275,7 +276,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(PythonType cls, object value) {
             if (cls != DynamicHelpers.GetPythonTypeFromType(typeof(Byte))) {
-                throw PythonOps.TypeError("Byte.__new__: first argument must be Byte type.");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("bytenewfirstargumentmustbebytetype", "Byte.__new__: first argument must be Byte type."));
             }
             IConvertible valueConvertible;
             if ((valueConvertible = value as IConvertible) != null) {
@@ -301,7 +302,7 @@ namespace IronPython.Runtime.Operations {
             } else if (value is Extensible<double>) {
                 return (Byte)((Extensible<double>)value).Value;
             }
-            throw PythonOps.ValueError("invalid value for Byte.__new__");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidvalueforbytenew", "invalid value for Byte.__new__"));
         }
         // Unary Operations
         [SpecialName]
@@ -597,7 +598,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(PythonType cls, object value) {
             if (cls != DynamicHelpers.GetPythonTypeFromType(typeof(Int16))) {
-                throw PythonOps.TypeError("Int16.__new__: first argument must be Int16 type.");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("int16newfirstargumentmustbeint16type", "Int16.__new__: first argument must be Int16 type."));
             }
             IConvertible valueConvertible;
             if ((valueConvertible = value as IConvertible) != null) {
@@ -623,7 +624,7 @@ namespace IronPython.Runtime.Operations {
             } else if (value is Extensible<double>) {
                 return (Int16)((Extensible<double>)value).Value;
             }
-            throw PythonOps.ValueError("invalid value for Int16.__new__");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidvalueforint16new", "invalid value for Int16.__new__"));
         }
         // Unary Operations
         [SpecialName]
@@ -845,7 +846,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(PythonType cls, object value) {
             if (cls != DynamicHelpers.GetPythonTypeFromType(typeof(UInt16))) {
-                throw PythonOps.TypeError("UInt16.__new__: first argument must be UInt16 type.");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("uint16newfirstargumentmustbeuint16type", "UInt16.__new__: first argument must be UInt16 type."));
             }
             IConvertible valueConvertible;
             if ((valueConvertible = value as IConvertible) != null) {
@@ -871,7 +872,7 @@ namespace IronPython.Runtime.Operations {
             } else if (value is Extensible<double>) {
                 return (UInt16)((Extensible<double>)value).Value;
             }
-            throw PythonOps.ValueError("invalid value for UInt16.__new__");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidvalueforuint16new", "invalid value for UInt16.__new__"));
         }
         // Unary Operations
         [SpecialName]
@@ -1361,7 +1362,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(PythonType cls, object value) {
             if (cls != DynamicHelpers.GetPythonTypeFromType(typeof(UInt32))) {
-                throw PythonOps.TypeError("UInt32.__new__: first argument must be UInt32 type.");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("uint32newfirstargumentmustbeuint32type", "UInt32.__new__: first argument must be UInt32 type."));
             }
             IConvertible valueConvertible;
             if ((valueConvertible = value as IConvertible) != null) {
@@ -1387,7 +1388,7 @@ namespace IronPython.Runtime.Operations {
             } else if (value is Extensible<double>) {
                 return (UInt32)((Extensible<double>)value).Value;
             }
-            throw PythonOps.ValueError("invalid value for UInt32.__new__");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidvalueforuint32new", "invalid value for UInt32.__new__"));
         }
         // Unary Operations
         [SpecialName]
@@ -1687,7 +1688,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(PythonType cls, object value) {
             if (cls != DynamicHelpers.GetPythonTypeFromType(typeof(Int64))) {
-                throw PythonOps.TypeError("Int64.__new__: first argument must be Int64 type.");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("int64newfirstargumentmustbeint64type", "Int64.__new__: first argument must be Int64 type."));
             }
             IConvertible valueConvertible;
             if ((valueConvertible = value as IConvertible) != null) {
@@ -1713,7 +1714,7 @@ namespace IronPython.Runtime.Operations {
             } else if (value is Extensible<double>) {
                 return (Int64)((Extensible<double>)value).Value;
             }
-            throw PythonOps.ValueError("invalid value for Int64.__new__");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidvalueforint64new", "invalid value for Int64.__new__"));
         }
         // Unary Operations
         [SpecialName]
@@ -1939,7 +1940,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(PythonType cls, object value) {
             if (cls != DynamicHelpers.GetPythonTypeFromType(typeof(UInt64))) {
-                throw PythonOps.TypeError("UInt64.__new__: first argument must be UInt64 type.");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("uint64newfirstargumentmustbeuint64type", "UInt64.__new__: first argument must be UInt64 type."));
             }
             IConvertible valueConvertible;
             if ((valueConvertible = value as IConvertible) != null) {
@@ -1965,7 +1966,7 @@ namespace IronPython.Runtime.Operations {
             } else if (value is Extensible<double>) {
                 return (UInt64)((Extensible<double>)value).Value;
             }
-            throw PythonOps.ValueError("invalid value for UInt64.__new__");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidvalueforuint64new", "invalid value for UInt64.__new__"));
         }
         // Unary Operations
         [SpecialName]

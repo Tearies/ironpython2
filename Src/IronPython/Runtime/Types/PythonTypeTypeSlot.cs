@@ -5,6 +5,7 @@
 
 using Microsoft.Scripting.Runtime;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Types {
     public class PythonTypeTypeSlot : PythonTypeDataSlot {
@@ -35,7 +36,7 @@ namespace IronPython.Runtime.Types {
 
             IPythonObject sdo = instance as IPythonObject;
             if (sdo == null) {
-                throw PythonOps.TypeError("__class__ assignment: only for user defined types");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("classassignmentonlyforuserdefinedtypes", "__class__ assignment: only for user defined types"));
             }
 
             PythonType dt = value as PythonType;

@@ -332,7 +332,7 @@ namespace IronPython.Modules {
         /// </summary>
         public static int alignment(PythonType type) {
             if (!(type is INativeType nativeType)) {
-                throw PythonOps.TypeError("this type has no size");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("thistypehasnosize", "this type has no size"));
             }
 
             return nativeType.Alignment;
@@ -413,7 +413,7 @@ namespace IronPython.Modules {
                 return NativeFunctions.GetLastError();
             }
 
-            throw PythonOps.NameError("get_last_error");
+            throw PythonOps.NameError(ResourceManager.Default.GetResource("getlasterror", "get_last_error"));
         }
 
         /// <summary>
@@ -458,7 +458,7 @@ namespace IronPython.Modules {
 
         public static int @sizeof(PythonType/*!*/ type) {
             if (!(type is INativeType simpleType)) {
-                throw PythonOps.TypeError("this type has no size");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("thistypehasnosize", "this type has no size"));
             }
 
             return simpleType.Size;
@@ -567,7 +567,7 @@ namespace IronPython.Modules {
         private static void GetFieldInfo(INativeType type, object o, out string fieldName, out INativeType cdata, out int? bitCount) {
             PythonTuple pt = o as PythonTuple;
             if (pt.Count != 2 && pt.Count != 3) {
-                throw PythonOps.AttributeError("'_fields_' must be a sequence of pairs");
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("fieldsmustbeasequenceofpairs", "'_fields_' must be a sequence of pairs"));
             }
 
             fieldName = pt[0] as string;
@@ -616,7 +616,7 @@ namespace IronPython.Modules {
             }
 
             if (bitCount <= 0 || bitCount > cdata.Size * 8) {
-                throw PythonOps.ValueError("number of bits invalid for bit field");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("numberofbitsinvalidforbitfield", "number of bits invalid for bit field"));
             }
             return bitCount;
         }
@@ -626,13 +626,13 @@ namespace IronPython.Modules {
         /// </summary>
         private static IList<object>/*!*/ GetFieldsList(object fields) {
             if (!(fields is IList<object> list)) {
-                throw PythonOps.TypeError("class must be a sequence of pairs");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("classmustbeasequenceofpairs", "class must be a sequence of pairs"));
             }
             return list;
         }
 
         private static Exception StructureCannotContainSelf() {
-            return PythonOps.AttributeError("Structure or union cannot contain itself");
+            return PythonOps.AttributeError(ResourceManager.Default.GetResource("structureorunioncannotcontainitself", "Structure or union cannot contain itself"));
         }
 
         /// <summary>
@@ -688,7 +688,7 @@ namespace IronPython.Modules {
 
         private static void ValidateArraySizes(int arraySize, int offset, int size) {
             if (offset < 0) {
-                throw PythonOps.ValueError("offset cannot be negative");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("offsetcannotbenegative", "offset cannot be negative"));
             } else if (arraySize < size + offset) {
                 throw PythonOps.ValueError($"Buffer size too small ({arraySize} instead of at least {size} bytes)");
             }
@@ -696,7 +696,7 @@ namespace IronPython.Modules {
 
         private static void ValidateArraySizes(BigInteger arraySize, int offset, int size) {
             if (offset < 0) {
-                throw PythonOps.ValueError("offset cannot be negative");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("offsetcannotbenegative", "offset cannot be negative"));
             } else if (arraySize < size + offset) {
                 throw PythonOps.ValueError($"Buffer size too small ({arraySize} instead of at least {size} bytes)");
             }
@@ -716,7 +716,7 @@ namespace IronPython.Modules {
         }
 
         public static void DeleteCharArrayValue(_Array arr) {
-            throw PythonOps.TypeError("cannot delete char array value");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotdeletechararrayvalue", "cannot delete char array value"));
         }
 
         public static object GetWCharArrayValue(_Array arr) {
@@ -728,7 +728,7 @@ namespace IronPython.Modules {
         }
 
         public static object DeleteWCharArrayValue(_Array arr) {
-            throw PythonOps.TypeError("cannot delete wchar array value");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotdeletewchararrayvalue", "cannot delete wchar array value"));
         }
 
         public static object GetWCharArrayRaw(_Array arr) {
@@ -745,7 +745,7 @@ namespace IronPython.Modules {
             if ((object)view != null) {
                 string strVal = view.tobytes().ToString();
                 if (strVal.Length > arr.__len__()) {
-                    throw PythonOps.ValueError("string too long");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("stringtoolong", "string too long"));
                 }
                 value = strVal;
             }
@@ -754,7 +754,7 @@ namespace IronPython.Modules {
         }
 
         public static object DeleteWCharArrayRaw(_Array arr) {
-            throw PythonOps.AttributeError("cannot delete wchar array raw");
+            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("cannotdeletewchararrayraw", "cannot delete wchar array raw"));
         }
         
         class RefCountInfo {

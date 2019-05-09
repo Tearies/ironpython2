@@ -194,7 +194,7 @@ namespace IronPython.Modules {
             public int __hash__(CodeContext/*!*/ context) {
                 if (!_fHasHash) {
                     object refObj = _target.Target;
-                    if (refObj == null) throw PythonOps.TypeError("weak object has gone away");
+                    if (refObj == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("weakobjecthasgoneaway", "weak object has gone away"));
                     _hashVal = context.LanguageContext.EqualityComparerNonGeneric.GetHashCode(refObj);
                     _fHasHash = true;
                 }
@@ -325,7 +325,7 @@ namespace IronPython.Modules {
             private object GetObject() {
                 object res;
                 if (!TryGetObject(out res)) {
-                    throw PythonOps.ReferenceError("weakly referenced object no longer exists");
+                    throw PythonOps.ReferenceError(ResourceManager.Default.GetResource("weaklyreferencedobjectnolongerexists", "weakly referenced object no longer exists"));
                 }
                 return res;
             }
@@ -573,7 +573,7 @@ namespace IronPython.Modules {
             private object GetObject() {
                 object res;
                 if (!TryGetObject(out res)) {
-                    throw PythonOps.ReferenceError("weakly referenced object no longer exists");
+                    throw PythonOps.ReferenceError(ResourceManager.Default.GetResource("weaklyreferencedobjectnolongerexists", "weakly referenced object no longer exists"));
                 }
                 return res;
             }

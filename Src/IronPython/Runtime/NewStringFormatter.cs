@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -73,7 +73,7 @@ namespace IronPython.Runtime {
             FieldName fieldName = ParseFieldName(name, false);
 
             if (String.IsNullOrEmpty(fieldName.ArgumentName)) {
-                throw PythonOps.ValueError("empty field name");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptyfieldname", "empty field name"));
             }
 
             int val;
@@ -174,7 +174,7 @@ namespace IronPython.Runtime {
                 // verify we hit the end of the format
                 end = end || CheckEnd();
                 if (!end) {
-                    throw PythonOps.ValueError("expected ':' after format specifier");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("expectedafterformatspecifier", "expected ':' after format specifier"));
                 }
 
                 // yield the replacement field information
@@ -197,14 +197,14 @@ namespace IronPython.Runtime {
                     // report the text w/ a single } at the end
                     _index++;
                     if (_index == _str.Length || _str[_index] != '}') {
-                        throw PythonOps.ValueError("Single '}}' encountered in format string");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("singleencounteredinformatstring", "Single '}}' encountered in format string"));
                     }
 
                     text = _str.Substring(lastTextStart, _index - lastTextStart);
                     _index++;
                     return true;
                 } else if (_index == _str.Length - 1) {
-                    throw PythonOps.ValueError("Single '{{' encountered in format string");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("singleencounteredinformatstring", "Single '{{' encountered in format string"));
                 } else if (_str[_index + 1] == '{') {
                     // report the text w/ a single { at the end
                     text = _str.Substring(lastTextStart, ++_index - lastTextStart);
@@ -223,7 +223,7 @@ namespace IronPython.Runtime {
             private char ParseConversion() {
                 _index++; // eat the !
                 if (CheckEnd()) {
-                    throw PythonOps.ValueError("end of format while looking for conversion specifier");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("endofformatwhilelookingforconversionspecifier", "end of format while looking for conversion specifier"));
                 }
 
                 return _str[_index++];
@@ -235,7 +235,7 @@ namespace IronPython.Runtime {
             /// </summary>
             private bool CheckEnd() {
                 if (_index == _str.Length) {
-                    throw PythonOps.ValueError("unmatched '{{' in format");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("unmatchedinformat", "unmatched '{{' in format"));
                 } else if (_str[_index] == '}') {
                     _index++;
                     return true;
@@ -274,7 +274,7 @@ namespace IronPython.Runtime {
                     end = _str.IndexOfAny(ends, end + 1);
 
                     if (end == -1) {
-                        throw PythonOps.ValueError("unmatched '{{' in format");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("unmatchedinformat", "unmatched '{{' in format"));
                     }
 
                     switch (_str[end]) {
@@ -320,7 +320,7 @@ namespace IronPython.Runtime {
 
             private string ReplaceText(string format) {
                 if (_depth == 2) {
-                    throw PythonOps.ValueError("Max string recursion exceeded");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("maxstringrecursionexceeded", "Max string recursion exceeded"));
                 }
 
                 StringBuilder builder = new StringBuilder();
@@ -409,12 +409,12 @@ namespace IronPython.Runtime {
                 if (fieldName.ArgumentName.Length == 0) {
                     // auto-numbering of format specifiers
                     if (_autoNumberedIndex == -1) {
-                        throw PythonOps.ValueError("cannot switch from manual field specification to automatic field numbering");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotswitchfrommanualfieldspecificationtoautomaticfieldnumbering", "cannot switch from manual field specification to automatic field numbering"));
                     }
                     argValue = _args[_autoNumberedIndex++];
                 } else if (Int32.TryParse(fieldName.ArgumentName, out argIndex)) {
                     if (_autoNumberedIndex > 0) {
-                        throw PythonOps.ValueError("cannot switch from automatic field numbering to manual field specification");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotswitchfromautomaticfieldnumberingtomanualfieldspecification", "cannot switch from automatic field numbering to manual field specification"));
                     }
                     _autoNumberedIndex = -1;
                     argValue = _args[argIndex];
@@ -488,14 +488,14 @@ namespace IronPython.Runtime {
 
                     if (isIndex) {
                         if (index == str.Length || str[index] != ']') {
-                            throw PythonOps.ValueError("Missing ']' in format string");
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("missinginformatstring", "Missing ']' in format string"));
                         }
 
                         index++;
                     }
 
                     if (identifier.Length == 0) {
-                        throw PythonOps.ValueError("Empty attribute in format string");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptyattributeinformatstring", "Empty attribute in format string"));
                     }
 
                     yield return new FieldAccessor(identifier, !isIndex);

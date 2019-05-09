@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -23,6 +23,7 @@ using IronPython.Runtime.Binding;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
 using IronPython.Runtime.Exceptions;
+using Microsoft.Scripting;
 
 namespace IronPython.Modules {
     public static partial class PythonIOModule {
@@ -274,7 +275,7 @@ namespace IronPython.Modules {
                 }
             }
 
-            public BigInteger seek(double pos, [Optional]object whence) => throw PythonOps.TypeError("'float' object cannot be interpreted as an index");
+            public BigInteger seek(double pos, [Optional]object whence) => throw PythonOps.TypeError(ResourceManager.Default.GetResource("floatobjectcannotbeinterpretedasanindex", "'float' object cannot be interpreted as an index"));
 
             [Documentation("seek(pos, whence=0) -> int.  Change stream position.\n\n"
                 + "Seek to byte offset pos relative to position indicated by whence:\n"
@@ -298,7 +299,7 @@ namespace IronPython.Modules {
                         return seek(posInt, (int)v.Value);
                     case double _:
                     case Extensible<double> _:
-                        throw PythonOps.TypeError("integer argument expected, got float");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerargumentexpectedgotfloat", "integer argument expected, got float"));
                     default:
                         return seek(posInt, GetInt(whence));
                 }
@@ -472,7 +473,7 @@ namespace IronPython.Modules {
                         // A character outside the range 0x00-0xFF is present in the original string.
                         // Ejecting, emulating the cPython 2.x behavior when it enounters "unicode".
                         // This should keep the unittest gods at bay.
-                        throw PythonOps.TypeError("'unicode' does not have the buffer interface");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("unicodedoesnothavethebufferinterface", "'unicode' does not have the buffer interface"));
                     }
                 }
 
@@ -493,7 +494,7 @@ namespace IronPython.Modules {
                     return DoWrite((string)bytes); // as string
                 }
 
-                throw PythonOps.TypeError("expected a readable buffer object");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedareadablebufferobject", "expected a readable buffer object"));
             }
 
             private void EnsureSize(int size) {

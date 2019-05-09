@@ -30,7 +30,7 @@ namespace IronPython.Modules {
         }
 
         public static object tee(object iterable, int n) {
-            if (n < 0) throw PythonOps.ValueError("n cannot be negative");
+            if (n < 0) throw PythonOps.ValueError(ResourceManager.Default.GetResource("ncannotbenegative", "n cannot be negative"));
 
             object[] res = new object[n];
             if (!(iterable is TeeIterator)) {
@@ -138,7 +138,7 @@ namespace IronPython.Modules {
                     !PythonOps.HasAttr(context, iter, "__iter__") &&
                     !PythonOps.HasAttr(context, iter, "__getitem__")) {
                         if (iter is OldInstance) {
-                            throw PythonOps.TypeError("iteration over non-sequence");
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("iterationovernonsequence", "iteration over non-sequence"));
                         } else {
                             throw PythonOps.TypeError("'{0}' object is not iterable", PythonTypeOps.GetName(iter));
                         }
@@ -223,7 +223,7 @@ namespace IronPython.Modules {
                 if (num == null ||
                     !PythonOps.HasAttr(context, num, "__int__") &&
                     !PythonOps.HasAttr(context, num, "__float__")) {
-                        throw PythonOps.TypeError("a number is required");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("anumberisrequired", "a number is required"));
                 }
             }
 
@@ -495,7 +495,7 @@ namespace IronPython.Modules {
 
             public imap(CodeContext/*!*/ context, object function, params object[] iterables) {
                 if (iterables.Length < 1) {
-                    throw PythonOps.TypeError("imap() must have at least two arguments");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("imapmusthaveatleasttwoarguments", "imap() must have at least two arguments"));
                 }
 
                 _function = function;
@@ -566,7 +566,7 @@ namespace IronPython.Modules {
 
                 int stepInt = 1;
                 if (step != null && !Converter.TryConvertToInt32(step, out stepInt) || stepInt <= 0) {
-                    throw PythonOps.ValueError("step must be 1 or greater for islice");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("stepmustbe1orgreaterforislice", "step must be 1 or greater for islice"));
                 }
 
                 InnerEnumerator = Yielder(PythonOps.GetEnumerator(iterable), startInt, stopInt, stepInt);
@@ -739,7 +739,7 @@ namespace IronPython.Modules {
                     if (repeat is int) {
                         iRepeat = (int)repeat;
                     } else {
-                        throw PythonOps.TypeError("an integer is required");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
                     }
 
                     if (paramDict.Count != 1) {
@@ -971,7 +971,7 @@ namespace IronPython.Modules {
             if (r != null) {
                 ri = Converter.ConvertToInt32(r);
                 if (ri < 0) {
-                    throw PythonOps.ValueError("r cannot be negative");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("rcannotbenegative", "r cannot be negative"));
                 }
             } else {
                 ri = data.Count;
@@ -1005,7 +1005,7 @@ namespace IronPython.Modules {
             }
 
             public int __length_hint__() {
-                if (_fInfinite) throw PythonOps.TypeError("len() of unsized object");
+                if (_fInfinite) throw PythonOps.TypeError(ResourceManager.Default.GetResource("lenofunsizedobject", "len() of unsized object"));
                 return Math.Max(_remaining, 0);
             }
 

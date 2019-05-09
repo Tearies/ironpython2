@@ -409,7 +409,7 @@ namespace IronPython.Modules {
             public string recv(int maxBytes, int flags=0) {
                 int bytesRead;
                 if (maxBytes < 0)
-                    throw PythonOps.ValueError("negative buffersize in recv");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativebuffersizeinrecv", "negative buffersize in recv"));
                 byte[] buffer = new byte[maxBytes];
                 try {
                     bytesRead = _socket.Receive(buffer, (SocketFlags)flags);
@@ -427,9 +427,9 @@ namespace IronPython.Modules {
                 )]
             public int recv_into(PythonBuffer buffer, int nbytes=0, int flags=0) {
                 if (nbytes < 0) {
-                    throw PythonOps.ValueError("negative buffersize in recv_into");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativebuffersizeinrecvinto", "negative buffersize in recv_into"));
                 }
-                throw PythonOps.TypeError("buffer is read-only");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("bufferisreadonly", "buffer is read-only"));
             }
 
             [Documentation("recv_into(buffer, [nbytes[, flags]]) -> nbytes_read\n\n"
@@ -439,7 +439,7 @@ namespace IronPython.Modules {
                 + "See recv() for documentation about the flags.\n"
                 )]
             public int recv_into(string buffer, int nbytes=0, int flags=0) {
-                throw PythonOps.TypeError("Cannot use string as modifiable buffer");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotusestringasmodifiablebuffer", "Cannot use string as modifiable buffer"));
             }
 
             [Documentation("recv_into(buffer, [nbytes[, flags]]) -> nbytes_read\n\n"
@@ -525,7 +525,7 @@ namespace IronPython.Modules {
                 )]
             public PythonTuple recvfrom(int maxBytes, int flags=0) {
                 if (maxBytes < 0) {
-                    throw PythonOps.ValueError("negative buffersize in recvfrom");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativebuffersizeinrecvfrom", "negative buffersize in recvfrom"));
                 }
 
                 int bytesRead;
@@ -548,16 +548,16 @@ namespace IronPython.Modules {
                 )]
             public PythonTuple recvfrom_into(PythonBuffer buffer, int nbytes=0, int flags=0) {
                 if (nbytes < 0) {
-                    throw PythonOps.ValueError("negative buffersize in recvfrom_into");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativebuffersizeinrecvfrominto", "negative buffersize in recvfrom_into"));
                 }
-                throw PythonOps.TypeError("buffer is read-only");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("bufferisreadonly", "buffer is read-only"));
             }
 
             [Documentation("recvfrom_into(buffer[, nbytes[, flags]]) -> (nbytes, address info)\n\n"
                 + "Like recv_into(buffer[, nbytes[, flags]]) but also return the sender's address info.\n"
                 )]
             public PythonTuple recvfrom_into(string buffer, int nbytes=0, int flags=0) {
-                throw PythonOps.TypeError("Cannot use string as modifiable buffer");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotusestringasmodifiablebuffer", "Cannot use string as modifiable buffer"));
             }
 
             [Documentation("recvfrom_into(buffer[, nbytes[, flags]]) -> (nbytes, address info)\n\n"
@@ -952,7 +952,7 @@ namespace IronPython.Modules {
                         double seconds;
                         seconds = Converter.ConvertToDouble(timeout);
                         if (seconds < 0) {
-                            throw PythonOps.ValueError("Timeout value out of range");
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("timeoutvalueoutofrange", "Timeout value out of range"));
                         }
                         _socket.Blocking = seconds > 0; // 0 timeout means non-blocking mode
                         _socket.SendTimeout = (int)(seconds * MillisecondsPerSecond);
@@ -1012,7 +1012,7 @@ namespace IronPython.Modules {
                     throw MakeException(_context, e);
                 }
 
-                throw PythonOps.TypeError("setsockopt() argument 3 must be int or string");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("setsockoptargument3mustbeintorstring", "setsockopt() argument 3 must be int or string"));
             }
 
             [Documentation("shutdown() -> None\n\n"
@@ -1047,13 +1047,13 @@ namespace IronPython.Modules {
             public int ioctl(BigInteger cmd, object option) {
                 if(cmd == SIO_KEEPALIVE_VALS){ 
                     if (!(option is PythonTuple))
-                        throw PythonOps.TypeError("option must be 3-item sequence, not int");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("optionmustbe3itemsequencenotint", "option must be 3-item sequence, not int"));
                     var tOption = (PythonTuple)option;
                     if (tOption.Count != 3)
                         throw PythonOps.TypeError(string.Format("option must be sequence of length 3, not {0}", tOption.Count));
                     //(onoff, timeout, interval)
                     if ((!(tOption[0] is int)) && (!(tOption[1] is int)) && (!(tOption[2] is int)))
-                        throw PythonOps.TypeError("option integer required");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("optionintegerrequired", "option integer required"));
 
                     int onoff = (int)tOption[0];
                     int timeout = (int)tOption[1];
@@ -1067,7 +1067,7 @@ namespace IronPython.Modules {
                 }
                 else if(cmd == SIO_RCVALL){
                     if (!(option is int))
-                        throw PythonOps.TypeError("option integer required");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("optionintegerrequired", "option integer required"));
 
                     return _socket.IOControl((IOControlCode)(long)cmd, BitConverter.GetBytes((int)option), null);
                 }
@@ -1318,7 +1318,7 @@ namespace IronPython.Modules {
             )]
         public static string getfqdn(string host) {
             if (host == null) {
-                throw PythonOps.TypeError("expected string, got None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnone", "expected string, got None"));
             }
             host = host.Trim();
             if (host == string.Empty || host == "0.0.0.0") {
@@ -1452,16 +1452,16 @@ namespace IronPython.Modules {
             )]
         public static object getnameinfo(CodeContext/*!*/ context, PythonTuple socketAddr, int flags) {
             if (socketAddr.__len__() < 2 || socketAddr.__len__() > 4) {
-                throw PythonOps.TypeError("socket address must be a 2-tuple (IPv4 or IPv6) or 4-tuple (IPv6)");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("socketaddressmustbea2tupleipv4oripv6or4tupleipv6", "socket address must be a 2-tuple (IPv4 or IPv6) or 4-tuple (IPv6)"));
             }
 
             string host = Converter.ConvertToString(socketAddr[0]);
-            if (host == null) throw PythonOps.TypeError("argument 1 must be string");
+            if (host == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("argument1mustbestring", "argument 1 must be string"));
             int port = 0;
             try {
                 port = (int)socketAddr[1];
             } catch (InvalidCastException) {
-                throw PythonOps.TypeError("an integer is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
             }
 
             string resultHost = null;
@@ -1624,7 +1624,7 @@ namespace IronPython.Modules {
         public static string getservbyport(CodeContext/*!*/ context, int port, string protocolName=null) {
 
             if (port < 0 || port > 65535)
-                throw PythonOps.OverflowError("getservbyport: port must be 0-65535.");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("getservbyportportmustbe065535", "getservbyport: port must be 0-65535."));
 
             if (protocolName != null){ 
                 protocolName = protocolName.ToLower();
@@ -1718,7 +1718,7 @@ namespace IronPython.Modules {
             BigInteger bigValue = Converter.ConvertToBigInteger(x);
 
             if (bigValue < 0) {
-                throw PythonOps.OverflowError("can't convert negative number to unsigned long");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cantconvertnegativenumbertounsignedlong", "can't convert negative number to unsigned long"));
             } else if (bigValue <= int.MaxValue) {
                 return (int)bigValue;
             } else {
@@ -1736,7 +1736,7 @@ namespace IronPython.Modules {
         private static short SignInsensitiveToInt16(object x) {
             BigInteger bigValue = Converter.ConvertToBigInteger(x);
             if (bigValue < 0) {
-                throw PythonOps.OverflowError("can't convert negative number to unsigned long");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cantconvertnegativenumbertounsignedlong", "can't convert negative number to unsigned long"));
             } else if (bigValue <= short.MaxValue) {
                 return (short)bigValue;
             } else {
@@ -1849,7 +1849,7 @@ namespace IronPython.Modules {
                 double seconds;
                 seconds = Converter.ConvertToDouble(timeout);
                 if (seconds < 0) {
-                    throw PythonOps.ValueError("a non-negative float is required");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("anonnegativefloatisrequired", "a non-negative float is required"));
                 }
                 SetDefaultTimeout(context, (int)(seconds * MillisecondsPerSecond));
             }
@@ -2174,24 +2174,24 @@ namespace IronPython.Modules {
         /// </summary>
         private static IPEndPoint TupleToEndPoint(CodeContext/*!*/ context, PythonTuple address, AddressFamily family, out string host) {
             if (address.__len__() != 2 && address.__len__() != 4) {
-                throw PythonOps.TypeError("address tuple must have exactly 2 (IPv4) or exactly 4 (IPv6) elements");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("addresstuplemusthaveexactly2ipv4orexactly4ipv6elements", "address tuple must have exactly 2 (IPv4) or exactly 4 (IPv6) elements"));
             }
 
             try {
                 host = Converter.ConvertToString(address[0]);
             } catch (ArgumentTypeException) {
-                throw PythonOps.TypeError("host must be string");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("hostmustbestring", "host must be string"));
             }
 
             int port;
             try {
                 port = context.LanguageContext.ConvertToInt32(address[1]);
             } catch (ArgumentTypeException) {
-                throw PythonOps.TypeError("port must be integer");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("portmustbeinteger", "port must be integer"));
             }
 
             if (port < 0 || port > 65535) {
-                throw PythonOps.OverflowError("getsockaddrarg: port must be 0-65535");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("getsockaddrargportmustbe065535", "getsockaddrarg: port must be 0-65535"));
             }
 
             IPAddress ip = HostToAddress(context, host, family);
@@ -2202,7 +2202,7 @@ namespace IronPython.Modules {
                 try {
                     Converter.ConvertToInt64(address[2]);
                 } catch (ArgumentTypeException) {
-                    throw PythonOps.TypeError("flowinfo must be integer");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("flowinfomustbeinteger", "flowinfo must be integer"));
                 }
                 // We don't actually do anything with flowinfo right now, but we validate it
                 // in case we want to do something in the future.
@@ -2211,7 +2211,7 @@ namespace IronPython.Modules {
                 try {
                     scopeId = Converter.ConvertToInt64(address[3]);
                 } catch (ArgumentTypeException) {
-                    throw PythonOps.TypeError("scopeid must be integer");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("scopeidmustbeinteger", "scopeid must be integer"));
                 }
 
                 IPEndPoint endPoint = new IPEndPoint(ip, port);
@@ -2459,7 +2459,7 @@ namespace IronPython.Modules {
                string cacertsfile=null,
                X509Certificate2Collection certs=null) {
                 if (sock == null) {
-                    throw PythonOps.TypeError("expected socket object, got None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedsocketobjectgotnone", "expected socket object, got None"));
                 }
 
                 _serverSide = server_side;

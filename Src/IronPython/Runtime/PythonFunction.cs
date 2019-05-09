@@ -121,7 +121,7 @@ namespace IronPython.Runtime {
                 return func_globals;
             }
             set {
-                throw PythonOps.TypeError("readonly attribute");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
             }
         }
 
@@ -130,13 +130,13 @@ namespace IronPython.Runtime {
                 return _context.GlobalDict;
             }
             set {
-                throw PythonOps.TypeError("readonly attribute");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
             }
         }
 
         [PropertyMethod, SpecialName, System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public void Deletefunc_globals() {
-            throw PythonOps.TypeError("readonly attribute");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -191,7 +191,7 @@ namespace IronPython.Runtime {
                 return null;
             }
             set {
-                throw PythonOps.TypeError("readonly attribute");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
             }
         }
 
@@ -204,7 +204,7 @@ namespace IronPython.Runtime {
             get { return _name; }
             set {
                 if (value == null) {
-                    throw PythonOps.TypeError("func_name must be set to a string object");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("funcnamemustbesettoastringobject", "func_name must be set to a string object"));
                 }
                 _name = value;
             }
@@ -220,7 +220,7 @@ namespace IronPython.Runtime {
         public PythonDictionary/*!*/ func_dict {
             get { return EnsureDict(); }
             set {
-                if (value == null) throw PythonOps.TypeError("setting function's dictionary to non-dict");
+                if (value == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("settingfunctionsdictionarytonondict", "setting function's dictionary to non-dict"));
 
                 _dict = value;
             }
@@ -256,7 +256,7 @@ namespace IronPython.Runtime {
             }
             set {
                 if (value == null) {
-                    throw PythonOps.TypeError("func_code must be set to a code object");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("funccodemustbesettoacodeobject", "func_code must be set to a code object"));
                 }
                 _code = value;
                 _compat = CalculatedCachedCompat();
@@ -573,7 +573,7 @@ namespace IronPython.Runtime {
         public object cell_contents {
             get {
                 if (Value == Uninitialized.Instance) {
-                    throw PythonOps.ValueError("cell is empty");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("cellisempty", "cell is empty"));
                 }
 
                 return Value;

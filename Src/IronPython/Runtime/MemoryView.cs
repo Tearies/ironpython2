@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -6,6 +6,7 @@ using System;
 using System.Numerics;
 
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 
 namespace IronPython.Runtime {
@@ -94,7 +95,7 @@ namespace IronPython.Runtime {
             }
             set {
                 if (_buffer.ReadOnly) {
-                    throw PythonOps.TypeError("cannot modify read-only memory");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotmodifyreadonlymemory", "cannot modify read-only memory"));
                 }
                 index = PythonOps.FixIndex(index, __len__());
                 _buffer.SetItem(index + _start, value);
@@ -103,16 +104,16 @@ namespace IronPython.Runtime {
 
         public void __delitem__(int index) {
             if (_buffer.ReadOnly) {
-                throw PythonOps.TypeError("cannot modify read-only memory");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotmodifyreadonlymemory", "cannot modify read-only memory"));
             }
-            throw PythonOps.TypeError("cannot delete memory");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotdeletememory", "cannot delete memory"));
         }
 
         public void __delitem__([NotNull]Slice slice) {
             if (_buffer.ReadOnly) {
-                throw PythonOps.TypeError("cannot modify read-only memory");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotmodifyreadonlymemory", "cannot modify read-only memory"));
             }
-            throw PythonOps.TypeError("cannot delete memory");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotdeletememory", "cannot delete memory"));
         }
 
         public object this[[NotNull]Slice slice] {
@@ -124,7 +125,7 @@ namespace IronPython.Runtime {
             }
             set {
                 if (_buffer.ReadOnly) {
-                    throw PythonOps.TypeError("cannot modify read-only memory");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotmodifyreadonlymemory", "cannot modify read-only memory"));
                 }
 
                 int start, stop;
@@ -132,7 +133,7 @@ namespace IronPython.Runtime {
 
                 int newLen = PythonOps.Length(value);
                 if (stop - start != newLen) {
-                    throw PythonOps.ValueError("cannot resize memory view");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotresizememoryview", "cannot resize memory view"));
                 }
 
                 _buffer.SetSlice(new Slice(_start + start, _start + stop), value);
@@ -145,7 +146,7 @@ namespace IronPython.Runtime {
         /// </summary>
         public static void FixSlice(Slice slice, int len, out int start, out int stop) {
             if (slice.step != null) {
-                throw PythonOps.NotImplementedError("");
+                throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("", ""));
             }
 
             int step;

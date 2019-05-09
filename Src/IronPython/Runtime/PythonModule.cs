@@ -144,8 +144,8 @@ namespace IronPython.Runtime {
             }
 
             switch (name) {
-                case "__dict__": throw PythonOps.TypeError("readonly attribute");
-                case "__class__": throw PythonOps.TypeError("__class__ assignment: only for heap types");
+                case "__dict__": throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
+                case "__class__": throw PythonOps.TypeError(ResourceManager.Default.GetResource("classassignmentonlyforheaptypes", "__class__ assignment: only for heap types"));
             }
 
             Debug.Assert(value != Uninitialized.Instance);
@@ -162,8 +162,8 @@ namespace IronPython.Runtime {
             }
 
             switch (name) {
-                case "__dict__": throw PythonOps.TypeError("readonly attribute");
-                case "__class__": throw PythonOps.TypeError("can't delete __class__ attribute");
+                case "__dict__": throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
+                case "__class__": throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantdeleteclassattribute", "can't delete __class__ attribute"));
             }
 
             object value;
@@ -208,13 +208,13 @@ namespace IronPython.Runtime {
         [SpecialName, PropertyMethod]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public void Set__dict__(object value) {
-            throw PythonOps.TypeError("readonly attribute");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
         }
 
         [SpecialName, PropertyMethod]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]
         public void Delete__dict__() {
-            throw PythonOps.TypeError("readonly attribute");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
         }
 
         public Scope Scope {

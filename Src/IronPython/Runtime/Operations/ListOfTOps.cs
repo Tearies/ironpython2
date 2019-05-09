@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -13,6 +13,7 @@ using System.Text;
 using Microsoft.Scripting.Runtime;
 
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Operations {
     public static class ListOfTOps<T> {
@@ -63,7 +64,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static void DeleteItem(List<T> l, Slice slice) {
             if (slice == null) {
-                throw PythonOps.TypeError("List<T> indices must be slices or integers");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("listtindicesmustbeslicesorintegers", "List<T> indices must be slices or integers"));
             }
 
             int start, stop, step;
@@ -122,7 +123,7 @@ namespace IronPython.Runtime.Operations {
 
         [SpecialName]
         public static List<T> GetItem(List<T> l, Slice slice) {
-            if (slice == null) throw PythonOps.TypeError("List<T> indices must be slices or integers");
+            if (slice == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("listtindicesmustbeslicesorintegers", "List<T> indices must be slices or integers"));
             int start, stop, step;
             slice.indices(l.Count, out start, out stop, out step);
             if (step == 1) {

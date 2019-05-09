@@ -13,6 +13,7 @@ using Microsoft.Scripting.Runtime;
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 
 namespace IronPython.Modules {
     /// <summary>
@@ -109,7 +110,7 @@ namespace IronPython.Modules {
             }
 
             internal override bool TryDeleteValue(CodeContext context, object instance, PythonType owner) {
-                throw PythonOps.TypeError("cannot delete fields in ctypes structures/unions");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotdeletefieldsinctypesstructuresunions", "cannot delete fields in ctypes structures/unions"));
             }
 
             internal INativeType NativeType {

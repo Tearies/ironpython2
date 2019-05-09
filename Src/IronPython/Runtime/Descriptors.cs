@@ -84,7 +84,7 @@ namespace IronPython.Runtime {
 
         public object __get__(object instance, object owner) {
             if (owner == null) {
-                if (instance == null) throw PythonOps.TypeError("__get__(None, None) is invalid");
+                if (instance == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("getnonenoneisinvalid", "__get__(None, None) is invalid"));
                 owner = DynamicHelpers.GetPythonType(instance);
             }
             return new Method(func, owner, DynamicHelpers.GetPythonType(owner));
@@ -162,14 +162,14 @@ namespace IronPython.Runtime {
 
         [SpecialName, PropertyMethod, WrapperDescriptor]
         public static void Set__doc__(PythonProperty self, object value) {
-            throw PythonOps.TypeError("readonly attribute");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
         public object fdel {
             get { return _fdel; }
             set {
-                throw PythonOps.TypeError("readonly attribute");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
             }
         }
 
@@ -177,7 +177,7 @@ namespace IronPython.Runtime {
         public object fset {
             get { return _fset; }
             set {
-                throw PythonOps.TypeError("readonly attribute");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
             }
         }
 
@@ -185,7 +185,7 @@ namespace IronPython.Runtime {
         public object fget {
             get { return _fget; }
             set {
-                throw PythonOps.TypeError("readonly attribute");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
             }
         }
 

@@ -42,7 +42,7 @@ namespace IronPython.Modules {
                 if (name == "_fields_") {
                     lock (this) {
                         if (_fields != null) {
-                            throw PythonOps.AttributeError("_fields_ is final");
+                            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("fieldsisfinal", "_fields_ is final"));
                         }
 
                         SetFields(value);
@@ -109,7 +109,7 @@ namespace IronPython.Modules {
                 IList<object> init = value as IList<object>;
                 if (init != null) {
                     if (init.Count > _fields.Length) {
-                        throw PythonOps.TypeError("too many initializers");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("toomanyinitializers", "too many initializers"));
                     }
 
                     for (int i = 0; i < init.Count; i++) {

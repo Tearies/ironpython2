@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -198,7 +198,7 @@ namespace IronPython.Runtime.Exceptions {
                 }
                 set {
                     if (_dict == null) {
-                        throw PythonOps.TypeError("__dict__ must be a dictionary");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("dictmustbeadictionary", "__dict__ must be a dictionary"));
                     }
 
                     _dict = value;
@@ -337,7 +337,7 @@ namespace IronPython.Runtime.Exceptions {
 
             void IPythonObject.SetPythonType(PythonType/*!*/ newType) {
                 if (_type.IsSystemType || newType.IsSystemType) {
-                    throw PythonOps.TypeError("__class__ assignment can only be performed on user defined types");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("classassignmentcanonlybeperformedonuserdefinedtypes", "__class__ assignment can only be performed on user defined types"));
                 }
 
                 _type = newType;
@@ -596,7 +596,7 @@ namespace IronPython.Runtime.Exceptions {
             public override void __init__(params object[] args) {
                 if (args.Length == 2 || args.Length == 3) {
                     if (!(args[0] is int)) {
-                        throw PythonOps.TypeError("an integer is required for the 1st argument of WindowsError");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequiredforthe1stargumentofwindowserror", "an integer is required for the 1st argument of WindowsError"));
                     }
                 }
                 base.__init__(args);

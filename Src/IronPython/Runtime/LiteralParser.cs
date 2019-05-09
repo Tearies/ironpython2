@@ -48,7 +48,7 @@ namespace IronPython.Runtime {
                             buf.Append('\\');
                             break;
                         } else {
-                            throw PythonOps.ValueError("Trailing \\ in string");
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("trailinginstring", "Trailing \\ in string"));
                         }
                     }
                     ch = text[i++];
@@ -194,7 +194,7 @@ namespace IronPython.Runtime {
                 char ch = text[i++];
                 if (!isRaw && ch == '\\') {
                     if (i >= l) {
-                        throw PythonOps.ValueError("Trailing \\ in string");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("trailinginstring", "Trailing \\ in string"));
                     }
                     ch = text[i++];
                     switch (ch) {
@@ -544,7 +544,7 @@ namespace IronPython.Runtime {
                 // we must check explicitly for the strings that end with '\0'
                 //
                 if (text != null && text.Length > 0 && text[text.Length - 1] == '\0') {
-                    throw PythonOps.ValueError("null byte in float literal");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("nullbyteinfloatliteral", "null byte in float literal"));
                 }
                 return ParseFloatNoCatch(text);
             } catch (OverflowException) {
@@ -588,7 +588,7 @@ namespace IronPython.Runtime {
         // ParseComplex helpers
         private static char[] signs = new char[] { '+', '-' };
         private static Exception ExnMalformed() {
-            return PythonOps.ValueError("complex() arg is a malformed string");
+            return PythonOps.ValueError(ResourceManager.Default.GetResource("complexargisamalformedstring", "complex() arg is a malformed string"));
         }
 
         public static Complex ParseComplex(string s) {
@@ -653,7 +653,7 @@ namespace IronPython.Runtime {
 
                 return new Complex(String.IsNullOrEmpty(real) ? 0 : ParseFloatNoCatch(real), ParseFloatNoCatch(imag));
             } catch (OverflowException) {
-                throw PythonOps.ValueError("complex() literal too large to convert");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("complexliteraltoolargetoconvert", "complex() literal too large to convert"));
             } catch {
                 throw ExnMalformed();
             }

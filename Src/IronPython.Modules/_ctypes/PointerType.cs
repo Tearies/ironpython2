@@ -35,7 +35,7 @@ namespace IronPython.Modules {
 
                 object type;
                 if (members.TryGetValue("_type_", out type) && !(type is INativeType)) {
-                    throw PythonOps.TypeError("_type_ must be a type");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("typemustbeatype", "_type_ must be a type"));
                 }
                 _type = (INativeType)type;
                 if (_type != null) {

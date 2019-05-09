@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -23,6 +23,7 @@ using IronPython.Runtime.Binding;
 using IronPython.Runtime.Exceptions;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 
 [assembly: PythonModule("_io", typeof(IronPython.Modules.PythonIOModule))]
 namespace IronPython.Modules {
@@ -150,17 +151,17 @@ namespace IronPython.Modules {
             [PythonHidden]
             public virtual Bytes peek(CodeContext/*!*/ context, [DefaultParameterValue(0)]int length) {
                 _checkClosed();
-                throw AttributeError("peek");
+                throw AttributeError(ResourceManager.Default.GetResource("peek", "peek"));
             }
 
             [PythonHidden]
             public virtual object read(CodeContext/*!*/ context, [DefaultParameterValue(null)]object length) {
-                throw AttributeError("read");
+                throw AttributeError(ResourceManager.Default.GetResource("read", "read"));
             }
 
             [PythonHidden]
             public virtual Bytes read1(CodeContext/*!*/ context, [DefaultParameterValue(0)]int length) {
-                throw AttributeError("read1");
+                throw AttributeError(ResourceManager.Default.GetResource("read1", "read1"));
             }
 
             public virtual bool readable(CodeContext/*!*/ context) {
@@ -234,7 +235,7 @@ namespace IronPython.Modules {
                         continue;
                     }
 
-                    throw PythonOps.TypeError("next() should return string or bytes");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("nextshouldreturnstringorbytes", "next() should return string or bytes"));
                 }
 
                 return res;
@@ -262,7 +263,7 @@ namespace IronPython.Modules {
 
             [PythonHidden]
             public virtual BigInteger write(CodeContext/*!*/ context, object buf) {
-                throw AttributeError("write");
+                throw AttributeError(ResourceManager.Default.GetResource("write", "write"));
             }
 
             public virtual void writelines(CodeContext/*!*/ context, object lines) {
@@ -625,15 +626,15 @@ namespace IronPython.Modules {
 
                 if (_rawIO != null) {
                     if (!_rawIO.readable(context)) {
-                        throw PythonOps.IOError("\"raw\" argument must be readable.");
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("rawargumentmustbereadable", "\"raw\" argument must be readable."));
                     }
                 } else {
                     if (PythonOps.Not(PythonOps.Invoke(context, _raw, "readable"))) {
-                        throw PythonOps.IOError("\"raw\" argument must be readable.");
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("rawargumentmustbereadable", "\"raw\" argument must be readable."));
                     }
                 }
                 if (buffer_size <= 0) {
-                    throw PythonOps.ValueError("invalid buffer size (must be positive)");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidbuffersizemustbepositive", "invalid buffer size (must be positive)"));
                 }
 
                 _bufSize = buffer_size;
@@ -681,7 +682,7 @@ namespace IronPython.Modules {
 
             public override object detach(CodeContext/*!*/ context) {
                 if (_raw == null) {
-                    throw PythonOps.ValueError("raw stream already detached");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("rawstreamalreadydetached", "raw stream already detached"));
                 }
 
                 flush(context);
@@ -755,7 +756,7 @@ namespace IronPython.Modules {
                 int len = GetInt(length, -1);
 
                 if (len < -1) {
-                    throw PythonOps.ValueError("invalid number of bytes to read");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidnumberofbytestoread", "invalid number of bytes to read"));
                 }
 
                 lock (this) {
@@ -887,7 +888,7 @@ namespace IronPython.Modules {
                 if (length == 0) {
                     return Bytes.Empty;
                 } else if (length < 0) {
-                    throw PythonOps.ValueError("number of bytes to read must be positive");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("numberofbytestoreadmustbepositive", "number of bytes to read must be positive"));
                 }
 
                 lock (this) {
@@ -913,7 +914,7 @@ namespace IronPython.Modules {
             public BigInteger seek(double offset, [Optional]object whence) {
                 _checkClosed();
 
-                throw PythonOps.TypeError("an integer is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
             }
 
             public override BigInteger seek(CodeContext/*!*/ context, BigInteger pos, [Optional]object whence) {
@@ -1015,15 +1016,15 @@ namespace IronPython.Modules {
                 this.raw = raw;
                 if (_rawIO != null) {
                     if (!_rawIO.writable(context)) {
-                        throw PythonOps.IOError("\"raw\" argument must be writable.");
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("rawargumentmustbewritable", "\"raw\" argument must be writable."));
                     }
                 } else {
                     if (PythonOps.Not(PythonOps.Invoke(context, _raw, "writable"))) {
-                        throw PythonOps.IOError("\"raw\" argument must be writable.");
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("rawargumentmustbewritable", "\"raw\" argument must be writable."));
                     }
                 }
                 if (buffer_size <= 0) {
-                    throw PythonOps.ValueError("invalid buffer size (must be positive)");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidbuffersizemustbepositive", "invalid buffer size (must be positive)"));
                 }
 
                 _bufSize = buffer_size;
@@ -1060,7 +1061,7 @@ namespace IronPython.Modules {
 
             public override object detach(CodeContext/*!*/ context) {
                 if (_raw == null) {
-                    throw PythonOps.ValueError("raw stream already detached");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("rawstreamalreadydetached", "raw stream already detached"));
                 }
 
                 flush(context);
@@ -1218,7 +1219,7 @@ namespace IronPython.Modules {
 
                         int written = GetInt(writtenObj, "write() should return integer");
                         if (written > _writeBuf.Count || written < 0) {
-                            throw PythonOps.IOError("write() returned incorrect number of bytes");
+                            throw PythonOps.IOError(ResourceManager.Default.GetResource("writereturnedincorrectnumberofbytes", "write() returned incorrect number of bytes"));
                         }
                         _writeBuf.RemoveRange(0, written);
                         count += written;
@@ -1253,7 +1254,7 @@ namespace IronPython.Modules {
             public BigInteger seek(double offset, [Optional]object whence) {
                 _checkClosed();
 
-                throw PythonOps.TypeError("an integer is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
             }
 
             public override BigInteger seek(CodeContext/*!*/ context, BigInteger pos, [Optional]object whence) {
@@ -1326,11 +1327,11 @@ namespace IronPython.Modules {
                 }
                 raw._checkSeekable();
                 if (buffer_size <= 0) {
-                    throw PythonOps.ValueError("invalid buffer size (must be positive)");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidbuffersizemustbepositive", "invalid buffer size (must be positive)"));
                 } else if (!raw.readable(context)) {
-                    throw PythonOps.IOError("\"raw\" argument must be readable.");
+                    throw PythonOps.IOError(ResourceManager.Default.GetResource("rawargumentmustbereadable", "\"raw\" argument must be readable."));
                 } else if (!raw.writable(context)) {
-                    throw PythonOps.IOError("\"raw\" argument must be writable.");
+                    throw PythonOps.IOError(ResourceManager.Default.GetResource("rawargumentmustbewritable", "\"raw\" argument must be writable."));
                 }
 
                 _bufSize = buffer_size;
@@ -1364,7 +1365,7 @@ namespace IronPython.Modules {
 
             public override object detach(CodeContext/*!*/ context) {
                 if (_inner == null) {
-                    throw PythonOps.ValueError("raw stream already detached");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("rawstreamalreadydetached", "raw stream already detached"));
                 }
 
                 flush(context);
@@ -1426,7 +1427,7 @@ namespace IronPython.Modules {
                 int len = GetInt(length, -1);
 
                 if (len < -1) {
-                    throw PythonOps.ValueError("invalid number of bytes to read");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidnumberofbytestoread", "invalid number of bytes to read"));
                 }
 
                 lock (this) {
@@ -1535,7 +1536,7 @@ namespace IronPython.Modules {
                 if (length == 0) {
                     return Bytes.Empty;
                 } else if (length < 0) {
-                    throw PythonOps.ValueError("number of bytes to read must be positive");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("numberofbytestoreadmustbepositive", "number of bytes to read must be positive"));
                 }
 
                 lock (this) {
@@ -1620,7 +1621,7 @@ namespace IronPython.Modules {
                     while (_writeBuf.Count > 0) {
                         int written = (int)_inner.write(context, _writeBuf);
                         if (written > _writeBuf.Count || written < 0) {
-                            throw PythonOps.IOError("write() returned incorrect number of bytes");
+                            throw PythonOps.IOError(ResourceManager.Default.GetResource("writereturnedincorrectnumberofbytes", "write() returned incorrect number of bytes"));
                         }
                         _writeBuf.RemoveRange(0, written);
                         count += written;
@@ -1648,7 +1649,7 @@ namespace IronPython.Modules {
             public BigInteger seek(double offset, [Optional]object whence) {
                 _checkClosed();
 
-                throw PythonOps.TypeError("an integer is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
             }
 
             public override BigInteger seek(CodeContext/*!*/ context, BigInteger pos, [Optional]object whence) {
@@ -1668,7 +1669,7 @@ namespace IronPython.Modules {
                     pos = _inner.seek(context, pos, whence);
                     ResetReadBuf();
                     if (pos < 0) {
-                        throw PythonOps.IOError("seek() returned invalid position");
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("seekreturnedinvalidposition", "seek() returned invalid position"));
                     }
                     GC.KeepAlive(this);
                     return pos;
@@ -1739,10 +1740,10 @@ namespace IronPython.Modules {
                 this.writer = writer;
 
                 if (!_reader.readable(context)) {
-                    throw PythonOps.IOError("\"reader\" object must be readable.");
+                    throw PythonOps.IOError(ResourceManager.Default.GetResource("readerobjectmustbereadable", "\"reader\" object must be readable."));
                 }
                 if (!_writer.writable(context)) {
-                    throw PythonOps.IOError("\"writer\" object must be writable.");
+                    throw PythonOps.IOError(ResourceManager.Default.GetResource("writerobjectmustbewritable", "\"writer\" object must be writable."));
                 }
             }
 
@@ -2111,7 +2112,7 @@ namespace IronPython.Modules {
                     str = es.Value;
                 }
                 if (closed) {
-                    throw PythonOps.ValueError("write to closed file");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("writetoclosedfile", "write to closed file"));
                 }
 
                 int length = str.Length;
@@ -2142,10 +2143,10 @@ namespace IronPython.Modules {
 
             public override BigInteger tell(CodeContext/*!*/ context) {
                 if (!_seekable) {
-                    throw PythonOps.IOError("underlying stream is not seekable");
+                    throw PythonOps.IOError(ResourceManager.Default.GetResource("underlyingstreamisnotseekable", "underlying stream is not seekable"));
                 }
                 if (!_telling) {
-                    throw PythonOps.IOError("telling position disabled by next() call");
+                    throw PythonOps.IOError(ResourceManager.Default.GetResource("tellingpositiondisabledbynextcall", "telling position disabled by next() call"));
                 }
 
                 flush(context);
@@ -2162,7 +2163,7 @@ namespace IronPython.Modules {
                 object decoder = _decoder;
                 if (decoder == null || _nextInput == null) {
                     if (!string.IsNullOrEmpty(_decodedChars)) {
-                        throw PythonOps.AssertionError("pending decoded text");
+                        throw PythonOps.AssertionError(ResourceManager.Default.GetResource("pendingdecodedtext", "pending decoded text"));
                     }
                     return pos;
                 }
@@ -2234,7 +2235,7 @@ namespace IronPython.Modules {
                             }
 
                             if (charsDecoded < skip) {
-                                throw PythonOps.IOError("can't reconstruct logical file position");
+                                throw PythonOps.IOError(ResourceManager.Default.GetResource("cantreconstructlogicalfileposition", "can't reconstruct logical file position"));
                             }
                             break;
                         }
@@ -2262,7 +2263,7 @@ namespace IronPython.Modules {
                 } else if (pos is BigInteger) {
                     position = (BigInteger)pos;
                 } else if (!Converter.TryConvertToBigInteger(pos, out position)) {
-                    throw PythonOps.TypeError("an integer is required");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
                 }
 
                 var savePos = tell(context);
@@ -2279,7 +2280,7 @@ namespace IronPython.Modules {
 
             public override object detach(CodeContext/*!*/ context) {
                 if (_buffer == null) {
-                    throw PythonOps.ValueError("buffer is already detached");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("bufferisalreadydetached", "buffer is already detached"));
                 }
 
                 flush(context);
@@ -2291,30 +2292,30 @@ namespace IronPython.Modules {
             public BigInteger seek(double offset, [Optional]object whence) {
                 _checkClosed();
 
-                throw PythonOps.TypeError("an integer is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
             }
 
             public override BigInteger seek(CodeContext/*!*/ context, BigInteger cookie, [Optional]object whence) {
                 int whenceInt = GetInt(whence);
                 if (closed) {
-                    throw PythonOps.ValueError("tell on closed file");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("tellonclosedfile", "tell on closed file"));
                 }
                 if (!_seekable) {
-                    throw PythonOps.IOError("underlying stream is not seekable");
+                    throw PythonOps.IOError(ResourceManager.Default.GetResource("underlyingstreamisnotseekable", "underlying stream is not seekable"));
                 }
 
                 IncrementalNewlineDecoder typedDecoder;
                 if (whenceInt == 1) {
                     // seek relative to the current position
                     if (cookie != 0) {
-                        throw PythonOps.IOError("can't do nonzero cur-relative seeks");
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("cantdononzerocurrelativeseeks", "can't do nonzero cur-relative seeks"));
                     }
                     whenceInt = 0;
                     cookie = tell(context);
                 } else if (whenceInt == 2) {
                     // seek relative to the end of the stream
                     if (cookie != 0) {
-                        throw PythonOps.IOError("can't do nonzero end-relative seeks");
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("cantdononzeroendrelativeseeks", "can't do nonzero end-relative seeks"));
                     }
                     flush(context);
                     BigInteger pos = _bufferTyped != null ?
@@ -2405,7 +2406,7 @@ namespace IronPython.Modules {
 
                     // skip appropriate number of decoded chars
                     if (_decodedChars.Length < skip) {
-                        throw PythonOps.IOError("can't restore logical file position");
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("cantrestorelogicalfileposition", "can't restore logical file position"));
                     }
                     _decodedCharsUsed = skip;
                 }
@@ -2429,7 +2430,7 @@ namespace IronPython.Modules {
             public override object read(CodeContext/*!*/ context, [DefaultParameterValue(null)]object length) {
                 _checkClosed();
                 if (!readable(context)) {
-                    throw PythonOps.IOError("not readable");
+                    throw PythonOps.IOError(ResourceManager.Default.GetResource("notreadable", "not readable"));
                 }
 
                 int size = GetInt(length, -1);
@@ -2689,7 +2690,7 @@ namespace IronPython.Modules {
 
             private void RewindDecodedChars(int length) {
                 if (_decodedCharsUsed < length) {
-                    throw PythonOps.AssertionError("rewind decoded_chars out of bounds");
+                    throw PythonOps.AssertionError(ResourceManager.Default.GetResource("rewinddecodedcharsoutofbounds", "rewind decoded_chars out of bounds"));
                 }
                 _decodedCharsUsed -= length;
             }
@@ -2700,7 +2701,7 @@ namespace IronPython.Modules {
             /// </summary>
             private bool ReadChunk(CodeContext/*!*/ context) {
                 if (_decoder == null) {
-                    throw PythonOps.ValueError("no decoder");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("nodecoder", "no decoder"));
                 }
 
                 IncrementalNewlineDecoder typedDecoder = _decoder as IncrementalNewlineDecoder;
@@ -2775,24 +2776,24 @@ namespace IronPython.Modules {
             bool binary = modes.Contains('b');
             if (modes.Contains('U')) {
                 if (writing || appending) {
-                    throw PythonOps.ValueError("can't use U and writing mode at once");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("cantuseuandwritingmodeatonce", "can't use U and writing mode at once"));
                 }
                 reading = true;
             }
             if (text && binary) {
-                throw PythonOps.ValueError("can't have text and binary mode at once");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("canthavetextandbinarymodeatonce", "can't have text and binary mode at once"));
             }
             if (reading && writing || reading && appending || writing && appending) {
-                throw PythonOps.ValueError("can't have read/write/append mode at once");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("canthavereadwriteappendmodeatonce", "can't have read/write/append mode at once"));
             }
             if (!(reading || writing || appending)) {
-                throw PythonOps.ValueError("must have exactly one of read/write/append mode");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("musthaveexactlyoneofreadwriteappendmode", "must have exactly one of read/write/append mode"));
             }
             if (binary && encoding != null) {
-                throw PythonOps.ValueError("binary mode doesn't take an encoding argument");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("binarymodedoesnttakeanencodingargument", "binary mode doesn't take an encoding argument"));
             }
             if (binary && newline != null) {
-                throw PythonOps.ValueError("binary mode doesn't take a newline argument");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("binarymodedoesnttakeanewlineargument", "binary mode doesn't take a newline argument"));
             }
 
             mode = reading ? "r" : "";
@@ -2824,7 +2825,7 @@ namespace IronPython.Modules {
                 if (binary) {
                     return fio;
                 }
-                throw PythonOps.ValueError("can't have unbuffered text I/O");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("canthaveunbufferedtextio", "can't have unbuffered text I/O"));
             }
 
             _BufferedIOBase buffer;
@@ -3187,7 +3188,7 @@ namespace IronPython.Modules {
                 return PythonOps.MakeBytes(s.MakeByteArray());
             }
 
-            throw PythonOps.TypeError("'" + name + "' should have returned bytes");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("nameshouldhavereturnedbytes", "'" + name + "' should have returned bytes"));
         }
 
         /// <summary>

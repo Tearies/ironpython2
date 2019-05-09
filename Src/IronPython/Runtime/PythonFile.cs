@@ -1111,7 +1111,7 @@ namespace IronPython.Runtime {
         #region Python initialization
 
         public void __init__(CodeContext/*!*/ context, string name, [DefaultParameterValue("r")]string mode, double buffering) {
-            throw PythonOps.TypeError("integer argument expected, got float");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerargumentexpectedgotfloat", "integer argument expected, got float"));
         }
 
         public void __init__(CodeContext/*!*/ context, string name, [DefaultParameterValue("r")]string mode, BigInteger buffering) {
@@ -1130,15 +1130,15 @@ namespace IronPython.Runtime {
             FileAccess faccess;
 
             if (name == null) {
-                throw PythonOps.TypeError("file name must be string, found NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("filenamemustbestringfoundnonetype", "file name must be string, found NoneType"));
             }
 
             if (mode == null) {
-                throw PythonOps.TypeError("mode must be string, not None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("modemustbestringnotnone", "mode must be string, not None"));
             }
 
             if (mode == "") {
-                throw PythonOps.ValueError("empty mode string");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptymodestring", "empty mode string"));
             }
 
             bool seekEnd;
@@ -1192,7 +1192,7 @@ namespace IronPython.Runtime {
 
         private static void TranslateAndValidateMode(string mode, out FileMode fmode, out FileAccess faccess, out bool seekEnd) {
             if (mode.Length == 0) {
-                throw PythonOps.ValueError("empty mode string");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("emptymodestring", "empty mode string"));
             }
 
             // remember the original mode for error reporting
@@ -1205,7 +1205,7 @@ namespace IronPython.Runtime {
                 } else if (mode == "+") {
                     mode = "r+";
                 } else if (mode[0] == 'w' || mode[0] == 'a') {
-                    throw PythonOps.ValueError("universal newline mode can only be used with modes starting with 'r'");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("universalnewlinemodecanonlybeusedwithmodesstartingwithr", "universal newline mode can only be used with modes starting with 'r'"));
                 } else if (mode[0] != 'r') {
                     mode = "r" + mode;
                 }
@@ -1574,7 +1574,7 @@ namespace IronPython.Runtime {
         [PythonHidden]
         protected void ThrowIfClosed() {
             if (!_isOpen) {
-                throw PythonOps.ValueError("I/O operation on closed file");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("iooperationonclosedfile", "I/O operation on closed file"));
             }
         }
 
@@ -1778,7 +1778,7 @@ namespace IronPython.Runtime {
 
         public void write(string s) {
             if (s == null) {
-                throw PythonOps.TypeError("must be string or read-only character buffer, not None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbestringorreadonlycharacterbuffernotnone", "must be string or read-only character buffer, not None"));
             }
 
             lock (this) {
@@ -1870,7 +1870,7 @@ namespace IronPython.Runtime {
                             continue;
                         }
 
-                        throw PythonOps.TypeError("writelines() argument must be a sequence of strings");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("writelinesargumentmustbeasequenceofstrings", "writelines() argument must be a sequence of strings"));
 
                     }
                     WriteNoLock(line);

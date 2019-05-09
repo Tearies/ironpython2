@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -20,7 +20,7 @@ using IronPython.Runtime;
 using IronPython.Runtime.Exceptions;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
-
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
@@ -127,17 +127,17 @@ namespace IronPython.Modules {
                         _fileAccess = MemoryMappedFileAccess.CopyOnWrite;
                         break;
                     default:
-                        throw PythonOps.ValueError("mmap invalid access parameter");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("mmapinvalidaccessparameter", "mmap invalid access parameter"));
                 }
 
                 if (length < 0) {
-                    throw PythonOps.OverflowError("memory mapped size must be positive");
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("memorymappedsizemustbepositive", "memory mapped size must be positive"));
                 }
                 if (offset < 0) {
-                    throw PythonOps.OverflowError("memory mapped offset must be positive");
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("memorymappedoffsetmustbepositive", "memory mapped offset must be positive"));
                 }
                 if (length > SysModule.maxsize) {
-                    throw PythonOps.OverflowError("cannot fit 'long' into an index-sized integer");
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cannotfitlongintoanindexsizedinteger", "cannot fit 'long' into an index-sized integer"));
                 }
 
                 // CPython only allows offsets that are a multiple of ALLOCATIONGRANULARITY
@@ -184,10 +184,10 @@ namespace IronPython.Modules {
                     if (length == 0) {
                         length = _sourceStream.Length;
                         if (length == 0) {
-                            throw PythonOps.ValueError("cannot mmap an empty file");
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotmmapanemptyfile", "cannot mmap an empty file"));
                         }
                         if (_offset >= length) {
-                            throw PythonOps.ValueError("mmap offset is greater than file size");
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("mmapoffsetisgreaterthanfilesize", "mmap offset is greater than file size"));
                         }
                         length -= _offset;
                     }
@@ -240,7 +240,7 @@ namespace IronPython.Modules {
                 set {
                     using (new MmapLocker(this)) {
                         if (value == null || value.Length != 1) {
-                            throw PythonOps.IndexError("mmap assignment must be a single-character string");
+                            throw PythonOps.IndexError(ResourceManager.Default.GetResource("mmapassignmentmustbeasinglecharacterstring", "mmap assignment must be a single-character string"));
                         }
                         EnsureWritable();
                         CheckIndex(index);
@@ -279,7 +279,7 @@ namespace IronPython.Modules {
                 set {
                     using (new MmapLocker(this)) {
                         if (value == null) {
-                            throw PythonOps.TypeError("mmap slice assignment must be a string");
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("mmapsliceassignmentmustbeastring", "mmap slice assignment must be a string"));
                         }
                         EnsureWritable();
 
@@ -292,7 +292,7 @@ namespace IronPython.Modules {
 
                         int count = (int)longCount;
                         if (value.Length != count) {
-                            throw PythonOps.IndexError("mmap slice assignment is wrong size");
+                            throw PythonOps.IndexError(ResourceManager.Default.GetResource("mmapsliceassignmentiswrongsize", "mmap slice assignment is wrong size"));
                         } else if (count == 0) {
                             return;
                         }
@@ -314,13 +314,13 @@ namespace IronPython.Modules {
             public void __delitem__(long index) {
                 using (new MmapLocker(this)) {
                     CheckIndex(index);
-                    throw PythonOps.TypeError("mmap object doesn't support item deletion");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("mmapobjectdoesntsupportitemdeletion", "mmap object doesn't support item deletion"));
                 }
             }
 
             public void __delslice__(Slice slice) {
                 using (new MmapLocker(this)) {
-                    throw PythonOps.TypeError("mmap object doesn't support slice deletion");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("mmapobjectdoesntsupportslicedeletion", "mmap object doesn't support slice deletion"));
                 }
             }
 
@@ -450,7 +450,7 @@ namespace IronPython.Modules {
                     EnsureWritable();
                     if (dest < 0 || src < 0 || count < 0 ||
                         checked(Math.Max(src, dest) + count) > _view.Capacity) {
-                        throw PythonOps.ValueError("source or destination out of range");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("sourceordestinationoutofrange", "source or destination out of range"));
                     }
 
                     if (src == dest || count == 0) {
@@ -530,7 +530,7 @@ namespace IronPython.Modules {
                     long pos = Position;
 
                     if (pos >= _view.Capacity) {
-                        throw PythonOps.ValueError("read byte out of range");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("readbyteoutofrange", "read byte out of range"));
                     }
 
                     byte res = _view.ReadByte(pos);
@@ -561,7 +561,7 @@ namespace IronPython.Modules {
             public void resize(long newsize) {
                 using (new MmapLocker(this)) {
                     if (_fileAccess != MemoryMappedFileAccess.ReadWrite) {
-                        throw PythonOps.TypeError("mmap can't resize a readonly or copy-on-write memory map.");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("mmapcantresizeareadonlyorcopyonwritememorymap", "mmap can't resize a readonly or copy-on-write memory map."));
                     }
 
                     if (_sourceStream == null) {
@@ -714,7 +714,7 @@ namespace IronPython.Modules {
                             pos = checked(pos + _view.Capacity);
                             break;
                         default:
-                            throw PythonOps.ValueError("unknown seek type");
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownseektype", "unknown seek type"));
                     }
 
                     CheckSeekIndex(pos);
@@ -742,7 +742,7 @@ namespace IronPython.Modules {
                     long pos = Position;
 
                     if (_view.Capacity - pos < s.Length) {
-                        throw PythonOps.ValueError("data out of range");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("dataoutofrange", "data out of range"));
                     }
 
                     byte[] data = s.MakeByteArray();
@@ -755,13 +755,13 @@ namespace IronPython.Modules {
             public void write_byte(string s) {
                 using (new MmapLocker(this)) {
                     if (s.Length != 1) {
-                        throw PythonOps.TypeError("write_byte() argument 1 must be char, not str");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("writebyteargument1mustbecharnotstr", "write_byte() argument 1 must be char, not str"));
                     }
                     EnsureWritable();
 
                     long pos = Position;
                     if (Position >= _view.Capacity) {
-                        throw PythonOps.ValueError("write byte out of range");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("writebyteoutofrange", "write byte out of range"));
                     }
 
                     _view.Write(pos, (byte)s[0]);
@@ -782,7 +782,7 @@ namespace IronPython.Modules {
 
             private void EnsureWritable() {
                 if (_fileAccess == MemoryMappedFileAccess.Read) {
-                    throw PythonOps.TypeError("mmap can't modify a read-only memory map.");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("mmapcantmodifyareadonlymemorymap", "mmap can't modify a read-only memory map."));
                 }
             }
 
@@ -792,13 +792,13 @@ namespace IronPython.Modules {
 
             private void CheckIndex(long index, bool inclusive) {
                 if (index > _view.Capacity || index < 0 || (inclusive && index == _view.Capacity)) {
-                    throw PythonOps.IndexError("mmap index out of range");
+                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("mmapindexoutofrange", "mmap index out of range"));
                 }
             }
 
             private void CheckSeekIndex(long index) {
                 if (index > _view.Capacity || index < 0) {
-                    throw PythonOps.ValueError("seek out of range");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("seekoutofrange", "seek out of range"));
                 }
             }
 
@@ -845,7 +845,7 @@ namespace IronPython.Modules {
 
             private void EnsureOpen() {
                 if (_isClosed) {
-                    throw PythonOps.ValueError("mmap closed or invalid");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("mmapclosedorinvalid", "mmap closed or invalid"));
                 }
             }
 

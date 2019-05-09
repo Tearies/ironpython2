@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -33,7 +33,7 @@ common approach.
             object litem;
 
             if (lo < 0) {
-                throw PythonOps.ValueError("lo must be non-negative");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("lomustbenonnegative", "lo must be non-negative"));
             }
 
             if (hi == -1) {
@@ -56,7 +56,7 @@ common approach.
             object litem;
 
             if (lo < 0) {
-                throw PythonOps.ValueError("lo must be non-negative");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("lomustbenonnegative", "lo must be non-negative"));
             }
 
             if (hi == -1) {
@@ -79,7 +79,7 @@ common approach.
             int mid;
 
             if (lo < 0) {
-                throw PythonOps.ValueError("lo must be non-negative");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("lomustbenonnegative", "lo must be non-negative"));
             }
 
             if (hi == -1) {
@@ -102,7 +102,7 @@ common approach.
             int mid;
 
             if (lo < 0) {
-                throw PythonOps.ValueError("lo must be non-negative");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("lomustbenonnegative", "lo must be non-negative"));
             }
 
             if (hi == -1) {

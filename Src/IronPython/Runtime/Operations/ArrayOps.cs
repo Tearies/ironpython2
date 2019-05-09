@@ -20,8 +20,8 @@ namespace IronPython.Runtime.Operations {
 
         [SpecialName]
         public static Array Add(Array data1, Array data2) {
-            if (data1 == null) throw PythonOps.TypeError("expected array for 1st argument, got None");
-            if (data2 == null) throw PythonOps.TypeError("expected array for 2nd argument, got None");
+            if (data1 == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedarrayfor1stargumentgotnone", "expected array for 1st argument, got None"));
+            if (data2 == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedarrayfor2ndargumentgotnone", "expected array for 2nd argument, got None"));
 
             if (data1.Rank > 1 || data2.Rank > 1) throw new NotImplementedException(ResourceManager.Default.GetResource("cantaddmultidimensionalarrays", "can't add multidimensional arrays"));
 
@@ -99,27 +99,27 @@ namespace IronPython.Runtime.Operations {
 
         [SpecialName]
         public static object GetItem(Array data, int index) {
-            if (data == null) throw PythonOps.TypeError("expected Array, got None");
+            if (data == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedarraygotnone", "expected Array, got None"));
 
             return data.GetValue(PythonOps.FixIndex(index, data.Length) + data.GetLowerBound(0));
         }
 
         [SpecialName]
         public static object GetItem(Array data, Slice slice) {
-            if (data == null) throw PythonOps.TypeError("expected Array, got None");
+            if (data == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedarraygotnone", "expected Array, got None"));
 
             return GetSlice(data, data.Length, slice);
         }
 
         [SpecialName]
         public static object GetItem(Array data, PythonTuple tuple) {
-            if (data == null) throw PythonOps.TypeError("expected Array, got None");
+            if (data == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedarraygotnone", "expected Array, got None"));
             return GetItem(data, tuple.ToArray());
         }
 
         [SpecialName]
         public static object GetItem(Array data, params object[] indices) {
-            if (indices == null || indices.Length < 1) throw PythonOps.TypeError("__getitem__ requires at least 1 parameter");
+            if (indices == null || indices.Length < 1) throw PythonOps.TypeError(ResourceManager.Default.GetResource("getitemrequiresatleast1parameter", "__getitem__ requires at least 1 parameter"));
 
             int iindex;
             if (indices.Length == 1 && Converter.TryConvertToInt32(indices[0], out iindex)) {
@@ -138,14 +138,14 @@ namespace IronPython.Runtime.Operations {
 
         [SpecialName]
         public static void SetItem(Array data, int index, object value) {
-            if (data == null) throw PythonOps.TypeError("expected Array, got None");
+            if (data == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedarraygotnone", "expected Array, got None"));
 
             data.SetValue(Converter.Convert(value, data.GetType().GetElementType()), PythonOps.FixIndex(index, data.Length) + data.GetLowerBound(0));
         }
 
         [SpecialName]
         public static void SetItem(Array a, params object[] indexAndValue) {
-            if (indexAndValue == null || indexAndValue.Length < 2) throw PythonOps.TypeError("__setitem__ requires at least 2 parameters");
+            if (indexAndValue == null || indexAndValue.Length < 2) throw PythonOps.TypeError(ResourceManager.Default.GetResource("setitemrequiresatleast2parameters", "__setitem__ requires at least 2 parameters"));
 
             int iindex;
             if (indexAndValue.Length == 2 && Converter.TryConvertToInt32(indexAndValue[0], out iindex)) {
@@ -168,7 +168,7 @@ namespace IronPython.Runtime.Operations {
 
         [SpecialName]
         public static void SetItem(Array a, Slice index, object value) {
-            if (a.Rank != 1) throw PythonOps.NotImplementedError("slice on multi-dimensional array");
+            if (a.Rank != 1) throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("sliceonmultidimensionalarray", "slice on multi-dimensional array"));
 
             Type elm = a.GetType().GetElementType();
 
@@ -297,7 +297,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         internal static Array GetSlice(Array data, int size, Slice slice) {
-            if (data.Rank != 1) throw PythonOps.NotImplementedError("slice on multi-dimensional array");
+            if (data.Rank != 1) throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("sliceonmultidimensionalarray", "slice on multi-dimensional array"));
 
             int start, stop, step;
             slice.indices(size, out start, out stop, out step);

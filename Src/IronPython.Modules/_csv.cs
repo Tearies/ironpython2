@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -135,7 +135,7 @@ dialect = csv.register_dialect(name, dialect)")]
         {
             DialectRegistry dialects = GetDialects(context);
             if (name == null || !dialects.ContainsKey(name))
-                throw MakeError("unknown dialect");
+                throw MakeError(ResourceManager.Default.GetResource("unknowndialect", "unknown dialect"));
 
             if (dialects.ContainsKey(name))
                 dialects.Remove(name);
@@ -147,7 +147,7 @@ dialect = csv.register_dialect(name, dialect)")]
         {
             DialectRegistry dialects = GetDialects(context);
             if (name == null || !dialects.ContainsKey(name))
-                throw MakeError("unknown dialect");
+                throw MakeError(ResourceManager.Default.GetResource("unknowndialect", "unknown dialect"));
             return dialects[name];
         }
 
@@ -196,14 +196,14 @@ dialect = csv.register_dialect(name, dialect)")]
 
             if (!PythonOps.TryGetEnumerator(context, args[0], out e))
             {
-                throw PythonOps.TypeError("argument 1 must be an iterator");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("argument1mustbeaniterator", "argument 1 must be an iterator"));
             }
 
             if (args.Length > 1)
                 dialectObj = args[1];
 
             if (dialectObj is string && !dialects.ContainsKey((string)dialectObj))
-                throw MakeError("unknown dialect");
+                throw MakeError(ResourceManager.Default.GetResource("unknowndialect", "unknown dialect"));
             else if (dialectObj is string)
             {
                 dialect = dialects[(string)dialectObj];
@@ -243,7 +243,7 @@ dialect = csv.register_dialect(name, dialect)")]
                 dialectObj = args[1];
 
             if (dialectObj is string && !dialects.ContainsKey((string)dialectObj))
-                throw MakeError("unknown dialect");
+                throw MakeError(ResourceManager.Default.GetResource("unknowndialect", "unknown dialect"));
             else if (dialectObj is string)
             {
                 dialect = dialects[(string)dialectObj];
@@ -323,7 +323,7 @@ The Dialect type records CSV parsing and generation options.")]
                         if (dialects.ContainsKey(dialectName))
                             dialect = dialects[dialectName];
                         else
-                            throw MakeError("unknown dialect");
+                            throw MakeError(ResourceManager.Default.GetResource("unknowndialect", "unknown dialect"));
                     }
                     
                     if (dialect is Dialect &&
@@ -355,7 +355,7 @@ The Dialect type records CSV parsing and generation options.")]
                     string.Compare(name, "doublequote") == 0 ||
                     string.Compare(name, "strict") == 0)
                 {
-                    throw PythonOps.TypeError("readonly attribute");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
                 }
                 else if (string.Compare(name, "escapechar") == 0 ||
                     string.Compare(name, "lineterminator") == 0 ||
@@ -380,7 +380,7 @@ The Dialect type records CSV parsing and generation options.")]
                     string.Compare(name, "doublequote") == 0 ||
                     string.Compare(name, "strict") == 0)
                 {
-                    throw PythonOps.TypeError("readonly attribute");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("readonlyattribute", "readonly attribute"));
                 }
                 else if (string.Compare(name, "escapechar") == 0 ||
                     string.Compare(name, "lineterminator") == 0 ||
@@ -558,17 +558,17 @@ The Dialect type records CSV parsing and generation options.")]
 
                 // validate options
                 if (_quoting < QUOTE_MINIMAL || _quoting > QUOTE_NONE)
-                    throw PythonOps.TypeError("bad \"quoting\" value");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("badquotingvalue", "bad \"quoting\" value"));
                 if (string.IsNullOrEmpty(_delimiter))
-                    throw PythonOps.TypeError("\"delimiter\" must be an 1-character string");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("delimitermustbean1characterstring", "\"delimiter\" must be an 1-character string"));
 
                 if ((foundParams["quotechar"] && quotechar == null) && quoting == null)
                     _quoting = QUOTE_NONE;
                 if (_quoting != QUOTE_NONE && string.IsNullOrEmpty(_quotechar))
-                    throw PythonOps.TypeError("quotechar must be set if quoting enabled");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("quotecharmustbesetifquotingenabled", "quotechar must be set if quoting enabled"));
 
                 if (_lineterminator == null)
-                    throw PythonOps.TypeError("lineterminator must be set");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("lineterminatormustbeset", "lineterminator must be set"));
             }
 
             public string escapechar
@@ -696,7 +696,7 @@ in CSV format.")]
                             // End of input OR exception
                             if(_field.Length > 0 || _state == State.InQuotedField) {
                                 if(_reader._dialect.strict) {
-                                    throw MakeError("unexpected end of data");
+                                    throw MakeError(ResourceManager.Default.GetResource("unexpectedendofdata", "unexpected end of data"));
                                 } else {
                                     ParseSaveField();
                                     return true;
@@ -728,7 +728,7 @@ in CSV format.")]
                             {
                                 char c = line[i];
                                 if (c == '\0')
-                                    throw MakeError("line contains NULL byte");
+                                    throw MakeError(ResourceManager.Default.GetResource("linecontainsnullbyte", "line contains NULL byte"));
 
                                 ProcessChar(c);
                             }
@@ -1047,7 +1047,7 @@ elements will be converted to string.")]
             {
                 IEnumerator e = null;
                 if (!PythonOps.TryGetEnumerator(context, sequence, out e))
-                    throw MakeError("sequence expected");
+                    throw MakeError(ResourceManager.Default.GetResource("sequenceexpected", "sequence expected"));
 
                 int rowlen = PythonOps.Length(sequence);
 
@@ -1170,7 +1170,7 @@ elements will be converted to string.")]
                     if (field.IndexOf(c) >= 0)
                     {
                         if (string.IsNullOrEmpty(_dialect.escapechar))
-                            throw MakeError("need to escape, but no escapechar set");
+                            throw MakeError(ResourceManager.Default.GetResource("needtoescapebutnoescapecharset", "need to escape, but no escapechar set"));
                         field = field.Replace(c.ToString(), _dialect.escapechar + c);
                     }
                 }
@@ -1179,7 +1179,7 @@ elements will be converted to string.")]
                 if (string.IsNullOrEmpty(field) && quote_empty)
                 {
                     if (_dialect.quoting == QUOTE_NONE)
-                        throw MakeError("single empty field record must be quoted");
+                        throw MakeError(ResourceManager.Default.GetResource("singleemptyfieldrecordmustbequoted", "single empty field record must be quoted"));
                     quoted = true;
                 }
 

@@ -19,6 +19,7 @@ using IronPython.Runtime;
 using IronPython.Runtime.Exceptions;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Utils;
 
 [assembly: PythonModule("sys", typeof(IronPython.Modules.SysModule))]
@@ -105,12 +106,12 @@ Handle an exception by displaying it with a traceback on sys.stderr._")]
         public static readonly BuiltinFunction __excepthook__ = excepthook;
 
         public static int getcheckinterval() {
-            throw PythonOps.NotImplementedError("IronPython does not support sys.getcheckinterval");
+            throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("ironpythondoesnotsupportsysgetcheckinterval", "IronPython does not support sys.getcheckinterval"));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "value")]
         public static void setcheckinterval(int value) {
-            throw PythonOps.NotImplementedError("IronPython does not support sys.setcheckinterval");
+            throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("ironpythondoesnotsupportsyssetcheckinterval", "IronPython does not support sys.setcheckinterval"));
         }
 
         public static int getrefcount(CodeContext/*!*/ context, object o) {
@@ -193,7 +194,7 @@ Handle an exception by displaying it with a traceback on sys.stderr._")]
                 return cur;
             } 
 
-            throw PythonOps.ValueError("call stack is not deep enough");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("callstackisnotdeepenough", "call stack is not deep enough"));
         }
 
         public static int getsizeof(object o) {
@@ -259,9 +260,9 @@ Handle an exception by displaying it with a traceback on sys.stderr._")]
         // ps1 and ps2 are set by PythonContext and only on the initial load
 
         public static void setdefaultencoding(CodeContext context, object name) {
-            if (name == null) throw PythonOps.TypeError("name cannot be None");
+            if (name == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("namecannotbenone", "name cannot be None"));
             string strName = name as string;
-            if (strName == null) throw PythonOps.TypeError("name must be a string");
+            if (strName == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("namemustbeastring", "name must be a string"));
 
             PythonContext pc = context.LanguageContext;
             Encoding enc;

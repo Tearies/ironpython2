@@ -67,7 +67,7 @@ namespace IronPython.Modules {
                     this,
                     "_abstract_",
                     out abstractCls)) {
-                    throw PythonOps.TypeError("abstract class");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("abstractclass", "abstract class"));
                 }
             }
         }

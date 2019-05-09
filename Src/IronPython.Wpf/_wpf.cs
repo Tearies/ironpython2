@@ -16,6 +16,7 @@ using Microsoft.Scripting.Runtime;
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
 using System.Windows.Threading;
+using Microsoft.Scripting;
 
 [assembly: PythonModule("_wpf", typeof(IronPython.Modules.Wpf), PlatformsAttribute.PlatformFamily.Windows)]
 namespace IronPython.Modules {
@@ -39,9 +40,9 @@ namespace IronPython.Modules {
         /// </summary>
         public static object LoadComponent(CodeContext context, object self, string filename) {
             if (filename == null) {
-                throw PythonOps.TypeError("expected str, got None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstrgotnone", "expected str, got None"));
             } else if (self == null) {
-                throw PythonOps.TypeError("expected module, got None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedmodulegotnone", "expected module, got None"));
             }
 
             return DynamicXamlReader.LoadComponent(self, context.LanguageContext.Operations, filename, XamlReader.GetWpfSchemaContext());
@@ -55,7 +56,7 @@ namespace IronPython.Modules {
         /// </summary>
         public static object LoadComponent(CodeContext context, object self, [NotNull]Stream stream) {
             if (self == null) {
-                throw PythonOps.TypeError("expected module, got None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedmodulegotnone", "expected module, got None"));
             }
 
             return DynamicXamlReader.LoadComponent(self, context.LanguageContext.Operations, stream, XamlReader.GetWpfSchemaContext());
@@ -69,7 +70,7 @@ namespace IronPython.Modules {
         /// </summary>
         public static object LoadComponent(CodeContext context, object self, [NotNull]XmlReader xmlReader) {
             if (self == null) {
-                throw PythonOps.TypeError("expected module, got None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedmodulegotnone", "expected module, got None"));
             }
 
             return DynamicXamlReader.LoadComponent(self, context.LanguageContext.Operations, xmlReader, XamlReader.GetWpfSchemaContext());
@@ -83,7 +84,7 @@ namespace IronPython.Modules {
         /// </summary>
         public static object LoadComponent(CodeContext context, object self, [NotNull]TextReader filename) {
             if (self == null) {
-                throw PythonOps.TypeError("expected module, got None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedmodulegotnone", "expected module, got None"));
             }
             return DynamicXamlReader.LoadComponent(self, context.LanguageContext.Operations, filename, XamlReader.GetWpfSchemaContext());
         }
@@ -96,7 +97,7 @@ namespace IronPython.Modules {
         /// </summary>
         public static object LoadComponent(CodeContext context, object self, [NotNull]System.Xaml.XamlXmlReader reader) {
             if (self == null) {
-                throw PythonOps.TypeError("expected module, got None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedmodulegotnone", "expected module, got None"));
             }
             return DynamicXamlReader.LoadComponent(self, context.LanguageContext.Operations, reader);
         }

@@ -278,13 +278,13 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
 
         internal static object __new__(CodeContext/*!*/ context, PythonType cls, string name, PythonTuple bases, PythonDictionary dict, string selfNames) {
             if (name == null) {
-                throw PythonOps.TypeError("type() argument 1 must be string, not None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("typeargument1mustbestringnotnone", "type() argument 1 must be string, not None"));
             }
             if (bases == null) {
-                throw PythonOps.TypeError("type() argument 2 must be tuple, not None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("typeargument2mustbetuplenotnone", "type() argument 2 must be tuple, not None"));
             }
             if (dict == null) {
-                throw PythonOps.TypeError("TypeError: type() argument 3 must be dict, not None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("typeerrortypeargument3mustbedictnotnone", "TypeError: type() argument 3 must be dict, not None"));
             }
 
             EnsureModule(context, dict);
@@ -323,7 +323,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                     meta = metaCls;
                     continue;
                 }
-                throw PythonOps.TypeError("Error when calling the metaclass bases\n    metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("errorwhencallingthemetaclassbasesnmetaclassconflictthemetaclassofaderivedclassmustbeanonstrictsubclassofthemetaclassesofallitsbases", "Error when calling the metaclass bases\n    metaclass conflict: the metaclass of a derived class must be a (non-strict) subclass of the metaclasses of all its bases"));
             }
             return meta;
         }
@@ -650,7 +650,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
         public object this[string member] {
             get {
                 if (!UnderlyingSystemType.IsEnum) {
-                    throw PythonOps.TypeError("'type' object is not subscriptable");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("typeobjectisnotsubscriptable", "'type' object is not subscriptable"));
                 }
                 if (member == null) {
                     throw PythonOps.KeyError(member);
@@ -1015,7 +1015,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
 
             object res = lenSite.Target(lenSite, context, func);
             if (!(res is int)) {
-                throw PythonOps.ValueError("__len__ must return int");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("lenmustreturnint", "__len__ must return int"));
             }
 
             length = (int)res;
@@ -2019,7 +2019,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                 
                 if (slotCount != 0) {
                     if (hasSlots) {
-                        throw PythonOps.TypeError("multiple bases have instance lay-out conflict");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("multiplebaseshaveinstancelayoutconflict", "multiple bases have instance lay-out conflict"));
                     }
                     hasSlots = true;
                 }
@@ -2067,7 +2067,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
             // instances of this type yet.
             _underlyingSystemType = __clrtype__();
             if (_underlyingSystemType == null) {
-                throw PythonOps.ValueError("__clrtype__ must return a type, not None");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("clrtypemustreturnatypenotnone", "__clrtype__ must return a type, not None"));
             }
 #else
             _underlyingSystemType = typeof(IronPython.NewTypes.System.Object_1_1);
@@ -2213,7 +2213,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
         private static string GetSlotName(object o) {
             string value;
             if (!Converter.TryConvertToString(o, out value) || String.IsNullOrEmpty(value))
-                throw PythonOps.TypeError("slots must be one string or a list of strings");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("slotsmustbeonestringoralistofstrings", "slots must be one string or a list of strings"));
 
             for (int i = 0; i < value.Length; i++) {
                 if ((value[i] >= 'a' && value[i] <= 'z') ||
@@ -2222,7 +2222,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                     value[i] == '_') {
                     continue;
                 }
-                throw PythonOps.TypeError("__slots__ must be valid identifiers");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("slotsmustbevalididentifiers", "__slots__ must be valid identifiers"));
             }
 
             return value;

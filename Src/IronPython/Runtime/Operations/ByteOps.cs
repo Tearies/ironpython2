@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -12,6 +12,7 @@ using Microsoft.Scripting.Utils;
 using IronPython.Runtime.Types;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Operations {
     public static partial class ByteOps {
@@ -19,7 +20,7 @@ namespace IronPython.Runtime.Operations {
             try {
                 return checked((byte)item);
             } catch (OverflowException) {
-                throw PythonOps.ValueError("byte must be in range(0, 256)");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("bytemustbeinrange0256", "byte must be in range(0, 256)"));
             }
         }
 
@@ -28,14 +29,14 @@ namespace IronPython.Runtime.Operations {
             if (item.AsInt32(out val)) {
                 return ToByteChecked(val);
             }
-            throw PythonOps.ValueError("byte must be in range(0, 256)");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("bytemustbeinrange0256", "byte must be in range(0, 256)"));
         }
 
         internal static byte ToByteChecked(this double item) {
             try {
                 return checked((byte)item);
             } catch (OverflowException) {
-                throw PythonOps.ValueError("byte must be in range(0, 256)");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("bytemustbeinrange0256", "byte must be in range(0, 256)"));
             }
         }
 
@@ -121,13 +122,13 @@ namespace IronPython.Runtime.Operations {
                 if (s.Length == 1) {
                     return ((int)s[0]).ToByteChecked();
                 } else {
-                    throw PythonOps.TypeError("an integer or string of size 1 is required");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerorstringofsize1isrequired", "an integer or string of size 1 is required"));
                 }
             } else if (!Object.ReferenceEquals(es = o as Extensible<string>, null)) {
                 if (es.Value.Length == 1) {
                     return ((int)es.Value[0]).ToByteChecked();
                 } else {
-                    throw PythonOps.TypeError("an integer or string of size 1 is required");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerorstringofsize1isrequired", "an integer or string of size 1 is required"));
                 }
             } else {
                 return GetByteListOk(o);
@@ -139,7 +140,7 @@ namespace IronPython.Runtime.Operations {
                 if (lbval.Count == 1) {
                     return lbval[0];
                 }
-                throw PythonOps.ValueError("an integer or string of size 1 is required");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("anintegerorstringofsize1isrequired", "an integer or string of size 1 is required"));
             }
 
             return GetByte(o);
@@ -181,7 +182,7 @@ namespace IronPython.Runtime.Operations {
             } else if(o is string str && str.Length == 1) {
                 return ((int)str[0]).ToByteChecked();
             } else {
-                throw PythonOps.TypeError("an integer or string of size 1 is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerorstringofsize1isrequired", "an integer or string of size 1 is required"));
             }
         }
     }

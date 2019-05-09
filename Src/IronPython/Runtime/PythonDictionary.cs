@@ -243,7 +243,7 @@ namespace IronPython.Runtime {
                 }
 
                 if (key.Length == 0) {
-                    throw PythonOps.TypeError("__getitem__() takes exactly one argument (0 given)");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("getitemtakesexactlyoneargument0given", "__getitem__() takes exactly one argument (0 given)"));
                 }
 
                 return this[PythonTuple.MakeTuple(key)];
@@ -255,7 +255,7 @@ namespace IronPython.Runtime {
                 }
 
                 if (key.Length == 0) {
-                    throw PythonOps.TypeError("__setitem__() takes exactly two argument (1 given)");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("setitemtakesexactlytwoargument1given", "__setitem__() takes exactly two argument (1 given)"));
                 }
 
                 this[PythonTuple.MakeTuple(key)] = value;
@@ -297,7 +297,7 @@ namespace IronPython.Runtime {
             } else if (key.Length > 0) {
                 __delitem__(PythonTuple.MakeTuple(key));
             } else {
-                throw PythonOps.TypeError("__delitem__() takes exactly one argument (0 given)");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("delitemtakesexactlyoneargument0given", "__delitem__() takes exactly one argument (0 given)"));
             }
         }
 
@@ -911,7 +911,7 @@ namespace IronPython.Runtime {
         bool IEnumerator.MoveNext() {
             if (_size != _dict.Count) {
                 _pos = _size - 1; // make the length 0
-                throw PythonOps.RuntimeError("dictionary changed size during iteration");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("dictionarychangedsizeduringiteration", "dictionary changed size during iteration"));
             }
             if (_keys.MoveNext()) {
                 _pos++;
@@ -977,7 +977,7 @@ namespace IronPython.Runtime {
         public bool MoveNext() {
             if (_size != _dict.Count) {
                 _pos = _size - 1; // make the length 0
-                throw PythonOps.RuntimeError("dictionary changed size during iteration");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("dictionarychangedsizeduringiteration", "dictionary changed size during iteration"));
             }
             if (_pos + 1 < _size) {
                 _pos++;
@@ -1038,7 +1038,7 @@ namespace IronPython.Runtime {
         public bool MoveNext() {
             if (_size != _dict.Count) {
                 _pos = _size - 1; // make the length 0
-                throw PythonOps.RuntimeError("dictionary changed size during iteration");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("dictionarychangedsizeduringiteration", "dictionary changed size during iteration"));
             }
             if (_pos + 1 < _size) {
                 _pos++;

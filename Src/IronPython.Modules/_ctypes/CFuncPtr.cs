@@ -54,7 +54,7 @@ namespace IronPython.Modules {
             /// </summary>
             public _CFuncPtr(PythonTuple args) {
                 if (args == null) {
-                    throw PythonOps.TypeError("expected sequence, got None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedsequencegotnone", "expected sequence, got None"));
                 } else if (args.Count != 2) {
                     throw PythonOps.TypeError($"argument 1 must be a sequence of length 2, not {args.Count}");
                 }
@@ -101,7 +101,7 @@ namespace IronPython.Modules {
                 _memHolder = new MemoryHolder(IntPtr.Size);
                 if (function != null) {
                     if (!PythonOps.IsCallable(context, function)) {
-                        throw PythonOps.TypeError("argument must be called or address of function");
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("argumentmustbecalledoraddressoffunction", "argument must be called or address of function"));
                     }
 
                     _delegate = ((CFuncPtrType)DynamicHelpers.GetPythonType(this)).MakeReverseDelegate(context, function);
@@ -190,7 +190,7 @@ namespace IronPython.Modules {
                     _restype = value;
                     _id = Interlocked.Increment(ref _curId);
                 } else {
-                    throw PythonOps.TypeError("restype must be a type, a callable, or None");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("restypemustbeatypeacallableornone", "restype must be a type, a callable, or None"));
                 }
             }
 

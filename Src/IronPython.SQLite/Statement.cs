@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 //
@@ -13,7 +13,7 @@ using Community.CsharpSqlite;
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
-
+using Microsoft.Scripting;
 using sqlite3_stmt = Community.CsharpSqlite.Sqlite3.Vdbe;
 
 namespace IronPython.SQLite
@@ -121,7 +121,7 @@ namespace IronPython.SQLite
             if(parameters == null)
             {
                 if(num_params_needed > 0)
-                    throw PythonSQLite.MakeProgrammingError("parameters are required but not specified.");
+                    throw PythonSQLite.MakeProgrammingError(ResourceManager.Default.GetResource("parametersarerequiredbutnotspecified", "parameters are required but not specified."));
                 else
                     return;
             }
@@ -131,7 +131,7 @@ namespace IronPython.SQLite
             else if(parameters is IList)
                 BindParameters(context, (IList)parameters, num_params_needed);
             else
-                throw PythonSQLite.MakeProgrammingError("unknown parameter type");
+                throw PythonSQLite.MakeProgrammingError(ResourceManager.Default.GetResource("unknownparametertype", "unknown parameter type"));
 
             bound = true;
         }
@@ -157,7 +157,7 @@ namespace IronPython.SQLite
         private void BindParameters(CodeContext context, IList args, int num_params_needed)
         {
             if(num_params_needed != args.Count)
-                throw PythonSQLite.MakeProgrammingError("Incorrect number of bindings supplied.");
+                throw PythonSQLite.MakeProgrammingError(ResourceManager.Default.GetResource("incorrectnumberofbindingssupplied", "Incorrect number of bindings supplied."));
 
             for(int i = 0; i < args.Count; ++i)
             {

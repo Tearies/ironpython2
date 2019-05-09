@@ -55,7 +55,7 @@ namespace IronPython.Modules {
         }
 
         public static void set_debug(object o) {
-            throw PythonOps.NotImplementedError("gc.set_debug isn't implemented");
+            throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("gcsetdebugisntimplemented", "gc.set_debug isn't implemented"));
         }
 
         public static object get_debug() {
@@ -63,12 +63,12 @@ namespace IronPython.Modules {
         }
 
         public static object[] get_objects() {
-            throw PythonOps.NotImplementedError("gc.get_objects isn't implemented");
+            throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("gcgetobjectsisntimplemented", "gc.get_objects isn't implemented"));
         }
 
         public static void set_threshold(CodeContext/*!*/ context, params object[] args) {
             if(args.Length == 0) {
-                throw PythonOps.TypeError("set_threshold() takes at least 1 argument (0 given)");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("setthresholdtakesatleast1argument0given", "set_threshold() takes at least 1 argument (0 given)"));
             }
 
             if(args.Length > 3) {
@@ -76,11 +76,11 @@ namespace IronPython.Modules {
             }
 
             if(args.Any(x => x is double)) {
-                throw PythonOps.TypeError("integer argument expected, got float");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerargumentexpectedgotfloat", "integer argument expected, got float"));
             }
 
             if(!args.All(x => x is int)) {
-                throw PythonOps.TypeError("an integer is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
             }
 
             PythonTuple current = get_threshold(context);
@@ -95,11 +95,11 @@ namespace IronPython.Modules {
         }
 
         public static object[] get_referrers(params object[] objs) {
-            throw PythonOps.NotImplementedError("gc.get_referrers isn't implemented");
+            throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("gcgetreferrersisntimplemented", "gc.get_referrers isn't implemented"));
         }
 
         public static object[] get_referents(params object[] objs) {
-            throw PythonOps.NotImplementedError("gc.get_referents isn't implemented");
+            throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("gcgetreferentsisntimplemented", "gc.get_referents isn't implemented"));
         }
 
 

@@ -231,7 +231,7 @@ namespace IronPython.Modules {
 
         private static object ParserCreateImpl(string encoding, string namespace_separator, object intern) {
             if (namespace_separator?.Length > 1)
-                throw PythonOps.ValueError("namespace_separator must be at most one character, omitted, or None");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("namespaceseparatormustbeatmostonecharacteromittedornone", "namespace_separator must be at most one character, omitted, or None"));
 
             return new xmlparser(encoding, namespace_separator, intern);
         }
@@ -584,9 +584,9 @@ namespace IronPython.Modules {
                 CheckParsingDone(context);
 
                 if (!PythonOps.TryGetBoundAttr(context, file, "read", out object _readMethod))
-                    throw PythonOps.TypeError("argument must have 'read' attribute");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("argumentmusthavereadattribute", "argument must have 'read' attribute"));
 
-                if (!(PythonOps.CallWithContext(context, _readMethod) is string data)) throw PythonOps.TypeError("read() did not return a string object");
+                if (!(PythonOps.CallWithContext(context, _readMethod) is string data)) throw PythonOps.TypeError(ResourceManager.Default.GetResource("readdidnotreturnastringobject", "read() did not return a string object"));
 
                 using (var reader = new StringReader(data)) {
                     var settings = new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse, XmlResolver = null };

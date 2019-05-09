@@ -154,7 +154,7 @@ namespace IronPython.Modules {
                 if (exp > 0.0) {
                     return 0.0;
                 }
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             } else if (double.IsPositiveInfinity(exp)) {
                 if (v > 1.0 || v < -1.0) {
                     return double.PositiveInfinity;
@@ -177,16 +177,16 @@ namespace IronPython.Modules {
 
         public static double log(double v0) {
             if (v0 <= 0.0) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
             return Check(v0, Math.Log(v0));
         }
 
         public static double log(double v0, double v1) {
             if (v0 <= 0.0 || v1 == 0.0) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             } else if (v1 == 1.0) {
-                throw PythonOps.ZeroDivisionError("float division");
+                throw PythonOps.ZeroDivisionError(ResourceManager.Default.GetResource("floatdivision", "float division"));
             } else if (v1 == Double.PositiveInfinity) {
                 return 0.0;
             }
@@ -195,7 +195,7 @@ namespace IronPython.Modules {
 
         public static double log(BigInteger value) {
             if (value.Sign <= 0) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
             return value.Log();
         }
@@ -213,9 +213,9 @@ namespace IronPython.Modules {
 
         public static double log(BigInteger value, double newBase) {
             if (newBase <= 0.0 || value <= 0) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             } else if (newBase == 1.0) {
-                throw PythonOps.ZeroDivisionError("float division");
+                throw PythonOps.ZeroDivisionError(ResourceManager.Default.GetResource("floatdivision", "float division"));
             } else if (newBase == Double.PositiveInfinity) {
                 return 0.0;
             }
@@ -235,14 +235,14 @@ namespace IronPython.Modules {
 
         public static double log10(double v0) {
             if (v0 <= 0.0) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
             return Check(v0, Math.Log10(v0));
         }
 
         public static double log10(BigInteger value) {
             if (value.Sign <= 0) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
             return value.Log10();
         }
@@ -320,7 +320,7 @@ namespace IronPython.Modules {
 
         public static double acosh(double v0) {
             if (v0 < 1.0) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             } else if (double.IsPositiveInfinity(v0)) {
                 return double.PositiveInfinity;
             }
@@ -342,7 +342,7 @@ namespace IronPython.Modules {
 
         public static double atanh(double v0) {
             if (v0 >= 1.0 || v0 <= -1.0) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             } else if (v0 == 0.0) {
                 // preserve +/-0.0
                 return v0;
@@ -355,7 +355,7 @@ namespace IronPython.Modules {
             if (value == 0) {
                 return 0;
             } else {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
         }
 
@@ -403,10 +403,10 @@ namespace IronPython.Modules {
 
         public static object factorial(double v0) {
             if (v0 % 1.0 != 0.0) {
-                throw PythonOps.ValueError("factorial() only accepts integral values");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("factorialonlyacceptsintegralvalues", "factorial() only accepts integral values"));
             }
             if (v0 < 0.0) {
-                throw PythonOps.ValueError("factorial() not defined for negative values");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("factorialnotdefinedfornegativevalues", "factorial() not defined for negative values"));
             }
 
             BigInteger val = 1;
@@ -422,7 +422,7 @@ namespace IronPython.Modules {
 
         public static object factorial(BigInteger value) {
             if (value < 0) {
-                throw PythonOps.ValueError("factorial() not defined for negative values");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("factorialnotdefinedfornegativevalues", "factorial() not defined for negative values"));
             }
 
             BigInteger val = 1;
@@ -466,7 +466,7 @@ namespace IronPython.Modules {
             if (PythonOps.TryGetBoundAttr(value, "__trunc__", out func)) {
                 return PythonOps.CallWithContext(context, func);
             } else {
-                throw PythonOps.AttributeError("__trunc__");
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("trunc", "__trunc__"));
             }
         }
 
@@ -514,7 +514,7 @@ namespace IronPython.Modules {
             double val, sign;
             if (!Converter.TryConvertToDouble(x, out val) ||
                 !Converter.TryConvertToDouble(y, out sign)) {
-                throw PythonOps.TypeError("TypeError: a float is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("typeerrorafloatisrequired", "TypeError: a float is required"));
             }
             return DoubleOps.CopySign(val, sign);
         }

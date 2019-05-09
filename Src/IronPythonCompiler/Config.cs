@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +6,8 @@ using System.Text;
 using System.Text.RegularExpressions;
 using IKVM.Reflection;
 using IKVM.Reflection.Emit;
-using System.Resources;
 using System.Reflection;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 
 namespace IronPythonCompiler {
@@ -283,17 +283,17 @@ namespace IronPythonCompiler {
             }
 
             if (Files == null || Files.Count == 0 || string.IsNullOrEmpty(MainName)) {
-                ConsoleOps.Error("No files or main defined");
+                ConsoleOps.Error(ResourceManager.Default.GetResource("nofilesormaindefined", "No files or main defined"));
                 return false;
             }
 
             if (Target != PEFileKinds.Dll && string.IsNullOrEmpty(MainName)) {
-                ConsoleOps.Error("EXEs require /main:<filename> to be specified");
+                ConsoleOps.Error(ResourceManager.Default.GetResource("exesrequiremainfilenametobespecified", "EXEs require /main:<filename> to be specified"));
                 return false;
             }
 
             if(DLLs.Count > 0 && !Standalone) {
-                ConsoleOps.Error("DLLs can only be used in standalone mode");
+                ConsoleOps.Error(ResourceManager.Default.GetResource("dllscanonlybeusedinstandalonemode", "DLLs can only be used in standalone mode"));
                 return false;
             }
 
@@ -306,7 +306,7 @@ namespace IronPythonCompiler {
             }
 
             if (!string.IsNullOrWhiteSpace(Win32Icon) && Target == PEFileKinds.Dll) {
-                ConsoleOps.Error("DLLs may not have a win32icon");
+                ConsoleOps.Error(ResourceManager.Default.GetResource("dllsmaynothaveawin32icon", "DLLs may not have a win32icon"));
                 return false;
             } else if (!string.IsNullOrWhiteSpace(Win32Icon) && !File.Exists(Win32Icon)) {
                 ConsoleOps.Error($"win32icon '{Win32Icon}' does not exist");

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -61,7 +61,7 @@ namespace IronPython.Modules {
             /// </summary>
             public partial(CodeContext/*!*/ context, object func, [ParamDictionary]IDictionary<object, object> keywords, [NotNull]params object[]/*!*/ args) {
                 if (!PythonOps.IsCallable(context, func)) {
-                    throw PythonOps.TypeError("the first argument must be callable");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("thefirstargumentmustbecallable", "the first argument must be callable"));
                 }
 
                 _function = func;
@@ -126,7 +126,7 @@ namespace IronPython.Modules {
 
             [SpecialName, PropertyMethod]
             public void Delete__dict__() {
-                throw PythonOps.TypeError("partial's dictionary may not be deleted");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("partialsdictionarymaynotbedeleted", "partial's dictionary may not be deleted"));
             }
 
             // This exists for subtypes because we don't yet automap DeleteMember onto __delattr__

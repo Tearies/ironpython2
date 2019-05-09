@@ -464,7 +464,7 @@ namespace IronPython.Runtime {
 
         public virtual object this[Slice slice] {
             get {
-                if (slice == null) throw PythonOps.TypeError("list indices must be integer or slice, not None");
+                if (slice == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("listindicesmustbeintegerorslicenotnone", "list indices must be integer or slice, not None"));
 
                 int start, stop, step;
                 slice.indices(_size, out start, out stop, out step);
@@ -490,7 +490,7 @@ namespace IronPython.Runtime {
                 }
             }
             set {
-                if (slice == null) throw PythonOps.TypeError("list indices must be integer or slice, not None");
+                if (slice == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("listindicesmustbeintegerorslicenotnone", "list indices must be integer or slice, not None"));
 
                 if (slice.step != null && (!(slice.step is int) || !slice.step.Equals(_boxedOne))) {
                     // try to assign back to self: make a copy first
@@ -625,7 +625,7 @@ namespace IronPython.Runtime {
         }
 
         public void __delitem__(Slice slice) {
-            if (slice == null) throw PythonOps.TypeError("list indices must be integers or slices");
+            if (slice == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("listindicesmustbeintegersorslices", "list indices must be integers or slices"));
 
             lock (this) {
                 int start, stop, step;
@@ -837,7 +837,7 @@ namespace IronPython.Runtime {
                 if (PythonOps.EqualRetBool(locData[i], item)) return i;
             }
 
-            throw PythonOps.ValueError("list.index(item): item not in list");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("listindexitemitemnotinlist", "list.index(item): item not in list"));
         }
 
         public int index(object item, object start) {
@@ -872,7 +872,7 @@ namespace IronPython.Runtime {
         }
 
         public object pop() {
-            if (this._size == 0) throw PythonOps.IndexError("pop off of empty list");
+            if (this._size == 0) throw PythonOps.IndexError(ResourceManager.Default.GetResource("popoffofemptylist", "pop off of empty list"));
 
             lock (this) {
                 this._size -= 1;
@@ -883,7 +883,7 @@ namespace IronPython.Runtime {
         public object pop(int index) {
             lock (this) {
                 index = PythonOps.FixIndex(index, _size);
-                if (_size == 0) throw PythonOps.IndexError("pop off of empty list");
+                if (_size == 0) throw PythonOps.IndexError(ResourceManager.Default.GetResource("popoffofemptylist", "pop off of empty list"));
 
                 object ret = _data[index];
                 _size -= 1;
@@ -971,7 +971,7 @@ namespace IronPython.Runtime {
                         for (int i = 0; i < sortSize; i++) {
                             Debug.Assert(_data.Length == 0);
                             keys[i] = PythonCalls.Call(context, key, sortData[i]);
-                            if (_data.Length != 0) throw PythonOps.ValueError("list mutated while determing keys");
+                            if (_data.Length != 0) throw PythonOps.ValueError(ResourceManager.Default.GetResource("listmutatedwhiledetermingkeys", "list mutated while determing keys"));
                         }
 
                         sortData = ListMergeSort(sortData, keys, cmp, index, count, reverse);
@@ -1107,7 +1107,7 @@ namespace IronPython.Runtime {
             int result = cmp.Compare(keys[p], keys[q]);
             bool ret = reverse ? (result >= 0) : (result <= 0);
 
-            if (_data.Length != 0) throw PythonOps.ValueError("list mutated during sort");
+            if (_data.Length != 0) throw PythonOps.ValueError(ResourceManager.Default.GetResource("listmutatedduringsort", "list mutated during sort"));
             return ret;
         }
 

@@ -68,7 +68,7 @@ namespace IronPython.Runtime.Types {
 
         public static object __new__(CodeContext/*!*/ context, [NotNull]PythonType cls, string name, PythonTuple bases, PythonDictionary/*!*/ dict) {
             if (dict == null) {
-                throw PythonOps.TypeError("dict must be a dictionary");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("dictmustbeadictionary", "dict must be a dictionary"));
             } else if (cls != TypeCache.OldClass) {
                 throw PythonOps.TypeError("{0} is not a subtype of classobj", cls.Name);
             }
@@ -345,7 +345,7 @@ namespace IronPython.Runtime.Types {
 
         private List<OldClass> ValidateBases(object value) {
             PythonTuple t = value as PythonTuple;
-            if (t == null) throw PythonOps.TypeError("__bases__ must be a tuple object");
+            if (t == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("basesmustbeatupleobject", "__bases__ must be a tuple object"));
 
             List<OldClass> res = new List<OldClass>(t.__len__());
             foreach (object o in t) {
@@ -353,7 +353,7 @@ namespace IronPython.Runtime.Types {
                 if (oc == null) throw PythonOps.TypeError("__bases__ items must be classes (got {0})", PythonTypeOps.GetName(o));
 
                 if (oc.IsSubclassOf(this)) {
-                    throw PythonOps.TypeError("a __bases__ item causes an inheritance cycle");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("abasesitemcausesaninheritancecycle", "a __bases__ item causes an inheritance cycle"));
                 }
 
                 res.Add(oc);
@@ -526,7 +526,7 @@ namespace IronPython.Runtime.Types {
             // This can happen when a class does not define __init__ and therefore does not take any arguments.
             // Beware that calls like F(*(), **{}) have 2 arguments but they're empty and so it should still
             // match against def F(). 
-            throw PythonOps.TypeError("this constructor takes no arguments");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("thisconstructortakesnoarguments", "this constructor takes no arguments"));
         }
 
         internal void SetBases(object value) {
@@ -535,13 +535,13 @@ namespace IronPython.Runtime.Types {
 
         internal void SetName(object value) {
             string n = value as string;
-            if (n == null) throw PythonOps.TypeError("TypeError: __name__ must be a string object");
+            if (n == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("typeerrornamemustbeastringobject", "TypeError: __name__ must be a string object"));
             _name = n;
         }
 
         internal void SetDictionary(object value) {
             PythonDictionary d = value as PythonDictionary;
-            if (d == null) throw PythonOps.TypeError("__dict__ must be set to dictionary");
+            if (d == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("dictmustbesettodictionary", "__dict__ must be set to dictionary"));
             _dict = d;
         }
 

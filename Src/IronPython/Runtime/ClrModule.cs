@@ -323,9 +323,9 @@ the assembly object.")]
 
         public static void ImportExtensions(CodeContext/*!*/ context, PythonType type) {
             if (type == null) {
-                throw PythonOps.TypeError("type must not be None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("typemustnotbenone", "type must not be None"));
             } else if (!type.IsSystemType) {
-                throw PythonOps.ValueError("type must be .NET type");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("typemustbenettype", "type must be .NET type"));
             }
 
             lock (context.ModuleContext) {
@@ -494,7 +494,7 @@ the assembly object.")]
                 IEnumerator ie = PythonOps.GetEnumerator(other);
                 while (ie.MoveNext()) {
                     Assembly cur = ie.Current as Assembly;
-                    if (cur == null) throw PythonOps.TypeError("non-assembly added to references list");
+                    if (cur == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("nonassemblyaddedtoreferenceslist", "non-assembly added to references list"));
 
                     base.Add(cur);
                 }
@@ -537,7 +537,7 @@ import Namespace.")]
         }
 
         private static void AddReferenceToFileAndPath(CodeContext/*!*/ context, string file) {
-            if (file == null) throw PythonOps.TypeError("Expected string, got NoneType");
+            if (file == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "Expected string, got NoneType"));
 
             // update our path w/ the path of this file...
             string path = System.IO.Path.GetDirectoryName(Path.GetFullPath(file));
@@ -545,7 +545,7 @@ import Namespace.")]
 
             PythonContext pc = context.LanguageContext;
             if (!pc.TryGetSystemPath(out list)) {
-                throw PythonOps.TypeError("cannot update path, it is not a list");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotupdatepathitisnotalist", "cannot update path, it is not a list"));
             }
 
             list.append(path);
@@ -962,7 +962,7 @@ import Namespace.")]
         /// </summary>
         public static void CompileSubclassTypes(string/*!*/ assemblyName, params object[] newTypes) {
             if (assemblyName == null) {
-                throw PythonOps.TypeError("CompileTypes expected str for assemblyName, got NoneType");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("compiletypesexpectedstrforassemblynamegotnonetype", "CompileTypes expected str for assemblyName, got NoneType"));
             }
 
             var typesToCreate = new List<PythonTuple>();

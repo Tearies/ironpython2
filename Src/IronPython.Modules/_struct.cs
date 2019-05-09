@@ -1106,7 +1106,7 @@ namespace IronPython.Modules {
 
             if (context.LanguageContext.FloatFormat == FloatFormat.Unknown) {
                 if (Single.IsNaN(res) || Single.IsInfinity(res)) {
-                    throw PythonOps.ValueError("can't unpack IEEE 754 special value on non-IEEE platform");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("cantunpackieee754specialvalueonnonieeeplatform", "can't unpack IEEE 754 special value on non-IEEE platform"));
                 }
             }
 
@@ -1197,7 +1197,7 @@ namespace IronPython.Modules {
             double res = BitConverter.ToDouble(bytes, 0);
             if (context.LanguageContext.DoubleFormat == FloatFormat.Unknown) {
                 if (Double.IsNaN(res) || Double.IsInfinity(res)) {
-                    throw PythonOps.ValueError("can't unpack IEEE 754 special value on non-IEEE platform");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("cantunpackieee754specialvalueonnonieeeplatform", "can't unpack IEEE 754 special value on non-IEEE platform"));
                 }
             }
 

@@ -45,7 +45,7 @@ namespace IronPython.Modules {
                 : base(context, name, bases, members) {
 
                 if (!members.TryGetValue("_flags_", out object flags) || !(flags is int)) {
-                    throw PythonOps.TypeError("class must define _flags_ which must be an integer");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("classmustdefineflagswhichmustbeaninteger", "class must define _flags_ which must be an integer"));
                 }
                 _flags = (int)flags;
 

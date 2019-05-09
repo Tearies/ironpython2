@@ -15,6 +15,7 @@ using IronPython.Runtime;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
 using System.Collections.Generic;
+using Microsoft.Scripting;
 
 namespace IronPython.Modules {
     /// <summary>
@@ -31,7 +32,7 @@ namespace IronPython.Modules {
                 _memHolder = new MemoryHolder(nativeType.Size);
 
                 if (args.Length > ((ArrayType)nativeType).Length) {
-                    throw PythonOps.IndexError("too many arguments");
+                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("toomanyarguments", "too many arguments"));
                 }
                 nativeType.SetValue(_memHolder, 0, args);
             }
@@ -108,13 +109,13 @@ namespace IronPython.Modules {
                     IEnumerator ie = PythonOps.GetEnumerator(value);
                     for (int i = 0, index = start; i < n; i++, index += step) {
                         if (!ie.MoveNext()) {
-                            throw PythonOps.ValueError("sequence not long enough");
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("sequencenotlongenough", "sequence not long enough"));
                         }
                         this[index] = ie.Current;
                     }
 
                     if (ie.MoveNext()) {
-                        throw PythonOps.ValueError("not all values consumed while slicing");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("notallvaluesconsumedwhileslicing", "not all values consumed while slicing"));
                     }
                 }
             }

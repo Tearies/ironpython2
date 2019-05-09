@@ -50,12 +50,12 @@ namespace IronPython.Modules {
         }
 
         public static PythonTuple find_module(CodeContext/*!*/ context, string/*!*/ name) {
-            if (name == null) throw PythonOps.TypeError("find_module() argument 1 must be string, not None");
+            if (name == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("findmoduleargument1mustbestringnotnone", "find_module() argument 1 must be string, not None"));
             return FindBuiltinOrSysPath(context, name);
         }
 
         public static PythonTuple find_module(CodeContext/*!*/ context, string/*!*/ name, List path) {
-            if (name == null) throw PythonOps.TypeError("find_module() argument 1 must be string, not None");
+            if (name == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("findmoduleargument1mustbestringnotnone", "find_module() argument 1 must be string, not None"));
 
             if (path == null) {
                 return FindBuiltinOrSysPath(context, name);
@@ -66,7 +66,7 @@ namespace IronPython.Modules {
 
         public static object load_module(CodeContext/*!*/ context, string name, PythonFile file, string filename, PythonTuple/*!*/ description) {
             if (description == null) {
-                throw PythonOps.TypeError("load_module() argument 4 must be 3-item sequence, not None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadmoduleargument4mustbe3itemsequencenotnone", "load_module() argument 4 must be 3-item sequence, not None"));
             } else if (description.__len__() != 3) {
                 throw PythonOps.TypeError("load_module() argument 4 must be sequence of length 3, not {0}", description.__len__());
             }
@@ -95,7 +95,7 @@ namespace IronPython.Modules {
 
         [Documentation("new_module(name) -> module\nCreates a new module without adding it to sys.modules.")]
         public static PythonModule/*!*/ new_module(CodeContext/*!*/ context, string/*!*/ name) {
-            if (name == null) throw PythonOps.TypeError("new_module() argument 1 must be string, not None");
+            if (name == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("newmoduleargument1mustbestringnotnone", "new_module() argument 1 must be string, not None"));
 
             PythonModule res = new PythonModule();
             res.__dict__["__name__"] = name;
@@ -119,7 +119,7 @@ namespace IronPython.Modules {
             lock (_lockCountKey) {
                 long lockCount = GetLockCount(context);
                 if (lockCount == 0) {
-                    throw PythonOps.RuntimeError("not holding the import lock");
+                    throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("notholdingtheimportlock", "not holding the import lock"));
                 }
                 SetLockCount(context, lockCount - 1);
             }            
@@ -137,7 +137,7 @@ namespace IronPython.Modules {
         public const int IMP_HOOK = ImporterHook;
 
         public static object init_builtin(CodeContext/*!*/ context, string/*!*/ name) {
-            if (name == null) throw PythonOps.TypeError("init_builtin() argument 1 must be string, not None");
+            if (name == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("initbuiltinargument1mustbestringnotnone", "init_builtin() argument 1 must be string, not None"));
             return LoadBuiltinModule(context, name);
         }
 
@@ -150,7 +150,7 @@ namespace IronPython.Modules {
         }
 
         public static int is_builtin(CodeContext/*!*/ context, string/*!*/ name) {
-            if (name == null) throw PythonOps.TypeError("is_builtin() argument 1 must be string, not None");
+            if (name == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("isbuiltinargument1mustbestringnotnone", "is_builtin() argument 1 must be string, not None"));
             Type ty;
             if (context.LanguageContext.BuiltinModules.TryGetValue(name, out ty)) {
                 if (ty.Assembly == typeof(PythonContext).Assembly) {
@@ -187,8 +187,8 @@ namespace IronPython.Modules {
         }
         
         public static object load_package(CodeContext/*!*/ context, string/*!*/ name, string/*!*/ pathname) {
-            if (name == null) throw PythonOps.TypeError("load_package() argument 1 must be string, not None");
-            if (pathname == null) throw PythonOps.TypeError("load_package() argument 2 must be string, not None");
+            if (name == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadpackageargument1mustbestringnotnone", "load_package() argument 1 must be string, not None"));
+            if (pathname == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadpackageargument2mustbestringnotnone", "load_package() argument 2 must be string, not None"));
 
             return (Importer.LoadPackageFromSource(context, name, pathname) ??
                     CreateEmptyPackage(context, name, pathname));
@@ -207,8 +207,8 @@ namespace IronPython.Modules {
         }
 
         public static object load_source(CodeContext/*!*/ context, string/*!*/ name, string/*!*/ pathname) {
-            if (name == null) throw PythonOps.TypeError("load_source() argument 1 must be string, not None");
-            if (pathname == null) throw PythonOps.TypeError("load_source() argument 2 must be string, not None");
+            if (name == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadsourceargument1mustbestringnotnone", "load_source() argument 1 must be string, not None"));
+            if (pathname == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadsourceargument2mustbestringnotnone", "load_source() argument 2 must be string, not None"));
             
             // TODO: is this supposed to open PythonFile with Python-specific behavior?
             // we may need to insert additional layer to SourceUnit content provider if so
@@ -222,9 +222,9 @@ namespace IronPython.Modules {
         }
 
         public static object load_source(CodeContext/*!*/ context, string/*!*/ name, string/*!*/ pathname, PythonFile/*!*/ file) {
-            if (name == null) throw PythonOps.TypeError("load_source() argument 1 must be string, not None");
-            if (pathname == null) throw PythonOps.TypeError("load_source() argument 2 must be string, not None");
-            if (file == null) throw PythonOps.TypeError("load_source() argument 3 must be file, not None");
+            if (name == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadsourceargument1mustbestringnotnone", "load_source() argument 1 must be string, not None"));
+            if (pathname == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadsourceargument2mustbestringnotnone", "load_source() argument 2 must be string, not None"));
+            if (file == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadsourceargument3mustbefilenotnone", "load_source() argument 3 must be file, not None"));
             
             return LoadPythonSource(context.LanguageContext, name, file, pathname);
         }
@@ -238,7 +238,7 @@ namespace IronPython.Modules {
         private static PythonTuple FindBuiltinOrSysPath(CodeContext/*!*/ context, string/*!*/ name) {
             List sysPath;
             if (!context.LanguageContext.TryGetSystemPath(out sysPath)) {
-                throw PythonOps.ImportError("sys.path must be a list of directory names");
+                throw PythonOps.ImportError(ResourceManager.Default.GetResource("syspathmustbealistofdirectorynames", "sys.path must be a list of directory names"));
             }
             return FindModuleBuiltinOrPath(context, name, sysPath);
         }
@@ -247,7 +247,7 @@ namespace IronPython.Modules {
             Debug.Assert(path != null);
 
             if (name == null) {
-                throw PythonOps.TypeError("find_module() argument 1 must be string, not None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("findmoduleargument1mustbestringnotnone", "find_module() argument 1 must be string, not None"));
             }
 
             PlatformAdaptationLayer pal = context.LanguageContext.DomainManager.Platform;

@@ -17,6 +17,7 @@ using Microsoft.Scripting.Runtime;
 using IronPython.Runtime.Binding;
 using IronPython.Runtime.Operations;
 using System.Numerics;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime {
     [PythonType("buffer"), DontMapGetMemberNamesToDir]
@@ -29,17 +30,17 @@ namespace IronPython.Runtime {
         public PythonBuffer(CodeContext/*!*/ context, object @object, int offset=0, int size=-1) {
             PythonOps.Warn3k(context, "buffer() not supported in 3.x");
             if (!InitBufferObject(@object, offset, size)) {
-                throw PythonOps.TypeError("expected buffer object");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedbufferobject", "expected buffer object"));
             }
             _context = context;
         }
 
         private bool InitBufferObject(object o, int offset, int size) {
             if (offset < 0) {
-                throw PythonOps.ValueError("offset must be zero or positive");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("offsetmustbezeroorpositive", "offset must be zero or positive"));
             } else if (size < -1) {
                 //  -1 is the way to ask for the default size so we allow -1 as a size
-                throw PythonOps.ValueError("size must be zero or positive");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("sizemustbezeroorpositive", "size must be zero or positive"));
             }
 
             //  we currently support only buffers, strings and arrays
@@ -133,7 +134,7 @@ namespace IronPython.Runtime {
         }
 
         private static Exception ReadOnlyError() {
-            return PythonOps.TypeError("buffer is read-only");
+            return PythonOps.TypeError(ResourceManager.Default.GetResource("bufferisreadonly", "buffer is read-only"));
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1822:MarkMembersAsStatic")]

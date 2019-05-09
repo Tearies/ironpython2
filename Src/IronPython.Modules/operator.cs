@@ -24,7 +24,7 @@ namespace IronPython.Modules {
         public class attrgetter {
             private readonly object[] _names;
             public attrgetter(params object[] attrs) {
-                if (attrs.Length == 0) throw PythonOps.TypeError("attrgetter expected 1 arguments, got 0");
+                if (attrs.Length == 0) throw PythonOps.TypeError(ResourceManager.Default.GetResource("attrgetterexpected1argumentsgot0", "attrgetter expected 1 arguments, got 0"));
 
                 this._names = attrs;
             }
@@ -45,7 +45,7 @@ namespace IronPython.Modules {
             private static object GetOneAttr(CodeContext context, object param, object val) {
                 string s = val as string;
                 if (s == null) {
-                    throw PythonOps.TypeError("attribute name must be string");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("attributenamemustbestring", "attribute name must be string"));
                 }
                 int dotPos = s.IndexOf('.');
                 if (dotPos >= 0) {
@@ -61,7 +61,7 @@ namespace IronPython.Modules {
 
             public itemgetter([NotNull]params object[] items) {
                 if (items.Length == 0) {
-                    throw PythonOps.TypeError("itemgetter needs at least one argument");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("itemgetterneedsatleastoneargument", "itemgetter needs at least one argument"));
                 }
                 _items = items;
             }
@@ -397,19 +397,19 @@ namespace IronPython.Modules {
                 }
                 index++;
             }
-            throw PythonOps.ValueError("object not in sequence");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("objectnotinsequence", "object not in sequence"));
         }
 
         public static object repeat(CodeContext context, object a, object b) {
             try {
                 PythonOps.GetEnumerator(a);
             } catch {
-                throw PythonOps.TypeError("object can't be repeated");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("objectcantberepeated", "object can't be repeated"));
             }
             try {
                 Int32Ops.__new__(context, b);
             } catch {
-                throw PythonOps.TypeError("integer required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerrequired", "integer required"));
             }
 
             return context.LanguageContext.Operation(PythonOperationKind.Multiply, a, b);
@@ -478,7 +478,7 @@ namespace IronPython.Modules {
         private static int SliceToInt(object o) {
             int i;
             if (Converter.TryConvertToInt32(o, out i)) return i;
-            throw PythonOps.TypeError("integer expected");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerexpected", "integer expected"));
         }
 
         private static object MakeSlice(object a, object b) {
@@ -551,7 +551,7 @@ namespace IronPython.Modules {
             try {
                 Int32Ops.__new__(DefaultContext.Default, b);
             } catch {
-                throw PythonOps.TypeError("integer required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerrequired", "integer required"));
             }
 
             return context.LanguageContext.Operation(PythonOperationKind.InPlaceMultiply, a, b);
@@ -644,7 +644,7 @@ types and lengths of a and b--but not their values.")]
                 IBufferProtocol aBuf = a as IBufferProtocol;
                 IBufferProtocol bBuf = b as IBufferProtocol;
                 if(aBuf.NumberDimensions > 1 || bBuf.NumberDimensions > 1) {
-                    throw PythonOps.BufferError("Buffer must be single dimension");
+                    throw PythonOps.BufferError(ResourceManager.Default.GetResource("buffermustbesingledimension", "Buffer must be single dimension"));
                 }
 
                 return CompareBytes(aBuf.ToBytes(0, null), bBuf.ToBytes(0, null));

@@ -177,7 +177,7 @@ namespace IronPython.Runtime {
                 if (pyGlobals._storage.TryGetPackage(out attribute)) {
                     package = attribute as string;
                     if (package == null && attribute != null) {
-                        throw PythonOps.ValueError("__package__ set to non-string");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("packagesettononstring", "__package__ set to non-string"));
                     }
                 } else {
                     package = null;
@@ -366,7 +366,7 @@ namespace IronPython.Runtime {
                 if (lastDot == -1) {
                     // name doesn't include dot, only absolute import possible
                     if (level > 0) {
-                        throw PythonOps.ValueError("Attempted relative import in non-package");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("attemptedrelativeimportinnonpackage", "Attempted relative import in non-package"));
                     }
 
                     return false;
@@ -463,7 +463,7 @@ namespace IronPython.Runtime {
                 sourceUnit = pc.CreateSourceUnit(new PythonFileStreamContentProvider(file), fileName, file.Encoding, SourceCodeKind.File);
             } else {
                 if (!pc.DomainManager.Platform.FileExists(fileName)) {
-                    throw PythonOps.SystemError("module source file not found");
+                    throw PythonOps.SystemError(ResourceManager.Default.GetResource("modulesourcefilenotfound", "module source file not found"));
                 }
 
                 sourceUnit = pc.CreateFileUnit(fileName, pc.DefaultEncoding, SourceCodeKind.File);
@@ -683,7 +683,7 @@ namespace IronPython.Runtime {
                 return import;
             }
 
-            throw PythonOps.ImportError("cannot find __import__");
+            throw PythonOps.ImportError(ResourceManager.Default.GetResource("cannotfindimport", "cannot find __import__"));
         }
 
         internal static object ImportBuiltin(CodeContext/*!*/ context, string/*!*/ name) {

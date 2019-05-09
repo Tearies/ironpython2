@@ -8,6 +8,7 @@ using System.Numerics;
 
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Utils;
 
 [assembly: PythonModule("_random", typeof(IronPython.Modules.PythonRandom))]
@@ -27,7 +28,7 @@ namespace IronPython.Modules {
 
             public object getrandbits(int bits) {
                 if (bits <= 0) {
-                    throw PythonOps.ValueError("number of bits must be greater than zero");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("numberofbitsmustbegreaterthanzero", "number of bits must be greater than zero"));
                 }
 
                 lock (this) {
@@ -96,7 +97,7 @@ namespace IronPython.Modules {
             }
 
             public void setstate(PythonTuple state) {
-                if (state.Count != 58) throw PythonOps.ValueError("state vector is the wrong size");
+                if (state.Count != 58) throw PythonOps.ValueError(ResourceManager.Default.GetResource("statevectoristhewrongsize", "state vector is the wrong size"));
                 var stateArray = state._data.Cast<int>().ToArray();
                 lock (this) {
                     _rnd.SetState(stateArray);

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 using System.Linq.Expressions;
@@ -52,7 +52,7 @@ namespace IronPython.Modules {
             public FileIO(CodeContext/*!*/ context, int fd, [DefaultParameterValue("r")]string mode, [DefaultParameterValue(true)]bool closefd)
                 : base(context) {
                 if (fd < 0) {
-                    throw PythonOps.ValueError("fd must be >= 0");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("fdmustbe0", "fd must be >= 0"));
                 }
 
                 PythonContext pc = context.LanguageContext;
@@ -95,7 +95,7 @@ namespace IronPython.Modules {
             public FileIO(CodeContext/*!*/ context, string name, [DefaultParameterValue("r")]string mode, [DefaultParameterValue(true)]bool closefd)
                 : base(context) {
                 if (!closefd) {
-                    throw PythonOps.ValueError("Cannot use closefd=False with file name");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotuseclosefdfalsewithfilename", "Cannot use closefd=False with file name"));
                 }
                 _closefd = true;
                 this.name = name;
@@ -170,14 +170,14 @@ namespace IronPython.Modules {
                         case 'w':
                         case 'a':
                             if (foundMode) {
-                                throw PythonOps.ValueError("Must have exactly one of read/write/append mode");
+                                throw PythonOps.ValueError(ResourceManager.Default.GetResource("musthaveexactlyoneofreadwriteappendmode", "Must have exactly one of read/write/append mode"));
                             } else {
                                 foundMode = true;
                                 continue;
                             }
                         case '+':
                             if (foundPlus) {
-                                throw PythonOps.ValueError("Must have exactly one of read/write/append mode");
+                                throw PythonOps.ValueError(ResourceManager.Default.GetResource("musthaveexactlyoneofreadwriteappendmode", "Must have exactly one of read/write/append mode"));
                             } else {
                                 foundPlus = true;
                                 continue;
@@ -190,7 +190,7 @@ namespace IronPython.Modules {
                     }
                 }
 
-                throw PythonOps.ValueError("Must have exactly one of read/write/append mode");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("musthaveexactlyoneofreadwriteappendmode", "Must have exactly one of read/write/append mode"));
             }
 
             #endregion
@@ -332,7 +332,7 @@ namespace IronPython.Modules {
             public BigInteger readinto([NotNull]PythonBuffer buffer) {
                 EnsureReadable();
 
-                throw PythonOps.TypeError("buffer is read-only");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("bufferisreadonly", "buffer is read-only"));
             }
 
             public override BigInteger readinto(CodeContext/*!*/ context, object buf) {
@@ -370,7 +370,7 @@ namespace IronPython.Modules {
             public BigInteger seek(double offset, [Optional]object whence) {
                 _checkClosed();
 
-                throw PythonOps.TypeError("an integer is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
             }
 
             [Documentation("seekable() -> bool.  True if file supports random-access.")]
@@ -400,7 +400,7 @@ namespace IronPython.Modules {
             public BigInteger truncate(double size) {
                 EnsureWritable();
 
-                throw PythonOps.TypeError("an integer is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
             }
 
             [Documentation("truncate([size: int]) -> None.  Truncate the file to at most size bytes.\n\n"
@@ -418,7 +418,7 @@ namespace IronPython.Modules {
                 }
 
                 EnsureWritable();
-                throw PythonOps.TypeError("an integer is required");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequired", "an integer is required"));
             }
 
             [Documentation("writable() -> bool.  True if file was opened in a write mode.")]
@@ -484,7 +484,7 @@ namespace IronPython.Modules {
 
                 EnsureWritable();
 
-                throw PythonOps.TypeError("expected a readable buffer object");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedareadablebufferobject", "expected a readable buffer object"));
             }
 
             #endregion

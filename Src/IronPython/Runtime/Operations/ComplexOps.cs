@@ -37,11 +37,11 @@ namespace IronPython.Runtime.Operations {
             Complex real2, imag2;
             real2 = imag2 = new Complex();
 
-            if (real == null && imag == null && cls == TypeCache.Complex) throw PythonOps.TypeError("argument must be a string or a number");
+            if (real == null && imag == null && cls == TypeCache.Complex) throw PythonOps.TypeError(ResourceManager.Default.GetResource("argumentmustbeastringoranumber", "argument must be a string or a number"));
 
             if (imag != null) {
-                if (real is string) throw PythonOps.TypeError("complex() can't take second arg if first is a string");
-                if (imag is string) throw PythonOps.TypeError("complex() second arg can't be a string");
+                if (real is string) throw PythonOps.TypeError(ResourceManager.Default.GetResource("complexcanttakesecondargiffirstisastring", "complex() can't take second arg if first is a string"));
+                if (imag is string) throw PythonOps.TypeError(ResourceManager.Default.GetResource("complexsecondargcantbeastring", "complex() second arg can't be a string"));
                 imag2 = Converter.ConvertToComplex(imag);
             }
 
@@ -130,7 +130,7 @@ namespace IronPython.Runtime.Operations {
         public static Complex op_Power(Complex x, Complex y) {
             if (x.IsZero()) {
                 if (y.Real < 0.0 || y.Imaginary() != 0.0) {
-                    throw PythonOps.ZeroDivisionError("0.0 to a negative or complex power");
+                    throw PythonOps.ZeroDivisionError(ResourceManager.Default.GetResource("00toanegativeorcomplexpower", "0.0 to a negative or complex power"));
                 }
                 return y.IsZero() ? Complex.One : Complex.Zero;
             }
@@ -254,15 +254,15 @@ namespace IronPython.Runtime.Operations {
 
         // report the same errors as CPython for these invalid conversions
         public static double __float__(Complex self) {
-            throw PythonOps.TypeError("can't convert complex to float; use abs(z)");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantconvertcomplextofloatuseabsz", "can't convert complex to float; use abs(z)"));
         }
 
         public static int __int__(Complex self) {
-            throw PythonOps.TypeError(" can't convert complex to int; use int(abs(z))");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantconvertcomplextointuseintabsz", " can't convert complex to int; use int(abs(z))"));
         }
 
         public static BigInteger __long__(Complex self) {
-            throw PythonOps.TypeError("can't convert complex to long; use long(abs(z))");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantconvertcomplextolonguselongabsz", "can't convert complex to long; use long(abs(z))"));
         }
 
         private static string FormatComplexValue(CodeContext/*!*/ context, double x) {
@@ -276,7 +276,7 @@ namespace IronPython.Runtime.Operations {
             double res = x.Abs();
 
             if (double.IsInfinity(res) && !double.IsInfinity(x.Real) && !double.IsInfinity(x.Imaginary())) {
-                throw PythonOps.OverflowError("absolute value too large");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("absolutevaluetoolarge", "absolute value too large"));
             }
 
             return res;
@@ -286,19 +286,19 @@ namespace IronPython.Runtime.Operations {
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "y"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "x"), SpecialName]
         public static bool LessThan(Complex x, Complex y) {
-            throw PythonOps.TypeError("complex is not an ordered type");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("complexisnotanorderedtype", "complex is not an ordered type"));
         }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "y"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "x"), SpecialName]
         public static bool LessThanOrEqual(Complex x, Complex y) {
-            throw PythonOps.TypeError("complex is not an ordered type");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("complexisnotanorderedtype", "complex is not an ordered type"));
         }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "x"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "y"), SpecialName]
         public static bool GreaterThan(Complex x, Complex y) {
-            throw PythonOps.TypeError("complex is not an ordered type");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("complexisnotanorderedtype", "complex is not an ordered type"));
         }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "y"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "x"), SpecialName]
         public static bool GreaterThanOrEqual(Complex x, Complex y) {
-            throw PythonOps.TypeError("complex is not an ordered type");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("complexisnotanorderedtype", "complex is not an ordered type"));
         }
 
     }

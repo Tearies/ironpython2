@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -83,11 +83,11 @@ For flag values, ored together, see module documentation.")]
         public static void PlaySound(CodeContext/*!*/ context, [NotNull] string sound, int flags) {
             if (((flags & SND_ASYNC) == SND_ASYNC)
                 && ((flags & SND_MEMORY) == SND_MEMORY)) {
-                throw PythonOps.RuntimeError("Cannot play asynchronously from memory");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("cannotplayasynchronouslyfrommemory", "Cannot play asynchronously from memory"));
             }
 
             if (!PlaySound(sound, IntPtr.Zero, flags)) {
-                throw PythonOps.RuntimeError("Failed to play sound");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("failedtoplaysound", "Failed to play sound"));
             }
         }
 
@@ -98,11 +98,11 @@ For flag values, ored together, see module documentation.")]
         public static void PlaySound(CodeContext/*!*/ context, [NotNull] IList<byte> sound, int flags) {
             if (((flags & SND_ASYNC) == SND_ASYNC)
                 && ((flags & SND_MEMORY) == SND_MEMORY)) {
-                throw PythonOps.RuntimeError("Cannot play asynchronously from memory");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("cannotplayasynchronouslyfrommemory", "Cannot play asynchronously from memory"));
             }
 
             if (!PlaySound(sound.ToArray(), IntPtr.Zero, flags)) {
-                throw PythonOps.RuntimeError("Failed to play sound");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("failedtoplaysound", "Failed to play sound"));
             }
         }
 
@@ -114,7 +114,7 @@ For flag values, ored together, see module documentation.")]
             bool ok = false;
             if (((flags & SND_ASYNC) == SND_ASYNC)
                 && ((flags & SND_MEMORY) == SND_MEMORY)) {
-                throw PythonOps.RuntimeError("Cannot play asynchronously from memory");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("cannotplayasynchronouslyfrommemory", "Cannot play asynchronously from memory"));
             }
 
             if (sound == null) {
@@ -124,11 +124,11 @@ For flag values, ored together, see module documentation.")]
             } else if (sound is IList<byte>) {
                 ok = PlaySound(((IList<byte>)sound).ToArray(), IntPtr.Zero, flags);
             } else {
-                throw PythonOps.RuntimeError("Failed to play sound");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("failedtoplaysound", "Failed to play sound"));
             }            
 
             if (!ok) {
-                throw PythonOps.RuntimeError("Failed to play sound");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("failedtoplaysound", "Failed to play sound"));
             }
         }
 
@@ -140,12 +140,12 @@ The duration argument specifies the number of milliseconds.
 ")]
         public static void Beep(CodeContext/*!*/ context, int freq, int dur) {
             if (freq < 37 || freq > 32767) {
-                throw PythonOps.ValueError("frequency must be in 37 thru 32767");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("frequencymustbein37thru32767", "frequency must be in 37 thru 32767"));
             }
 
             bool ok = Beep(freq, dur);
             if (!ok) {
-                throw PythonOps.RuntimeError("Failed to beep");
+                throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("failedtobeep", "Failed to beep"));
             }
         }
 

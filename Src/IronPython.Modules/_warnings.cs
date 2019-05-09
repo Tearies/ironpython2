@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -60,7 +60,7 @@ namespace IronPython.Modules {
                 category = PythonExceptions.UserWarning;
             }
             if (!category.IsSubclassOf(PythonExceptions.Warning)) {
-                throw PythonOps.ValueError("category is not a subclass of Warning");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("categoryisnotasubclassofwarning", "category is not a subclass of Warning"));
             }
 
             TraceBackFrame caller = null;
@@ -144,7 +144,7 @@ namespace IronPython.Modules {
             if (warnings != null) {
                 filters = PythonOps.GetBoundAttr(context, warnings, "filters") as List;
                 if(filters == null) {
-                    throw PythonOps.ValueError("_warnings.filters must be a list");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("warningsfiltersmustbealist", "_warnings.filters must be a list"));
                 }
             }
 

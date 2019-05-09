@@ -925,7 +925,7 @@ namespace IronPython.Runtime.Operations {
                 return new PythonTuple(bases, TypeCache.Object);
             }
 
-            throw PythonOps.TypeError("a new-style class can't have only classic bases");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("anewstyleclasscanthaveonlyclassicbases", "a new-style class can't have only classic bases"));
         }
 
         internal static Type GetFinalSystemType(Type type) {

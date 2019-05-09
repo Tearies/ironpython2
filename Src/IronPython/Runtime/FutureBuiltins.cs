@@ -66,7 +66,7 @@ namespace IronPython.Runtime {
 
                 return hex(context, value);
             }
-            throw PythonOps.TypeError("hex() argument cannot be interpreted as an index");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("hexargumentcannotbeinterpretedasanindex", "hex() argument cannot be interpreted as an index"));
         }
         
         public static string oct(CodeContext context, object number) {
@@ -94,7 +94,7 @@ namespace IronPython.Runtime {
 
                 return oct(context, value);
             }
-            throw PythonOps.TypeError("oct() argument cannot be interpreted as an index");
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("octargumentcannotbeinterpretedasanindex", "oct() argument cannot be interpreted as an index"));
         }
     }
 }

@@ -464,7 +464,7 @@ namespace IronPython.Runtime {
         }
 
         private static void AlreadyExecuting() {
-            throw PythonOps.ValueError("generator already executing");
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("generatoralreadyexecuting", "generator already executing"));
         }
 
         /// <summary>

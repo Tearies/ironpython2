@@ -399,7 +399,7 @@ namespace IronPython.Runtime {
             if (bi.AsInt32(out res)) return res;
 
             if (throwOverflowError) {
-                throw PythonOps.OverflowError("can't fit long into index");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("cantfitlongintoindex", "can't fit long into index"));
             }
 
             return bi == BigInteger.Zero ? 0 : bi > 0 ? Int32.MaxValue : Int32.MinValue;

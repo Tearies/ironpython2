@@ -12,6 +12,7 @@ using System.Linq;
 using Ionic.BZip2;
 using IronPython.Runtime;
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 
 namespace IronPython.Modules.Bz2 {
@@ -50,7 +51,7 @@ unused_data attribute.
 ")]
             public Bytes decompress([BytesConversion]IList<byte> data) {
                 if (_finished)
-                    throw PythonOps.EofError("End of stream was already found");
+                    throw PythonOps.EofError(ResourceManager.Default.GetResource("endofstreamwasalreadyfound", "End of stream was already found"));
 
                 var bytes = data.ToArrayNoCopy();
 

@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -28,7 +28,7 @@ namespace IronPython.Modules {
 
             // can't take sin or cos of +/-Infinity
             if (double.IsInfinity(num.Real)) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
 
             double real, imag;
@@ -49,7 +49,7 @@ namespace IronPython.Modules {
 
             // can't take sin or cos of +/-Infinity
             if (double.IsInfinity(num.Real)) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
 
             double real, imag;
@@ -86,7 +86,7 @@ namespace IronPython.Modules {
 
             // can't take sin or cos of +/-Infinity
             if (double.IsInfinity(num.Imaginary())) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
 
             double real, imag;
@@ -107,7 +107,7 @@ namespace IronPython.Modules {
 
             // can't take sin or cos of +/-Infinity
             if (double.IsInfinity(num.Imaginary())) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
 
             double real, imag;
@@ -199,7 +199,7 @@ namespace IronPython.Modules {
             Complex num = GetComplexNum(x);
 
             if (num.IsZero()) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
 
             double r, theta;
@@ -229,7 +229,7 @@ namespace IronPython.Modules {
 
                 double expt = Math.Exp(num.Real);
                 if (double.IsInfinity(expt)) {
-                    throw PythonOps.OverflowError("math range error");
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("mathrangeerror", "math range error"));
                 }
 
                 return new Complex(expt, 0.0);
@@ -252,7 +252,7 @@ namespace IronPython.Modules {
 
             // can't take sin or cos of +/-infinity
             if (double.IsInfinity(num.Imaginary())) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
             
             // use c*(e^x) = (sign(c))*e^(x+log(abs(c))) for fewer overflows in corner cases
@@ -279,7 +279,7 @@ namespace IronPython.Modules {
 
             // check for overflow
             if ((double.IsInfinity(real) || double.IsInfinity(imag)) && !double.IsInfinity(num.Real)) {
-                throw PythonOps.OverflowError("math range error");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("mathrangeerror", "math range error"));
             }
 
             return new Complex(real, imag);
@@ -316,7 +316,7 @@ namespace IronPython.Modules {
 
             // check for overflow
             if (double.IsInfinity(res[0]) && !IsInfinity(num)) {
-                throw PythonOps.OverflowError("math range error");
+                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("mathrangeerror", "math range error"));
             }
 
             return new PythonTuple(res);
@@ -345,7 +345,7 @@ namespace IronPython.Modules {
 
             // can't take sin or cos of +/-Infinity
             if (double.IsInfinity(theta)) {
-                throw PythonOps.ValueError("math domain error");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("mathdomainerror", "math domain error"));
             }
 
             return new Complex(r * Math.Cos(theta), r * Math.Sin(theta));

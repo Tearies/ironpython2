@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -22,6 +22,7 @@ using IronPython.Runtime;
 using IronPython.Runtime.Exceptions;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 
 [assembly: PythonModule("_ssl", typeof(IronPython.Modules.PythonSsl))]
 namespace IronPython.Modules {
@@ -96,7 +97,7 @@ namespace IronPython.Modules {
 
         public static void RAND_add(object buf, double entropy) {
             if (buf == null) {
-                throw PythonOps.TypeError("must be string or read-only buffer, not None");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbestringorreadonlybuffernotnone", "must be string or read-only buffer, not None"));
             } else if (!(buf is string) && !(buf is PythonBuffer)) {
                 throw PythonOps.TypeError("must be string or read-only buffer, not {0}", PythonOps.GetPythonTypeName(buf));
             }
@@ -118,7 +119,7 @@ namespace IronPython.Modules {
             public _SSLContext(CodeContext context, [DefaultParameterValue(PROTOCOL_TLS)] int protocol) {
                 if (protocol != PROTOCOL_SSLv2 && protocol != PROTOCOL_TLS && protocol != PROTOCOL_SSLv3 &&
                     protocol != PROTOCOL_TLSv1 && protocol != PROTOCOL_TLSv1_1 && protocol != PROTOCOL_TLSv1_2) {
-                    throw PythonOps.ValueError("invalid protocol version");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidprotocolversion", "invalid protocol version"));
                 }
 
                 this.protocol = protocol;
@@ -145,7 +146,7 @@ namespace IronPython.Modules {
                 }
                 set {
                     if(_verify_mode != CERT_NONE && _verify_mode != CERT_OPTIONAL && _verify_mode != CERT_REQUIRED) {
-                        throw PythonOps.ValueError("invalid value for verify_mode");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidvalueforverifymode", "invalid value for verify_mode"));
                     }
                     _verify_mode = value;
                 }
@@ -169,7 +170,7 @@ namespace IronPython.Modules {
 
             public void load_verify_locations(CodeContext context, [DefaultParameterValue(null)] string cafile, [DefaultParameterValue(null)] string capath, [DefaultParameterValue(null)] object cadata) {
                 if(cafile == null && capath == null && cadata == null) {
-                    throw PythonOps.TypeError("cafile, capath and cadata cannot be all omitted");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("cafilecapathandcadatacannotbeallomitted", "cafile, capath and cadata cannot be all omitted"));
                 }
 
                 if(cafile != null) {
@@ -246,7 +247,7 @@ namespace IronPython.Modules {
 
         public static object nid2obj(CodeContext context, int nid) {
             if(nid < 0) {
-                throw PythonOps.ValueError("NID must be positive");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("nidmustbepositive", "NID must be positive"));
             }
 
             var obj = _asn1Objects.Where(x => x.NID == nid).FirstOrDefault();

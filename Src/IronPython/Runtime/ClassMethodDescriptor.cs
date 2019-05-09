@@ -5,6 +5,7 @@
 using System;
 using IronPython.Runtime.Operations;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Runtime;
 
 namespace IronPython.Runtime {
@@ -26,7 +27,7 @@ namespace IronPython.Runtime {
         
         private PythonType CheckGetArgs(CodeContext context, object instance, PythonType owner) {
             if (owner == null) {
-                if (instance == null) throw PythonOps.TypeError("__get__(None, None) is invalid");
+                if (instance == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("getnonenoneisinvalid", "__get__(None, None) is invalid"));
                 owner = DynamicHelpers.GetPythonType(instance);
             } else {
                 if (!owner.IsSubclassOf(DynamicHelpers.GetPythonTypeFromType(_func.DeclaringType))) {

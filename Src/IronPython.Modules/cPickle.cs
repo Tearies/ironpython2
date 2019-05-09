@@ -121,7 +121,7 @@ namespace IronPython.Modules {
             public virtual char ReadChar(CodeContext context) {
                 string res = Read(context, 1);
                 if (res.Length < 1) {
-                    throw PythonOps.EofError("unexpected EOF while unpickling");
+                    throw PythonOps.EofError(ResourceManager.Default.GetResource("unexpectedeofwhileunpickling", "unexpected EOF while unpickling"));
                 }
                 return res[0];
             }
@@ -166,7 +166,7 @@ namespace IronPython.Modules {
                     !PythonOps.TryGetBoundAttr(context, file, "readline", out _readLineMethod) ||
                     !PythonOps.IsCallable(context, _readLineMethod)
                 ) {
-                    throw PythonOps.TypeError("argument must have callable 'read' and 'readline' attributes");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("argumentmusthavecallablereadandreadlineattributes", "argument must have callable 'read' and 'readline' attributes"));
                 }
             }
 
@@ -205,7 +205,7 @@ namespace IronPython.Modules {
                 if (_offset < _data.Length) {
                     return _data[_offset++];
                 }
-                throw PythonOps.EofError("unexpected EOF while unpickling");
+                throw PythonOps.EofError(ResourceManager.Default.GetResource("unexpectedeofwhileunpickling", "unexpected EOF while unpickling"));
             }
 
             public override int ReadInt(CodeContext context) {
@@ -219,7 +219,7 @@ namespace IronPython.Modules {
                     return res;
                 }
 
-                throw PythonOps.EofError("unexpected EOF while unpickling");
+                throw PythonOps.EofError(ResourceManager.Default.GetResource("unexpectedeofwhileunpickling", "unexpected EOF while unpickling"));
             }
 
             private string ReadLineWorker(bool includeNewLine) {
@@ -244,7 +244,7 @@ namespace IronPython.Modules {
                 if (!PythonOps.TryGetBoundAttr(context, file, "write", out _writeMethod) ||
                     !PythonOps.IsCallable(context, this._writeMethod)
                 ) {
-                    throw PythonOps.TypeError("argument must have callable 'write' attribute");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("argumentmusthavecallablewriteattribute", "argument must have callable 'write' attribute"));
                 }
             }
 
@@ -296,7 +296,7 @@ namespace IronPython.Modules {
                 if (!PythonOps.TryGetBoundAttr(context, file, "getvalue", out _getValueMethod) ||
                     !PythonOps.IsCallable(context, _getValueMethod)
                 ) {
-                    throw PythonOps.TypeError("argument must have callable 'getvalue' attribute");
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("argumentmusthavecallablegetvalueattribute", "argument must have callable 'getvalue' attribute"));
                 }
             }
 
@@ -744,7 +744,7 @@ namespace IronPython.Modules {
                             Write(context, Opcode.Ext4);
                             WriteInt32(context, code);
                         } else {
-                            throw PythonOps.RuntimeError("unrecognized integer format");
+                            throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("unrecognizedintegerformat", "unrecognized integer format"));
                         }
                         return;
                     }
@@ -818,7 +818,7 @@ namespace IronPython.Modules {
                         pickler.Write(context, Opcode.BinInt);
                         pickler.WriteInt32(context, obj);
                     } else {
-                        throw PythonOps.RuntimeError("unrecognized integer format");
+                        throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("unrecognizedintegerformat", "unrecognized integer format"));
                     }
                 }
             }
@@ -1783,7 +1783,7 @@ namespace IronPython.Modules {
                 + "module documentation for more information about persistent ids."
                )]
             public void noload(CodeContext/*!*/ context) {
-                throw PythonOps.NotImplementedError("noload() is not implemented");
+                throw PythonOps.NotImplementedError(ResourceManager.Default.GetResource("noloadisnotimplemented", "noload() is not implemented"));
             }
 
             private Exception CannotUnpickle(CodeContext/*!*/ context, string format, params object[] args) {
@@ -1853,7 +1853,7 @@ namespace IronPython.Modules {
             private string Read(CodeContext/*!*/ context, int size) {
                 string res = _file.Read(context, size);
                 if (res.Length < size) {
-                    throw PythonOps.EofError("unexpected EOF while unpickling");
+                    throw PythonOps.EofError(ResourceManager.Default.GetResource("unexpectedeofwhileunpickling", "unexpected EOF while unpickling"));
                 }
                 return res;
             }
@@ -2025,12 +2025,12 @@ namespace IronPython.Modules {
                 } else if (arg is PythonTuple) {
                     PythonTuple argsTuple = (PythonTuple)arg;
                     if (argsTuple.__len__() != 2) {
-                        throw PythonOps.ValueError("state for object without __setstate__ must be None, dict, or 2-tuple");
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("stateforobjectwithoutsetstatemustbenonedictor2tuple", "state for object without __setstate__ must be None, dict, or 2-tuple"));
                     }
                     dict = (PythonDictionary)argsTuple[0];
                     slots = (PythonDictionary)argsTuple[1];
                 } else {
-                    throw PythonOps.ValueError("state for object without __setstate__ must be None, dict, or 2-tuple");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("stateforobjectwithoutsetstatemustbenonedictor2tuple", "state for object without __setstate__ must be None, dict, or 2-tuple"));
                 }
 
                 if (dict != null) {
@@ -2194,7 +2194,7 @@ namespace IronPython.Modules {
                     return;
                 }
                 
-                throw PythonOps.TypeError("didn't find __new__");
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("didntfindnew", "didn't find __new__"));
             }
 
             private void LoadNewTrue(CodeContext/*!*/ context) {
@@ -2299,7 +2299,7 @@ namespace IronPython.Modules {
                     repr[0] == '\'' && repr[repr.Length - 1] == '\''
                     )
                 ) {
-                    throw PythonOps.ValueError("while executing STRING, expected string that starts and ends with quotes");
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("whileexecutingstringexpectedstringthatstartsandendswithquotes", "while executing STRING, expected string that starts and ends with quotes"));
                 }
                 _stack.Add(StringOps.decode(context, repr.Substring(1, repr.Length - 2), "string-escape", "strict"));
             }

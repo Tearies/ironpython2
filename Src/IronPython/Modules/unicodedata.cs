@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 //
@@ -153,7 +153,7 @@ namespace IronPython.Modules {
                 if (TryGetInfo(unichr, out CharInfo info)) {
                     return info.Name;
                 }
-                throw PythonOps.ValueError("no such name");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("nosuchname", "no such name"));
             }
 
             public int @decimal(char unichr, int @default) {
@@ -173,7 +173,7 @@ namespace IronPython.Modules {
                         return d.Value;
                     }
                 }
-                throw PythonOps.ValueError("not a decimal");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("notadecimal", "not a decimal"));
             }
 
             public object @decimal(char unichr, object @default) {
@@ -213,7 +213,7 @@ namespace IronPython.Modules {
                         return d.Value;
                     }
                 }
-                throw PythonOps.ValueError("not a digit");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("notadigit", "not a digit"));
             }
 
             public double numeric(char unichr, double @default) {
@@ -233,7 +233,7 @@ namespace IronPython.Modules {
                         return d.Value;
                     }
                 }
-                throw PythonOps.ValueError("not a numeric character");
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("notanumericcharacter", "not a numeric character"));
             }
 
             public object numeric(char unichr, object @default) {
