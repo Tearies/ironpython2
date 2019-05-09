@@ -155,7 +155,7 @@ namespace IronPython.Runtime.Types {
             [SpecialName]
             public object InPlaceAdd(CodeContext/*!*/ context, object func) {
                 if (func == null || !PythonOps.IsCallable(context, func)) {
-                    throw PythonOps.TypeError("event addition expected callable object, got {0}", PythonTypeOps.GetName(func));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("eventadditionexpectedcallableobjectgot0", "event addition expected callable object, got {0}"), PythonTypeOps.GetName(func));
                 }
 
                 if (_event.Tracker.IsStatic) {

@@ -65,7 +65,7 @@ namespace IronPython.Runtime {
             } else if (cls.IsSubclassOf(TypeCache.Module)) {
                 res = (PythonModule)cls.CreateInstance(context);
             } else {
-                throw PythonOps.TypeError("{0} is not a subtype of module", cls.Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotasubtypeofmodule", "{0} is not a subtype of module"), cls.Name);
             }
 
             return res;

@@ -130,7 +130,7 @@ namespace IronPython.Runtime.Operations {
             Debug.Assert(t.HasElementType);
 
             int[] iindices = TupleToIndices(data, indices);
-            if (data.Rank != indices.Length) throw PythonOps.ValueError("bad dimensions for array, got {0} expected {1}", indices.Length, data.Rank);
+            if (data.Rank != indices.Length) throw PythonOps.ValueError(ResourceManager.Default.GetResource("baddimensionsforarraygot0expected1", "bad dimensions for array, got {0} expected {1}"), indices.Length, data.Rank);
 
             for (int i = 0; i < iindices.Length; i++) iindices[i] += data.GetLowerBound(i);
             return data.GetValue(iindices);
@@ -160,7 +160,7 @@ namespace IronPython.Runtime.Operations {
 
             int[] indices = TupleToIndices(a, args);
 
-            if (a.Rank != args.Length) throw PythonOps.ValueError("bad dimensions for array, got {0} expected {1}", args.Length, a.Rank);
+            if (a.Rank != args.Length) throw PythonOps.ValueError(ResourceManager.Default.GetResource("baddimensionsforarraygot0expected1", "bad dimensions for array, got {0} expected {1}"), args.Length, a.Rank);
 
             for (int i = 0; i < indices.Length; i++) indices[i] += a.GetLowerBound(i);
             a.SetValue(indexAndValue[indexAndValue.Length - 1], indices);

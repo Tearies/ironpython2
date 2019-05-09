@@ -116,7 +116,7 @@ namespace IronPython.Modules {
             /// </summary>
             public object from_param(object obj) {
                 if (!Builtin.isinstance(obj, this)) {
-                    throw PythonOps.TypeError("expected {0} instance got {1}", Name, PythonTypeOps.GetName(obj));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expected0instancegot1", "expected {0} instance got {1}"), Name, PythonTypeOps.GetName(obj));
                 }
 
                 return obj;
@@ -168,11 +168,11 @@ namespace IronPython.Modules {
                 try {
                     return SetValueInternal(address, offset, value);
                 } catch (ArgumentTypeException e) {
-                    throw PythonOps.RuntimeError("({0}) <type 'exceptions.TypeError'>: {1}",
+                    throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("0typeexceptionstypeerror1", "({0}) <type 'exceptions.TypeError'>: {1}"),
                         Name,
                         e.Message);
                 } catch (ArgumentException e) {
-                    throw PythonOps.RuntimeError("({0}) <type 'exceptions.ValueError'>: {1}",
+                    throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("0typeexceptionsvalueerror1", "({0}) <type 'exceptions.ValueError'>: {1}"),
                         Name,
                         e.Message);
                 }
@@ -307,7 +307,7 @@ namespace IronPython.Modules {
                         }
 
                         if (!found) {
-                            throw PythonOps.AttributeError("anonymous field {0} is not defined in this structure", s);
+                            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("anonymousfield0isnotdefinedinthisstructure", "anonymous field {0} is not defined in this structure"), s);
                         }
                     }
                 }

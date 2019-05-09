@@ -60,7 +60,7 @@ namespace IronPython.Modules {
                 }
 
                 if (obj.NativeType != this) {
-                    throw PythonOps.TypeError("assign to pointer of type {0} from {1} is not valid", Name, ((PythonType)obj.NativeType).Name);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("assigntopointeroftype0from1isnotvalid", "assign to pointer of type {0} from {1} is not valid"), Name, ((PythonType)obj.NativeType).Name);
                 }
 
                 Pointer res = (Pointer)PythonCalls.Call(this);

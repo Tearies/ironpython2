@@ -85,7 +85,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(CodeContext/*!*/ context, PythonType cls) {
             if (cls == null) {
-                throw PythonOps.TypeError("__new__ expected type object, got {0}", PythonOps.Repr(context, DynamicHelpers.GetPythonType(cls)));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("newexpectedtypeobjectgot0", "__new__ expected type object, got {0}"), PythonOps.Repr(context, DynamicHelpers.GetPythonType(cls)));
             }
 
             return cls.CreateInstance(context);
@@ -97,7 +97,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(CodeContext/*!*/ context, PythonType cls, [NotNull]params object[] args\u00F8) {
             if (cls == null) {
-                throw PythonOps.TypeError("__new__ expected type object, got {0}", PythonOps.Repr(context, DynamicHelpers.GetPythonType(cls)));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("newexpectedtypeobjectgot0", "__new__ expected type object, got {0}"), PythonOps.Repr(context, DynamicHelpers.GetPythonType(cls)));
             }
 
             InstanceOps.CheckNewArgs(context, null, args\u00F8, cls);
@@ -111,7 +111,7 @@ namespace IronPython.Runtime.Operations {
         [StaticExtensionMethod]
         public static object __new__(CodeContext/*!*/ context, PythonType cls, [ParamDictionary]IDictionary<object, object> kwargs\u00F8, [NotNull]params object[] args\u00F8) {
             if (cls == null) {
-                throw PythonOps.TypeError("__new__ expected type object, got {0}", PythonOps.Repr(context, DynamicHelpers.GetPythonType(cls)));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("newexpectedtypeobjectgot0", "__new__ expected type object, got {0}"), PythonOps.Repr(context, DynamicHelpers.GetPythonType(cls)));
             }
 
             InstanceOps.CheckNewArgs(context, kwargs\u00F8, args\u00F8, cls);
@@ -233,7 +233,7 @@ namespace IronPython.Runtime.Operations {
             StringFormatSpec spec = StringFormatSpec.FromString(formatSpec);
 
             if (spec.Type != null && spec.Type != 's') {
-                throw PythonOps.ValueError("Unknown format code '{0}' for object of type 'str'", spec.Type.Value.ToString());
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownformatcode0forobjectoftypestr", "Unknown format code '{0}' for object of type 'str'"), spec.Type.Value.ToString());
             } else if (spec.Sign != null) {
                 throw PythonOps.ValueError(ResourceManager.Default.GetResource("signnotallowedinstringformatspecifier", "Sign not allowed in string format specifier"));
             } else if (spec.Alignment == '=') {
@@ -365,7 +365,7 @@ namespace IronPython.Runtime.Operations {
 
         private static void ThrowIfNativelyPickable(PythonType type) {
             if (NativelyPickleableTypes.ContainsKey(type)) {
-                throw PythonOps.TypeError("can't pickle {0} objects", type.Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantpickle0objects", "can't pickle {0} objects"), type.Name);
             }
         }
 
@@ -378,7 +378,7 @@ namespace IronPython.Runtime.Operations {
                     return pythonBase;
                 }
             }
-            throw PythonOps.TypeError("can't pickle {0} instance: no non-Python bases found", type.Name);
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantpickle0instancenononpythonbasesfound", "can't pickle {0} instance: no non-Python bases found"), type.Name);
         }
 
         /// <summary>

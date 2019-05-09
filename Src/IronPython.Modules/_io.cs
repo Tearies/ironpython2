@@ -405,11 +405,11 @@ namespace IronPython.Modules {
             }
 
             internal Exception AttributeError(string attrName) {
-                throw PythonOps.AttributeError("'{0}' object has no attribute '{1}'", PythonTypeOps.GetName(this), attrName);
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0objecthasnoattribute1", "'{0}' object has no attribute '{1}'"), PythonTypeOps.GetName(this), attrName);
             }
 
             internal Exception InvalidPosition(BigInteger pos) {
-                return PythonOps.IOError("Raw stream returned invalid position {0}", pos);
+                return PythonOps.IOError(ResourceManager.Default.GetResource("rawstreamreturnedinvalidposition0", "Raw stream returned invalid position {0}"), pos);
             }
             
             #endregion
@@ -920,7 +920,7 @@ namespace IronPython.Modules {
             public override BigInteger seek(CodeContext/*!*/ context, BigInteger pos, [Optional]object whence) {
                 int whenceInt = GetInt(whence);
                 if (whenceInt < 0 || whenceInt > 2) {
-                    throw PythonOps.ValueError("invalid whence ({0}, should be 0, 1, or 2)", whenceInt);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidwhence0shouldbe01or2", "invalid whence ({0}, should be 0, 1, or 2)"), whenceInt);
                 }
 
                 lock (this) {
@@ -1260,7 +1260,7 @@ namespace IronPython.Modules {
             public override BigInteger seek(CodeContext/*!*/ context, BigInteger pos, [Optional]object whence) {
                 int whenceInt = GetInt(whence);
                 if (whenceInt < 0 || whenceInt > 2) {
-                    throw PythonOps.ValueError("invalid whence ({0}, should be 0, 1, or 2)", whenceInt);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidwhence0shouldbe01or2", "invalid whence ({0}, should be 0, 1, or 2)"), whenceInt);
                 }
                 lock (this) {
                     FlushNoLock(context);
@@ -1655,7 +1655,7 @@ namespace IronPython.Modules {
             public override BigInteger seek(CodeContext/*!*/ context, BigInteger pos, [Optional]object whence) {
                 int whenceInt = GetInt(whence);
                 if (whenceInt < 0 || whenceInt > 2) {
-                    throw PythonOps.ValueError("invalid whence ({0}, should be 0, 1, or 2)", whenceInt);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidwhence0shouldbe01or2", "invalid whence ({0}, should be 0, 1, or 2)"), whenceInt);
                 }
 
                 lock (this) {
@@ -2107,7 +2107,7 @@ namespace IronPython.Modules {
                 if (str == null) {
                     Extensible<string> es = s as Extensible<string>;
                     if (es == null) {
-                        throw PythonOps.TypeError("must be unicode, not {0}", PythonTypeOps.GetName(s));
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbeunicodenot0", "must be unicode, not {0}"), PythonTypeOps.GetName(s));
                     }
                     str = es.Value;
                 }
@@ -2343,10 +2343,10 @@ namespace IronPython.Modules {
                 }
 
                 if (whenceInt != 0) {
-                    throw PythonOps.ValueError("invalid whence ({0}, should be 0, 1, or 2)", whenceInt);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidwhence0shouldbe01or2", "invalid whence ({0}, should be 0, 1, or 2)"), whenceInt);
                 }
                 if (cookie < 0) {
-                    throw PythonOps.ValueError("negative seek position {0}", cookie);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativeseekposition0", "negative seek position {0}"), cookie);
                 }
                 flush(context);
 
@@ -2765,7 +2765,7 @@ namespace IronPython.Modules {
 
             HashSet<char> modes = MakeSet(mode);
             if (modes.Count < mode.Length || !_validModes.IsSupersetOf(modes)) {
-                throw PythonOps.ValueError("invalid mode: {0}", mode);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidmode0", "invalid mode: {0}"), mode);
             }
 
             bool reading = modes.Contains('r');
@@ -2836,7 +2836,7 @@ namespace IronPython.Modules {
             } else if (reading) {
                 buffer = BufferedReader.Create(context, fio, buffering);
             } else {
-                throw PythonOps.ValueError("unknown mode: {0}", mode);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownmode0", "unknown mode: {0}"), mode);
             }
 
             if (binary) {
@@ -2891,7 +2891,7 @@ namespace IronPython.Modules {
                     if (output is Extensible<string>) {
                         decoded = ((Extensible<string>)output).Value;
                     } else {
-                        throw PythonOps.TypeError("decoder produced {0}, expected str", PythonTypeOps.GetName(output));
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("decoderproduced0expectedstr", "decoder produced {0}, expected str"), PythonTypeOps.GetName(output));
                     }
                 }
 
@@ -3040,9 +3040,9 @@ namespace IronPython.Modules {
                         break;
                     default:
                         if (args.Length < 2) {
-                            throw PythonOps.TypeError("BlockingIOError() takes at least 2 arguments ({0} given)", args.Length);
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("blockingioerrortakesatleast2arguments0given", "BlockingIOError() takes at least 2 arguments ({0} given)"), args.Length);
                         }
-                        throw PythonOps.TypeError("BlockingIOError() takes at most 3 arguments ({0} given)", args.Length);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("blockingioerrortakesatmost3arguments0given", "BlockingIOError() takes at most 3 arguments ({0} given)"), args.Length);
                 }
             }
 
@@ -3124,7 +3124,7 @@ namespace IronPython.Modules {
             }
 
             if (msg == null) {
-                throw PythonOps.TypeError("integer argument expected, got '{0}'", PythonTypeOps.GetName(i));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerargumentexpectedgot0", "integer argument expected, got '{0}'"), PythonTypeOps.GetName(i));
             } else {
                 throw PythonOps.TypeError(msg, args);
             }
@@ -3215,7 +3215,7 @@ namespace IronPython.Modules {
                 return arr.ToByteArray();
             }
 
-            throw PythonOps.TypeError("must be bytes or buffer, not {0}", PythonTypeOps.GetName(buf));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbebytesorbuffernot0", "must be bytes or buffer, not {0}"), PythonTypeOps.GetName(buf));
         }
 
         #endregion

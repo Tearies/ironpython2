@@ -584,7 +584,7 @@ namespace IronPython.Runtime {
 
         internal object Call(CodeContext/*!*/ context) {
             if (co_freevars != PythonTuple.EMPTY) {
-                throw PythonOps.TypeError("cannot exec code object that contains free variables: {0}", co_freevars.__repr__(context));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotexeccodeobjectthatcontainsfreevariables0", "cannot exec code object that contains free variables: {0}"), co_freevars.__repr__(context));
             }
 
             if (Target == null || (Target.GetMethodInfo() != null && Target.GetMethodInfo().DeclaringType == typeof(PythonCallTargets))) {

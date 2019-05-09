@@ -361,7 +361,7 @@ namespace IronPython.Modules {
 
         public static List listdir(CodeContext/*!*/ context, [NotNull]string path) {
             if (path == String.Empty) {
-                throw PythonOps.WindowsError("The system cannot find the path specified: '{0}'", path);
+                throw PythonOps.WindowsError(ResourceManager.Default.GetResource("thesystemcannotfindthepathspecified0", "The system cannot find the path specified: '{0}'"), path);
             }
 
             List ret = PythonOps.MakeList();
@@ -529,7 +529,7 @@ namespace IronPython.Modules {
                         res = new POpenFile(context, command, p, p.StandardInput.BaseStream, "w");
                         break;
                     default:
-                        throw PythonOps.ValueError("expected 'r' or 'w' for mode, got {0}", mode);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("expectedrorwformodegot0", "expected 'r' or 'w' for mode, got {0}"), mode);
                 }
             } catch (Exception e) {
                 throw ToPythonException(e);
@@ -660,7 +660,7 @@ namespace IronPython.Modules {
         /// </summary>
         public static object spawnle(CodeContext/*!*/ context, int mode, string path, params object[] args) {
             if (args.Length < 1) {
-                throw PythonOps.TypeError("spawnle() takes at least three arguments ({0} given)", 2 + args.Length);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("spawnletakesatleastthreearguments0given", "spawnle() takes at least three arguments ({0} given)"), 2 + args.Length);
             }
 
             object env = args[args.Length - 1];
@@ -721,7 +721,7 @@ namespace IronPython.Modules {
             }
 
             if (!process.Start()) {
-                throw PythonOps.OSError("Cannot start process: {0}", path);
+                throw PythonOps.OSError(ResourceManager.Default.GetResource("cannotstartprocess0", "Cannot start process: {0}"), path);
             }
             if (mode == P_WAIT) {
                 process.WaitForExit();
@@ -781,7 +781,7 @@ namespace IronPython.Modules {
             IEnumerator argsEnumerator;
             System.Text.StringBuilder sb = null;
             if (!PythonOps.TryGetEnumerator(context, args, out argsEnumerator)) {
-                throw PythonOps.TypeError("args parameter must be sequence, not {0}", DynamicHelpers.GetPythonType(args));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("argsparametermustbesequencenot0", "args parameter must be sequence, not {0}"), DynamicHelpers.GetPythonType(args));
             }
 
             bool space = false;
@@ -867,7 +867,7 @@ namespace IronPython.Modules {
                 // dict is allowed by CPython's stat_result, but doesn't seem to do anything, so we ignore it here.
 
                 if (statResult.Count < 10) {
-                    throw PythonOps.TypeError("stat_result() takes an at least 10-sequence ({0}-sequence given)", statResult.Count);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("statresulttakesanatleast10sequence0sequencegiven", "stat_result() takes an at least 10-sequence ({0}-sequence given)"), statResult.Count);
                 }
 
                 _mode = statResult[0];
@@ -1747,7 +1747,7 @@ are defined in the signal module.")]
             if (!TryGetExecutableCommand(command, out baseCommand, out args)) {
                 if (!TryGetShellCommand(command, out baseCommand, out args)) {
                     if (throwException) {
-                        throw PythonOps.WindowsError("The system can not find command '{0}'", command);
+                        throw PythonOps.WindowsError(ResourceManager.Default.GetResource("thesystemcannotfindcommand0", "The system can not find command '{0}'"), command);
                     } else {
                         return null;
                     }

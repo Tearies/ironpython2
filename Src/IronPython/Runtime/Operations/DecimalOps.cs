@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using Microsoft.Scripting.Runtime;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Operations {
     public static class DecimalOps {
@@ -246,7 +247,7 @@ namespace IronPython.Runtime.Operations {
                     }
                     break;
                 default:
-                    throw PythonOps.ValueError("Unknown format code '{0}' for object of type 'decimal'", spec.Type.ToString());
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownformatcode0forobjectoftypedecimal", "Unknown format code '{0}' for object of type 'decimal'"), spec.Type.ToString());
             }
 
             return digits;

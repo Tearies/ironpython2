@@ -36,7 +36,7 @@ namespace IronPython.Modules {
 
             public array([BytesConversion]string type, [Optional]object initializer) {
                 if (type == null || type.Length != 1) {
-                    throw PythonOps.TypeError("expected character, got {0}", PythonTypeOps.GetName(type));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedcharactergot0", "expected character, got {0}"), PythonTypeOps.GetName(type));
                 }
 
                 _typeCode = type[0];
@@ -225,7 +225,7 @@ namespace IronPython.Modules {
                 List<object> items = new List<object>();
                 while (ie.MoveNext()) {
                     if (!_data.CanStore(ie.Current)) {
-                        throw PythonOps.TypeError("expected {0}, got {1}",
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("expected0got1", "expected {0}, got {1}"),
                             DynamicHelpers.GetPythonTypeFromType(_data.StorageType).Name,
                             DynamicHelpers.GetPythonType(ie.Current).Name);
                     }
@@ -884,10 +884,10 @@ namespace IronPython.Modules {
                         object newVal;
                         if (!Converter.TryConvert(value, typeof(T), out newVal)) {
                             if (value != null && typeof(T).IsPrimitive && typeof(T) != typeof(char))
-                                throw PythonOps.OverflowError("couldn't convert {1} to {0}",
+                                throw PythonOps.OverflowError(ResourceManager.Default.GetResource("couldntconvert1to0", "couldn't convert {1} to {0}"),
                                     DynamicHelpers.GetPythonTypeFromType(typeof(T)).Name,
                                     DynamicHelpers.GetPythonType(value).Name);
-                            throw PythonOps.TypeError("expected {0}, got {1}",
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("expected0got1", "expected {0}, got {1}"),
                                 DynamicHelpers.GetPythonTypeFromType(typeof(T)).Name,
                                 DynamicHelpers.GetPythonType(value).Name);
                         }

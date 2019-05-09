@@ -56,7 +56,7 @@ namespace IronPython.Modules {
             _unpackedLibrary = new Dictionary<string, PackedResourceInfo>();
             _unpackedModules = new Dictionary<string, PackedResourceInfo[]>();
             if (!String.IsNullOrEmpty(_unpackingError))
-                throw MakeError("meta_path importer initialization error: {0}", _unpackingError);
+                throw MakeError(ResourceManager.Default.GetResource("metapathimporterinitializationerror0", "meta_path importer initialization error: {0}"), _unpackingError);
         }
 
         [Documentation(
@@ -165,7 +165,7 @@ module, or raises ResourceImportError if it wasn't found."
                 modpath = tocEntry.FullName;
                 return code;
             }
-            throw MakeError("can't find module '{0}'", fullname);
+            throw MakeError(ResourceManager.Default.GetResource("cantfindmodule0", "can't find module '{0}'"), fullname);
         }
 
         private byte[] GetCodeFromData(CodeContext /*!*/ context, bool isbytecode, PackedResourceInfo tocEntry) {

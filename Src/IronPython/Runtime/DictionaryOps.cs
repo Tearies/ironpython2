@@ -172,7 +172,7 @@ namespace IronPython.Runtime {
                 int index = 0;
                 while (i.MoveNext()) {
                     if (!AddKeyValue(self, i.Current)) {
-                        throw PythonOps.ValueError("dictionary update sequence element #{0} has bad length; 2 is required", index);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("dictionaryupdatesequenceelement0hasbadlength2isrequired", "dictionary update sequence element #{0} has bad length; 2 is required"), index);
                     }
                     index++;
                 }

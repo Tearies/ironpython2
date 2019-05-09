@@ -70,7 +70,7 @@ namespace IronPython.Runtime.Types {
             if (dict == null) {
                 throw PythonOps.TypeError(ResourceManager.Default.GetResource("dictmustbeadictionary", "dict must be a dictionary"));
             } else if (cls != TypeCache.OldClass) {
-                throw PythonOps.TypeError("{0} is not a subtype of classobj", cls.Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotasubtypeofclassobj", "{0} is not a subtype of classobj"), cls.Name);
             }
 
             if (!dict.ContainsKey("__module__")) {
@@ -350,7 +350,7 @@ namespace IronPython.Runtime.Types {
             List<OldClass> res = new List<OldClass>(t.__len__());
             foreach (object o in t) {
                 OldClass oc = o as OldClass;
-                if (oc == null) throw PythonOps.TypeError("__bases__ items must be classes (got {0})", PythonTypeOps.GetName(o));
+                if (oc == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("basesitemsmustbeclassesgot0", "__bases__ items must be classes (got {0})"), PythonTypeOps.GetName(o));
 
                 if (oc.IsSubclassOf(this)) {
                     throw PythonOps.TypeError(ResourceManager.Default.GetResource("abasesitemcausesaninheritancecycle", "a __bases__ item causes an inheritance cycle"));
@@ -365,7 +365,7 @@ namespace IronPython.Runtime.Types {
             object value;
 
             if (!TryGetBoundCustomMember(context, name, out value)) {
-                throw PythonOps.AttributeError("type object '{0}' has no attribute '{1}'", Name, name);
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("typeobject0hasnoattribute1", "type object '{0}' has no attribute '{1}'"), Name, name);
             }
 
             return value;
@@ -389,7 +389,7 @@ namespace IronPython.Runtime.Types {
 
         internal bool DeleteCustomMember(CodeContext context, string name) {
             if (!_dict._storage.Remove(ref _dict._storage, name)) {
-                throw PythonOps.AttributeError("{0} is not a valid attribute", name);
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0isnotavalidattribute", "{0} is not a valid attribute"), name);
             }
 
             if (name == "__del__") {

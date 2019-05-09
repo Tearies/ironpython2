@@ -391,7 +391,7 @@ namespace IronPython.Runtime {
                         // no conversion specified
                         break;
                     default:
-                        throw PythonOps.ValueError("Unknown conversion specifier {0}", conversion.Value);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownconversionspecifier0", "Unknown conversion specifier {0}"), conversion.Value);
                 }
 
                 return argValue;
@@ -501,7 +501,7 @@ namespace IronPython.Runtime {
                     yield return new FieldAccessor(identifier, !isIndex);
                 } else {
                     if (reportErrors) {
-                        throw PythonOps.ValueError("Only '.' and '[' are valid in format field specifier, got {0}", accessType);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("onlyandarevalidinformatfieldspecifiergot0", "Only '.' and '[' are valid in format field specifier, got {0}"), accessType);
                     } else {
                         break;
                     }

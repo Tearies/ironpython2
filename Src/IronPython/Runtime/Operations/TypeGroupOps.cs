@@ -74,7 +74,7 @@ namespace IronPython.Runtime.Operations {
                     TypeGroup typeGroup = t as TypeGroup;
                     Type nonGenericType;
                     if (!typeGroup.TryGetNonGenericType(out nonGenericType)) {
-                        throw PythonOps.TypeError("cannot use open generic type {0} as type argument", typeGroup.Name);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotuseopengenerictype0astypeargument", "cannot use open generic type {0} as type argument"), typeGroup.Name);
                     }
                     pythonTypes[i] = DynamicHelpers.GetPythonTypeFromType(nonGenericType);
                 } else {

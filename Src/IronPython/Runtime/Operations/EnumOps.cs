@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+using Microsoft.Scripting;
 using Microsoft.Scripting.Utils;
 
 namespace IronPython.Runtime.Operations {
@@ -15,7 +16,7 @@ namespace IronPython.Runtime.Operations {
             if (result != null) {
                 return result;
             }
-            throw PythonOps.ValueError("bitwise or cannot be applied to {0} and {1}", self.GetType(), other.GetType());
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("bitwiseorcannotbeappliedto0and1", "bitwise or cannot be applied to {0} and {1}"), self.GetType(), other.GetType());
         }
 
         [SpecialName]
@@ -25,7 +26,7 @@ namespace IronPython.Runtime.Operations {
                 return result;
             }
 
-            throw PythonOps.ValueError("bitwise and cannot be applied to {0} and {1}", self.GetType(), other.GetType());
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("bitwiseandcannotbeappliedto0and1", "bitwise and cannot be applied to {0} and {1}"), self.GetType(), other.GetType());
         }
 
         [SpecialName]
@@ -35,7 +36,7 @@ namespace IronPython.Runtime.Operations {
                 return result;
             }
 
-            throw PythonOps.ValueError("bitwise xor cannot be applied to {0} and {1}", self.GetType(), other.GetType());
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("bitwisexorcannotbeappliedto0and1", "bitwise xor cannot be applied to {0} and {1}"), self.GetType(), other.GetType());
         }
 
         [SpecialName]
@@ -45,7 +46,7 @@ namespace IronPython.Runtime.Operations {
                 return result;
             }
 
-            throw PythonOps.ValueError("one's complement cannot be applied to {0}", self.GetType());
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("onescomplementcannotbeappliedto0", "one's complement cannot be applied to {0}"), self.GetType());
         }
 
         public static bool __nonzero__(object self) {
@@ -65,7 +66,7 @@ namespace IronPython.Runtime.Operations {
                 }
             }
 
-            throw PythonOps.ValueError("__nonzero__ cannot be applied to {0}", self.GetType());
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("nonzerocannotbeappliedto0", "__nonzero__ cannot be applied to {0}"), self.GetType());
         }
 
         public static string __repr__(object self) {

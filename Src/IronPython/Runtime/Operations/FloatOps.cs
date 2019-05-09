@@ -51,7 +51,7 @@ namespace IronPython.Runtime.Operations {
                 } else if (d is Extensible<double>) {
                     value = ((Extensible<double>)d).Value;
                 } else {
-                    throw PythonOps.TypeError("__float__ returned non-float (type {0})", PythonTypeOps.GetName(d));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("floatreturnednonfloattype0", "__float__ returned non-float (type {0})"), PythonTypeOps.GetName(d));
                 }
             }
 
@@ -189,7 +189,7 @@ namespace IronPython.Runtime.Operations {
 
             if ((!exponent.Success && !fraction.Success && !integer.Success) ||
                 (!integer.Success && fraction.Length == 1)) {
-                throw PythonOps.ValueError("invalid hexidecimal floating point string '{0}'", self);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidhexidecimalfloatingpointstring0", "invalid hexidecimal floating point string '{0}'"), self);
             }
 
             if (finalBits == BigInteger.Zero) {
@@ -352,7 +352,7 @@ namespace IronPython.Runtime.Operations {
                 }
                 return LiteralParser.ParseFloat(x);
             } catch (FormatException) {
-                throw PythonOps.ValueError("invalid literal for float(): {0}", x);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidliteralforfloat0", "invalid literal for float(): {0}"), x);
             }
         }
 
@@ -955,7 +955,7 @@ namespace IronPython.Runtime.Operations {
                     }
                     break;
                 default:
-                    throw PythonOps.ValueError("Unknown format code '{0}' for object of type 'float'", spec.Type.ToString());
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownformatcode0forobjectoftypefloat", "Unknown format code '{0}' for object of type 'float'"), spec.Type.ToString());
             }
 
             return digits;
@@ -1094,7 +1094,7 @@ namespace IronPython.Runtime.Operations {
 
             object d = PythonOps.CallWithContext(context, PythonOps.GetBoundAttr(context, x, "__float__"));
             if (d is double) return (float)(double)d;
-            throw PythonOps.TypeError("__float__ returned non-float (type %s)", DynamicHelpers.GetPythonType(d));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("floatreturnednonfloattypes", "__float__ returned non-float (type %s)"), DynamicHelpers.GetPythonType(d));
         }
 
         [StaticExtensionMethod]
@@ -1110,7 +1110,7 @@ namespace IronPython.Runtime.Operations {
 
             if (!(value is double)) {
                 // The check for double is correct, because that's all Python types should be using
-                throw PythonOps.TypeError("__float__ returned non-float (type %s)", DynamicHelpers.GetPythonType(value));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("floatreturnednonfloattypes", "__float__ returned non-float (type %s)"), DynamicHelpers.GetPythonType(value));
             }
 
             if (cls == TypeCache.Single) {
@@ -1124,7 +1124,7 @@ namespace IronPython.Runtime.Operations {
             try {
                 return (float)LiteralParser.ParseFloat(x);
             } catch (FormatException) {
-                throw PythonOps.ValueError("invalid literal for Single(): {0}", x);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidliteralforsingle0", "invalid literal for Single(): {0}"), x);
             }
         }
 

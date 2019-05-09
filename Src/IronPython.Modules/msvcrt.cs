@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -17,6 +17,7 @@ using IronPython.Runtime;
 using IronPython.Runtime.Operations;
 
 using System.Numerics;
+using Microsoft.Scripting;
 
 [assembly: PythonModule("msvcrt", typeof(IronPython.Modules.PythonMsvcrt), PlatformsAttribute.PlatformFamily.Windows)]
 namespace IronPython.Modules {
@@ -76,7 +77,7 @@ os.O_BINARY.")]
             } else if (flags == PythonNT.O_BINARY) {
                 oldMode = pfile.SetMode(context, false) ? PythonNT.O_TEXT : PythonNT.O_BINARY;
             } else {
-                throw PythonOps.ValueError("unknown mode: {0}", flags);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownmode0", "unknown mode: {0}"), flags);
             }
             return oldMode;
         }

@@ -79,7 +79,7 @@ namespace IronPython.Modules {
 
             object ret = Importer.ImportModule(context, globals, name, from != null && from.Count > 0, level);
             if (ret == null) {
-                return LightExceptions.Throw(PythonOps.ImportError("No module named {0}", name));
+                return LightExceptions.Throw(PythonOps.ImportError(ResourceManager.Default.GetResource("nomodulenamed0", "No module named {0}"), name));
             }
 
             if (ret is PythonModule mod && from != null) {
@@ -117,7 +117,7 @@ namespace IronPython.Modules {
                 return value;
             }
 
-            throw PythonOps.TypeError("bad operand type for abs(): '{0}'", PythonTypeOps.GetName(o));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("badoperandtypeforabs0", "bad operand type for abs(): '{0}'"), PythonTypeOps.GetName(o));
         }
 
         public static bool all(object x) {
@@ -177,7 +177,7 @@ namespace IronPython.Modules {
                 return BigIntegerOps.ToBinary((BigInteger)res);
             }
 
-            throw PythonOps.TypeError("__index__ returned non-(int, long) (type {0})", PythonOps.GetPythonTypeName(res));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("indexreturnednonintlongtype0", "__index__ returned non-(int, long) (type {0})"), PythonOps.GetPythonTypeName(res));
         }
 
         public static PythonType @bool {
@@ -214,7 +214,7 @@ namespace IronPython.Modules {
         [LightThrowing]
         public static object chr(int value) {
             if (value < 0 || value > 0xFF) {
-                return LightExceptions.Throw(PythonOps.ValueError("{0} is not in required range", value));
+                return LightExceptions.Throw(PythonOps.ValueError(ResourceManager.Default.GetResource("0isnotinrequiredrange", "{0} is not in required range"), value));
             }
             return ScriptingRuntimeHelpers.CharToString((char)value);
         }
@@ -291,7 +291,7 @@ namespace IronPython.Modules {
                 text = ((Bytes)source).ToString();
             else 
                 // cpython accepts either AST or readable buffer object
-                throw PythonOps.TypeError("source can be either AST or string, actual argument: {0}", source.GetType());
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("sourcecanbeeitherastorstringactualargument0", "source can be either AST or string, actual argument: {0}"), source.GetType());
             
             if (text.IndexOf('\0') != -1) {
                 throw PythonOps.TypeError(ResourceManager.Default.GetResource("compileexpectedstringwithoutnullbytes", "compile() expected string without null bytes"));
@@ -627,7 +627,7 @@ namespace IronPython.Modules {
 
             string strRes = res as string;
             if (strRes == null) {
-                throw PythonOps.TypeError("{0}.__format__ must return string or unicode, not {1}", PythonTypeOps.GetName(argValue), PythonTypeOps.GetName(res));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("0formatmustreturnstringorunicodenot1", "{0}.__format__ must return string or unicode, not {1}"), PythonTypeOps.GetName(argValue), PythonTypeOps.GetName(res));
             }
 
             return strRes;
@@ -1365,7 +1365,7 @@ namespace IronPython.Modules {
 
         private static object GetMaxKwArg(IDictionary<object, object> dict) {
             if (dict.Count != 1)
-                throw PythonOps.TypeError(" max() should have only 1 keyword argument, but got {0} keyword arguments", dict.Count);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("maxshouldhaveonly1keywordargumentbutgot0keywordarguments", " max() should have only 1 keyword argument, but got {0} keyword arguments"), dict.Count);
 
             return VerifyKeys("max", dict);
         }
@@ -1454,7 +1454,7 @@ namespace IronPython.Modules {
 
         private static object GetMinKwArg([ParamDictionary]IDictionary<object, object> dict) {
             if (dict.Count != 1)
-                throw PythonOps.TypeError(" min() should have only 1 keyword argument, but got {0} keyword arguments", dict.Count);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("minshouldhaveonly1keywordargumentbutgot0keywordarguments", " min() should have only 1 keyword argument, but got {0} keyword arguments"), dict.Count);
 
             return VerifyKeys("min", dict);
         }
@@ -1465,7 +1465,7 @@ namespace IronPython.Modules {
                 ICollection<object> keys = dict.Keys;
                 IEnumerator<object> en = keys.GetEnumerator();
                 if (en.MoveNext()) {
-                    throw PythonOps.TypeError(" {1}() got an unexpected keyword argument ({0})", en.Current, name);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("1gotanunexpectedkeywordargument0", " {1}() got an unexpected keyword argument ({0})"), en.Current, name);
                 }
             }
             return value;
@@ -1570,20 +1570,20 @@ namespace IronPython.Modules {
             
             if (stringValue != null) {
                 if (stringValue.Length != 1) {
-                    throw PythonOps.TypeError("expected a character, but string of length {0} found", stringValue.Length);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedacharacterbutstringoflength0found", "expected a character, but string of length {0} found"), stringValue.Length);
                 }
                 return stringValue[0];
             }
 
             if (value is IList<byte> bytes) {
                 if (bytes.Count != 1) {
-                    throw PythonOps.TypeError("expected a character, but string of length {0} found", bytes.Count);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedacharacterbutstringoflength0found", "expected a character, but string of length {0} found"), bytes.Count);
                 }
 
                 return bytes[0];
             }
                 
-            throw PythonOps.TypeError("expected a character, but {0} found", PythonTypeOps.GetName(value));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedacharacterbut0found", "expected a character, but {0} found"), PythonTypeOps.GetName(value));
         }
 
         public static object pow(CodeContext/*!*/ context, object x, object y) {
@@ -1605,12 +1605,12 @@ namespace IronPython.Modules {
         public static void print(CodeContext/*!*/ context, [ParamDictionary]IDictionary<object, object> kwargs, params object[] args) {
             object sep = AttrCollectionPop(kwargs, "sep", " ");
             if (sep != null && !(sep is string)) {
-                throw PythonOps.TypeError("sep must be None or str, not {0}", PythonTypeOps.GetName(sep));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("sepmustbenoneorstrnot0", "sep must be None or str, not {0}"), PythonTypeOps.GetName(sep));
             }
 
             object end = AttrCollectionPop(kwargs, "end", "\n");
             if (end != null && !(end is string)) {
-                throw PythonOps.TypeError("end must be None or str, not {0}", PythonTypeOps.GetName(end));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("endmustbenoneorstrnot0", "end must be None or str, not {0}"), PythonTypeOps.GetName(end));
             }
 
             object file = AttrCollectionPop(kwargs, "file", null);
@@ -2008,7 +2008,7 @@ namespace IronPython.Modules {
             object res = PythonOps.Repr(context, o);
 
             if (!(res is String) && !(res is ExtensibleString)) {
-                throw PythonOps.TypeError("__repr__ returned non-string (type {0})", PythonOps.GetPythonTypeName(o));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("reprreturnednonstringtype0", "__repr__ returned non-string (type {0})"), PythonOps.GetPythonTypeName(o));
             }
 
             return res;
@@ -2100,7 +2100,7 @@ namespace IronPython.Modules {
             IEnumerator i = PythonOps.GetEnumerator(sequence);
 
             if (start is string) {
-                throw PythonOps.TypeError("Cannot sum strings, use '{0}'.join(seq)", start);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotsumstringsuse0joinseq", "Cannot sum strings, use '{0}'.join(seq)"), start);
             }
 
             var sumState = new SumState(context.LanguageContext, start);
@@ -2113,7 +2113,7 @@ namespace IronPython.Modules {
 
         public static object sum(CodeContext/*!*/ context, [NotNull]List sequence, object start) {
             if (start is string) {
-                throw PythonOps.TypeError("Cannot sum strings, use '{0}'.join(seq)", start);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotsumstringsuse0joinseq", "Cannot sum strings, use '{0}'.join(seq)"), start);
             }
 
             var sumState = new SumState(context.LanguageContext, start);
@@ -2126,7 +2126,7 @@ namespace IronPython.Modules {
 
         public static object sum(CodeContext/*!*/ context, [NotNull]PythonTuple sequence, object start) {
             if (start is string) {
-                throw PythonOps.TypeError("Cannot sum strings, use '{0}'.join(seq)", start);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotsumstringsuse0joinseq", "Cannot sum strings, use '{0}'.join(seq)"), start);
             }
 
             var sumState = new SumState(context.LanguageContext, start);
@@ -2286,7 +2286,7 @@ namespace IronPython.Modules {
 
         public static string unichr(int i) {
             if (i < Char.MinValue || i > Char.MaxValue) {
-                throw PythonOps.ValueError("{0} is not in required range", i);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("0isnotinrequiredrange", "{0} is not in required range"), i);
             }
             return ScriptingRuntimeHelpers.CharToString((char)i);
         }

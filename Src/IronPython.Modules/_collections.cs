@@ -99,14 +99,14 @@ namespace IronPython.Modules {
 
             private static int VerifyMaxLen(IDictionary<object, object> dict) {
                 if (dict.Count != 1) {
-                    throw PythonOps.TypeError("deque() takes at most 1 keyword argument ({0} given)", dict.Count);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("dequetakesatmost1keywordargument0given", "deque() takes at most 1 keyword argument ({0} given)"), dict.Count);
                 }
                 
                 object value;
                 if (!dict.TryGetValue("maxlen", out value)) {
                     IEnumerator<object> e = dict.Keys.GetEnumerator();
                     if (e.MoveNext()) {
-                        throw PythonOps.TypeError("deque(): '{0}' is an invalid keyword argument", e.Current);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("deque0isaninvalidkeywordargument", "deque(): '{0}' is an invalid keyword argument"), e.Current);
                     }
                 }
 

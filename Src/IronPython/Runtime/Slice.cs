@@ -178,8 +178,8 @@ namespace IronPython.Runtime {
         }
 
         private static void ListSliceAssign(SliceAssign assign, int start, int n, int step, IList lst) {
-            if (lst.Count < n) throw PythonOps.ValueError("too few items in the enumerator. need {0} have {1}", n, lst.Count);
-            else if (lst.Count != n) throw PythonOps.ValueError("too many items in the enumerator need {0} have {1}", n, lst.Count);
+            if (lst.Count < n) throw PythonOps.ValueError(ResourceManager.Default.GetResource("toofewitemsintheenumeratorneed0have1", "too few items in the enumerator. need {0} have {1}"), n, lst.Count);
+            else if (lst.Count != n) throw PythonOps.ValueError(ResourceManager.Default.GetResource("toomanyitemsintheenumeratorneed0have1", "too many items in the enumerator need {0} have {1}"), n, lst.Count);
 
             for (int i = 0, index = start; i < n; i++, index += step) {
                 assign(index, lst[i]);

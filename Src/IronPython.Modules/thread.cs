@@ -92,7 +92,7 @@ namespace IronPython.Modules {
 
         public static int stack_size(CodeContext/*!*/ context, int size) {
             if (size < 32 * 1024 && size != 0) {
-                throw PythonOps.ValueError("size too small: {0}", size);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("sizetoosmall0", "size too small: {0}"), size);
             }
 
             int oldSize = GetStackSize(context);

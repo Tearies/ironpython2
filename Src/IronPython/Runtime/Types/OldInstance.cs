@@ -135,7 +135,7 @@ namespace IronPython.Runtime.Types {
                 if (Converter.TryConvertToString(ret, out strRet) && strRet != null) {
                     return strRet;
                 }
-                throw PythonOps.TypeError("__str__ returned non-string type ({0})", PythonTypeOps.GetName(ret));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("strreturnednonstringtype0", "__str__ returned non-string type ({0})"), PythonTypeOps.GetName(ret));
             }
 
             return __repr__(DefaultContext.Default);
@@ -152,7 +152,7 @@ namespace IronPython.Runtime.Types {
                 if (Converter.TryConvertToString(ret, out strRet) && strRet != null) {
                     return strRet;
                 }
-                throw PythonOps.TypeError("__repr__ returned non-string type ({0})", PythonTypeOps.GetName(ret));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("reprreturnednonstringtype0", "__repr__ returned non-string type ({0})"), PythonTypeOps.GetName(ret));
             }
 
             return string.Format("<{0} instance at {1}>", _class.FullName, PythonOps.HexId(this));
@@ -243,7 +243,7 @@ namespace IronPython.Runtime.Types {
                 return PythonCalls.Call(context, callable, new Slice(i, j));
             }
 
-            throw PythonOps.TypeError("instance {0} does not have __getslice__ or __getitem__", _class.Name);
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("instance0doesnothavegetsliceorgetitem", "instance {0} does not have __getslice__ or __getitem__"), _class.Name);
         }
         
         [Python3Warning("in 3.x, __setslice__ has been removed; use __setitem__")]
@@ -257,7 +257,7 @@ namespace IronPython.Runtime.Types {
                 return;
             }
 
-            throw PythonOps.TypeError("instance {0} does not have __setslice__ or __setitem__", _class.Name);
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("instance0doesnothavesetsliceorsetitem", "instance {0} does not have __setslice__ or __setitem__"), _class.Name);
         }
 
         [Python3Warning("in 3.x, __delslice__ has been removed; use __delitem__")]
@@ -269,7 +269,7 @@ namespace IronPython.Runtime.Types {
                 return PythonCalls.Call(context, callable, new Slice(i, j));
             }
 
-            throw PythonOps.TypeError("instance {0} does not have __delslice__ or __delitem__", _class.Name);
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("instance0doesnothavedelsliceordelitem", "instance {0} does not have __delslice__ or __delitem__"), _class.Name);
         }
 
         public object __index__(CodeContext context) {
@@ -345,7 +345,7 @@ namespace IronPython.Runtime.Types {
                 PythonOps.FunctionPopFrame();
             }
 
-            throw PythonOps.AttributeError("{0} instance has no __call__ method", _class.Name);
+            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0instancehasnocallmethod", "{0} instance has no __call__ method"), _class.Name);
         }
 
         [SpecialName]
@@ -361,7 +361,7 @@ namespace IronPython.Runtime.Types {
                 PythonOps.FunctionPopFrame();
             }
 
-            throw PythonOps.AttributeError("{0} instance has no __call__ method", _class.Name);
+            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0instancehasnocallmethod", "{0} instance has no __call__ method"), _class.Name);
         }
 
         [SpecialName]
@@ -377,7 +377,7 @@ namespace IronPython.Runtime.Types {
                 PythonOps.FunctionPopFrame();
             }
 
-            throw PythonOps.AttributeError("{0} instance has no __call__ method", _class.Name);
+            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0instancehasnocallmethod", "{0} instance has no __call__ method"), _class.Name);
         }
 
         public object __nonzero__(CodeContext context) {
@@ -393,7 +393,7 @@ namespace IronPython.Runtime.Types {
                 if (value is Int32 || value is BigInteger) {
                     return ScriptingRuntimeHelpers.BooleanToObject(Converter.ConvertToBoolean(value));
                 }
-                throw PythonOps.TypeError("an integer is required, got {0}", PythonTypeOps.GetName(value));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("anintegerisrequiredgot0", "an integer is required, got {0}"), PythonTypeOps.GetName(value));
             }
 
             return ScriptingRuntimeHelpers.True;
@@ -463,7 +463,7 @@ namespace IronPython.Runtime.Types {
                 return res;
             }
 
-            throw PythonOps.AttributeError("{0} instance has no attribute '{1}'", _class._name, name);
+            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0instancehasnoattribute1", "{0} instance has no attribute '{1}'"), _class._name, name);
         }
 
         internal object GetBoundMember(CodeContext context, string name) {
@@ -471,7 +471,7 @@ namespace IronPython.Runtime.Types {
             if (TryGetBoundCustomMember(context, name, out ret)) {
                 return ret;
             }
-            throw PythonOps.AttributeError("'{0}' object has no attribute '{1}'",
+            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0objecthasnoattribute1", "'{0}' object has no attribute '{1}'"),
                 PythonTypeOps.GetName(this), name);
         }
 
@@ -571,7 +571,7 @@ namespace IronPython.Runtime.Types {
             }
 
             if (!_dict.Remove(name)) {
-                throw PythonOps.AttributeError("{0} is not a valid attribute", name);
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0isnotavalidattribute", "{0} is not a valid attribute"), name);
             }
             return true;
         }
@@ -597,7 +597,7 @@ namespace IronPython.Runtime.Types {
             OldInstance oiOther = other as OldInstance;
             // CPython raises this if called directly, but not via cmp(os,ns) which still calls the user __cmp__
             //if(!(oiOther is OldInstance)) 
-            //    throw Ops.TypeError("instance.cmp(x,y) -> y must be an instance, got {0}", Ops.StringRepr(DynamicHelpers.GetPythonType(other)));
+            //    throw Ops.TypeError(ResourceManager.Default.GetResource("instancecmpxyymustbeaninstancegot0", "instance.cmp(x,y) -> y must be an instance, got {0}"), Ops.StringRepr(DynamicHelpers.GetPythonType(other)));
 
             object res = InternalCompare("__cmp__", other);
             if (res != NotImplementedType.Value) return res;
@@ -727,7 +727,7 @@ namespace IronPython.Runtime.Types {
                 if (ret is BigInteger) {
                     return BigIntegerOps.__hash__((BigInteger)ret);
                 } else if (!(ret is int))
-                    throw PythonOps.TypeError("expected int from __hash__, got {0}", PythonTypeOps.GetName(ret));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedintfromhashgot0", "expected int from __hash__, got {0}"), PythonTypeOps.GetName(ret));
 
                 return (int)ret;
             }
@@ -982,7 +982,7 @@ namespace IronPython.Runtime.Types {
                     if (oi.TryGetBoundCustomMember(context, _name, out res)) {
                         return res;
                     }
-                    throw PythonOps.AttributeError("{0} instance has no attribute '{1}'", oi._class.Name, _name);
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0instancehasnoattribute1", "{0} instance has no attribute '{1}'"), oi._class.Name, _name);
                 }
 
                 return ((CallSite<Func<CallSite, object, CodeContext, object>>)site).Update(site, instance, context);
@@ -995,7 +995,7 @@ namespace IronPython.Runtime.Types {
                     if (oi.TryGetBoundCustomMember(context, _name, out res)) {
                         return res;
                     }
-                    return LightExceptions.Throw(PythonOps.AttributeError("{0} instance has no attribute '{1}'", oi._class.Name, _name));
+                    return LightExceptions.Throw(PythonOps.AttributeError(ResourceManager.Default.GetResource("0instancehasnoattribute1", "{0} instance has no attribute '{1}'"), oi._class.Name, _name));
                 }
 
                 return ((CallSite<Func<CallSite, object, CodeContext, object>>)site).Update(site, instance, context);

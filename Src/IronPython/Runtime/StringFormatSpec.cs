@@ -153,7 +153,7 @@ namespace IronPython.Runtime {
                         case 'o':
                         case 'x':
                         case 'X':
-                            throw PythonOps.ValueError("Cannot specify ',' with '{0}'", type);
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("cannotspecifywith0", "Cannot specify ',' with '{0}'"), type);
                     }
                 }
             }

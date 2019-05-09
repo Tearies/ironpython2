@@ -115,7 +115,7 @@ namespace IronPython.Runtime {
         private void DoFormatCode() {
             // we already pulled the first %
             if (_index == _str.Length)
-                throw PythonOps.ValueError("incomplete format, expected format character at index {0}", _index);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("incompleteformatexpectedformatcharacteratindex0", "incomplete format, expected format character at index {0}"), _index);
 
             // Index is placed right after the %.
             Debug.Assert(_str[_index - 1] == '%');
@@ -324,9 +324,9 @@ namespace IronPython.Runtime {
                 case 's': AppendString(); return;
                 default:
                     if (_curCh > 0xff)
-                        throw PythonOps.ValueError("unsupported format character '{0}' (0x{1:X}) at index {2}", '?', (int)_curCh, _index - 1);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("unsupportedformatcharacter00x1xatindex2", "unsupported format character '{0}' (0x{1:X}) at index {2}"), '?', (int)_curCh, _index - 1);
                     else
-                        throw PythonOps.ValueError("unsupported format character '{0}' (0x{1:X}) at index {2}", _curCh, (int)_curCh, _index - 1);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("unsupportedformatcharacter00x1xatindex2", "unsupported format character '{0}' (0x{1:X}) at index {2}"), _curCh, (int)_curCh, _index - 1);
             }
         }
 

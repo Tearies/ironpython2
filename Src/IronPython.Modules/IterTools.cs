@@ -140,7 +140,7 @@ namespace IronPython.Modules {
                         if (iter is OldInstance) {
                             throw PythonOps.TypeError(ResourceManager.Default.GetResource("iterationovernonsequence", "iteration over non-sequence"));
                         } else {
-                            throw PythonOps.TypeError("'{0}' object is not iterable", PythonTypeOps.GetName(iter));
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("0objectisnotiterable", "'{0}' object is not iterable"), PythonTypeOps.GetName(iter));
                         }
                 }
             }
@@ -557,11 +557,11 @@ namespace IronPython.Modules {
                 int startInt = 0, stopInt = -1;
 
                 if (start != null && !Converter.TryConvertToInt32(start, out startInt) || startInt < 0)
-                    throw PythonOps.ValueError("start argument must be non-negative integer, ({0})", start);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("startargumentmustbenonnegativeinteger0", "start argument must be non-negative integer, ({0})"), start);
 
                 if (stop != null) {
                     if (!Converter.TryConvertToInt32(stop, out stopInt) || stopInt < 0)
-                        throw PythonOps.ValueError("stop argument must be non-negative integer ({0})", stop);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("stopargumentmustbenonnegativeinteger0", "stop argument must be non-negative integer ({0})"), stop);
                 }
 
                 int stepInt = 1;
@@ -720,7 +720,7 @@ namespace IronPython.Modules {
 
         private static Exception UnexpectedKeywordArgument(IDictionary<object, object> paramDict) {
             foreach (object name in paramDict.Keys) {
-                return PythonOps.TypeError("got unexpected keyword argument {0}", name);
+                return PythonOps.TypeError(ResourceManager.Default.GetResource("gotunexpectedkeywordargument0", "got unexpected keyword argument {0}"), name);
             }
 
             throw new InvalidOperationException();

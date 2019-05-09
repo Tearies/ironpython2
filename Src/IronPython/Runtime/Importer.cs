@@ -133,7 +133,7 @@ namespace IronPython.Runtime {
                     }
                 }
             
-            throw PythonOps.ImportError("Cannot import name {0}", name);
+            throw PythonOps.ImportError(ResourceManager.Default.GetResource("cannotimportname0", "Cannot import name {0}"), name);
         }
 
         private static object ImportModuleFrom(CodeContext/*!*/ context, object from, string[] parts, int current) {
@@ -154,7 +154,7 @@ namespace IronPython.Runtime {
                 }
             }
 
-            throw PythonOps.ImportError("No module named {0}", parts[current]);
+            throw PythonOps.ImportError(ResourceManager.Default.GetResource("nomodulenamed0", "No module named {0}"), parts[current]);
         }
 
         /// <summary>
@@ -167,7 +167,7 @@ namespace IronPython.Runtime {
         /// </summary>        
         public static object ImportModule(CodeContext/*!*/ context, object globals, string/*!*/ modName, bool bottom, int level) {
             if (modName.IndexOf(Path.DirectorySeparatorChar) != -1) {
-                throw PythonOps.ImportError("Import by filename is not supported.", modName);
+                throw PythonOps.ImportError(ResourceManager.Default.GetResource("importbyfilenameisnotsupported", "Import by filename is not supported."), modName);
             }
 
             string package = null;
@@ -400,7 +400,7 @@ namespace IronPython.Runtime {
             }
 
             if (level > 0) {
-                throw PythonOps.SystemError("Parent module '{0}' not loaded, cannot perform relative import", pn);
+                throw PythonOps.SystemError(ResourceManager.Default.GetResource("parentmodule0notloadedcannotperformrelativeimport", "Parent module '{0}' not loaded, cannot perform relative import"), pn);
             }
             // not enough information - absolute import
             return false;
@@ -515,7 +515,7 @@ namespace IronPython.Runtime {
             PythonContext pc = context.LanguageContext;
 
             if (!pc.BuiltinModules.TryGetValue(name, out type)) {
-                throw PythonOps.ImportError("no module named {0}", module.GetName());
+                throw PythonOps.ImportError(ResourceManager.Default.GetResource("nomodulenamed0", "no module named {0}"), module.GetName());
             }
 
             // should be a built-in module which we can reload.
@@ -672,7 +672,7 @@ namespace IronPython.Runtime {
                 return importedModule;
             }
 
-            throw PythonOps.ImportError("cannot import {0} from {1}", name, module.GetName());
+            throw PythonOps.ImportError(ResourceManager.Default.GetResource("cannotimport0from1", "cannot import {0} from {1}"), name, module.GetName());
         }
 
         private static object FindImportFunction(CodeContext/*!*/ context) {

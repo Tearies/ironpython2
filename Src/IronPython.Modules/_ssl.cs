@@ -99,7 +99,7 @@ namespace IronPython.Modules {
             if (buf == null) {
                 throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbestringorreadonlybuffernotnone", "must be string or read-only buffer, not None"));
             } else if (!(buf is string) && !(buf is PythonBuffer)) {
-                throw PythonOps.TypeError("must be string or read-only buffer, not {0}", PythonOps.GetPythonTypeName(buf));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbestringorreadonlybuffernot0", "must be string or read-only buffer, not {0}"), PythonOps.GetPythonTypeName(buf));
             }
         }
 
@@ -239,7 +239,7 @@ namespace IronPython.Modules {
             }
 
             if(obj == null) {
-                throw PythonOps.ValueError("unknown object '{0}'", txt);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownobject0", "unknown object '{0}'"), txt);
             }
 
             return obj.ToTuple();
@@ -252,7 +252,7 @@ namespace IronPython.Modules {
 
             var obj = _asn1Objects.Where(x => x.NID == nid).FirstOrDefault();
             if(obj == null) {
-                throw PythonOps.ValueError("unknown NID {0}", nid);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownnid0", "unknown NID {0}"), nid);
             }
 
             return obj.ToTuple();

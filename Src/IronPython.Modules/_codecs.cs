@@ -622,7 +622,7 @@ namespace IronPython.Modules {
                         byteCount += efb.Remaining;
                     }
                 } else if (val == null) {
-                    throw PythonOps.UnicodeEncodeError("charmap", c, index, "'charmap' codec can't encode character u'\\x{0:x}' in position {1}: character maps to <undefined>", (int)c, index);
+                    throw PythonOps.UnicodeEncodeError(ResourceManager.Default.GetResource("charmap", "charmap"), c, index, "'charmap' codec can't encode character u'\\x{0:x}' in position {1}: character maps to <undefined>", (int)c, index);
                 } else if (val is string) {
                     byteCount += ((string)val).Length;
                 } else if (val is int) {
@@ -652,7 +652,7 @@ namespace IronPython.Modules {
                         }
                     }
                 } else if (val == null) {
-                    throw PythonOps.UnicodeEncodeError("charmap", c, charIndex, "'charmap' codec can't encode character u'\\x{0:x}' in position {1}: character maps to <undefined>", (int)c, charIndex);
+                    throw PythonOps.UnicodeEncodeError(ResourceManager.Default.GetResource("charmap", "charmap"), c, charIndex, "'charmap' codec can't encode character u'\\x{0:x}' in position {1}: character maps to <undefined>", (int)c, charIndex);
                 } else if (val is string) {
                     string v = val as string;
                     for (int i = 0; i < v.Length; i++) {

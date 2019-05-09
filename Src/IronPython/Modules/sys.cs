@@ -267,7 +267,7 @@ Handle an exception by displaying it with a traceback on sys.stderr._")]
             PythonContext pc = context.LanguageContext;
             Encoding enc;
             if (!StringOps.TryGetEncoding(strName, out enc)) {
-                throw PythonOps.LookupError("'{0}' does not match any available encodings", strName);
+                throw PythonOps.LookupError(ResourceManager.Default.GetResource("0doesnotmatchanyavailableencodings", "'{0}' does not match any available encodings"), strName);
             }
 
             pc.DefaultEncoding = enc;

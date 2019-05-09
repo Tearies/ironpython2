@@ -157,7 +157,7 @@ namespace IronPython.Runtime.Operations {
             PythonTypeSlot dts;
 
             if (!dt.TryResolveSlot(context, "__new__", out dts)) {
-                throw PythonOps.TypeError("cannot create instances of {0}", dt.Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotcreateinstancesof0", "cannot create instances of {0}"), dt.Name);
             }
 
             object newInst;

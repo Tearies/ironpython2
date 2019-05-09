@@ -94,7 +94,7 @@ to Zip archives.";
                 }
 
                 if (!(pathObj is string)) {
-                    throw PythonOps.TypeError("must be string, not {0}", pathObj.GetType());
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbestringnot0", "must be string, not {0}"), pathObj.GetType());
                 }
 
                 if (kwArgs.Count > 0) {
@@ -386,7 +386,7 @@ contain the module, but has no source for it.")]
                     try {
                         fp = new BinaryReader(new FileStream(archive, FileMode.Open, FileAccess.Read));
                     } catch {
-                        throw PythonOps.IOError("zipimport: can not open file {0}", archive);
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("zipimportcannotopenfile0", "zipimport: can not open file {0}"), archive);
                     }
 
                     // Check to make sure the local file header is correct

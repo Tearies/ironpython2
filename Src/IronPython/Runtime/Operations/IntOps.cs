@@ -102,7 +102,7 @@ namespace IronPython.Runtime.Operations {
                     result is Extensible<int> || result is Extensible<BigInteger>) {
                     return result;
                 } else {
-                    throw PythonOps.TypeError("__int__ returned non-Integral (type {0})", PythonTypeOps.GetOldName(result));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("intreturnednonintegraltype0", "__int__ returned non-Integral (type {0})"), PythonTypeOps.GetOldName(result));
                 }
             } else if (PythonOps.TryGetBoundAttr(context, o, "__trunc__", out result)) {
                 result = PythonOps.CallWithContext(context, result);
@@ -114,14 +114,14 @@ namespace IronPython.Runtime.Operations {
                 } else if (Converter.TryConvertToBigInteger(result, out bigintRes)) {
                     return bigintRes;
                 } else {
-                    throw PythonOps.TypeError("__trunc__ returned non-Integral (type {0})", PythonTypeOps.GetOldName(result));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("truncreturnednonintegraltype0", "__trunc__ returned non-Integral (type {0})"), PythonTypeOps.GetOldName(result));
                 }
             }
 
             if (o is OldInstance) {
-                throw PythonOps.AttributeError("{0} instance has no attribute '__trunc__'", PythonTypeOps.GetOldName((OldInstance)o));
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0instancehasnoattributetrunc", "{0} instance has no attribute '__trunc__'"), PythonTypeOps.GetOldName((OldInstance)o));
             } else {
-                throw PythonOps.TypeError("int() argument must be a string or a number, not '{0}'", PythonTypeOps.GetName(o));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("intargumentmustbeastringoranumbernot0", "int() argument must be a string or a number, not '{0}'"), PythonTypeOps.GetName(o));
             }
         }
 
@@ -534,7 +534,7 @@ namespace IronPython.Runtime.Operations {
                     digits = ScriptingRuntimeHelpers.CharToString((char)self);
                     break;
                 default:
-                    throw PythonOps.ValueError("Unknown format code '{0}'", spec.Type.ToString());
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownformatcode0", "Unknown format code '{0}'"), spec.Type.ToString());
             }
 
             if (self < 0 && digits[0] == '-') {

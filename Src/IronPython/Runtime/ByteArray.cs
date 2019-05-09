@@ -573,7 +573,7 @@ namespace IronPython.Runtime {
             int ret = rfind(sub, start, end);
             
             if (ret == -1) {
-                throw PythonOps.ValueError("substring {0} not found in {1}", sub, this);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("substring0notfoundin1", "substring {0} not found in {1}"), sub, this);
             }
 
             return ret;
@@ -853,7 +853,7 @@ namespace IronPython.Runtime {
                 return IndexOf(((Extensible<BigInteger>)value).Value.ToByteChecked()) != -1;
             }
 
-            throw PythonOps.TypeError("Type {0} doesn't support the buffer API",
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("type0doesntsupportthebufferapi", "Type {0} doesn't support the buffer API"),
                 context.LanguageContext.PythonOptions.Python30 ? PythonTypeOps.GetOldName(value) : PythonTypeOps.GetName(value));
         }
 
@@ -1123,7 +1123,7 @@ namespace IronPython.Runtime {
                         // we don't use slice.Assign* helpers here because bytearray has different assignment semantics.
 
                         if (list.Count < n) {
-                            throw PythonOps.ValueError("too few items in the enumerator. need {0} have {1}", n, castedVal.Count);
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("toofewitemsintheenumeratorneed0have1", "too few items in the enumerator. need {0} have {1}"), n, castedVal.Count);
                         }
 
                         for (int i = 0, index = start; i < castedVal.Count; i++, index += step) {

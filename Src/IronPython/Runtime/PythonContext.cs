@@ -1273,7 +1273,7 @@ namespace IronPython.Runtime
             }
 
             if (!SystemStateModules.ContainsKey(name)) {
-                throw PythonOps.ImportError("module {0} not in sys.modules", name);
+                throw PythonOps.ImportError(ResourceManager.Default.GetResource("module0notinsysmodules", "module {0} not in sys.modules"), name);
             }
 
             return module;
@@ -2211,7 +2211,7 @@ namespace IronPython.Runtime
             if (TryConvertToWeakReferenceable(obj, out iwr)) {
                 return iwr;
             } else {
-                throw PythonOps.TypeError("cannot create weak reference to '{0}' object", PythonOps.GetPythonTypeName(obj));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotcreateweakreferenceto0object", "cannot create weak reference to '{0}' object"), PythonOps.GetPythonTypeName(obj));
             }
         }
 
@@ -3469,7 +3469,7 @@ namespace IronPython.Runtime
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods", MessageId = "System.GC.Collect")]
         internal int Collect(int generation) {
             if (generation > GC.MaxGeneration || generation < 0) {
-                throw PythonOps.ValueError("invalid generation {0}", generation);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidgeneration0", "invalid generation {0}"), generation);
             }
 
             // now let the CLR do it's normal collection

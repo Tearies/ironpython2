@@ -68,7 +68,7 @@ namespace IronPython.Modules {
             if (description == null) {
                 throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadmoduleargument4mustbe3itemsequencenotnone", "load_module() argument 4 must be 3-item sequence, not None"));
             } else if (description.__len__() != 3) {
-                throw PythonOps.TypeError("load_module() argument 4 must be sequence of length 3, not {0}", description.__len__());
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("loadmoduleargument4mustbesequenceoflength3not0", "load_module() argument 4 must be sequence of length 3, not {0}"), description.__len__());
             }
 
             PythonContext pythonContext = context.LanguageContext;
@@ -89,7 +89,7 @@ namespace IronPython.Modules {
                 case PackageDirectory:
                     return LoadPackageDirectory(pythonContext, name, filename);
                 default:
-                    throw PythonOps.TypeError("don't know how to import {0}, (type code {1}", name, type);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("dontknowhowtoimport0typecode1", "don't know how to import {0}, (type code {1}"), name, type);
             }
         }
 
@@ -146,7 +146,7 @@ namespace IronPython.Modules {
         }
 
         public static object get_frozen_object(string name) {
-            throw PythonOps.ImportError("No such frozen object named {0}", name);
+            throw PythonOps.ImportError(ResourceManager.Default.GetResource("nosuchfrozenobjectnamed0", "No such frozen object named {0}"), name);
         }
 
         public static int is_builtin(CodeContext/*!*/ context, string/*!*/ name) {
@@ -214,7 +214,7 @@ namespace IronPython.Modules {
             // we may need to insert additional layer to SourceUnit content provider if so
             PythonContext pc = context.LanguageContext;
             if (!pc.DomainManager.Platform.FileExists(pathname)) {
-                throw PythonOps.IOError("Couldn't find file: {0}", pathname);
+                throw PythonOps.IOError(ResourceManager.Default.GetResource("couldntfindfile0", "Couldn't find file: {0}"), pathname);
             }
 
             SourceUnit sourceUnit = pc.CreateFileUnit(pathname, pc.DefaultEncoding, SourceCodeKind.File);
@@ -269,7 +269,7 @@ namespace IronPython.Modules {
                     return PythonTuple.MakeTuple(pf, fileName, PythonTuple.MakeTuple(".py", "U", PythonSource));
                 }
             }
-            throw PythonOps.ImportError("No module named {0}", name);
+            throw PythonOps.ImportError(ResourceManager.Default.GetResource("nomodulenamed0", "No module named {0}"), name);
         }
 
         private static PythonTuple FindModuleBuiltinOrPath(CodeContext/*!*/ context, string name, List path) {

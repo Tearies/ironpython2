@@ -246,14 +246,14 @@ namespace IronPython.Runtime.Operations {
                 return value;
             }
 
-            throw PythonOps.TypeError("expected str, got {0} from __str__", DynamicHelpers.GetPythonType(value).Name);
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstrgot0fromstr", "expected str, got {0} from __str__"), DynamicHelpers.GetPythonType(value).Name);
         }
 
 
         internal static string FastNewUnicode(CodeContext context, object value, object encoding, object errors) {
             string strErrors = errors as string;
             if (strErrors == null) {
-                throw PythonOps.TypeError("unicode() argument 3 must be string, not {0}", PythonTypeOps.GetName(errors));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("unicodeargument3mustbestringnot0", "unicode() argument 3 must be string, not {0}"), PythonTypeOps.GetName(errors));
             }
 
             if (value != null) {
@@ -278,7 +278,7 @@ namespace IronPython.Runtime.Operations {
                 }
             }
 
-            throw PythonOps.TypeError("coercing to Unicode: need string or buffer, {0} found", PythonTypeOps.GetName(value));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("coercingtounicodeneedstringorbuffer0found", "coercing to Unicode: need string or buffer, {0} found"), PythonTypeOps.GetName(value));
         }
 
         internal static object FastNewUnicode(CodeContext context, object value, object encoding) {
@@ -300,7 +300,7 @@ namespace IronPython.Runtime.Operations {
                 if (res is string || res is Extensible<string>) {
                     return res;
                 }
-                throw PythonOps.TypeError("coercing to Unicode: expected string, got {0}", PythonTypeOps.GetName(value));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("coercingtounicodeexpectedstringgot0", "coercing to Unicode: expected string, got {0}"), PythonTypeOps.GetName(value));
             }
 
 
@@ -309,7 +309,7 @@ namespace IronPython.Runtime.Operations {
                 if (res is string || res is Extensible<string>) {
                     return res;
                 }
-                throw PythonOps.TypeError("coercing to Unicode: expected string, got {0}", PythonTypeOps.GetName(value));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("coercingtounicodeexpectedstringgot0", "coercing to Unicode: expected string, got {0}"), PythonTypeOps.GetName(value));
             }
 
             return FastNewUnicode(context, value, context.LanguageContext.DefaultEncoding.WebName, "strict");
@@ -716,7 +716,7 @@ namespace IronPython.Runtime.Operations {
         public static int index(this string self, [BytesConversion]string sub, int start, int end) {
             if (sub == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgotnonetype", "expected string, got NoneType"));
             int ret = find(self, sub, start, end);
-            if (ret == -1) throw PythonOps.ValueError("substring {0} not found in {1}", sub, self);
+            if (ret == -1) throw PythonOps.ValueError(ResourceManager.Default.GetResource("substring0notfoundin1", "substring {0} not found in {1}"), sub, self);
             return ret;
         }
 
@@ -1028,7 +1028,7 @@ namespace IronPython.Runtime.Operations {
 
         public static int rindex(this string self, [BytesConversion]string sub, int start, int end) {
             int ret = rfind(self, sub, start, end);
-            if (ret == -1) throw PythonOps.ValueError("substring {0} not found in {1}", sub, self);
+            if (ret == -1) throw PythonOps.ValueError(ResourceManager.Default.GetResource("substring0notfoundin1", "substring {0} not found in {1}"), sub, self);
             return ret;
         }
 
@@ -1610,7 +1610,7 @@ namespace IronPython.Runtime.Operations {
             } else if (Converter.TryConvertToString(value, out strVal) && strVal != null) {
                 sb.Append(strVal);
             } else {
-                throw PythonOps.TypeError("sequence item {0}: expected string, {1} found", index.ToString(), PythonOps.GetPythonTypeName(value));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("sequenceitem0expectedstring1found", "sequence item {0}: expected string, {1} found"), index.ToString(), PythonOps.GetPythonTypeName(value));
             }
         }
 
@@ -1743,7 +1743,7 @@ namespace IronPython.Runtime.Operations {
                     if (encodingType == Missing.Value) {
                         encoding = pc.GetDefaultEncodingName();
                     } else {
-                        throw PythonOps.TypeError("decode() expected string, got '{0}'", DynamicHelpers.GetPythonType(encodingType).Name);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("decodeexpectedstringgot0", "decode() expected string, got '{0}'"), DynamicHelpers.GetPythonType(encodingType).Name);
                     }
                 }
             }
@@ -1769,7 +1769,7 @@ namespace IronPython.Runtime.Operations {
                 return UserDecodeOrEncode(codecTuple[1], s, errors);
             }
 
-            throw PythonOps.LookupError("unknown encoding: {0}", encoding);
+            throw PythonOps.LookupError(ResourceManager.Default.GetResource("unknownencoding0", "unknown encoding: {0}"), encoding);
         }
 
 #if FEATURE_ENCODING
@@ -1842,7 +1842,7 @@ namespace IronPython.Runtime.Operations {
                     if (encodingType == Missing.Value) {
                         encoding = context.LanguageContext.GetDefaultEncodingName();
                     } else {
-                        throw PythonOps.TypeError("encode() expected string, got '{0}'", DynamicHelpers.GetPythonType(encodingType).Name);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("encodeexpectedstringgot0", "encode() expected string, got '{0}'"), DynamicHelpers.GetPythonType(encodingType).Name);
                     }
                 }
             }
@@ -1868,7 +1868,7 @@ namespace IronPython.Runtime.Operations {
                 return UserDecodeOrEncode(codecTuple[0], s, errors);
             }
 
-            throw PythonOps.LookupError("unknown encoding: {0}", encoding);
+            throw PythonOps.LookupError(ResourceManager.Default.GetResource("unknownencoding0", "unknown encoding: {0}"), encoding);
         }
 
         internal static string DoEncode(CodeContext context, string s, string errors, string encoding, Encoding e) {
@@ -2137,14 +2137,14 @@ namespace IronPython.Runtime.Operations {
                 throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringortuplegotnonetype", "expected string or Tuple, got NoneType"));
             }
             if (!(prefix is string) && !(prefix is PythonTuple) && !(prefix is Extensible<string>)) {
-                throw PythonOps.TypeError("expected string or Tuple, got {0} Type", prefix.GetType());
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringortuplegot0type", "expected string or Tuple, got {0} Type"), prefix.GetType());
             }
         }
 
         private static string GetString(object obj) {
             string ret = AsString(obj);
             if (ret == null) {
-                throw PythonOps.TypeError("expected string, got {0}", DynamicHelpers.GetPythonType(obj).Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgot0", "expected string, got {0}"), DynamicHelpers.GetPythonType(obj).Name);
             }
             return ret;
         }
@@ -2539,7 +2539,7 @@ namespace IronPython.Runtime.Operations {
                     ok = false;
                 }
 
-                if (!ok) throw PythonOps.TypeError("{1} error handler must return tuple containing (str, int), got {0}", PythonOps.GetPythonTypeName(res), encodeOrDecode);
+                if (!ok) throw PythonOps.TypeError(ResourceManager.Default.GetResource("1errorhandlermustreturntuplecontainingstrintgot0", "{1} error handler must return tuple containing (str, int), got {0}"), PythonOps.GetPythonTypeName(res), encodeOrDecode);
                 return replacement;
             }
         }

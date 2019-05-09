@@ -310,7 +310,7 @@ namespace IronPython.Modules {
 
         public static void _check_HRESULT(int hresult) {
             if (hresult < 0) {
-                throw PythonOps.WindowsError("ctypes function returned failed HRESULT: {0}", PythonOps.Hex((BigInteger)(uint)hresult));
+                throw PythonOps.WindowsError(ResourceManager.Default.GetResource("ctypesfunctionreturnedfailedhresult0", "ctypes function returned failed HRESULT: {0}"), PythonOps.Hex((BigInteger)(uint)hresult));
             }
         }
 
@@ -427,7 +427,7 @@ namespace IronPython.Modules {
 
         public static void resize(CData obj, int newSize) {
             if (newSize < obj.NativeType.Size) {
-                throw PythonOps.ValueError("minimum size is {0}", newSize);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("minimumsizeis0", "minimum size is {0}"), newSize);
             }
 
             MemoryHolder newMem = new MemoryHolder(newSize);
@@ -572,12 +572,12 @@ namespace IronPython.Modules {
 
             fieldName = pt[0] as string;
             if (fieldName == null) {
-                throw PythonOps.TypeError("first item in _fields_ tuple must be a string, got", PythonTypeOps.GetName(pt[0]));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("firstiteminfieldstuplemustbeastringgot", "first item in _fields_ tuple must be a string, got"), PythonTypeOps.GetName(pt[0]));
             }
 
             cdata = pt[1] as INativeType;
             if (cdata == null) {
-                throw PythonOps.TypeError("second item in _fields_ tuple must be a C type, got {0}", PythonTypeOps.GetName(pt[0]));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("seconditeminfieldstuplemustbeactypegot0", "second item in _fields_ tuple must be a C type, got {0}"), PythonTypeOps.GetName(pt[0]));
             } else if (cdata == type) {
                 throw StructureCannotContainSelf();
             }
@@ -600,7 +600,7 @@ namespace IronPython.Modules {
             int bitCount = Converter.ConvertToInt32(pt[2]);
 
             if (!(cdata is SimpleType simpType)) {
-                throw PythonOps.TypeError("bit fields not allowed for type {0}", ((PythonType)cdata).Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("bitfieldsnotallowedfortype0", "bit fields not allowed for type {0}"), ((PythonType)cdata).Name);
             }
 
             switch (simpType._type) {
@@ -612,7 +612,7 @@ namespace IronPython.Modules {
                 case SimpleTypeKind.CharPointer:
                 case SimpleTypeKind.WChar:
                 case SimpleTypeKind.WCharPointer:
-                    throw PythonOps.TypeError("bit fields not allowed for type {0}", ((PythonType)cdata).Name);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("bitfieldsnotallowedfortype0", "bit fields not allowed for type {0}"), ((PythonType)cdata).Name);
             }
 
             if (bitCount <= 0 || bitCount > cdata.Size * 8) {

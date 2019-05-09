@@ -62,7 +62,7 @@ namespace IronPython.Runtime {
                 "__index__",
                 out value)) {
                 if (!(value is int) && !(value is BigInteger))
-                    throw PythonOps.TypeError("index returned non-(int, long), got '{0}'", PythonTypeOps.GetName(value));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("indexreturnednonintlonggot0", "index returned non-(int, long), got '{0}'"), PythonTypeOps.GetName(value));
 
                 return hex(context, value);
             }
@@ -90,7 +90,7 @@ namespace IronPython.Runtime {
                 "__index__",
                 out value)) {
                 if (!(value is int) && !(value is BigInteger))
-                    throw PythonOps.TypeError("index returned non-(int, long), got '{0}'", PythonTypeOps.GetName(value));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("indexreturnednonintlonggot0", "index returned non-(int, long), got '{0}'"), PythonTypeOps.GetName(value));
 
                 return oct(context, value);
             }

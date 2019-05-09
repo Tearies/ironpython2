@@ -900,7 +900,7 @@ namespace IronPython.Runtime {
                 object res = ((PythonType)cls).CreateInstance(context);
                 FrozenSetCollection fs = res as FrozenSetCollection;
                 if (fs == null) {
-                    throw PythonOps.TypeError("{0} is not a subclass of frozenset", res);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotasubclassoffrozenset", "{0} is not a subclass of frozenset"), res);
                 }
 
                 return fs;
@@ -914,7 +914,7 @@ namespace IronPython.Runtime {
                 object res = ((PythonType)cls).CreateInstance(context, set);
                 FrozenSetCollection fs = res as FrozenSetCollection;
                 if (fs == null) {
-                    throw PythonOps.TypeError("{0} is not a subclass of frozenset", res);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotasubclassoffrozenset", "{0} is not a subclass of frozenset"), res);
                 }
 
                 return fs;

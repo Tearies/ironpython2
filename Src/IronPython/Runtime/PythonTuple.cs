@@ -63,7 +63,7 @@ namespace IronPython.Runtime {
                 return EMPTY;
             } else {
                 PythonTuple tupObj = cls.CreateInstance(context) as PythonTuple;
-                if (tupObj == null) throw PythonOps.TypeError("{0} is not a subclass of tuple", cls);
+                if (tupObj == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotasubclassoftuple", "{0} is not a subclass of tuple"), cls);
                 return tupObj;
             }
         }
@@ -76,7 +76,7 @@ namespace IronPython.Runtime {
                 return new PythonTuple(MakeItems(sequence));
             } else {
                 PythonTuple tupObj = cls.CreateInstance(context, sequence) as PythonTuple;
-                if (tupObj == null) throw PythonOps.TypeError("{0} is not a subclass of tuple", cls);
+                if (tupObj == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotasubclassoftuple", "{0} is not a subclass of tuple"), cls);
                 return tupObj;
             }
         }

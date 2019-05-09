@@ -335,7 +335,7 @@ namespace IronPython.Modules {
                 return dblVal;
             }
 
-            throw PythonOps.TypeError("expected int, got {0}", DynamicHelpers.GetPythonType(seconds));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedintgot0", "expected int, got {0}"), DynamicHelpers.GetPythonType(seconds));
         }
 
         private enum FormatInfoType {
@@ -567,7 +567,7 @@ namespace IronPython.Modules {
         }
 
         private static int[] ValidateDateTimeTuple(CodeContext/*!*/ context, PythonTuple t) {
-            if (t.__len__() != MaxIndex) throw PythonOps.TypeError("expected tuple of length {0}", MaxIndex);
+            if (t.__len__() != MaxIndex) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedtupleoflength0", "expected tuple of length {0}"), MaxIndex);
 
             int[] ints = new int[MaxIndex];
             for (int i = 0; i < MaxIndex; i++) {
@@ -659,21 +659,21 @@ namespace IronPython.Modules {
                 } else {
                     struct_time st = cls.CreateInstance(context, year, month, day, hour, minute, second, dayOfWeek, dayOfYear, isDst) as struct_time;
                     if (st == null)
-                        throw PythonOps.TypeError("{0} is not a subclass of time.struct_time", cls);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotasubclassoftimestructtime", "{0} is not a subclass of time.struct_time"), cls);
                     return st;
                 }
             }
 
             public static struct_time __new__(CodeContext context, PythonType cls, [NotNull]PythonTuple sequence) {
                 if (sequence.__len__() != 9) {
-                    throw PythonOps.TypeError("time.struct_time() takes a 9-sequence ({0}-sequence given)", sequence.__len__());
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("timestructtimetakesa9sequence0sequencegiven", "time.struct_time() takes a 9-sequence ({0}-sequence given)"), sequence.__len__());
                 }
                 if (cls == _StructTimeType) {
                     return new struct_time(sequence);
                 } else {
                     struct_time st = cls.CreateInstance(context, sequence) as struct_time;
                     if (st == null) {
-                        throw PythonOps.TypeError("{0} is not a subclass of time.struct_time", cls);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotasubclassoftimestructtime", "{0} is not a subclass of time.struct_time"), cls);
                     }
                     return st;
                 }

@@ -606,7 +606,7 @@ namespace IronPython.Runtime {
         [Python3Warning("cell comparisons not supported in 3.x")]
         public int __cmp__(object other) {
             ClosureCell cc = other as ClosureCell;
-            if (cc == null) throw PythonOps.TypeError("cell.__cmp__(x,y) expected cell, got {0}", PythonTypeOps.GetName(other));
+            if (cc == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("cellcmpxyexpectedcellgot0", "cell.__cmp__(x,y) expected cell, got {0}"), PythonTypeOps.GetName(other));
 
             return PythonOps.Compare(Value, cc.Value);
         }

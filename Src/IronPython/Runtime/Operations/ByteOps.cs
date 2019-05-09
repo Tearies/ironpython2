@@ -91,14 +91,14 @@ namespace IronPython.Runtime.Operations {
             } else if ((strValue = value as string) != null) {
                 byteList.AddRange(strValue.MakeByteArray());
             } else {
-                throw PythonOps.TypeError("sequence item {0}: expected bytes or byte array, {1} found", index.ToString(), PythonOps.GetPythonTypeName(value));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("sequenceitem0expectedbytesorbytearray1found", "sequence item {0}: expected bytes or byte array, {1} found"), index.ToString(), PythonOps.GetPythonTypeName(value));
             }
         }
 
         internal static IList<byte> CoerceBytes(object obj) {
             IList<byte> ret = obj as IList<byte>;
             if (ret == null) {
-                throw PythonOps.TypeError("expected string, got {0} Type", PythonTypeOps.GetName(obj));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringgot0type", "expected string, got {0} Type"), PythonTypeOps.GetName(obj));
             }
             return ret;
         }

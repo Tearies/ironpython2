@@ -455,7 +455,7 @@ namespace IronPython.Runtime.Exceptions {
                         //  (msg, (filename, lineno, offset, text, printFileandLineStr))
                         if(args[1] is PythonTuple locationInfo) {
                             if (locationInfo.__len__() != 4) {
-                                throw PythonOps.IndexError("SyntaxError expected tuple with 4 arguments, got {0}", locationInfo.__len__());
+                                throw PythonOps.IndexError(ResourceManager.Default.GetResource("syntaxerrorexpectedtuplewith4argumentsgot0", "SyntaxError expected tuple with 4 arguments, got {0}"), locationInfo.__len__());
                             }
 
                             filename = locationInfo[0];
@@ -570,13 +570,13 @@ namespace IronPython.Runtime.Exceptions {
         public partial class _UnicodeTranslateError : BaseException {
             public override void __init__(params object[] args) {
                 if (args.Length != 4) {
-                    throw PythonOps.TypeError("function takes exactly 4 arguments ({0} given)", args.Length);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("functiontakesexactly4arguments0given", "function takes exactly 4 arguments ({0} given)"), args.Length);
                 }
 
                 if (args[0] is string || args[0] is Extensible<string>) {
                     @object = args[0];
                 } else {
-                    throw PythonOps.TypeError("argument 4 must be unicode, not {0}", DynamicHelpers.GetPythonType(args[0]).Name);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("argument4mustbeunicodenot0", "argument 4 must be unicode, not {0}"), DynamicHelpers.GetPythonType(args[0]).Name);
                 }
 
                 start = args[1];
@@ -585,7 +585,7 @@ namespace IronPython.Runtime.Exceptions {
                 if (args[3] is string || args[3] is Extensible<string>) {
                     reason = args[3];
                 } else {
-                    throw PythonOps.TypeError("argument 4 must be str, not {0}", DynamicHelpers.GetPythonType(args[3]).Name);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("argument4mustbestrnot0", "argument 4 must be str, not {0}"), DynamicHelpers.GetPythonType(args[3]).Name);
                 }
 
                 base.__init__(args);

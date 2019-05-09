@@ -237,9 +237,9 @@ namespace IronPython.Modules {
                 string str = value as string;
                 if (str != null) {
                     if (!IsStringType) {
-                        throw PythonOps.TypeError("expected {0} instance, got str", Name);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("expected0instancegotstr", "expected {0} instance, got str"), Name);
                     } else if (str.Length > _length) {
-                        throw PythonOps.ValueError("string too long ({0}, maximum length {1})", str.Length, _length);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("stringtoolong0maximumlength1", "string too long ({0}, maximum length {1})"), str.Length, _length);
                     }
 
                     WriteString(address, offset, str);
@@ -257,7 +257,7 @@ namespace IronPython.Modules {
                         return null;
                     }
 
-                    throw PythonOps.TypeError("expected string or Unicode object, {0} found", DynamicHelpers.GetPythonType(value).Name);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringorunicodeobject0found", "expected string or Unicode object, {0} found"), DynamicHelpers.GetPythonType(value).Name);
                 }
 
                 object[] arrArgs = value as object[];
@@ -284,7 +284,7 @@ namespace IronPython.Modules {
                         return arr._memHolder.EnsureObjects();
                     }
 
-                    throw PythonOps.TypeError("unexpected {0} instance, got {1}", Name, DynamicHelpers.GetPythonType(value).Name);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("unexpected0instancegot1", "unexpected {0} instance, got {1}"), Name, DynamicHelpers.GetPythonType(value).Name);
                 }
 
                 return null;

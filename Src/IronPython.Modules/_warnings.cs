@@ -202,7 +202,7 @@ namespace IronPython.Modules {
                     registry.Add(key, 1);
                     break;
                 default:
-                    throw PythonOps.RuntimeError("Unrecognized action ({0}) in warnings.filters:\n {1}", action, last_filter);
+                    throw PythonOps.RuntimeError(ResourceManager.Default.GetResource("unrecognizedaction0inwarningsfiltersn1", "Unrecognized action ({0}) in warnings.filters:\n {1}"), action, last_filter);
             }
 
             if (warnings != null) {

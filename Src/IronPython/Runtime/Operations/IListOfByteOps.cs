@@ -1216,12 +1216,12 @@ namespace IronPython.Runtime.Operations {
                 } else if (c == ' ') {
                     continue;
                 } else {
-                    throw PythonOps.ValueError("non-hexadecimal number found in fromhex() arg at position {0}", i);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("nonhexadecimalnumberfoundinfromhexargatposition0", "non-hexadecimal number found in fromhex() arg at position {0}"), i);
                 }
 
                 i++;
                 if (i == @string.Length) {
-                    throw PythonOps.ValueError("non-hexadecimal number found in fromhex() arg at position {0}", i - 1);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("nonhexadecimalnumberfoundinfromhexargatposition0", "non-hexadecimal number found in fromhex() arg at position {0}"), i - 1);
                 }
 
                 c = @string[i];
@@ -1232,7 +1232,7 @@ namespace IronPython.Runtime.Operations {
                 } else if (c >= 'a' && c <= 'f') {
                     iVal += c - 'a' + 10;
                 } else {
-                    throw PythonOps.ValueError("non-hexadecimal number found in fromhex() arg at position {0}", i);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("nonhexadecimalnumberfoundinfromhexargatposition0", "non-hexadecimal number found in fromhex() arg at position {0}"), i);
                 }
                 res.Add((byte)iVal);
             }

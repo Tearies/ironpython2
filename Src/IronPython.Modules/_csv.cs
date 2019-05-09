@@ -72,13 +72,13 @@ dialect = csv.register_dialect(name, dialect)")]
 
             if (args.Length < 1)
             {
-                throw PythonOps.TypeError("expected at least 1 arguments, got {0}",
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedatleast1argumentsgot0", "expected at least 1 arguments, got {0}"),
                      args.Length);
             }
 
             if (args.Length > 2)
             {
-                throw PythonOps.TypeError("expected at most 2 arguments, got {0}",
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedatmost2argumentsgot0", "expected at most 2 arguments, got {0}"),
                     args.Length);
             }
 
@@ -228,13 +228,13 @@ dialect = csv.register_dialect(name, dialect)")]
 
             if (args.Length < 1)
             {
-                throw PythonOps.TypeError("expected at least 1 arguments, got {0}",
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedatleast1argumentsgot0", "expected at least 1 arguments, got {0}"),
                      args.Length);
             }
 
             if (args.Length > 2)
             {
-                throw PythonOps.TypeError("expected at most 2 arguments, got {0}",
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedatmost2argumentsgot0", "expected at most 2 arguments, got {0}"),
                     args.Length);
             }
 
@@ -406,7 +406,7 @@ The Dialect type records CSV parsing and generation options.")]
                 {
                     if (!(src is int))
                     {
-                        throw PythonOps.TypeError("\"{0}\" must be an integer",
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("0mustbeaninteger", "\"{0}\" must be an integer"),
                             name);
                     }
                     result = (int)src;
@@ -931,7 +931,7 @@ in CSV format.")]
                             else
                             {
                                 // illegal!
-                                throw MakeError("'{0}' expected after '{1}'",
+                                throw MakeError(ResourceManager.Default.GetResource("0expectedafter1", "'{0}' expected after '{1}'"),
                                     dialect.delimiter, dialect.quotechar);
                             }
                             break;

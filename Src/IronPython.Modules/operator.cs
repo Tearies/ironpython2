@@ -545,7 +545,7 @@ namespace IronPython.Modules {
 
         public static object irepeat(CodeContext/*!*/ context, object a, object b) {
             if (!isSequenceType(a)) {
-                throw PythonOps.TypeError("'{0}' object cannot be repeated", PythonTypeOps.GetName(a));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("0objectcannotberepeated", "'{0}' object cannot be repeated"), PythonTypeOps.GetName(a));
             }
 
             try {
@@ -649,7 +649,7 @@ types and lengths of a and b--but not their values.")]
 
                 return CompareBytes(aBuf.ToBytes(0, null), bBuf.ToBytes(0, null));
             }
-            throw PythonOps.TypeError("unsupported operand types(s) or combination of types: '{0}' and '{1}", PythonOps.GetPythonTypeName(a), PythonOps.GetPythonTypeName(b));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("unsupportedoperandtypessorcombinationoftypes0and1", "unsupported operand types(s) or combination of types: '{0}' and '{1}"), PythonOps.GetPythonTypeName(a), PythonOps.GetPythonTypeName(b));
         }
 
         private static bool CompareBytes(IEnumerable<byte> a, IEnumerable<byte> b) {
@@ -675,9 +675,9 @@ types and lengths of a and b--but not their values.")]
 
         private static void TestBothSequence(object a, object b) {
             if (!isSequenceType(a)) {
-                throw PythonOps.TypeError("'{0}' object cannot be concatenated", PythonTypeOps.GetName(a));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("0objectcannotbeconcatenated", "'{0}' object cannot be concatenated"), PythonTypeOps.GetName(a));
             } else if (!isSequenceType(b)) {
-                throw PythonOps.TypeError("cannot concatenate '{0}' and '{1} objects", PythonTypeOps.GetName(a), PythonTypeOps.GetName(b));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotconcatenate0and1objects", "cannot concatenate '{0}' and '{1} objects"), PythonTypeOps.GetName(a), PythonTypeOps.GetName(b));
             }
         }
     }

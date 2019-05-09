@@ -89,9 +89,9 @@ namespace IronPython.Runtime.Types {
             NewTypeInfo typeInfo = NewTypeInfo.GetTypeInfo(typeName, bases);
 
             if (typeInfo.BaseType.IsValueType()) {
-                throw PythonOps.TypeError("cannot derive from {0} because it is a value type", typeInfo.BaseType.FullName);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotderivefrom0becauseitisavaluetype", "cannot derive from {0} because it is a value type"), typeInfo.BaseType.FullName);
             } else if (typeInfo.BaseType.IsSealed()) {
-                throw PythonOps.TypeError("cannot derive from {0} because it is sealed", typeInfo.BaseType.FullName);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotderivefrom0becauseitissealed", "cannot derive from {0} because it is sealed"), typeInfo.BaseType.FullName);
             }
 
             Type ret = _newTypes.GetOrCreateValue(typeInfo,

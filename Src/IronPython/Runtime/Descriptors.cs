@@ -57,7 +57,7 @@ namespace IronPython.Runtime {
 
         public classmethod(CodeContext/*!*/ context, object func) {
             if (!PythonOps.IsCallable(context, func))
-                throw PythonOps.TypeError("{0} object is not callable", PythonTypeOps.GetName(func));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("0objectisnotcallable", "{0} object is not callable"), PythonTypeOps.GetName(func));
             this.func = func;
         }
 
@@ -116,7 +116,7 @@ namespace IronPython.Runtime {
                 // http://bugs.python.org/issue5890
                 PythonDictionary dict = UserTypeOps.GetDictionary((IPythonObject)this);
                 if (dict == null) {
-                    throw PythonOps.AttributeError("{0} object has no __doc__ attribute", PythonTypeOps.GetName(this));
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0objecthasnodocattribute", "{0} object has no __doc__ attribute"), PythonTypeOps.GetName(this));
                 }
 
                 dict["__doc__"] = ((PythonFunction)_fget).__doc__;

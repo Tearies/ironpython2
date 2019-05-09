@@ -1218,7 +1218,7 @@ namespace IronPython.Runtime {
                 case 'w': fmode = FileMode.Create; mode = mode.Remove(0, 1); break;
                 case 'a': fmode = FileMode.Append; mode = mode.Remove(0, 1); break;
                 default:
-                    throw PythonOps.ValueError("mode string must begin with one of 'r', 'w', 'a' or 'U', not '{0}'", inMode);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("modestringmustbeginwithoneofrwaorunot0", "mode string must begin with one of 'r', 'w', 'a' or 'U', not '{0}'"), inMode);
             }
 
             // process +
@@ -1241,7 +1241,7 @@ namespace IronPython.Runtime {
             // Make some additional mode check after processing all valid modes.
             if (mode.Length > 0) {
                 if (mode[0] != 'U' && mode[0] != 'b' && mode[0] != 't') {
-                    throw PythonOps.ValueError("Invalid mode ('{0}')", inMode);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidmode0", "Invalid mode ('{0}')"), inMode);
                 }
             }
         }
@@ -1829,9 +1829,9 @@ namespace IronPython.Runtime {
 
             IPythonArray array = arr as IPythonArray;
             if (array == null) {
-                throw PythonOps.TypeError("file.write() argument must be string or read-only character buffer, not {0}", DynamicHelpers.GetPythonType(arr).Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("filewriteargumentmustbestringorreadonlycharacterbuffernot0", "file.write() argument must be string or read-only character buffer, not {0}"), DynamicHelpers.GetPythonType(arr).Name);
             } else if (_fileMode != PythonFileMode.Binary) {
-                throw PythonOps.TypeError("file.write() argument must be string or buffer, not {0}", DynamicHelpers.GetPythonType(arr).Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("filewriteargumentmustbestringorbuffernot0", "file.write() argument must be string or buffer, not {0}"), DynamicHelpers.GetPythonType(arr).Name);
             }
 
             if (locking) {

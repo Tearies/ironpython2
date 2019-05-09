@@ -186,7 +186,7 @@ namespace IronPython.Modules {
                             // any number of 'b's is acceptable
                             continue;
                         default:
-                            throw PythonOps.ValueError("invalid mode: {0}", mode);
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidmode0", "invalid mode: {0}"), mode);
                     }
                 }
 

@@ -50,7 +50,7 @@ namespace IronPython.Runtime.Types {
             IPythonObject sdo = instance as IPythonObject;
             if (sdo != null) {
                 if (!(value is PythonDictionary))
-                    throw PythonOps.TypeError("__dict__ must be set to a dictionary, not '{0}'", owner.Name);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("dictmustbesettoadictionarynot0", "__dict__ must be set to a dictionary, not '{0}'"), owner.Name);
 
                 if (!sdo.PythonType.HasDictionary) {
                     return false;
@@ -60,7 +60,7 @@ namespace IronPython.Runtime.Types {
                 return true;
             }
 
-            if (instance == null) throw PythonOps.AttributeError("'__dict__' of '{0}' objects is not writable", owner.Name);
+            if (instance == null) throw PythonOps.AttributeError(ResourceManager.Default.GetResource("dictof0objectsisnotwritable", "'__dict__' of '{0}' objects is not writable"), owner.Name);
             return false;
         }
 
@@ -79,7 +79,7 @@ namespace IronPython.Runtime.Types {
                 return true;
             }
 
-            if (instance == null) throw PythonOps.TypeError("'__dict__' of '{0}' objects is not writable", owner.Name);
+            if (instance == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("dictof0objectsisnotwritable", "'__dict__' of '{0}' objects is not writable"), owner.Name);
             return false;
         }
 

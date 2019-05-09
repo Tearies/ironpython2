@@ -562,7 +562,7 @@ namespace IronPython.Runtime.Exceptions {
 
             public override void __init__(params object[] args) {
                 if (args == null || args.Length != 5) {
-                    throw PythonOps.TypeError("__init__ takes exactly 5 arguments ({0} given)", args.Length);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("inittakesexactly5arguments0given", "__init__ takes exactly 5 arguments ({0} given)"), args.Length);
                 }
                 __init__(encoding, @object, start, end, reason);
             }
@@ -631,7 +631,7 @@ namespace IronPython.Runtime.Exceptions {
 
             public override void __init__(params object[] args) {
                 if (args == null || args.Length != 5) {
-                    throw PythonOps.TypeError("__init__ takes exactly 5 arguments ({0} given)", args.Length);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("inittakesexactly5arguments0given", "__init__ takes exactly 5 arguments ({0} given)"), args.Length);
                 }
                 __init__(encoding, @object, start, end, reason);
             }

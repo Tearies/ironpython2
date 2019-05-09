@@ -44,7 +44,7 @@ namespace IronPython.Modules {
                     (sVal = StringOps.AsString(val)) == null ||
                     sVal.Length != 1 ||
                     allowedTypes.IndexOf(sVal[0]) == -1) {
-                    throw PythonOps.AttributeError("AttributeError: class must define a '_type_' attribute which must be a single character string containing one of '{0}'.", allowedTypes);
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("attributeerrorclassmustdefineatypeattributewhichmustbeasinglecharacterstringcontainingoneof0", "AttributeError: class must define a '_type_' attribute which must be a single character string containing one of '{0}'."), allowedTypes);
                 }
 
                 _charType = sVal[0];
@@ -164,7 +164,7 @@ namespace IronPython.Modules {
                 IntPtr handle = GetHandleFromObject(library, "in_dll expected object with _handle attribute");
                 IntPtr addr = NativeFunctions.LoadFunction(handle, name);
                 if (addr == IntPtr.Zero) {
-                    throw PythonOps.ValueError("{0} not found when attempting to load {1} from dll", name, Name);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("0notfoundwhenattemptingtoload1fromdll", "{0} not found when attempting to load {1} from dll"), name, Name);
                 }
 
                 SimpleCData res = (SimpleCData)CreateInstance(context);

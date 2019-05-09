@@ -41,7 +41,7 @@ namespace IronPython.Runtime {
                     this._selfClass = obj;
                     this._self = obj;
                 } else {
-                    throw PythonOps.TypeError("super(type, obj): obj must be an instance or subtype of type {1}, not {0}", PythonTypeOps.GetName(obj), type.Name);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("supertypeobjobjmustbeaninstanceorsubtypeoftype1not0", "super(type, obj): obj must be an instance or subtype of type {1}, not {0}"), PythonTypeOps.GetName(obj), type.Name);
                 }
             } else {
                 this._thisClass = type;

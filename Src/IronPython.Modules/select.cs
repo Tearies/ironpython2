@@ -135,7 +135,7 @@ namespace IronPython.Modules {
                 handle = Converter.ConvertToInt64(fileno);
             }
             if (handle < 0) {
-                throw PythonOps.ValueError("file descriptor cannot be a negative number ({0})", handle);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("filedescriptorcannotbeanegativenumber0", "file descriptor cannot be a negative number ({0})"), handle);
             }
             socket = PythonSocket.socket.HandleToSocket(handle);
             if (socket == null) {

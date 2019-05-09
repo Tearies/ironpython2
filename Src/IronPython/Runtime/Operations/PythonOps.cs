@@ -143,7 +143,7 @@ namespace IronPython.Runtime.Operations {
                 if (errorHandlers.ContainsKey(name))
                     return errorHandlers[name];
                 else
-                    return LightExceptions.Throw(PythonOps.LookupError("unknown error handler name '{0}'", name));
+                    return LightExceptions.Throw(PythonOps.LookupError(ResourceManager.Default.GetResource("unknownerrorhandlername0", "unknown error handler name '{0}'"), name));
             }
         }
 
@@ -173,7 +173,7 @@ namespace IronPython.Runtime.Operations {
                 }
             }
 
-            throw PythonOps.LookupError("unknown encoding: {0}", encoding);
+            throw PythonOps.LookupError(ResourceManager.Default.GetResource("unknownencoding0", "unknown encoding: {0}"), encoding);
         }
 
         internal static void RegisterEncoding(CodeContext/*!*/ context, object search_function) {
@@ -246,7 +246,7 @@ namespace IronPython.Runtime.Operations {
             if (ret == null) {
                 Extensible<string> es = value as Extensible<string>;
                 if (es == null) {
-                    throw PythonOps.TypeError("expected str, got {0} from __str__", PythonTypeOps.GetName(value));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstrgot0fromstr", "expected str, got {0} from __str__"), PythonTypeOps.GetName(value));
                 }
 
                 ret = es.Value;
@@ -556,7 +556,7 @@ namespace IronPython.Runtime.Operations {
                 }
 
                 if (pt == null || !Converter.TryConvertToIndex(pt[0], out icount)) {
-                    throw TypeError("can't multiply sequence by non-int of type '{0}'", PythonTypeOps.GetName(count));
+                    throw TypeError(ResourceManager.Default.GetResource("cantmultiplysequencebynonintoftype0", "can't multiply sequence by non-int of type '{0}'"), PythonTypeOps.GetName(count));
                 }
             }
             return icount;
@@ -849,7 +849,7 @@ namespace IronPython.Runtime.Operations {
                 "__hex__",
                 out hex)) {
                 if (!(hex is string) && !(hex is ExtensibleString))
-                    throw PythonOps.TypeError("hex expected string type as return, got '{0}'", PythonTypeOps.GetName(hex));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("hexexpectedstringtypeasreturngot0", "hex expected string type as return, got '{0}'"), PythonTypeOps.GetName(hex));
 
                 return hex;
             }
@@ -870,7 +870,7 @@ namespace IronPython.Runtime.Operations {
                 "__oct__",
                 out octal)) {
                 if (!(octal is string) && !(octal is ExtensibleString))
-                    throw PythonOps.TypeError("hex expected string type as return, got '{0}'", PythonTypeOps.GetName(octal));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("hexexpectedstringtypeasreturngot0", "hex expected string type as return, got '{0}'"), PythonTypeOps.GetName(octal));
 
                 return octal;
             }
@@ -905,11 +905,11 @@ namespace IronPython.Runtime.Operations {
                 "__index__",
                 out index)) {
                 if (!(index is int) && !(index is double))
-                    throw PythonOps.TypeError("__index__ returned non-(int,long) (type {0})", PythonTypeOps.GetName(index));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("indexreturnednonintlongtype0", "__index__ returned non-(int,long) (type {0})"), PythonTypeOps.GetName(index));
 
                 return index;
             }
-            throw TypeError("'{0}' object cannot be interpreted as an index", PythonTypeOps.GetName(o));
+            throw TypeError(ResourceManager.Default.GetResource("0objectcannotbeinterpretedasanindex", "'{0}' object cannot be interpreted as an index"), PythonTypeOps.GetName(o));
         }
 
         public static int Length(object o) {
@@ -934,7 +934,7 @@ namespace IronPython.Runtime.Operations {
             }
 
             if (res < 0) {
-                throw PythonOps.ValueError("__len__ should return >= 0, got {0}", res);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("lenshouldreturn0got0", "__len__ should return >= 0, got {0}"), res);
             }
             return res;
         }
@@ -1085,10 +1085,10 @@ namespace IronPython.Runtime.Operations {
             object ret;
             if (!DynamicHelpers.GetPythonType(o).TryGetBoundAttr(context, o, name, out ret)) {
                 if (o is OldClass) {
-                    throw PythonOps.AttributeError("type object '{0}' has no attribute '{1}'",
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("typeobject0hasnoattribute1", "type object '{0}' has no attribute '{1}'"),
                         ((OldClass)o).Name, name);
                 } else {
-                    throw PythonOps.AttributeError("'{0}' object has no attribute '{1}'", PythonTypeOps.GetName(o), name);
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0objecthasnoattribute1", "'{0}' object has no attribute '{1}'"), PythonTypeOps.GetName(o), name);
                 }
             }
 
@@ -1163,7 +1163,7 @@ namespace IronPython.Runtime.Operations {
         /// </summary>
         public static void CheckInitializedAttribute(object o, object self, string name) {
             if (o == Uninitialized.Instance) {
-                throw PythonOps.AttributeError("'{0}' object has no attribute '{1}'",
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0objecthasnoattribute1", "'{0}' object has no attribute '{1}'"),
                     PythonTypeOps.GetName(self),
                     name);
             }
@@ -1389,10 +1389,10 @@ namespace IronPython.Runtime.Operations {
             if (v < 0) {
                 v += len;
                 if (v < 0) {
-                    throw PythonOps.IndexError("index out of range: {0}", v - len);
+                    throw PythonOps.IndexError(ResourceManager.Default.GetResource("indexoutofrange0", "index out of range: {0}"), v - len);
                 }
             } else if (v >= len) {
-                throw PythonOps.IndexError("index out of range: {0}", v);
+                throw PythonOps.IndexError(ResourceManager.Default.GetResource("indexoutofrange0", "index out of range: {0}"), v);
             }
             return v;
         }
@@ -1468,7 +1468,7 @@ namespace IronPython.Runtime.Operations {
                     if (pt.Equals(PythonType.GetPythonType(typeof(Enum))) || pt.Equals(PythonType.GetPythonType(typeof(Array)))
                     || pt.Equals(PythonType.GetPythonType(typeof(Delegate))) || pt.Equals(PythonType.GetPythonType(typeof(ValueType)))) {
                         // .NET does not allow inheriting from these types
-                        throw PythonOps.TypeError("cannot derive from special class '{0}'", pt.FinalSystemType.FullName);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotderivefromspecialclass0", "cannot derive from special class '{0}'"), pt.FinalSystemType.FullName);
                     }
                 }
 
@@ -1530,7 +1530,7 @@ namespace IronPython.Runtime.Operations {
                 throw PythonOps.CreateThrowable(DynamicHelpers.GetPythonType(obj), msg);
             }
 
-            throw PythonOps.AssertionError("{0}", msg);
+            throw PythonOps.AssertionError(ResourceManager.Default.GetResource("0", "{0}"), msg);
         }
 
         /// <summary>
@@ -1904,7 +1904,7 @@ namespace IronPython.Runtime.Operations {
                 !pt.UnderlyingSystemType.IsEnum() &&
                 (!pt.UnderlyingSystemType.IsAbstract() || !pt.UnderlyingSystemType.IsSealed())) {
                 // from type import * only allowed on static classes (and enums)
-                throw PythonOps.ImportError("no module named {0}", pt.Name);
+                throw PythonOps.ImportError(ResourceManager.Default.GetResource("nomodulenamed0", "no module named {0}"), pt.Name);
             }
 
             IEnumerator exports;
@@ -2082,7 +2082,7 @@ namespace IronPython.Runtime.Operations {
         public static IEnumerator GetEnumerator(CodeContext/*!*/ context, object o) {
             IEnumerator ie;
             if (!TryGetEnumerator(context, o, out ie)) {
-                throw PythonOps.TypeError("{0} is not iterable", PythonTypeOps.GetName(o));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotiterable", "{0} is not iterable"), PythonTypeOps.GetName(o));
             }
             return ie;
         }
@@ -2109,11 +2109,11 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static Exception TypeErrorForNotIterable(object enumerable) {
-            return PythonOps.TypeError("'{0}' object is not iterable", PythonTypeOps.GetName(enumerable));
+            return PythonOps.TypeError(ResourceManager.Default.GetResource("0objectisnotiterable", "'{0}' object is not iterable"), PythonTypeOps.GetName(enumerable));
         }        
 
         public static KeyValuePair<IEnumerator, IDisposable> ThrowTypeErrorForBadIteration(CodeContext/*!*/ context, object enumerable) {
-            throw PythonOps.TypeError("iteration over non-sequence of type {0}", PythonTypeOps.GetName(enumerable));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("iterationovernonsequenceoftype0", "iteration over non-sequence of type {0}"), PythonTypeOps.GetName(enumerable));
         }
 
         internal static bool TryGetEnumerator(CodeContext/*!*/ context, object enumerable, out IEnumerator enumerator) {
@@ -2497,7 +2497,7 @@ namespace IronPython.Runtime.Operations {
         public static PythonDictionary CopyAndVerifyDictionary(PythonFunction function, IDictionary dict) {
             foreach (object o in dict.Keys) {
                 if (!(o is string)) {
-                    throw TypeError("{0}() keywords must be strings", function.__name__);
+                    throw TypeError(ResourceManager.Default.GetResource("0keywordsmustbestrings", "{0}() keywords must be strings"), function.__name__);
                 }
             }
             return new PythonDictionary(dict);
@@ -2511,7 +2511,7 @@ namespace IronPython.Runtime.Operations {
             // call dict.keys()
             object keys;
             if (!PythonTypeOps.TryInvokeUnaryOperator(context, dict, "keys", out keys)) {
-                throw PythonOps.TypeError("{0}() argument after ** must be a mapping, not {1}",
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("0argumentaftermustbeamappingnot1", "{0}() argument after ** must be a mapping, not {1}"),
                     funcName,
                     PythonTypeOps.GetName(dict));
             }
@@ -2526,7 +2526,7 @@ namespace IronPython.Runtime.Operations {
                 if (s == null) {
                     Extensible<string> es = o as Extensible<string>;
                     if (es == null) {
-                        throw PythonOps.TypeError("{0}() keywords must be strings, not {0}",
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("0keywordsmustbestringsnot0", "{0}() keywords must be strings, not {0}"),
                             funcName,
                             PythonTypeOps.GetName(dict));
                     }
@@ -2542,7 +2542,7 @@ namespace IronPython.Runtime.Operations {
 
         public static PythonDictionary CopyAndVerifyPythonDictionary(PythonFunction function, PythonDictionary dict) {
             if (dict._storage.HasNonStringAttributes()) {
-                throw TypeError("{0}() keywords must be strings", function.__name__);
+                throw TypeError(ResourceManager.Default.GetResource("0keywordsmustbestrings", "{0}() keywords must be strings"), function.__name__);
             }
 
             return new PythonDictionary(dict);
@@ -2555,7 +2555,7 @@ namespace IronPython.Runtime.Operations {
                 return val;
             }
 
-            throw PythonOps.TypeError("{0}() takes exactly {1} arguments ({2} given)",
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("0takesexactly1arguments2given", "{0}() takes exactly {1} arguments ({2} given)"),
                 function.__name__,
                 function.NormalArgumentCount,
                 argCnt);
@@ -2581,7 +2581,7 @@ namespace IronPython.Runtime.Operations {
 
         public static PythonTuple GetOrCopyParamsTuple(PythonFunction function, object input) {
             if (input == null) {
-                throw PythonOps.TypeError("{0}() argument after * must be a sequence, not NoneType", function.func_name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("0argumentaftermustbeasequencenotnonetype", "{0}() argument after * must be a sequence, not NoneType"), function.func_name);
             } else if (input.GetType() == typeof(PythonTuple)) {
                 return (PythonTuple)input;
             }
@@ -3113,32 +3113,32 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static object ThrowingConvertToInt(object value) {
-            if (!CheckingConvertToInt(value)) throw TypeError(" __int__ returned non-int (type {0})", PythonTypeOps.GetName(value));
+            if (!CheckingConvertToInt(value)) throw TypeError(ResourceManager.Default.GetResource("intreturnednoninttype0", " __int__ returned non-int (type {0})"), PythonTypeOps.GetName(value));
             return value;
         }
 
         public static object ThrowingConvertToFloat(object value) {
-            if (!CheckingConvertToFloat(value)) throw TypeError(" __float__ returned non-float (type {0})", PythonTypeOps.GetName(value));
+            if (!CheckingConvertToFloat(value)) throw TypeError(ResourceManager.Default.GetResource("floatreturnednonfloattype0", " __float__ returned non-float (type {0})"), PythonTypeOps.GetName(value));
             return value;
         }
 
         public static object ThrowingConvertToComplex(object value) {
-            if (!CheckingConvertToComplex(value)) throw TypeError(" __complex__ returned non-complex (type {0})", PythonTypeOps.GetName(value));
+            if (!CheckingConvertToComplex(value)) throw TypeError(ResourceManager.Default.GetResource("complexreturnednoncomplextype0", " __complex__ returned non-complex (type {0})"), PythonTypeOps.GetName(value));
             return value;
         }
 
         public static object ThrowingConvertToLong(object value) {
-            if (!CheckingConvertToComplex(value)) throw TypeError(" __long__ returned non-long (type {0})", PythonTypeOps.GetName(value));
+            if (!CheckingConvertToComplex(value)) throw TypeError(ResourceManager.Default.GetResource("longreturnednonlongtype0", " __long__ returned non-long (type {0})"), PythonTypeOps.GetName(value));
             return value;
         }
 
         public static object ThrowingConvertToString(object value) {
-            if (!CheckingConvertToString(value)) throw TypeError(" __str__ returned non-str (type {0})", PythonTypeOps.GetName(value));
+            if (!CheckingConvertToString(value)) throw TypeError(ResourceManager.Default.GetResource("strreturnednonstrtype0", " __str__ returned non-str (type {0})"), PythonTypeOps.GetName(value));
             return value;
         }
 
         public static bool ThrowingConvertToNonZero(object value) {
-            if (!CheckingConvertToNonZero(value)) throw TypeError("__nonzero__ should return bool or int, returned {0}", PythonTypeOps.GetName(value));
+            if (!CheckingConvertToNonZero(value)) throw TypeError(ResourceManager.Default.GetResource("nonzeroshouldreturnboolorintreturned0", "__nonzero__ should return bool or int, returned {0}"), PythonTypeOps.GetName(value));
             if (value is bool) {
                 return (bool)value;
             }
@@ -3354,7 +3354,7 @@ namespace IronPython.Runtime.Operations {
             }
 
             PythonTuple pt = coerceResult as PythonTuple;
-            if (pt == null) throw PythonOps.TypeError("coercion should return None, NotImplemented, or 2-tuple, got {0}", PythonTypeOps.GetName(coerceResult));
+            if (pt == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("coercionshouldreturnnonenotimplementedor2tuplegot0", "coercion should return None, NotImplemented, or 2-tuple, got {0}"), PythonTypeOps.GetName(coerceResult));
             return pt;
         }
 
@@ -3913,7 +3913,7 @@ namespace IronPython.Runtime.Operations {
             for (int i = 0; i < s.Length; i++) {
                 if (s[i] < 0x100) ret[i] = (byte)s[i];
                 else {
-                    throw PythonOps.UnicodeEncodeError("ascii", s[i], i,
+                    throw PythonOps.UnicodeEncodeError(ResourceManager.Default.GetResource("ascii", "ascii"), s[i], i,
                         "'ascii' codec can't encode character '\\u{0:X}' in position {1}: ordinal not in range(128)", (int)s[i], i);
                 }
             }
@@ -4130,11 +4130,11 @@ namespace IronPython.Runtime.Operations {
         #region Exception Factories
 
         public static Exception MultipleKeywordArgumentError(PythonFunction function, string name) {
-            return TypeError("{0}() got multiple values for keyword argument '{1}'", function.__name__, name);
+            return TypeError(ResourceManager.Default.GetResource("0gotmultiplevaluesforkeywordargument1", "{0}() got multiple values for keyword argument '{1}'"), function.__name__, name);
         }
 
         public static Exception UnexpectedKeywordArgumentError(PythonFunction function, string name) {
-            return TypeError("{0}() got an unexpected keyword argument '{1}'", function.__name__, name);
+            return TypeError(ResourceManager.Default.GetResource("0gotanunexpectedkeywordargument1", "{0}() got an unexpected keyword argument '{1}'"), function.__name__, name);
         }
 
         public static Exception StaticAssignmentFromInstanceError(PropertyTracker tracker, bool isAssignment) {
@@ -4340,7 +4340,7 @@ namespace IronPython.Runtime.Operations {
             System.Diagnostics.Debug.Assert(left != right);
 
             if (left > right)
-                return ValueError("need more than {0} values to unpack", right);
+                return ValueError(ResourceManager.Default.GetResource("needmorethan0valuestounpack", "need more than {0} values to unpack"), right);
             else
                 return ValueError(ResourceManager.Default.GetResource("toomanyvaluestounpack", "too many values to unpack"));
         }
@@ -4374,12 +4374,12 @@ namespace IronPython.Runtime.Operations {
         // If a method is called with an incorrect number of arguments
         // You should use TypeErrorForUnboundMethodCall() for unbound methods called with 0 arguments
         public static Exception TypeErrorForArgumentCountMismatch(string methodName, int expectedArgCount, int actualArgCount) {
-            return TypeError("{0}() takes exactly {1} argument{2} ({3} given)",
+            return TypeError(ResourceManager.Default.GetResource("0takesexactly1argument23given", "{0}() takes exactly {1} argument{2} ({3} given)"),
                              methodName, expectedArgCount, expectedArgCount == 1 ? "" : "s", actualArgCount);
         }
 
         public static Exception TypeErrorForTypeMismatch(string expectedTypeName, object instance) {
-            return TypeError("expected {0}, got {1}", expectedTypeName, PythonOps.GetPythonTypeName(instance));
+            return TypeError(ResourceManager.Default.GetResource("expected0got1", "expected {0}, got {1}"), expectedTypeName, PythonOps.GetPythonTypeName(instance));
         }
 
         // If hash is called on an instance of an unhashable type
@@ -4392,7 +4392,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         internal static Exception TypeErrorForIncompatibleObjectLayout(string prefix, PythonType type, Type newType) {
-            return TypeError("{0}: '{1}' object layout differs from '{2}'", prefix, type.Name, newType);
+            return TypeError(ResourceManager.Default.GetResource("01objectlayoutdiffersfrom2", "{0}: '{1}' object layout differs from '{2}'"), prefix, type.Name, newType);
         }
 
         public static Exception TypeErrorForNonStringAttribute() {
@@ -4404,12 +4404,12 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static Exception TypeErrorForBinaryOp(string opSymbol, object x, object y) {
-            throw PythonOps.TypeError("unsupported operand type(s) for {0}: '{1}' and '{2}'",
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("unsupportedoperandtypesfor01and2", "unsupported operand type(s) for {0}: '{1}' and '{2}'"),
                                 opSymbol, GetPythonTypeName(x), GetPythonTypeName(y));
         }
 
         public static Exception TypeErrorForUnaryOp(string opSymbol, object x) {
-            throw PythonOps.TypeError("unsupported operand type for {0}: '{1}'",
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("unsupportedoperandtypefor01", "unsupported operand type for {0}: '{1}'"),
                                 opSymbol, GetPythonTypeName(x));
         }
 
@@ -4429,19 +4429,19 @@ namespace IronPython.Runtime.Operations {
             if (attributeName == "__class__")
                 return PythonOps.TypeError(ResourceManager.Default.GetResource("cantdeleteclassattribute", "can't delete __class__ attribute"));
 
-            return PythonOps.AttributeError("'{1}' object attribute '{0}' is read-only", attributeName, typeName);
+            return PythonOps.AttributeError(ResourceManager.Default.GetResource("1objectattribute0isreadonly", "'{1}' object attribute '{0}' is read-only"), attributeName, typeName);
         }
 
         public static Exception AttributeErrorForBuiltinAttributeDeletion(string typeName, string attributeName) {
-            return PythonOps.AttributeError("cannot delete attribute '{0}' of builtin type '{1}'", attributeName, typeName);
+            return PythonOps.AttributeError(ResourceManager.Default.GetResource("cannotdeleteattribute0ofbuiltintype1", "cannot delete attribute '{0}' of builtin type '{1}'"), attributeName, typeName);
         }
 
         public static Exception MissingInvokeMethodException(object o, string name) {
             if (o is OldClass) {
-                throw PythonOps.AttributeError("type object '{0}' has no attribute '{1}'",
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("typeobject0hasnoattribute1", "type object '{0}' has no attribute '{1}'"),
                     ((OldClass)o).Name, name);
             } else {
-                throw PythonOps.AttributeError("'{0}' object has no attribute '{1}'", GetPythonTypeName(o), name);
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0objecthasnoattribute1", "'{0}' object has no attribute '{1}'"), GetPythonTypeName(o), name);
             }
         }
 
@@ -4467,27 +4467,27 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static Exception AttributeErrorForMissingAttribute(string typeName, string attributeName) {
-            return PythonOps.AttributeError("'{0}' object has no attribute '{1}'", typeName, attributeName);
+            return PythonOps.AttributeError(ResourceManager.Default.GetResource("0objecthasnoattribute1", "'{0}' object has no attribute '{1}'"), typeName, attributeName);
         }
 
         public static Exception AttributeErrorForOldInstanceMissingAttribute(string typeName, string attributeName) {
-            return PythonOps.AttributeError("{0} instance has no attribute '{1}'", typeName, attributeName);
+            return PythonOps.AttributeError(ResourceManager.Default.GetResource("0instancehasnoattribute1", "{0} instance has no attribute '{1}'"), typeName, attributeName);
         }
 
         public static Exception AttributeErrorForOldClassMissingAttribute(string typeName, string attributeName) {
-            return PythonOps.AttributeError("class {0} has no attribute '{1}'", typeName, attributeName);
+            return PythonOps.AttributeError(ResourceManager.Default.GetResource("class0hasnoattribute1", "class {0} has no attribute '{1}'"), typeName, attributeName);
         }
 
         public static Exception UncallableError(object func) {
-            return PythonOps.TypeError("{0} is not callable", PythonTypeOps.GetName(func));
+            return PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotcallable", "{0} is not callable"), PythonTypeOps.GetName(func));
         }
 
         public static Exception TypeErrorForProtectedMember(Type/*!*/ type, string/*!*/ name) {
-            return PythonOps.TypeError("cannot access protected member {0} without a python subclass of {1}", name, NameConverter.GetTypeName(type));
+            return PythonOps.TypeError(ResourceManager.Default.GetResource("cannotaccessprotectedmember0withoutapythonsubclassof1", "cannot access protected member {0} without a python subclass of {1}"), name, NameConverter.GetTypeName(type));
         }
 
         public static Exception TypeErrorForGenericMethod(Type/*!*/ type, string/*!*/ name) {
-            return PythonOps.TypeError("{0}.{1} is a generic method and must be indexed with types before calling", NameConverter.GetTypeName(type), name);
+            return PythonOps.TypeError(ResourceManager.Default.GetResource("01isagenericmethodandmustbeindexedwithtypesbeforecalling", "{0}.{1} is a generic method and must be indexed with types before calling"), NameConverter.GetTypeName(type), name);
         }
 
         public static Exception TypeErrorForUnIndexableObject(object o) {
@@ -4495,7 +4495,7 @@ namespace IronPython.Runtime.Operations {
             if (o == null) {
                 return PythonOps.TypeError(ResourceManager.Default.GetResource("nonetypeobjectcannotbeinterpretedasanindex", "'NoneType' object cannot be interpreted as an index"));
             } else if ((ipo = o as IPythonObject) != null) {
-                return TypeError("'{0}' object cannot be interpreted as an index", ipo.PythonType.Name);
+                return TypeError(ResourceManager.Default.GetResource("0objectcannotbeinterpretedasanindex", "'{0}' object cannot be interpreted as an index"), ipo.PythonType.Name);
             }
 
             return TypeError(ResourceManager.Default.GetResource("objectcannotbeinterpretedasanindex", "object cannot be interpreted as an index"));
@@ -4503,11 +4503,11 @@ namespace IronPython.Runtime.Operations {
 
         [Obsolete("no longer used anywhere")]
         public static Exception/*!*/ TypeErrorForBadDictionaryArgument(PythonFunction/*!*/ f) {
-            return PythonOps.TypeError("{0}() argument after ** must be a dictionary", f.__name__);
+            return PythonOps.TypeError(ResourceManager.Default.GetResource("0argumentaftermustbeadictionary", "{0}() argument after ** must be a dictionary"), f.__name__);
         }
 
         public static T TypeErrorForBadEnumConversion<T>(object value) {
-            throw TypeError("Cannot convert numeric value {0} to {1}.  The value must be zero.", value, NameConverter.GetTypeName(typeof(T)));
+            throw TypeError(ResourceManager.Default.GetResource("cannotconvertnumericvalue0to1thevaluemustbezero", "Cannot convert numeric value {0} to {1}.  The value must be zero."), value, NameConverter.GetTypeName(typeof(T)));
         }
 
         public static Exception/*!*/ UnreadableProperty() {

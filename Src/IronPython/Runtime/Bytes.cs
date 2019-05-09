@@ -410,7 +410,7 @@ namespace IronPython.Runtime {
             int ret = rfind(sub, start, end);
 
             if (ret == -1) {
-                throw PythonOps.ValueError("substring {0} not found in {1}", sub, this);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("substring0notfoundin1", "substring {0} not found in {1}"), sub, this);
             }
 
             return ret;
@@ -631,7 +631,7 @@ namespace IronPython.Runtime {
                 return __contains__(PythonOps.MakeBytes(((Extensible<string>)value).Value.MakeByteArray()));
             }
             if (!context.LanguageContext.PythonOptions.Python30) {
-                throw PythonOps.TypeError("'in <bytes>' requires string or bytes as left operand, not {0}", PythonTypeOps.GetName(value));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("inbytesrequiresstringorbytesasleftoperandnot0", "'in <bytes>' requires string or bytes as left operand, not {0}"), PythonTypeOps.GetName(value));
             }
 
             if (value is Extensible<int>) {
@@ -643,7 +643,7 @@ namespace IronPython.Runtime {
             }
 
             // 3.0 error message
-            throw PythonOps.TypeError("Type {0} doesn't support the buffer API", PythonTypeOps.GetOldName(value));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("type0doesntsupportthebufferapi", "Type {0} doesn't support the buffer API"), PythonTypeOps.GetOldName(value));
         }
 
         public PythonTuple __reduce__(CodeContext/*!*/ context) {

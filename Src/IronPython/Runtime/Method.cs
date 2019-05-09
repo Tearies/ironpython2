@@ -101,7 +101,7 @@ namespace IronPython.Runtime {
             }
             PythonType pt = im_class as PythonType;
 
-            return PythonOps.TypeError("unbound method {0}() must be called with {1} instance as first argument (got {2} instead)",
+            return PythonOps.TypeError(ResourceManager.Default.GetResource("unboundmethod0mustbecalledwith1instanceasfirstargumentgot2instead", "unbound method {0}() must be called with {1} instance as first argument (got {2} instead)"),
                 Name,
                 (dt != null) ? dt.Name : (pt != null) ? pt.Name : im_class,
                 firstArg);

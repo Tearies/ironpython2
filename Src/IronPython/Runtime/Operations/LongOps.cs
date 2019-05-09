@@ -106,7 +106,7 @@ namespace IronPython.Runtime.Operations {
                     result is Extensible<int> || result is Extensible<BigInteger>) {
                     return ReturnObject(context, cls, result);
                 } else {
-                    throw PythonOps.TypeError("__long__ returned non-long (type {0})", PythonTypeOps.GetOldName(result));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("longreturnednonlongtype0", "__long__ returned non-long (type {0})"), PythonTypeOps.GetOldName(result));
                 }
             } else if (PythonOps.TryGetBoundAttr(context, x, "__trunc__", out result)) {
                 result = PythonOps.CallWithContext(context, result);
@@ -115,15 +115,15 @@ namespace IronPython.Runtime.Operations {
                 } else if (Converter.TryConvertToBigInteger(result, out bigintRes)) {
                     return ReturnObject(context, cls, bigintRes);
                 } else {
-                    throw PythonOps.TypeError("__trunc__ returned non-Integral (type {0})", PythonTypeOps.GetOldName(result));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("truncreturnednonintegraltype0", "__trunc__ returned non-Integral (type {0})"), PythonTypeOps.GetOldName(result));
                 }
             }
 
             if (x is OldInstance) {
-                throw PythonOps.AttributeError("{0} instance has no attribute '__trunc__'",
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("0instancehasnoattributetrunc", "{0} instance has no attribute '__trunc__'"),
                     ((OldInstance)x)._class.Name);
             } else {
-                throw PythonOps.TypeError("long() argument must be a string or a number, not '{0}'",
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("longargumentmustbeastringoranumbernot0", "long() argument must be a string or a number, not '{0}'"),
                     DynamicHelpers.GetPythonType(x).Name);
             }
         }
@@ -190,7 +190,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static object Power(BigInteger x, int y, BigInteger z) {
             if (y < 0) {
-                throw PythonOps.TypeError("power", y, ResourceManager.Default.GetResource("powermustbe0", "power must be >= 0"));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("power", "power"), y, ResourceManager.Default.GetResource("powermustbe0", "power must be >= 0"));
             }
             if (z == BigInteger.Zero) {
                 throw PythonOps.ZeroDivisionError();
@@ -209,7 +209,7 @@ namespace IronPython.Runtime.Operations {
         [SpecialName]
         public static object Power(BigInteger x, BigInteger y, BigInteger z) {
             if (y < BigInteger.Zero) {
-                throw PythonOps.TypeError("power", y, ResourceManager.Default.GetResource("powermustbe0", "power must be >= 0"));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("power", "power"), y, ResourceManager.Default.GetResource("powermustbe0", "power must be >= 0"));
             }
             if (z == BigInteger.Zero) {
                 throw PythonOps.ZeroDivisionError();
@@ -1020,7 +1020,7 @@ namespace IronPython.Runtime.Operations {
                     digits = ScriptingRuntimeHelpers.CharToString((char)iVal);
                     break;
                 default:
-                    throw PythonOps.ValueError("Unknown format code '{0}'", spec.Type.ToString());
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownformatcode0", "Unknown format code '{0}'"), spec.Type.ToString());
             }
 
             Debug.Assert(digits[0] != '-');

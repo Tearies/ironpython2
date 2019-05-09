@@ -551,7 +551,7 @@ import Namespace.")]
             list.append(path);
 
             Assembly asm = pc.LoadAssemblyFromFile(file);
-            if (asm == null) throw PythonOps.IOError("file does not exist: {0}", file);
+            if (asm == null) throw PythonOps.IOError(ResourceManager.Default.GetResource("filedoesnotexist0", "file does not exist: {0}"), file);
             AddReference(context, asm);
         }
 
@@ -679,7 +679,7 @@ import Namespace.")]
                     PythonType expct = _expected[i] as PythonType;
                     if (expct == null) expct = ((OldClass)_expected[i]).TypeObject;
                     if (dt != _expected[i] && !dt.IsSubclassOf(expct)) {
-                        throw PythonOps.AssertionError("argument {0} has bad value (got {1}, expected {2})", i, dt, _expected[i]);
+                        throw PythonOps.AssertionError(ResourceManager.Default.GetResource("argument0hasbadvaluegot1expected2", "argument {0} has bad value (got {1}, expected {2})"), i, dt, _expected[i]);
                     }
                 }
             }
@@ -773,7 +773,7 @@ import Namespace.")]
                     if (expct == null) expct = ((OldClass)_retType).TypeObject;
 
                     if (!dt.IsSubclassOf(expct))
-                        throw PythonOps.AssertionError("bad return value returned (expected {0}, got {1})", _retType, dt);
+                        throw PythonOps.AssertionError(ResourceManager.Default.GetResource("badreturnvaluereturnedexpected0got1", "bad return value returned (expected {0}, got {1})"), _retType, dt);
                 }
             }
 
@@ -926,7 +926,7 @@ import Namespace.")]
             if (kwArgs != null && kwArgs.TryGetValue("mainModule", out object mainModule)) {
                 if (mainModule is string strModule) {
                     if (!pc.DomainManager.Platform.FileExists(strModule)) {
-                        throw PythonOps.IOError("Couldn't find main file for compilation: {0}", strModule);
+                        throw PythonOps.IOError(ResourceManager.Default.GetResource("couldntfindmainfileforcompilation0", "Couldn't find main file for compilation: {0}"), strModule);
                     }
 
                     SourceUnit su = pc.CreateFileUnit(strModule, pc.DefaultEncoding, SourceCodeKind.File);
@@ -1220,7 +1220,7 @@ import Namespace.")]
                     case "System.UInt32": return UInt32.Parse(data);
                     case "System.UInt64": return UInt64.Parse(data);
                     default:
-                        throw PythonOps.ValueError("unknown serialization format: {0}", serializationFormat);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("unknownserializationformat0", "unknown serialization format: {0}"), serializationFormat);
                 }
             } else if (String.IsNullOrEmpty(data)) {
                 return null;

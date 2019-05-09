@@ -495,7 +495,7 @@ namespace IronPython.Modules {
 
                 intProtocol = context.LanguageContext.ConvertToInt32(protocol);
                 if (intProtocol > highestProtocol) {
-                    throw PythonOps.ValueError("pickle protocol {0} asked for; the highest available protocol is {1}", intProtocol, highestProtocol);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("pickleprotocol0askedforthehighestavailableprotocolis1", "pickle protocol {0} asked for; the highest available protocol is {1}"), intProtocol, highestProtocol);
                 } else if (intProtocol < 0) {
                     this._protocol = highestProtocol;
                 } else {
@@ -914,7 +914,7 @@ namespace IronPython.Modules {
                         result = context.LanguageContext.Call(context, reduceCallable);
                     }
                 } else {
-                    throw PythonOps.AttributeError("no reduce function found for {0}", obj);
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("noreducefunctionfoundfor0", "no reduce function found for {0}"), obj);
                 }
 
                 if (objType.Equals(TypeCache.String)) {
@@ -2123,7 +2123,7 @@ namespace IronPython.Modules {
 
                     _stack.Add(MakeInstance(context, cls, args));
                 } else {
-                    throw PythonOps.TypeError("expected class or type after INST, got {0}", DynamicHelpers.GetPythonType(cls));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedclassortypeafterinstgot0", "expected class or type after INST, got {0}"), DynamicHelpers.GetPythonType(cls));
                 }
             }
 
@@ -2174,12 +2174,12 @@ namespace IronPython.Modules {
             private void LoadNewObj(CodeContext/*!*/ context) {
                 PythonTuple args = PopStack() as PythonTuple;
                 if (args == null) {
-                    throw PythonOps.TypeError("expected tuple as second argument to NEWOBJ, got {0}", DynamicHelpers.GetPythonType(args));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedtupleassecondargumenttonewobjgot0", "expected tuple as second argument to NEWOBJ, got {0}"), DynamicHelpers.GetPythonType(args));
                 }
 
                 PythonType cls = PopStack() as PythonType;
                 if (cls == null) {
-                    throw PythonOps.TypeError("expected new-style type as first argument to NEWOBJ, got {0}", DynamicHelpers.GetPythonType(args));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectednewstyletypeasfirstargumenttonewobjgot0", "expected new-style type as first argument to NEWOBJ, got {0}"), DynamicHelpers.GetPythonType(args));
                 }
 
                 PythonTypeSlot dts;
@@ -2217,7 +2217,7 @@ namespace IronPython.Modules {
                     PopMark(markIndex);
                     _stack.Add(MakeInstance(context, cls, args));
                 } else {
-                    throw PythonOps.TypeError("expected class or type as first argument to INST, got {0}", DynamicHelpers.GetPythonType(cls));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedclassortypeasfirstargumenttoinstgot0", "expected class or type as first argument to INST, got {0}"), DynamicHelpers.GetPythonType(cls));
                 }
             }
 
@@ -2238,7 +2238,7 @@ namespace IronPython.Modules {
 
             private void LoadProto(CodeContext/*!*/ context) {
                 int proto = ReadUInt8(context);
-                if (proto > 2) throw PythonOps.ValueError("unsupported pickle protocol: {0}", proto);
+                if (proto > 2) throw PythonOps.ValueError(ResourceManager.Default.GetResource("unsupportedpickleprotocol0", "unsupported pickle protocol: {0}"), proto);
                 // discard result
             }
 

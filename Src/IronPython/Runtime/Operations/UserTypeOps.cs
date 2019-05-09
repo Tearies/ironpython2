@@ -18,6 +18,7 @@ using Microsoft.Scripting.Utils;
 
 using IronPython.Runtime.Types;
 using IronPython.Runtime.Binding;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Operations {
     
@@ -27,7 +28,7 @@ namespace IronPython.Runtime.Operations {
             if (o is string && o != null) {
                 return (string)o;
             }
-            throw PythonOps.TypeError("__str__ returned non-string type ({0})", PythonTypeOps.GetName(o));
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("strreturnednonstringtype0", "__str__ returned non-string type ({0})"), PythonTypeOps.GetName(o));
         }
 
         public static PythonDictionary SetDictHelper(ref PythonDictionary dict, PythonDictionary value) {
@@ -39,7 +40,7 @@ namespace IronPython.Runtime.Operations {
         public static object GetPropertyHelper(object prop, object instance, string name) {
             PythonTypeSlot desc = prop as PythonTypeSlot;
             if (desc == null) {
-                throw PythonOps.TypeError("Expected property for {0}, but found {1}",
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedpropertyfor0butfound1", "Expected property for {0}, but found {1}"),
                     name.ToString(), DynamicHelpers.GetPythonType(prop).Name);
             }
             object value;
@@ -50,7 +51,7 @@ namespace IronPython.Runtime.Operations {
         public static void SetPropertyHelper(object prop, object instance, object newValue, string name) {
             PythonTypeSlot desc = prop as PythonTypeSlot;
             if (desc == null) {
-                throw PythonOps.TypeError("Expected settable property for {0}, but found {1}",
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedsettablepropertyfor0butfound1", "Expected settable property for {0}, but found {1}"),
                     name.ToString(), DynamicHelpers.GetPythonType(prop).Name);
             }
             desc.TrySetValue(DefaultContext.Default, instance, DynamicHelpers.GetPythonType(instance), newValue);
@@ -104,7 +105,7 @@ namespace IronPython.Runtime.Operations {
             }
 
             if (!PythonOps.IsCallable(DefaultContext.Default, callable)) {
-                throw PythonOps.TypeError("Expected callable value for {0}, but found {1}", name.ToString(),
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedcallablevaluefor0butfound1", "Expected callable value for {0}, but found {1}"), name.ToString(),
                     PythonTypeOps.GetName(method));
             }
 

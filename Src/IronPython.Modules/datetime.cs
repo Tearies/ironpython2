@@ -84,7 +84,7 @@ namespace IronPython.Modules {
                 _microseconds = (int)(totalMicroseconds);
 
                 if (Math.Abs(_days) > MAXDAYS) {
-                    throw PythonOps.OverflowError("days={0}; must have magnitude <= 999999999", _days);
+                    throw PythonOps.OverflowError(ResourceManager.Default.GetResource("days0musthavemagnitude999999999", "days={0}; must have magnitude <= 999999999"), _days);
                 }
             }
 
@@ -100,7 +100,7 @@ namespace IronPython.Modules {
                     return new timedelta(days, seconds, microseconds, milliseconds, minutes, hours, weeks);
                 } else {
                     timedelta delta = cls.CreateInstance(context, days, seconds, microseconds, milliseconds, minutes, hours, weeks) as timedelta;
-                    if (delta == null) throw PythonOps.TypeError("{0} is not a subclass of datetime.timedelta", cls);
+                    if (delta == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isnotasubclassofdatetimetimedelta", "{0} is not a subclass of datetime.timedelta"), cls);
                     return delta;
                 }
             }
@@ -246,7 +246,7 @@ namespace IronPython.Modules {
             private int CompareTo(object other) {
                 timedelta delta = other as timedelta;
                 if (delta == null)
-                    throw PythonOps.TypeError("can't compare datetime.timedelta to {0}", PythonTypeOps.GetName(other));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantcomparedatetimetimedeltato0", "can't compare datetime.timedelta to {0}"), PythonTypeOps.GetName(other));
 
                 int res = this._days - delta._days;
                 if (res != 0) return res;
@@ -293,12 +293,12 @@ namespace IronPython.Modules {
         internal static void ThrowIfInvalid(timedelta delta, string funcname) {
             if (delta != null) {
                 if (delta._microseconds != 0 || delta._seconds % 60 != 0) {
-                    throw PythonOps.ValueError("tzinfo.{0}() must return a whole number of minutes", funcname);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("tzinfo0mustreturnawholenumberofminutes", "tzinfo.{0}() must return a whole number of minutes"), funcname);
                 }
 
                 int minutes = (int)(delta.TimeSpanWithDaysAndSeconds.TotalSeconds / 60);
                 if (Math.Abs(minutes) >= 1440) {
-                    throw PythonOps.ValueError("tzinfo.{0}() returned {1}; must be in -1439 .. 1439", funcname, minutes);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("tzinfo0returned1mustbein14391439", "tzinfo.{0}() returned {1}; must be in -1439 .. 1439"), funcname, minutes);
                 }
             }
         }
@@ -485,7 +485,7 @@ namespace IronPython.Modules {
                         case "year": year2 = CastToInt(kvp.Value); break;
                         case "month": month2 = CastToInt(kvp.Value); break;
                         case "day": day2 = CastToInt(kvp.Value); break;
-                        default: throw PythonOps.TypeError("{0} is an invalid keyword argument for this function", kvp.Key);
+                        default: throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isaninvalidkeywordargumentforthisfunction", "{0} is an invalid keyword argument for this function"), kvp.Key);
                     }
                 }
 
@@ -620,7 +620,7 @@ namespace IronPython.Modules {
 
             private static bool CheckTypeError(object other, bool shouldThrow) {
                 if (shouldThrow) {
-                    throw PythonOps.TypeError("can't compare datetime.date to {0}", PythonTypeOps.GetName(other));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantcomparedatetimedateto0", "can't compare datetime.date to {0}"), PythonTypeOps.GetName(other));
                 } else {
                     return true;
                 }
@@ -767,9 +767,9 @@ namespace IronPython.Modules {
             public datetime(params object[] args) {
                 
                 if (args.Length < 3) {
-                    throw PythonOps.TypeError("function takes at least 3 arguments ({0} given)", args.Length);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("functiontakesatleast3arguments0given", "function takes at least 3 arguments ({0} given)"), args.Length);
                 } else if (args.Length > 8) {
-                    throw PythonOps.TypeError("function takes at most 8 arguments ({0} given)", args.Length);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("functiontakesatmost8arguments0given", "function takes at most 8 arguments ({0} given)"), args.Length);
                 }
                 
                 for (int i = 0; i < args.Length && i < 7; i++) {    // 8 is offsetof tzinfo
@@ -779,7 +779,7 @@ namespace IronPython.Modules {
                 }
 
                 if (args.Length > 7 && !(args[7] is tzinfo || args[7] == null)) {
-                    throw PythonOps.TypeError("tzinfo argument must be None or of a tzinfo subclass, not type '{0}'", PythonTypeOps.GetName(args[7]));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("tzinfoargumentmustbenoneorofatzinfosubclassnottype0", "tzinfo argument must be None or of a tzinfo subclass, not type '{0}'"), PythonTypeOps.GetName(args[7]));
                 }
 
                 // the above cases should cover all binding failures...
@@ -982,7 +982,7 @@ namespace IronPython.Modules {
                             tz = kvp.Value as tzinfo;
                             break;
                         default:
-                            throw PythonOps.TypeError("{0} is an invalid keyword argument for this function", kvp.Key);
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isaninvalidkeywordargumentforthisfunction", "{0} is an invalid keyword argument for this function"), kvp.Key);
                     }
                 }
                 return new datetime(lyear, lmonth, lday, lhour, lminute, lsecond, lmicrosecond, tz);
@@ -1125,7 +1125,7 @@ namespace IronPython.Modules {
 
                 datetime combo = other as datetime;
                 if (combo == null)
-                    throw PythonOps.TypeError("can't compare datetime.datetime to {0}", PythonTypeOps.GetName(other));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantcomparedatetimedatetimeto0", "can't compare datetime.datetime to {0}"), PythonTypeOps.GetName(other));
 
                 if (CheckTzInfoBeforeCompare(this, combo)) {
                     int res = this.InternalDateTime.CompareTo(combo.InternalDateTime);
@@ -1426,7 +1426,7 @@ namespace IronPython.Modules {
             private int CompareTo(object other) {
                 time other2 = other as time;
                 if (other2 == null)
-                    throw PythonOps.TypeError("can't compare datetime.time to {0}", PythonTypeOps.GetName(other));
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantcomparedatetimetimeto0", "can't compare datetime.time to {0}"), PythonTypeOps.GetName(other));
 
                 if (CheckTzInfoBeforeCompare(this, other2)) {
                     int res = this._timeSpan.CompareTo(other2._timeSpan);

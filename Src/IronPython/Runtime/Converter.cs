@@ -375,10 +375,10 @@ namespace IronPython.Runtime {
                     return res.Value;
                 }
 
-                throw PythonOps.TypeError("__index__ returned bad value: {0}", DynamicHelpers.GetPythonType(index).Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("indexreturnedbadvalue0", "__index__ returned bad value: {0}"), DynamicHelpers.GetPythonType(index).Name);
             }
 
-            throw PythonOps.TypeError("expected index value, got {0}", DynamicHelpers.GetPythonType(value).Name);
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedindexvaluegot0", "expected index value, got {0}"), DynamicHelpers.GetPythonType(value).Name);
         }
 
         private static int? ConvertToSliceIndexHelper(object value, bool throwOverflowError) {
@@ -418,7 +418,7 @@ namespace IronPython.Runtime {
         }
 
         internal static Exception CannotConvertOverflow(string name, object value) {
-            return PythonOps.OverflowError("Cannot convert {0}({1}) to {2}", PythonTypeOps.GetName(value), value, name);
+            return PythonOps.OverflowError(ResourceManager.Default.GetResource("cannotconvert01to2", "Cannot convert {0}({1}) to {2}"), PythonTypeOps.GetName(value), value, name);
         }
 
         private static Exception MakeTypeError(Type expectedType, object o) {
@@ -488,7 +488,7 @@ namespace IronPython.Runtime {
                 }
             }
 
-            throw MakeTypeError("Type", value);
+            throw MakeTypeError(ResourceManager.Default.GetResource("type", "Type"), value);
         }
 
         public static object ConvertToDelegate(object value, Type to) {

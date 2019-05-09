@@ -57,7 +57,7 @@ namespace IronPython.Modules {
             }
 
             public void jumpahead(object count) {
-                throw PythonOps.TypeError("jumpahead requires an integer, not '{0}'", PythonOps.GetPythonTypeName(count));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("jumpaheadrequiresanintegernot0", "jumpahead requires an integer, not '{0}'"), PythonOps.GetPythonTypeName(count));
             }
 
             public object random() {
@@ -85,7 +85,7 @@ namespace IronPython.Modules {
                         break;
                     default:
                         if (!PythonContext.IsHashable(s)) {
-                            throw PythonOps.TypeError("unhashable type: '{0}'", PythonOps.GetPythonTypeName(s));
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("unhashabletype0", "unhashable type: '{0}'"), PythonOps.GetPythonTypeName(s));
                         }
                         newSeed = s.GetHashCode();
                         break;

@@ -761,7 +761,7 @@ namespace IronPython.Modules {
                 WeakRefTracker wrt = iwr.GetWeakRef();
                 if (wrt == null) {
                     if (!iwr.SetWeakRef(wrt = new WeakRefTracker(iwr))) 
-                        throw PythonOps.TypeError("cannot create weak reference to '{0}' object", PythonOps.GetPythonTypeName(target));
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("cannotcreateweakreferenceto0object", "cannot create weak reference to '{0}' object"), PythonOps.GetPythonTypeName(target));
                 }
 
                 if (callback != null || !wrt.Contains(callback, self)) {
@@ -804,7 +804,7 @@ namespace IronPython.Modules {
             IProxyObject proxy = instance as IProxyObject;
 
             if (proxy == null)
-                throw PythonOps.TypeError("descriptor for {0} object doesn't apply to {1} object",
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("descriptorfor0objectdoesntapplyto1object", "descriptor for {0} object doesn't apply to {1} object"),
                     PythonOps.Repr(context, _type.Name),
                     PythonOps.Repr(context, PythonTypeOps.GetName(instance)));
 
@@ -838,7 +838,7 @@ namespace IronPython.Modules {
         public object Call(CodeContext context, [ParamDictionary]IDictionary<object, object> dict, params object[] args) {
             object targetMethod;
             if (!DynamicHelpers.GetPythonType(target.Target).TryGetBoundMember(context, target.Target, name, out targetMethod))
-                throw PythonOps.AttributeError("type {0} has no attribute {1}",
+                throw PythonOps.AttributeError(ResourceManager.Default.GetResource("type0hasnoattribute1", "type {0} has no attribute {1}"),
                     DynamicHelpers.GetPythonType(target.Target),
                     name);
 

@@ -31,7 +31,7 @@ namespace IronPython.Runtime {
                 owner = DynamicHelpers.GetPythonType(instance);
             } else {
                 if (!owner.IsSubclassOf(DynamicHelpers.GetPythonTypeFromType(_func.DeclaringType))) {
-                    throw PythonOps.TypeError("descriptor {0} for type {1} doesn't apply to type {2}",
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("descriptor0fortype1doesntapplytotype2", "descriptor {0} for type {1} doesn't apply to type {2}"),
                         PythonOps.Repr(context, _func.Name),
                         PythonOps.Repr(context, DynamicHelpers.GetPythonTypeFromType(_func.DeclaringType).Name),
                         PythonOps.Repr(context, owner.Name));

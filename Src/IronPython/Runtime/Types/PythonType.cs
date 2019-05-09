@@ -497,7 +497,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
         public static void Set__bases__(CodeContext/*!*/ context, PythonType/*!*/ type, object value) {
             // validate we got a tuple...           
             PythonTuple t = value as PythonTuple;
-            if (t == null) throw PythonOps.TypeError("expected tuple of types or old-classes, got '{0}'", PythonTypeOps.GetName(value));
+            if (t == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedtupleoftypesoroldclassesgot0", "expected tuple of types or old-classes, got '{0}'"), PythonTypeOps.GetName(value));
 
             List<PythonType> ldt = new List<PythonType>();
 
@@ -507,7 +507,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                 if (adt == null) {
                     OldClass oc = o as OldClass;
                     if (oc == null) {
-                        throw PythonOps.TypeError("expected tuple of types, got '{0}'", PythonTypeOps.GetName(o));
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedtupleoftypesgot0", "expected tuple of types, got '{0}'"), PythonTypeOps.GetName(o));
                     }
 
                     adt = oc.TypeObject;
@@ -627,7 +627,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                 return value;
             }
 
-            throw PythonOps.AttributeError("type object '{0}' has no attribute '{1}'", Name, name);
+            throw PythonOps.AttributeError(ResourceManager.Default.GetResource("typeobject0hasnoattribute1", "type object '{0}' has no attribute '{1}'"), Name, name);
         }
 
         public PythonType this[params Type[] args] {
@@ -636,7 +636,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                     if (args.Length == 1) {
                         return DynamicHelpers.GetPythonTypeFromType(args[0].MakeArrayType());
                     }
-                    throw PythonOps.TypeError("expected one argument to make array type, got {0}", args.Length);
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedoneargumenttomakearraytypegot0", "expected one argument to make array type, got {0}"), args.Length);
                 }
 
                 if (!UnderlyingSystemType.IsGenericTypeDefinition()) {
@@ -683,7 +683,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
         [SpecialName, PropertyMethod, WrapperDescriptor]
         public static void Set__module__(CodeContext/*!*/ context, PythonType self, object value) {
             if (self.IsSystemType) {
-                throw PythonOps.TypeError("can't set {0}.__module__", self.Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantset0module", "can't set {0}.__module__"), self.Name);
             }
 
             Debug.Assert(self._dict != null);
@@ -693,7 +693,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
 
         [SpecialName, PropertyMethod, WrapperDescriptor]
         public static void Delete__module__(CodeContext/*!*/ context, PythonType self) {
-            throw PythonOps.TypeError("can't delete {0}.__module__", self.Name);
+            throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantdelete0module", "can't delete {0}.__module__"), self.Name);
         }
 
         [SpecialName, PropertyMethod, WrapperDescriptor]
@@ -709,7 +709,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
         [SpecialName, PropertyMethod, WrapperDescriptor]
         public static void Set__name__(PythonType type, string name) {
             if (type.IsSystemType) {
-                throw PythonOps.TypeError("can't set attributes of built-in/extension type '{0}'", type.Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("cantsetattributesofbuiltinextensiontype0", "can't set attributes of built-in/extension type '{0}'"), type.Name);
             }
 
             type.Name = name;
@@ -2380,9 +2380,9 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                     if (i != j && newBases[i] == newBases[j]) {
                         OldClass oc = newBases[i] as OldClass;
                         if (oc != null) {
-                            throw PythonOps.TypeError("duplicate base class {0}", oc.Name);
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("duplicatebaseclass0", "duplicate base class {0}"), oc.Name);
                         } else {
-                            throw PythonOps.TypeError("duplicate base class {0}", ((PythonType)newBases[i]).Name);
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("duplicatebaseclass0", "duplicate base class {0}"), ((PythonType)newBases[i]).Name);
                         }
                     }
                 }

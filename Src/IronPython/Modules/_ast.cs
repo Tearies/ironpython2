@@ -71,7 +71,7 @@ namespace IronPython.Modules
                 stmt = _ast.stmt.RevertStmts(interactive.body);
                 printExpression = true;
             } else 
-                throw PythonOps.TypeError("unsupported type of AST: {0}",(source.GetType()));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("unsupportedtypeofast0", "unsupported type of AST: {0}"),(source.GetType()));
 
             return new PythonAst(stmt, false, ModuleOptions.ExecOrEvalCode, printExpression, compilerContext, new int[] {} );
         }
@@ -727,7 +727,7 @@ namespace IronPython.Modules
             }
 
             internal virtual AstExpression Revert() {
-                throw PythonOps.TypeError("Unexpected expr type: {0}", GetType());
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("unexpectedexprtype0", "Unexpected expr type: {0}"), GetType());
             }
 
             internal static AstExpression Revert(expr ex) {
@@ -814,7 +814,7 @@ namespace IronPython.Modules
             }
 
             internal virtual Statement Revert() {
-                throw PythonOps.TypeError("Unexpected statement type: {0}", GetType());
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("unexpectedstatementtype0", "Unexpected statement type: {0}"), GetType());
             }
 
             internal static Statement RevertStmts(PythonList stmts) {
@@ -1150,7 +1150,7 @@ namespace IronPython.Modules
                         expr.Revert(values[1]));
                     return oe;
                 }
-                throw PythonOps.TypeError("Unexpected boolean operator: {0}", op);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("unexpectedbooleanoperator0", "Unexpected boolean operator: {0}"), op);
             }
 
             public boolop op {
@@ -2452,7 +2452,7 @@ namespace IronPython.Modules
 
                     _body = ((Yield)((Expr)statement).value).value;
                 }  else
-                    throw PythonOps.TypeError("Unexpected statement type: {0}, expected Return or Expr", statement.GetType());
+                    throw PythonOps.TypeError(ResourceManager.Default.GetResource("unexpectedstatementtype0expectedreturnorexpr", "Unexpected statement type: {0}, expected Return or Expr"), statement.GetType());
             }
 
             internal override AstExpression Revert() {

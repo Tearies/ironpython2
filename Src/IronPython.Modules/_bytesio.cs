@@ -189,7 +189,7 @@ namespace IronPython.Modules {
                 }
 
                 _checkClosed();
-                throw PythonOps.TypeError("must be read-write buffer, not {0}", PythonTypeOps.GetName(buf));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbereadwritebuffernot0", "must be read-write buffer, not {0}"), PythonTypeOps.GetName(buf));
             }
 
             [Documentation("readline([size]) -> next line from the file, as bytes.\n\n"
@@ -228,7 +228,7 @@ namespace IronPython.Modules {
 
                 _checkClosed();
 
-                throw PythonOps.TypeError("integer argument expected, got '{0}'", PythonTypeOps.GetName(size));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerargumentexpectedgot0", "integer argument expected, got '{0}'"), PythonTypeOps.GetName(size));
             }
 
             [Documentation("readlines([size]) -> list of bytes objects, each a line from the file.\n\n"
@@ -260,7 +260,7 @@ namespace IronPython.Modules {
                 switch (whence) {
                     case 0:
                         if (pos < 0) {
-                            throw PythonOps.ValueError("negative seek value {0}", pos);
+                            throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativeseekvalue0", "negative seek value {0}"), pos);
                         }
                         _pos = pos;
                         return _pos;
@@ -271,7 +271,7 @@ namespace IronPython.Modules {
                         _pos = Math.Max(0, _length + pos);
                         return _pos;
                     default:
-                        throw PythonOps.ValueError("invalid whence ({0}, should be 0, 1 or 2)", whence);
+                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("invalidwhence0shouldbe01or2", "invalid whence ({0}, should be 0, 1 or 2)"), whence);
                 }
             }
 
@@ -327,7 +327,7 @@ namespace IronPython.Modules {
             public BigInteger truncate(int size) {
                 _checkClosed();
                 if (size < 0) {
-                    throw PythonOps.ValueError("negative size value {0}", size);
+                    throw PythonOps.ValueError(ResourceManager.Default.GetResource("negativesizevalue0", "negative size value {0}"), size);
                 }
 
                 _length = Math.Min(_length, size);
@@ -346,7 +346,7 @@ namespace IronPython.Modules {
 
                 _checkClosed();
 
-                throw PythonOps.TypeError("integer argument expected, got '{0}'", PythonTypeOps.GetName(size));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("integerargumentexpectedgot0", "integer argument expected, got '{0}'"), PythonTypeOps.GetName(size));
             }
 
             public override bool writable(CodeContext/*!*/ context) {

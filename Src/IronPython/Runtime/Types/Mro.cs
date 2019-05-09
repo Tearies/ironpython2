@@ -55,7 +55,7 @@ namespace IronPython.Runtime.Types {
             foreach (PythonType dt in baseTypes) bases.Add(dt);
 
             if (bases.Contains(startingType)) {
-                throw PythonOps.TypeError("a __bases__ item causes an inheritance cycle ({0})", startingType.Name);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("abasesitemcausesaninheritancecycle0", "a __bases__ item causes an inheritance cycle ({0})"), startingType.Name);
             }
 
             List<PythonType> mro = new List<PythonType>();

@@ -250,9 +250,9 @@ namespace IronPython.Runtime.Exceptions {
             int originalNewLine = newLineNum;
 
             if (newLineNum < funcCode.Span.Start.Line) {
-                throw PythonOps.ValueError("line {0} comes before the current code block", newLineNum);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("line0comesbeforethecurrentcodeblock", "line {0} comes before the current code block"), newLineNum);
             } else if (newLineNum > funcCode.Span.End.Line) {
-                throw PythonOps.ValueError("line {0} comes after the current code block", newLineNum);
+                throw PythonOps.ValueError(ResourceManager.Default.GetResource("line0comesafterthecurrentcodeblock", "line {0} comes after the current code block"), newLineNum);
             }
 
 
@@ -295,7 +295,7 @@ namespace IronPython.Runtime.Exceptions {
                 ++newLineNum;
             }
 
-            throw PythonOps.ValueError("line {0} is invalid jump location ({1} - {2} are valid)", originalNewLine, funcCode.Span.Start.Line, funcCode.Span.End.Line);
+            throw PythonOps.ValueError(ResourceManager.Default.GetResource("line0isinvalidjumplocation12arevalid", "line {0} is invalid jump location ({1} - {2} are valid)"), originalNewLine, funcCode.Span.Start.Line, funcCode.Span.End.Line);
         }
 
         private bool IsTopMostFrame(List<FunctionStack> pyThread) {
@@ -305,10 +305,10 @@ namespace IronPython.Runtime.Exceptions {
         private static Exception BadForOrFinallyJump(int newLineNum, Dictionary<int, bool> jumpIntoLoopIds) {
             foreach (bool isFinally in jumpIntoLoopIds.Values) {
                 if (isFinally) {
-                    return PythonOps.ValueError("can't jump into 'finally block'", newLineNum);
+                    return PythonOps.ValueError(ResourceManager.Default.GetResource("cantjumpintofinallyblock", "can't jump into 'finally block'"), newLineNum);
                 }
             }
-            return PythonOps.ValueError("can't jump into 'for loop'", newLineNum);
+            return PythonOps.ValueError(ResourceManager.Default.GetResource("cantjumpintoforloop", "can't jump into 'for loop'"), newLineNum);
         }
     }
 

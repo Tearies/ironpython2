@@ -72,7 +72,7 @@ namespace IronPython.Modules {
             }
 
             if(args.Length > 3) {
-                throw PythonOps.TypeError("set_threshold() takes at most 3 arguments ({0} given)", args.Length);
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("setthresholdtakesatmost3arguments0given", "set_threshold() takes at most 3 arguments ({0} given)"), args.Length);
             }
 
             if(args.Any(x => x is double)) {

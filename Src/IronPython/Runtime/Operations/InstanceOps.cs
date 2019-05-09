@@ -123,19 +123,19 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static object OverloadedNewBasic(CodeContext context, SiteLocalStorage<CallSite<Func<CallSite, CodeContext, object, object[], object>>> storage, BuiltinFunction overloads\u00F8, PythonType type\u00F8, params object[] args\u00F8) {
-            if (type\u00F8 == null) throw PythonOps.TypeError("__new__ expected type object, got {0}", PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
+            if (type\u00F8 == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("newexpectedtypeobjectgot0", "__new__ expected type object, got {0}"), PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
             if (args\u00F8 == null) args\u00F8 = new object[1];
             return overloads\u00F8.Call(context, storage, null, args\u00F8);
         }
 
         public static object OverloadedNewKW(CodeContext context, BuiltinFunction overloads\u00F8, PythonType type\u00F8, [ParamDictionary]IDictionary<object, object> kwargs\u00F8) {
-            if (type\u00F8 == null) throw PythonOps.TypeError("__new__ expected type object, got {0}", PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
+            if (type\u00F8 == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("newexpectedtypeobjectgot0", "__new__ expected type object, got {0}"), PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
             
             return overloads\u00F8.Call(context, null, null, ArrayUtils.EmptyObjects, kwargs\u00F8);
         }
 
         public static object OverloadedNewClsKW(CodeContext context, BuiltinFunction overloads\u00F8, PythonType type\u00F8, [ParamDictionary]IDictionary<object, object> kwargs\u00F8, params object[] args\u00F8) {
-            if (type\u00F8 == null) throw PythonOps.TypeError("__new__ expected type object, got {0}", PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
+            if (type\u00F8 == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("newexpectedtypeobjectgot0", "__new__ expected type object, got {0}"), PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
             if (args\u00F8 == null) args\u00F8 = new object[1];
 
             return overloads\u00F8.Call(context, null, null, args\u00F8, kwargs\u00F8);
@@ -152,7 +152,7 @@ namespace IronPython.Runtime.Operations {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "context")]
         [StaticExtensionMethod]
         public static object NonDefaultNew(CodeContext context, PythonType type\u00F8, params object[] args\u00F8) {
-            if (type\u00F8 == null) throw PythonOps.TypeError("__new__ expected type object, got {0}", PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
+            if (type\u00F8 == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("newexpectedtypeobjectgot0", "__new__ expected type object, got {0}"), PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
             if (args\u00F8 == null) args\u00F8 = new object[1];
             return type\u00F8.CreateInstance(context, args\u00F8);
         }
@@ -160,7 +160,7 @@ namespace IronPython.Runtime.Operations {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "context")]
         [StaticExtensionMethod]
         public static object NonDefaultNewKW(CodeContext context, PythonType type\u00F8, [ParamDictionary]IDictionary<object, object> kwargs\u00F8, params object[] args\u00F8) {
-            if (type\u00F8 == null) throw PythonOps.TypeError("__new__ expected type object, got {0}", PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
+            if (type\u00F8 == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("newexpectedtypeobjectgot0", "__new__ expected type object, got {0}"), PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
             if (args\u00F8 == null) args\u00F8 = new object[1];
 
             string []names;
@@ -171,7 +171,7 @@ namespace IronPython.Runtime.Operations {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "context")]
         [StaticExtensionMethod]
         public static object NonDefaultNewKWNoParams(CodeContext context, PythonType type\u00F8, [ParamDictionary]IDictionary<object, object> kwargs\u00F8) {
-            if (type\u00F8 == null) throw PythonOps.TypeError("__new__ expected type object, got {0}", PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
+            if (type\u00F8 == null) throw PythonOps.TypeError(ResourceManager.Default.GetResource("newexpectedtypeobjectgot0", "__new__ expected type object, got {0}"), PythonOps.Repr(context, DynamicHelpers.GetPythonType(type\u00F8)));
 
             string[] names;
             object[] args;
