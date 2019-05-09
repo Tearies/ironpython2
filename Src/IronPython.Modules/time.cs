@@ -358,7 +358,7 @@ namespace IronPython.Modules {
             public string Text;
 
             public override string ToString() {
-                return string.Format(ResourceManager.Default.GetResource("01", "{0}:{1}"), Type, Text);
+                return string.Format(ResourceManager.Default.GetResource("firstArg:2ndArg", "{0}:{1}"), Type, Text);
             }
         }
 

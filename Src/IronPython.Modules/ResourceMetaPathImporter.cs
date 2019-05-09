@@ -119,7 +119,7 @@ module, or raises ResourceImportError if it wasn't found."
                 //// add __path__ to the module *before* the code
                 //// gets executed
                 //var subname = GetSubName(fullname);
-                //var fullpath = string.Format(ResourceManager.Default.GetResource("01", "{0}{1}"),
+                //var fullpath = string.Format(ResourceManager.Default.GetResource("firstArg2ndArg", "{0}{1}"),
                 //    Path.DirectorySeparatorChar,
                 //    subname);
 
@@ -223,7 +223,7 @@ module, or raises ResourceImportError if it wasn't found."
                 var sizeDesc = String.Format(ResourceManager.Default.GetResource("0bytes", "{0} bytes"), _fileSize);
                 if (Convert.ToDouble(_fileSize)/1024.0 > 1.0)
                     sizeDesc = String.Format(ResourceManager.Default.GetResource("0kb", "{0} KB"), Math.Round(Convert.ToDouble(_fileSize)/1024.0, 1));
-                return String.Format(ResourceManager.Default.GetResource("01", "{0} ({1})"), FullName, sizeDesc);
+                return String.Format(ResourceManager.Default.GetResource("TwoArgs2ndhavePreSpace", "{0} ({1})"), FullName, sizeDesc);
             }
 #endif
         }
@@ -281,7 +281,7 @@ module, or raises ResourceImportError if it wasn't found."
                 catch (Exception exception) {
                     files = null;
                     modules = null;
-                    unpackingError = String.Format(ResourceManager.Default.GetResource("01", "{0}: {1}"), exception.GetType().Name, exception.Message);
+                    unpackingError = String.Format(ResourceManager.Default.GetResource("firstArg:2ndArg", "{0}:{1}"), exception.GetType().Name, exception.Message);
                     return false;
                 }
             }
@@ -341,7 +341,7 @@ module, or raises ResourceImportError if it wasn't found."
                     }
                 }
                 catch (Exception exception) {
-                    unpackingError = String.Format(ResourceManager.Default.GetResource("01", "{0}: {1}"), exception.GetType().Name, exception.Message);
+                    unpackingError = String.Format(ResourceManager.Default.GetResource("firstArg:2ndArg", "{0}:{1}"), exception.GetType().Name, exception.Message);
                     return false;
                 }
             }
@@ -432,7 +432,7 @@ module, or raises ResourceImportError if it wasn't found."
                     }
                 }
                 catch (Exception exception) {
-                    unpackingError = String.Format(ResourceManager.Default.GetResource("01", "{0}: {1}"), exception.GetType().Name, exception.Message);
+                    unpackingError = String.Format(ResourceManager.Default.GetResource("firstArg:2ndArg", "{0}:{1}"), exception.GetType().Name, exception.Message);
                     return false;
                 }
             }

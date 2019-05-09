@@ -1013,9 +1013,9 @@ namespace IronPython.Modules {
 
             public virtual string/*!*/ __repr__(CodeContext/*!*/ context) {
                 if (_fInfinite) {
-                    return String.Format(ResourceManager.Default.GetResource("01", "{0}({1})"), PythonOps.GetPythonTypeName(this), PythonOps.Repr(context, _obj));
+                    return String.Format(ResourceManager.Default.GetResource("firstArg(2ndArg)", "{0}({1})"), PythonOps.GetPythonTypeName(this), PythonOps.Repr(context, _obj));
                 }
-                return String.Format(ResourceManager.Default.GetResource("012", "{0}({1}, {2})"), PythonOps.GetPythonTypeName(this), PythonOps.Repr(context, _obj), _remaining);
+                return String.Format(ResourceManager.Default.GetResource("firstArg(2ndArg3rdArg)", "{0}({1},{2})"), PythonOps.GetPythonTypeName(this), PythonOps.Repr(context, _obj), _remaining);
             }
 
             #endregion

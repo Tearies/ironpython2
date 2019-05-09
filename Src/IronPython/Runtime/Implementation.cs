@@ -27,12 +27,12 @@ namespace IronPython.Runtime {
         public string __repr__(CodeContext context) {
             var attrs = from attr in PythonOps.GetAttrNames(context, this)
                         where !attr.ToString().StartsWith("_")
-                        select string.Format(ResourceManager.Default.GetResource("01", "{0}={1}"),
+                        select string.Format(ResourceManager.Default.GetResource("firstArg=2ndArg", "{0}={1}"),
                             attr,
                             PythonOps.Repr(context, PythonOps.GetBoundAttr(context, this, attr.ToString()))
                         );
 
-            return string.Format(ResourceManager.Default.GetResource("01", "{0}({1})"),
+            return string.Format(ResourceManager.Default.GetResource("firstArg(2ndArg)", "{0}({1})"),
                 PythonOps.GetPythonTypeName(this),
                 string.Join(",", attrs.ToArray())
             );

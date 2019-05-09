@@ -388,7 +388,7 @@ Handle an exception by displaying it with a traceback on sys.stderr._")]
                         if (_keys[i] == null) {
                             sb.Append(_values[i]);
                         } else {
-                            sb.AppendFormat(ResourceManager.Default.GetResource("01", "{0}={1}"), _keys[i], _values[i]);
+                            sb.AppendFormat(ResourceManager.Default.GetResource("firstArg=2ndArg", "{0}={1}"), _keys[i], _values[i]);
                         }
                         if (i < n_fields - 1) {
                             sb.Append(", ");

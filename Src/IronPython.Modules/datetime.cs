@@ -1160,10 +1160,10 @@ namespace IronPython.Modules {
                     InternalDateTime.Minute);
 
                 if (microsecond != 0) {
-                    sb.AppendFormat(ResourceManager.Default.GetResource("01", ", {0}, {1}"), second, microsecond);
+                    sb.AppendFormat(ResourceManager.Default.GetResource("TwoArgsWithParameter", ", {0}, {1}"), second, microsecond);
                 } else {
                     if (second != 0) {
-                        sb.AppendFormat(ResourceManager.Default.GetResource("0", ", {0}"), second);
+                        sb.AppendFormat(ResourceManager.Default.GetResource("OneArgsWithPrefixSpace", ", {0}"), second);
                     }
                 }
 
