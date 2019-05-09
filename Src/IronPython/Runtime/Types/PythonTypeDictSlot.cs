@@ -90,7 +90,7 @@ namespace IronPython.Runtime.Types {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return String.Format("<attribute '__dict__' of '{0}' objects>", _type.Name);
+            return String.Format(ResourceManager.Default.GetResource("attributedictof0objects", "<attribute '__dict__' of '{0}' objects>"), _type.Name);
         }
 
         #endregion

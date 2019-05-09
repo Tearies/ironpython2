@@ -777,7 +777,7 @@ namespace IronPython.Modules {
                 // find all the functions, and display their 
                 // documentation                
                 if (indent == 0) {
-                    doc.AppendFormat("Help on {0} in module {1}\n\n", type.Name, PythonOps.GetBoundAttr(context, type, "__module__"));
+                    doc.AppendFormat(ResourceManager.Default.GetResource("helpon0inmodule1nn", "Help on {0} in module {1}\n\n"), type.Name, PythonOps.GetBoundAttr(context, type, "__module__"));
                 }
 
                 PythonTypeSlot dts;
@@ -805,21 +805,21 @@ namespace IronPython.Modules {
                     }
                 }
             } else if ((methodDesc = obj as BuiltinMethodDescriptor) != null) {
-                if (indent == 0) doc.AppendFormat("Help on method-descriptor {0}\n\n", methodDesc.__name__);
+                if (indent == 0) doc.AppendFormat(ResourceManager.Default.GetResource("helponmethoddescriptor0nn", "Help on method-descriptor {0}\n\n"), methodDesc.__name__);
                 AppendIndent(doc, indent);
                 doc.Append(methodDesc.__name__);
                 doc.Append("(...)\n");
 
                 AppendMultiLine(doc, methodDesc.__doc__, indent + 1);
             } else if ((builtinFunction = obj as BuiltinFunction) != null) {
-                if (indent == 0) doc.AppendFormat("Help on built-in function {0}\n\n", builtinFunction.Name);
+                if (indent == 0) doc.AppendFormat(ResourceManager.Default.GetResource("helponbuiltinfunction0nn", "Help on built-in function {0}\n\n"), builtinFunction.Name);
                 AppendIndent(doc, indent);
                 doc.Append(builtinFunction.Name);
                 doc.Append("(...)\n");
 
                 AppendMultiLine(doc, builtinFunction.__doc__, indent + 1);
             } else if ((function = obj as PythonFunction) != null) {
-                if (indent == 0) doc.AppendFormat("Help on function {0} in module {1}:\n\n", function.__name__, function.__module__);
+                if (indent == 0) doc.AppendFormat(ResourceManager.Default.GetResource("helponfunction0inmodule1nn", "Help on function {0} in module {1}:\n\n"), function.__name__, function.__module__);
 
                 AppendIndent(doc, indent);
                 doc.Append(function.GetSignatureString());
@@ -828,15 +828,15 @@ namespace IronPython.Modules {
                     AppendMultiLine(doc, pfDoc, indent);
                 }
             } else if ((method = obj as Method) != null && ((function = method.im_func as PythonFunction) != null)) {
-                if (indent == 0) doc.AppendFormat("Help on method {0} in module {1}:\n\n", function.__name__, function.__module__);
+                if (indent == 0) doc.AppendFormat(ResourceManager.Default.GetResource("helponmethod0inmodule1nn", "Help on method {0} in module {1}:\n\n"), function.__name__, function.__module__);
 
                 AppendIndent(doc, indent);
                 doc.Append(function.GetSignatureString());
 
                 if (method.im_self == null) {
-                    doc.AppendFormat(" unbound {0} method\n", PythonOps.ToString(method.im_class));
+                    doc.AppendFormat(ResourceManager.Default.GetResource("unbound0methodn", " unbound {0} method\n"), PythonOps.ToString(method.im_class));
                 } else {
-                    doc.AppendFormat(" method of {0} instance\n", PythonOps.ToString(method.im_class));
+                    doc.AppendFormat(ResourceManager.Default.GetResource("methodof0instancen", " method of {0} instance\n"), PythonOps.ToString(method.im_class));
                 }
 
                 string pfDoc = Converter.ConvertToString(function.__doc__);
@@ -854,7 +854,7 @@ namespace IronPython.Modules {
                 }
             } else if ((oldClass = obj as OldClass) != null) {
                 if (indent == 0) {
-                    doc.AppendFormat("Help on {0} in module {1}\n\n", oldClass.Name, PythonOps.GetBoundAttr(context, oldClass, "__module__"));
+                    doc.AppendFormat(ResourceManager.Default.GetResource("helpon0inmodule1nn", "Help on {0} in module {1}\n\n"), oldClass.Name, PythonOps.GetBoundAttr(context, oldClass, "__module__"));
                 }
 
                 object docText;

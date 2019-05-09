@@ -260,7 +260,7 @@ namespace IronPython.Runtime.Types {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return string.Format("<property# {0} on {1}>",
+            return string.Format(ResourceManager.Default.GetResource("property0on1", "<property# {0} on {1}>"),
                 __name__,
                 DynamicHelpers.GetPythonTypeFromType(DeclaringType).Name);
         }

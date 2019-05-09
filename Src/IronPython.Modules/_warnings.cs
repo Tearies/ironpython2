@@ -222,7 +222,7 @@ namespace IronPython.Modules {
 
         internal static string formatwarning(object message, PythonType category, string filename, int lineno, [DefaultParameterValue(null)]string line) {
             StringBuilder sb = new StringBuilder();
-            sb.AppendFormat("{0}:{1}: {2}: {3}\n", filename, lineno, category.Name, message);
+            sb.AppendFormat(ResourceManager.Default.GetResource("0123n", "{0}:{1}: {2}: {3}\n"), filename, lineno, category.Name, message);
             if (line == null && lineno > 0 && File.Exists(filename)) {
                 using (FileStream stream = File.OpenRead(filename))
                 using (StreamReader reader = new StreamReader(stream)) {
@@ -233,7 +233,7 @@ namespace IronPython.Modules {
                 }
             }
             if (line != null) {
-                sb.AppendFormat("  {0}\n", line.strip());
+                sb.AppendFormat(ResourceManager.Default.GetResource("0n", "  {0}\n"), line.strip());
             }
             return sb.ToString();
         }

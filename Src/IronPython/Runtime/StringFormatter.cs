@@ -608,7 +608,7 @@ namespace IronPython.Runtime {
                 string res = String.Format(_nfi, "{0:" + format + _opts.FieldWidth.ToString() + "}", val);
 
                 // Difference: 
-                //   System.String.Format("{0:D3}", -1)      '-001'
+                //   System.String.Format(ResourceManager.Default.GetResource("0d3", "{0:D3}"), -1)      '-001'
                 //   "%03d" % -1                             '-01'
 
                 if (res[0] == '-') {
@@ -718,7 +718,7 @@ namespace IronPython.Runtime {
 
         private void AppendNumericCommon(object val, char format) {
             StringBuilder res = new StringBuilder();
-            res.AppendFormat("{0:" + format + "}", val);
+            res.AppendFormat(ResourceManager.Default.GetResource("0format", "{0:" + format + "}"), val);
             if (res.Length < _opts.Precision) {
                 res.Insert(0, new String('0', _opts.Precision - res.Length));
             }

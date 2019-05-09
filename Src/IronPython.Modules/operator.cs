@@ -99,7 +99,7 @@ namespace IronPython.Modules {
             }
 
             public override string ToString() {
-                return String.Format("<operator.methodcaller: {0}>", _name);
+                return String.Format(ResourceManager.Default.GetResource("operatormethodcaller0", "<operator.methodcaller: {0}>"), _name);
             }
 
             [SpecialName]

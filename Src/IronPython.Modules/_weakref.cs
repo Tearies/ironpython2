@@ -387,7 +387,7 @@ namespace IronPython.Modules {
             public string/*!*/ __repr__(CodeContext/*!*/ context) {
                 object obj = _target.Target;
                 GC.KeepAlive(this);
-                return String.Format("<weakproxy at {0} to {1} at {2}>",
+                return String.Format(ResourceManager.Default.GetResource("weakproxyat0to1at2", "<weakproxy at {0} to {1} at {2}>"),
                     IdDispenser.GetId(this),
                     PythonOps.GetPythonTypeName(obj),
                     IdDispenser.GetId(obj));
@@ -636,7 +636,7 @@ namespace IronPython.Modules {
             public string/*!*/ __repr__(CodeContext/*!*/ context) {
                 object obj = _target.Target;
                 GC.KeepAlive(this);
-                return String.Format("<weakproxy at {0} to {1} at {2}>",
+                return String.Format(ResourceManager.Default.GetResource("weakproxyat0to1at2", "<weakproxy at {0} to {1} at {2}>"),
                     IdDispenser.GetId(this),
                     PythonOps.GetPythonTypeName(obj),
                     IdDispenser.GetId(obj));
@@ -786,7 +786,7 @@ namespace IronPython.Modules {
         #region ICodeFormattable Members
 
         public virtual string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return String.Format("<slot wrapper {0} of {1} objects>",
+            return String.Format(ResourceManager.Default.GetResource("slotwrapper0of1objects", "<slot wrapper {0} of {1} objects>"),
                 PythonOps.Repr(context, _name),
                 PythonOps.Repr(context, _type.Name));
         }

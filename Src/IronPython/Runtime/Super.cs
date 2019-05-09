@@ -207,7 +207,7 @@ namespace IronPython.Runtime {
                 selfRepr = "<super object>";
             else
                 selfRepr = PythonOps.Repr(context, _self);
-            return string.Format("<{0}: {1}, {2}>", PythonTypeOps.GetName(this), PythonOps.Repr(context, _thisClass), selfRepr);
+            return string.Format(ResourceManager.Default.GetResource("012", "<{0}: {1}, {2}>"), PythonTypeOps.GetName(this), PythonOps.Repr(context, _thisClass), selfRepr);
         }
 
         #endregion

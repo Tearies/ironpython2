@@ -818,7 +818,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static string HexId(object o) {
-            return string.Format("0x{0:X16}", Id(o));
+            return string.Format(ResourceManager.Default.GetResource("0x0x16", "0x{0:X16}"), Id(o));
         }
 
         // For hash operators, it's essential that:
@@ -924,7 +924,7 @@ namespace IronPython.Runtime.Operations {
             }
 
             object len = PythonContext.InvokeUnaryOperator(DefaultContext.Default, UnaryOperators.Length, o, 
-                string.Format("object of type '{0}' has no len()", PythonOps.GetPythonTypeName(o)));
+                string.Format(ResourceManager.Default.GetResource("objectoftype0hasnolen", "object of type '{0}' has no len()"), PythonOps.GetPythonTypeName(o)));
 
             int res;
             if (len is int) {
@@ -3421,7 +3421,7 @@ namespace IronPython.Runtime.Operations {
         [NoSideEffects]
         public static object CheckUninitialized(object value, string name) {
             if (value == Uninitialized.Instance) {
-                throw new UnboundLocalException(String.Format("Local variable '{0}' referenced before assignment.", name));
+                throw new UnboundLocalException(String.Format(ResourceManager.Default.GetResource("localvariable0referencedbeforeassignment", "Local variable '{0}' referenced before assignment."), name));
             }
             return value;
         }
@@ -3648,7 +3648,7 @@ namespace IronPython.Runtime.Operations {
             }
 
             if (warn == null) {
-                PythonOps.PrintWithDestNoNewline(context, pc.SystemStandardError, String.Format("{0}:{1}: {2}: {3}\n", filename, lineNo, category.Name, message));
+                PythonOps.PrintWithDestNoNewline(context, pc.SystemStandardError, String.Format(ResourceManager.Default.GetResource("0123n", "{0}:{1}: {2}: {3}\n"), filename, lineNo, category.Name, message));
             } else {
                 PythonOps.CallWithContext(context, warn, message, category, filename ?? "", lineNo);
             }
@@ -4307,7 +4307,7 @@ namespace IronPython.Runtime.Operations {
 
         public static SyntaxErrorException BadSourceError(byte badByte, SourceSpan span, string path) {
             SyntaxErrorException res = new SyntaxErrorException(
-                String.Format("Non-ASCII character '\\x{0:x2}' in file {2} on line {1}, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details",
+                String.Format(ResourceManager.Default.GetResource("nonasciicharacterx0x2infile2online1butnoencodingdeclaredseehttpwwwpythonorgpepspep0263htmlfordetails", "Non-ASCII character '\\x{0:x2}' in file {2} on line {1}, but no encoding declared; see http://www.python.org/peps/pep-0263.html for details"),
                     badByte,
                     span.Start.Line,
                     path
@@ -4346,11 +4346,11 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static Exception NameError(string name) {
-            return new UnboundNameException(string.Format("name '{0}' is not defined", name));
+            return new UnboundNameException(string.Format(ResourceManager.Default.GetResource("name0isnotdefined", "name '{0}' is not defined"), name));
         }
 
         public static Exception GlobalNameError(string name) {
-            return new UnboundNameException(string.Format("global name '{0}' is not defined", name));
+            return new UnboundNameException(string.Format(ResourceManager.Default.GetResource("globalname0isnotdefined", "global name '{0}' is not defined"), name));
         }
 
         // If an unbound method is called without a "self" argument, or a "self" argument of a bad type
@@ -4359,7 +4359,7 @@ namespace IronPython.Runtime.Operations {
         }
 
         public static Exception TypeErrorForUnboundMethodCall(string methodName, PythonType methodType, object instance) {
-            string message = string.Format("unbound method {0}() must be called with {1} instance as first argument (got {2} instead)",
+            string message = string.Format(ResourceManager.Default.GetResource("unboundmethod0mustbecalledwith1instanceasfirstargumentgot2instead", "unbound method {0}() must be called with {1} instance as first argument (got {2} instead)"),
                                            methodName, methodType.Name, PythonTypeOps.GetName(instance));
             return TypeError(message);
         }

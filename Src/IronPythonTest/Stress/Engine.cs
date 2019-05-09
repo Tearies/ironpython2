@@ -7,7 +7,7 @@ using System.Diagnostics;
 using Microsoft.Scripting.Generation;
 using Microsoft.Scripting.Hosting;
 using IronPython.Hosting;
-
+using Microsoft.Scripting;
 using NUnit.Framework;
 
 namespace IronPythonTest.Stress {
@@ -61,7 +61,7 @@ namespace IronPythonTest.Stress {
             {
                 System.Console.WriteLine("ScenarioGC used {0} bytes of memory.", memoryUsed);
                 if (memoryUsed > memoryThreshold)
-                    throw new Exception(String.Format("ScenarioGC used {0} bytes of memory. The threshold is {1} bytes", memoryUsed, memoryThreshold));
+                    throw new Exception(String.Format(ResourceManager.Default.GetResource("scenariogcused0bytesofmemorythethresholdis1bytes", "ScenarioGC used {0} bytes of memory. The threshold is {1} bytes"), memoryUsed, memoryThreshold));
             }
             else {
                 System.Console.WriteLine("Skipping memory usage test under SaveSnippets and/or Debug mode.");

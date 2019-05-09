@@ -169,7 +169,7 @@ namespace IronPython.Compiler.Ast {
         [Conditional("DEBUG")]
         public void Dump(BitArray bits) {
             System.Text.StringBuilder sb = new System.Text.StringBuilder();
-            sb.AppendFormat("FlowChecker ({0})", _scope is FunctionDefinition ? ((FunctionDefinition)_scope).Name :
+            sb.AppendFormat(ResourceManager.Default.GetResource("flowchecker0", "FlowChecker ({0})"), _scope is FunctionDefinition ? ((FunctionDefinition)_scope).Name :
                                                  _scope is ClassDefinition ? ((ClassDefinition)_scope).Name : "");
             sb.Append('{');
             bool comma = false;
@@ -177,7 +177,7 @@ namespace IronPython.Compiler.Ast {
                 if (comma) sb.Append(", ");
                 else comma = true;
                 int index = 2 * binding.Value.Index;
-                sb.AppendFormat("{0}:{1}{2}",
+                sb.AppendFormat(ResourceManager.Default.GetResource("012", "{0}:{1}{2}"),
                     binding.Key,
                     bits.Get(index) ? "*" : "-",
                     bits.Get(index + 1) ? "-" : "*");

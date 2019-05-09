@@ -401,7 +401,7 @@ namespace IronPython.Modules {
                         binder.Throw(
                             Expression.Call(
                                 typeof(PythonOps).GetMethod(nameof(PythonOps.TypeError)),
-                                Expression.Constant(String.Format("this function takes {0} arguments ({1} given)", expected, got)),
+                                Expression.Constant(String.Format(ResourceManager.Default.GetResource("thisfunctiontakes0arguments1given", "this function takes {0} arguments ({1} given)"), expected, got)),
                                 Expression.NewArrayInit(typeof(object))                                    
                             ),
                             typeof(object)
@@ -590,7 +590,7 @@ namespace IronPython.Modules {
                     List<MarshalCleanup> cleanups = null;
                     for (int i = 0; i < sig.Length; i++) {
 #if DEBUG
-                        method.Emit(OpCodes.Ldstr, String.Format("Argument #{0}, Marshaller: {1}, Native Type: {2}", i, sig[i], sig[i].NativeType));
+                        method.Emit(OpCodes.Ldstr, String.Format(ResourceManager.Default.GetResource("argument0marshaller1nativetype2", "Argument #{0}, Marshaller: {1}, Native Type: {2}"), i, sig[i], sig[i].NativeType));
                         method.Emit(OpCodes.Pop);
 #endif
                         MarshalCleanup cleanup = sig[i].EmitCallStubArgument(method, i + 1, constantPool, sigTypes.Length - 1);
@@ -946,7 +946,7 @@ namespace IronPython.Modules {
 
             public string __repr__(CodeContext context) {
                 if (_comInterfaceIndex != -1) {
-                    return string.Format("<COM method offset {0}: {1} at {2}>", _comInterfaceIndex, DynamicHelpers.GetPythonType(this).Name, _id);
+                    return string.Format(ResourceManager.Default.GetResource("commethodoffset01at2", "<COM method offset {0}: {1} at {2}>"), _comInterfaceIndex, DynamicHelpers.GetPythonType(this).Name, _id);
                 }
 
                 return ObjectOps.__repr__(this);

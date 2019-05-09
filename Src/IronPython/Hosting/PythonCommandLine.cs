@@ -540,7 +540,7 @@ namespace IronPython.Hosting {
                     return 0;
                 }
                 if (importer != null && importer.GetType() != typeof(PythonImport.NullImporter)) {
-                    Console.WriteLine(String.Format("can't find '__main__' module in '{0}'", fileName), Style.Error);
+                    Console.WriteLine(String.Format(ResourceManager.Default.GetResource("cantfindmainmodulein0", "can't find '__main__' module in '{0}'"), fileName), Style.Error);
                     return 0;
                 }
             } catch (SystemExitException pythonSystemExit) {

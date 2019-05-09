@@ -239,7 +239,7 @@ Handle an exception by displaying it with a traceback on sys.stderr._")]
             public const int n_unnamed_fields = 0;
 
             public override string __repr__(CodeContext context) {
-                return string.Format("sys.getwindowsversion(major={0}, minor={1}, build={2}, platform={3}, service_pack='{4}')",
+                return string.Format(ResourceManager.Default.GetResource("sysgetwindowsversionmajor0minor1build2platform3servicepack4", "sys.getwindowsversion(major={0}, minor={1}, build={2}, platform={3}, service_pack='{4}')"),
                     this.major, this.minor, this.build, this.platform, this.service_pack);
             }
         }
@@ -388,7 +388,7 @@ Handle an exception by displaying it with a traceback on sys.stderr._")]
                         if (_keys[i] == null) {
                             sb.Append(_values[i]);
                         } else {
-                            sb.AppendFormat("{0}={1}", _keys[i], _values[i]);
+                            sb.AppendFormat(ResourceManager.Default.GetResource("01", "{0}={1}"), _keys[i], _values[i]);
                         }
                         if (i < n_fields - 1) {
                             sb.Append(", ");
@@ -693,7 +693,7 @@ Handle an exception by displaying it with a traceback on sys.stderr._")]
             public const int n_unnamed_fields = 0;
 
             public override string __repr__(CodeContext context) {
-                return string.Format("sys.long_info(bits_per_digit={0}, sizeof_digit={1})",
+                return string.Format(ResourceManager.Default.GetResource("syslonginfobitsperdigit0sizeofdigit1", "sys.long_info(bits_per_digit={0}, sizeof_digit={1})"),
                     this.bits_per_digit, this.sizeof_digit);
             }
         }

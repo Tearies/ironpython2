@@ -546,7 +546,7 @@ namespace IronPython.Runtime {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return string.Format("<function {0} at {1}>", func_name, PythonOps.HexId(this));
+            return string.Format(ResourceManager.Default.GetResource("function0at1", "<function {0} at {1}>"), func_name, PythonOps.HexId(this));
         }
 
         #endregion
@@ -583,7 +583,7 @@ namespace IronPython.Runtime {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return String.Format("<cell at {0}: {1}>",
+            return String.Format(ResourceManager.Default.GetResource("cellat01", "<cell at {0}: {1}>"),
                 IdDispenser.GetId(this),
                 GetContentsRepr()
                 );
@@ -594,7 +594,7 @@ namespace IronPython.Runtime {
                 return "empty";
             }
 
-            return String.Format("{0} object at {1}",
+            return String.Format(ResourceManager.Default.GetResource("0objectat1", "{0} object at {1}"),
                 PythonTypeOps.GetName(Value),
                 IdDispenser.GetId(Value));
         }

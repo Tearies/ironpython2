@@ -278,7 +278,7 @@ namespace IronPython.Modules {
             }
 
             if (postProc) {
-                res = res.Replace("%f", microseconds != null ? System.String.Format("{0:D6}", microseconds) : "");
+                res = res.Replace("%f", microseconds != null ? System.String.Format(ResourceManager.Default.GetResource("0d6", "{0:D6}"), microseconds) : "");
 
                 res = res.Replace("%j", dt.DayOfYear.ToString("D03"));  // day of the year (001 - 366)
 
@@ -358,7 +358,7 @@ namespace IronPython.Modules {
             public string Text;
 
             public override string ToString() {
-                return string.Format("{0}:{1}", Type, Text);
+                return string.Format(ResourceManager.Default.GetResource("01", "{0}:{1}"), Type, Text);
             }
         }
 

@@ -1634,7 +1634,7 @@ namespace IronPython.Runtime.Types {
             Type baseType = mi.DeclaringType.GetBaseType();
 
             MemberInfo[] members = baseType.GetMember(newName, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.FlattenHierarchy);
-            Debug.Assert(members.Length > 0, String.Format("{0} from {1}", newName, baseType.Name));
+            Debug.Assert(members.Length > 0, String.Format(ResourceManager.Default.GetResource("0from1", "{0} from {1}"), newName, baseType.Name));
             Type declType = ((MethodInfo)members[0]).GetBaseDefinition().DeclaringType;
 
             string pythonName = newName;

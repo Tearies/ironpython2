@@ -11,6 +11,7 @@ using System.Threading;
 using Microsoft.Scripting.Runtime;
 
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Types {
 
@@ -159,7 +160,7 @@ namespace IronPython.Runtime.Types {
                 possibleOverloads.Append("]");
             }
 
-            throw ScriptingRuntimeHelpers.SimpleTypeError(String.Format("No match found for the method signature {0}. Expected {1}", sigInfo.ToString(),
+            throw ScriptingRuntimeHelpers.SimpleTypeError(String.Format(ResourceManager.Default.GetResource("nomatchfoundforthemethodsignature0expected1", "No match found for the method signature {0}. Expected {1}"), sigInfo.ToString(),
                 possibleOverloads.ToString()));
         }
 

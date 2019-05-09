@@ -133,7 +133,7 @@ namespace IronPython.Modules {
                 case 63:
                     return '/';
                 default:
-                    throw new InvalidOperationException(String.Format("Bad int val: {0}", val));
+                    throw new InvalidOperationException(String.Format(ResourceManager.Default.GetResource("badintval0", "Bad int val: {0}"), val));
             }
         }
 
@@ -343,7 +343,7 @@ both encoded.  When quotetabs is set, space and tabs are encoded.")]
         public static string b2a_hex(string data) {
             StringBuilder sb = new StringBuilder(data.Length * 2);
             for (int i = 0; i < data.Length; i++) {
-                sb.AppendFormat("{0:x2}", (int)data[i]);
+                sb.AppendFormat(ResourceManager.Default.GetResource("0x2", "{0:x2}"), (int)data[i]);
             }
             return sb.ToString();
         }

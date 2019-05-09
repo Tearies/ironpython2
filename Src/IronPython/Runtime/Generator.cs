@@ -576,7 +576,7 @@ namespace IronPython.Runtime {
         #region ICodeFormattable Members
 
         public string __repr__(CodeContext context) {
-            return string.Format("<generator object at {0}>", PythonOps.HexId(this));
+            return string.Format(ResourceManager.Default.GetResource("generatorobjectat0", "<generator object at {0}>"), PythonOps.HexId(this));
         }
 
         #endregion

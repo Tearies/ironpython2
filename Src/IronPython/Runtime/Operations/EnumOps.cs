@@ -75,7 +75,7 @@ namespace IronPython.Runtime.Operations {
                 return self.GetType().FullName + "." + name;
             }
 
-            return String.Format("<enum {0}: {1}>", self.GetType().FullName, self.ToString());
+            return String.Format(ResourceManager.Default.GetResource("enum01", "<enum {0}: {1}>"), self.GetType().FullName, self.ToString());
         }
     }
 }

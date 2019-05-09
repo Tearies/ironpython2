@@ -69,7 +69,7 @@ namespace IronPython.Runtime.Exceptions {
                 var co = f.f_code;
                 var filename = co.co_filename;
                 var name = co.co_name;
-                sb.AppendFormat("  File \"{0}\", line {1}, in {2}{3}", filename, lineno, name, Environment.NewLine);
+                sb.AppendFormat(ResourceManager.Default.GetResource("file0line1in23", "  File \"{0}\", line {1}, in {2}{3}"), filename, lineno, name, Environment.NewLine);
                 tb = tb._next;
             }
             return sb.ToString();

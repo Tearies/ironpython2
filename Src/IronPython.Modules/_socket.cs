@@ -514,7 +514,7 @@ namespace IronPython.Modules {
 
 
             public int recv_into(object buffer, int nbytes=0, int flags=0){
-                throw PythonOps.TypeError(string.Format("recv_into() argument 1 must be read-write buffer, not {0}",PythonOps.GetPythonTypeName(buffer)));
+                throw PythonOps.TypeError(string.Format(ResourceManager.Default.GetResource("recvintoargument1mustbereadwritebuffernot0", "recv_into() argument 1 must be read-write buffer, not {0}"),PythonOps.GetPythonTypeName(buffer)));
             }
 
             
@@ -625,7 +625,7 @@ namespace IronPython.Modules {
             }
 
             public PythonTuple recvfrom_into(object buffer, int nbytes=0, int flags=0) {
-                throw PythonOps.TypeError(string.Format("recvfrom_into() argument 1 must be read-write buffer, not {0}", PythonOps.GetPythonTypeName(buffer)));
+                throw PythonOps.TypeError(string.Format(ResourceManager.Default.GetResource("recvfromintoargument1mustbereadwritebuffernot0", "recvfrom_into() argument 1 must be read-write buffer, not {0}"), PythonOps.GetPythonTypeName(buffer)));
             }
 
             private static int byteBufferSize(string funcName, int nbytes, int bufLength, int itemSize) {
@@ -1050,7 +1050,7 @@ namespace IronPython.Modules {
                         throw PythonOps.TypeError(ResourceManager.Default.GetResource("optionmustbe3itemsequencenotint", "option must be 3-item sequence, not int"));
                     var tOption = (PythonTuple)option;
                     if (tOption.Count != 3)
-                        throw PythonOps.TypeError(string.Format("option must be sequence of length 3, not {0}", tOption.Count));
+                        throw PythonOps.TypeError(string.Format(ResourceManager.Default.GetResource("optionmustbesequenceoflength3not0", "option must be sequence of length 3, not {0}"), tOption.Count));
                     //(onoff, timeout, interval)
                     if ((!(tOption[0] is int)) && (!(tOption[1] is int)) && (!(tOption[2] is int)))
                         throw PythonOps.TypeError(ResourceManager.Default.GetResource("optionintegerrequired", "option integer required"));
@@ -1072,13 +1072,13 @@ namespace IronPython.Modules {
                     return _socket.IOControl((IOControlCode)(long)cmd, BitConverter.GetBytes((int)option), null);
                 }
                 else
-                    throw PythonOps.ValueError(string.Format("invalid ioctl command {0}", cmd));
+                    throw PythonOps.ValueError(string.Format(ResourceManager.Default.GetResource("invalidioctlcommand0", "invalid ioctl command {0}"), cmd));
             }
 
             public override string ToString() {
                 try {
 
-                    return String.Format("<socket object, fd={0}, family={1}, type={2}, protocol={3}>",
+                    return String.Format(ResourceManager.Default.GetResource("socketobjectfd0family1type2protocol3", "<socket object, fd={0}, family={1}, type={2}, protocol={3}>"),
                         fileno(), family, type, proto);
                 } catch {
                     return "<socket object, fd=?, family=?, type=, protocol=>";
@@ -2481,7 +2481,7 @@ namespace IronPython.Modules {
                         callback = CertValidationCallbackRequired;
                         break;
                     default:
-                        throw new InvalidOperationException(String.Format("bad certs_mode: {0}", certs_mode));
+                        throw new InvalidOperationException(String.Format(ResourceManager.Default.GetResource("badcertsmode0", "bad certs_mode: {0}"), certs_mode));
                 }
 
                 _callback = callback;
@@ -2899,7 +2899,7 @@ of bytes written.")]
             var netport = unchecked((ushort)IPAddress.HostToNetworkOrder(unchecked((short)port)));
             var result = getservbyport(netport, protocol);
             if (IntPtr.Zero == result)
-                throw new SocketUtilException(string.Format("Could not resolve service for port {0}", port));
+                throw new SocketUtilException(string.Format(ResourceManager.Default.GetResource("couldnotresolveserviceforport0", "Could not resolve service for port {0}"), port));
 
             if (Environment.Is64BitProcess)
                 return PtrToStructure<servent64>(result).s_name;
@@ -2912,7 +2912,7 @@ of bytes written.")]
             var result = getservbyport_linux(netport, protocol);
             if (IntPtr.Zero == result) {
                 throw new SocketUtilException(
-                    string.Format("Could not resolve service for port {0}", port));
+                    string.Format(ResourceManager.Default.GetResource("couldnotresolveserviceforport0", "Could not resolve service for port {0}"), port));
             }
 
             return PtrToStructure<servent>(result).s_name;
@@ -2932,7 +2932,7 @@ of bytes written.")]
 
             var result = getservbyname(service, protocol);
             if (IntPtr.Zero == result)
-                throw new SocketUtilException(string.Format("Could not resolve port for service {0}", service));
+                throw new SocketUtilException(string.Format(ResourceManager.Default.GetResource("couldnotresolveportforservice0", "Could not resolve port for service {0}"), service));
 
             ushort port;
             if (Environment.Is64BitProcess)
@@ -2949,7 +2949,7 @@ of bytes written.")]
             var result = getservbyname_linux(service, protocol);
             if (IntPtr.Zero == result) {
                 throw new SocketUtilException(
-                    string.Format("Could not resolve port for service {0}", service));
+                    string.Format(ResourceManager.Default.GetResource("couldnotresolveportforservice0", "Could not resolve port for service {0}"), service));
             }
 
             ushort port = PtrToStructure<servent>(result).s_port;

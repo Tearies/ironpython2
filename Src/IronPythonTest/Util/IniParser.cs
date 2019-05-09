@@ -1,6 +1,7 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using Microsoft.Scripting;
 
 namespace IronPythonTest.Util {
     using Section = Dictionary<string, string>;
@@ -111,7 +112,7 @@ namespace IronPythonTest.Util {
             } else if (Falsey.Contains(l)) {
                 return false;
             } else {
-                throw new ArgumentException(string.Format("'{0}' is neither true nor false.", s));
+                throw new ArgumentException(string.Format(ResourceManager.Default.GetResource("0isneithertruenorfalse", "'{0}' is neither true nor false."), s));
             }
         }
 

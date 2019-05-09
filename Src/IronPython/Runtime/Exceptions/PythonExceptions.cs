@@ -507,9 +507,9 @@ namespace IronPython.Runtime.Exceptions {
             public override string ToString() {
                 if (_errno != null && _strerror != null) {
                     if (_filename != null) {
-                        return String.Format("[Errno {0}] {1}: {2}", _errno, _strerror, _filename);
+                        return String.Format(ResourceManager.Default.GetResource("errno012", "[Errno {0}] {1}: {2}"), _errno, _strerror, _filename);
                     } else {
-                        return String.Format("[Errno {0}] {1}", _errno, _strerror);
+                        return String.Format(ResourceManager.Default.GetResource("errno01", "[Errno {0}] {1}"), _errno, _strerror);
                     }
                 } else if (args is PythonTuple && ((PythonTuple)args).Count > 0) {
                     return PythonOps.ToString(((PythonTuple)args)[0]);

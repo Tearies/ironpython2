@@ -198,7 +198,7 @@ Note: Return value differs from CPython - it is not a string.")]
                         }
 
                         // return them all...
-                        return String.Format("LC_COLLATE={0};LC_CTYPE={1};LC_MONETARY={2};LC_NUMERIC={3};LC_TIME={4}",
+                        return String.Format(ResourceManager.Default.GetResource("lccollate0lcctype1lcmonetary2lcnumeric3lctime4", "LC_COLLATE={0};LC_CTYPE={1};LC_MONETARY={2};LC_NUMERIC={3};LC_TIME={4}"),
                             GetLocale(context, LC_COLLATE),
                             GetLocale(context, LC_CTYPE),
                             GetLocale(context, LC_MONETARY),
@@ -232,7 +232,7 @@ Note: Return value differs from CPython - it is not a string.")]
                 try {
                     return StringUtils.GetCultureInfo(locale);
                 } catch (ArgumentException) {
-                    throw PythonExceptions.CreateThrowable(_localeerror(context), String.Format("unknown locale: {0}", locale));
+                    throw PythonExceptions.CreateThrowable(_localeerror(context), String.Format(ResourceManager.Default.GetResource("unknownlocale0", "unknown locale: {0}"), locale));
                 }
             }
 

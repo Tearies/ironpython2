@@ -391,7 +391,7 @@ namespace IronPython.Compiler.Ast {
                     
                     for (int i = 0; i < parentClosure.Length; i++) {
                         if (parentClosure[i].Variable == variable) {
-                            _variableMapping[variable] = new ClosureExpression(variable, Ast.Property(_localParentTuple, String.Format("Item{0:D3}", i)), null);
+                            _variableMapping[variable] = new ClosureExpression(variable, Ast.Property(_localParentTuple, String.Format(ResourceManager.Default.GetResource("item0d3", "Item{0:D3}"), i)), null);
                             break;
                         }
                     }

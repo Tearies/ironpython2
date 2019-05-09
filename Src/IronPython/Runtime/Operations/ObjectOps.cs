@@ -160,7 +160,7 @@ namespace IronPython.Runtime.Operations {
         /// a string which consists of the type and a unique numerical identifier.
         /// </summary>
         public static string __repr__(object self) {
-            return String.Format("<{0} object at {1}>",
+            return String.Format(ResourceManager.Default.GetResource("0objectat1", "<{0} object at {1}>"),
                 DynamicHelpers.GetPythonType(self).Name,
                 PythonOps.HexId(self));
         }

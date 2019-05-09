@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -2327,13 +2327,13 @@ namespace IronPython.Runtime.Binding {
 
         internal static string/*!*/ MakeUnaryOpErrorMessage(string op, string/*!*/ xType) {
             if (op == "__invert__") {
-                return string.Format("bad operand type for unary ~: '{0}'", xType);
+                return string.Format(ResourceManager.Default.GetResource("badoperandtypeforunary0", "bad operand type for unary ~: '{0}'"), xType);
             } else if (op == "__abs__") {
-                return string.Format("bad operand type for abs(): '{0}'", xType);
+                return string.Format(ResourceManager.Default.GetResource("badoperandtypeforabs0", "bad operand type for abs(): '{0}'"), xType);
             } else if (op == "__pos__") {
-                return string.Format("bad operand type for unary +: '{0}'", xType);
+                return string.Format(ResourceManager.Default.GetResource("badoperandtypeforunary0", "bad operand type for unary +: '{0}'"), xType);
             } else if (op == "__neg__") {
-                return string.Format("bad operand type for unary -: '{0}'", xType);
+                return string.Format(ResourceManager.Default.GetResource("badoperandtypeforunary0", "bad operand type for unary -: '{0}'"), xType);
             }
 
             // unreachable
@@ -2342,7 +2342,7 @@ namespace IronPython.Runtime.Binding {
 
 
         internal static string/*!*/ MakeBinaryOpErrorMessage(PythonOperationKind op, string/*!*/ xType, string/*!*/ yType) {
-            return string.Format("unsupported operand type(s) for {2}: '{0}' and '{1}'",
+            return string.Format(ResourceManager.Default.GetResource("unsupportedoperandtypesfor20and1", "unsupported operand type(s) for {2}: '{0}' and '{1}'"),
                                 xType, yType, GetOperatorDisplay(op));
         }
 

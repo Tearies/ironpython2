@@ -1639,7 +1639,7 @@ are defined in the signal module.")]
                     isWindowsError = true;
                     errorCode = PythonExceptions._WindowsError.ERROR_ACCESS_DENIED;
                     if (filename != null) {
-                        message = string.Format("Access is denied: '{0}'", filename);
+                        message = string.Format(ResourceManager.Default.GetResource("accessisdenied0", "Access is denied: '{0}'"), filename);
                     } else {
                         message = "Access is denied";
                     }
@@ -1815,9 +1815,9 @@ are defined in the signal module.")]
                 if (baseCommand == null) {
                     return false;
                 }
-                args = String.Format("-c \"{0}\"", command);
+                args = String.Format(ResourceManager.Default.GetResource("c0", "-c \"{0}\""), command);
             } else {
-                args = String.Format("/c {0}", command);
+                args = String.Format(ResourceManager.Default.GetResource("c0", "/c {0}"), command);
             }
             return true;
         }

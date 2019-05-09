@@ -51,7 +51,7 @@ namespace IronPython.Runtime.Types {
         }
        
         public override string ToString() {
-            return String.Format("<attribute '__weakref__' of '{0}' objects>", _type.Name);
+            return String.Format(ResourceManager.Default.GetResource("attributeweakrefof0objects", "<attribute '__weakref__' of '{0}' objects>"), _type.Name);
         }
 
         public void __set__(CodeContext context, object instance, object value) {
@@ -61,7 +61,7 @@ namespace IronPython.Runtime.Types {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return String.Format("<attribute '__weakref__' of {0} objects",
+            return String.Format(ResourceManager.Default.GetResource("attributeweakrefof0objects", "<attribute '__weakref__' of {0} objects"),
                 PythonOps.Repr(context, _type));
         }
 

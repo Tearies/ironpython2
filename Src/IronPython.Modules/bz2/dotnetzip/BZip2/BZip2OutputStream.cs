@@ -335,11 +335,11 @@ namespace Ionic.BZip2
         public override void Write(byte[] buffer, int offset, int count)
         {
             if (offset < 0)
-                throw new IndexOutOfRangeException(String.Format("offset ({0}) must be > 0", offset));
+                throw new IndexOutOfRangeException(String.Format(ResourceManager.Default.GetResource("offset0mustbe0", "offset ({0}) must be > 0"), offset));
             if (count < 0)
-                throw new IndexOutOfRangeException(String.Format("count ({0}) must be > 0", count));
+                throw new IndexOutOfRangeException(String.Format(ResourceManager.Default.GetResource("count0mustbe0", "count ({0}) must be > 0"), count));
             if (offset + count > buffer.Length)
-                throw new IndexOutOfRangeException(String.Format("offset({0}) count({1}) bLength({2})",
+                throw new IndexOutOfRangeException(String.Format(ResourceManager.Default.GetResource("offset0count1blength2", "offset({0}) count({1}) bLength({2})"),
                                                                  offset, count, buffer.Length));
             if (this.output == null)
                 throw new IOException(ResourceManager.Default.GetResource("thestreamisnotopen", "the stream is not open"));

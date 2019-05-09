@@ -492,7 +492,7 @@ namespace IronPython.Modules {
             #region ICodeFormattable Members
 
             public string __repr__(CodeContext/*!*/ context) {
-                return string.Format("<_io.FileIO name={0} mode='{1}'>", PythonOps.Repr(context, name), mode);
+                return string.Format(ResourceManager.Default.GetResource("iofileioname0mode1", "<_io.FileIO name={0} mode='{1}'>"), PythonOps.Repr(context, name), mode);
             }
 
             #endregion

@@ -300,7 +300,7 @@ namespace IronPython.Runtime.Binding {
             return ErrorInfo.FromException(
                 Ast.New(
                     typeof(MissingMemberException).GetConstructor(new Type[] { typeof(string) }),
-                    AstUtils.Constant(String.Format("'{0}' object has no attribute '{1}'", typeName, name))
+                    AstUtils.Constant(String.Format(ResourceManager.Default.GetResource("0objecthasnoattribute1", "'{0}' object has no attribute '{1}'"), typeName, name))
                 )
             );
         }
@@ -313,7 +313,7 @@ namespace IronPython.Runtime.Binding {
             return ErrorInfo.FromException(
                 Ast.New(
                     typeof(TypeErrorException).GetConstructor(new Type[] { typeof(string) }),
-                    AstUtils.Constant(String.Format("can't set attributes of built-in/extension type '{0}'", NameConverter.GetTypeName(type)))
+                    AstUtils.Constant(String.Format(ResourceManager.Default.GetResource("cantsetattributesofbuiltinextensiontype0", "can't set attributes of built-in/extension type '{0}'"), NameConverter.GetTypeName(type)))
                 )
             );
         }
@@ -322,7 +322,7 @@ namespace IronPython.Runtime.Binding {
             return ErrorInfo.FromException(
                 Ast.New(
                     typeof(MissingMemberException).GetConstructor(new Type[] { typeof(string) }),
-                    AstUtils.Constant(String.Format("can't assign to read-only property {0} of type '{1}'", name, NameConverter.GetTypeName(type)))
+                    AstUtils.Constant(String.Format(ResourceManager.Default.GetResource("cantassigntoreadonlyproperty0oftype1", "can't assign to read-only property {0} of type '{1}'"), name, NameConverter.GetTypeName(type)))
                 )
             );
         }
@@ -340,7 +340,7 @@ namespace IronPython.Runtime.Binding {
                 Ast.New(
                     typeof(MissingMemberException).GetConstructor(new Type[] { typeof(string) }),
                     AstUtils.Constant(
-                        String.Format("attribute '{0}' of '{1}' object is read-only",
+                        String.Format(ResourceManager.Default.GetResource("attribute0of1objectisreadonly", "attribute '{0}' of '{1}' object is read-only"),
                             name,
                             NameConverter.GetTypeName(type)
                         )
@@ -358,7 +358,7 @@ namespace IronPython.Runtime.Binding {
                 Ast.New(
                     typeof(MissingMemberException).GetConstructor(new Type[] { typeof(string) }),
                     AstUtils.Constant(
-                        String.Format("cannot delete attribute '{0}' of builtin type '{1}'",
+                        String.Format(ResourceManager.Default.GetResource("cannotdeleteattribute0ofbuiltintype1", "cannot delete attribute '{0}' of builtin type '{1}'"),
                             name,
                             NameConverter.GetTypeName(type)
                         )

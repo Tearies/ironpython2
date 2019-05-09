@@ -160,7 +160,7 @@ namespace IronPython.Runtime.Types {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return String.Format("<method '{0}' of '{1}' objects>",
+            return String.Format(ResourceManager.Default.GetResource("method0of1objects", "<method '{0}' of '{1}' objects>"),
                 Template.Name,
                 DynamicHelpers.GetPythonTypeFromType(DeclaringType).Name);
         }

@@ -175,9 +175,9 @@ to Zip archives.";
                 string res = string.Empty;
 
                 if (!string.IsNullOrEmpty(prefix)) {
-                    res = string.Format("<zipimporter object \"{0}{1}{2}\">", archive, Path.DirectorySeparatorChar, prefix);
+                    res = string.Format(ResourceManager.Default.GetResource("zipimporterobject012", "<zipimporter object \"{0}{1}{2}\">"), archive, Path.DirectorySeparatorChar, prefix);
                 } else {
-                    res = string.Format("<zipimporter object \"{0}\">", archive);
+                    res = string.Format(ResourceManager.Default.GetResource("zipimporterobject0", "<zipimporter object \"{0}\">"), archive);
                 }
                 return res;
             }
@@ -232,7 +232,7 @@ module, or raises ZipImportError if it wasn't found.")]
                     // add __path__ to the module *before* the code
                     // gets executed
                     string subname = GetSubName(fullname);
-                    string fullpath = string.Format("{0}{1}{2}{3}",
+                    string fullpath = string.Format(ResourceManager.Default.GetResource("0123", "{0}{1}{2}{3}"),
                         _archive,
                         Path.DirectorySeparatorChar,
                         _prefix.Length > 0 ? _prefix : string.Empty,

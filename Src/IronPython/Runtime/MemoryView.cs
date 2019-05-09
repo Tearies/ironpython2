@@ -277,7 +277,7 @@ namespace IronPython.Runtime {
         #region ICodeFormattable Members
 
         public string __repr__(CodeContext context) {
-            return String.Format("<memory at {0}>", PythonOps.Id(this));
+            return String.Format(ResourceManager.Default.GetResource("memoryat0", "<memory at {0}>"), PythonOps.Id(this));
         }
 
         #endregion

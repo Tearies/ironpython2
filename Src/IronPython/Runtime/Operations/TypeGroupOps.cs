@@ -97,7 +97,7 @@ namespace IronPython.Runtime.Operations {
         private static PythonType GetItemHelper(TypeGroup self, PythonType[] types) {
             TypeTracker genType = self.GetTypeForArity(types.Length);
             if (genType == null) {
-                throw new ValueErrorException(String.Format("could not find compatible generic type for {0} type arguments", types.Length));
+                throw new ValueErrorException(String.Format(ResourceManager.Default.GetResource("couldnotfindcompatiblegenerictypefor0typearguments", "could not find compatible generic type for {0} type arguments"), types.Length));
             }
 
             Type res = genType.Type;

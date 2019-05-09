@@ -579,11 +579,11 @@ namespace Ionic.BZip2
             }
 
             if (offset < 0)
-                throw new IndexOutOfRangeException(String.Format("offset ({0}) must be > 0", offset));
+                throw new IndexOutOfRangeException(String.Format(ResourceManager.Default.GetResource("offset0mustbe0", "offset ({0}) must be > 0"), offset));
             if (count < 0)
-                throw new IndexOutOfRangeException(String.Format("count ({0}) must be > 0", count));
+                throw new IndexOutOfRangeException(String.Format(ResourceManager.Default.GetResource("count0mustbe0", "count ({0}) must be > 0"), count));
             if (offset + count > buffer.Length)
-                throw new IndexOutOfRangeException(String.Format("offset({0}) count({1}) bLength({2})",
+                throw new IndexOutOfRangeException(String.Format(ResourceManager.Default.GetResource("offset0count1blength2", "offset({0}) count({1}) bLength({2})"),
                                                                  offset, count, buffer.Length));
 
 
@@ -744,7 +744,7 @@ namespace Ionic.BZip2
                                     var sb1 = new System.Text.StringBuilder();
                                     sb1.Append("first 16 whole bytes in block: ");
                                     for (int z=0; z < 16; z++)
-                                        sb1.Append(String.Format(" {0:X2}", buffer[z]));
+                                        sb1.Append(String.Format(ResourceManager.Default.GetResource("0x2", " {0:X2}"), buffer[z]));
                                     TraceOutput(TraceBits.Write, sb1.ToString());
                                 }
 #endif
@@ -760,7 +760,7 @@ namespace Ionic.BZip2
                             var sb = new System.Text.StringBuilder();
                             sb.Append("final 16 whole bytes in block: ");
                             for (int z=0; z < 16; z++)
-                                sb.Append(String.Format(" {0:X2}", buffer[y-1-12+z]));
+                                sb.Append(String.Format(ResourceManager.Default.GetResource("0x2", " {0:X2}"), buffer[y-1-12+z]));
                             TraceOutput(TraceBits.Write, sb.ToString());
 #endif
 

@@ -112,9 +112,9 @@ namespace IronPython.Runtime.Binding {
             } else {
                 string msg;
                 if (Value.UnderlyingSystemType.IsAbstract()) {
-                    msg = String.Format("Cannot create instances of {0} because it is abstract", Value.Name);
+                    msg = String.Format(ResourceManager.Default.GetResource("cannotcreateinstancesof0becauseitisabstract", "Cannot create instances of {0} because it is abstract"), Value.Name);
                 }else{
-                    msg = String.Format("Cannot create instances of {0} because it has no public constructors", Value.Name);
+                    msg = String.Format(ResourceManager.Default.GetResource("cannotcreateinstancesof0becauseithasnopublicconstructors", "Cannot create instances of {0} because it has no public constructors"), Value.Name);
                 }
                 return new DynamicMetaObject(
                    call.Throw(

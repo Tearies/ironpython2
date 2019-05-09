@@ -248,7 +248,7 @@ namespace IronPython.Runtime.Operations {
         #region Representation and Formatting
 
         public static string SimpleRepr(object self) {
-            return String.Format("<{0} object at {1}>",
+            return String.Format(ResourceManager.Default.GetResource("0objectat1", "<{0} object at {1}>"),
                 PythonTypeOps.GetName(self),
                 PythonOps.HexId(self));
         }
@@ -284,14 +284,14 @@ namespace IronPython.Runtime.Operations {
                     string first_non_empty_line = toStr.Substring(i, j - i);
                     bool has_multiple_non_empty_lines = k < toStr.Length;
 
-                    return String.Format("<{0} object at {1} [{2}{3}]>",
+                    return String.Format(ResourceManager.Default.GetResource("0objectat123", "<{0} object at {1} [{2}{3}]>"),
                         typeName,
                         PythonOps.HexId(self),
                         first_non_empty_line,
                         has_multiple_non_empty_lines ? "..." : String.Empty);
 
                 } else {
-                    return String.Format("<{0} object at {1}>",
+                    return String.Format(ResourceManager.Default.GetResource("0objectat1", "<{0} object at {1}>"),
                              typeName,
                              PythonOps.HexId(self));
                 }

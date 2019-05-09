@@ -4,6 +4,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime {
 
@@ -221,7 +222,7 @@ namespace IronPython.Runtime {
                 }
                 catch (System.InvalidCastException iex)
                 {
-                    throw new System.InvalidCastException(string.Format("Error in IEnumeratorOfTWrapper.Current. Could not cast: {0} in {1}", typeof(T).ToString(), enumerable.Current.GetType().ToString()), iex);
+                    throw new System.InvalidCastException(string.Format(ResourceManager.Default.GetResource("errorinienumeratoroftwrappercurrentcouldnotcast0in1", "Error in IEnumeratorOfTWrapper.Current. Could not cast: {0} in {1}"), typeof(T).ToString(), enumerable.Current.GetType().ToString()), iex);
                 }
             }
         }

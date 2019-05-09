@@ -577,7 +577,7 @@ static void DeleteCriticalSection( Object mtx )
 }
 static void LeaveCriticalSection( Object mtx )
 {
-  //Debug.WriteLine(String.Format("{2}: +LeaveCriticalSection; Mutex {0} Thread {1}", mtx.GetHashCode(), Thread.CurrentThread.ManagedThreadId, System.DateTime.Now.Ticks ));
+  //Debug.WriteLine(String.Format(ResourceManager.Default.GetResource("2leavecriticalsectionmutex0thread1", "{2}: +LeaveCriticalSection; Mutex {0} Thread {1}"), mtx.GetHashCode(), Thread.CurrentThread.ManagedThreadId, System.DateTime.Now.Ticks ));
   Monitor.Exit( mtx );
 }
 #endif

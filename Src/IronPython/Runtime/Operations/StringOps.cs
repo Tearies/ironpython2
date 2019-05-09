@@ -1575,7 +1575,7 @@ namespace IronPython.Runtime.Operations {
                 char ch = s[i];
                 if (ch > 0xff) {
                     ReprInit(ref b, s, i);
-                    b.AppendFormat("\\u{0:x4}", (int)ch);
+                    b.AppendFormat(ResourceManager.Default.GetResource("u0x4", "\\u{0:x4}"), (int)ch);
                 } else if (b != null) {
                     b.Append(ch);
                 }
@@ -1665,10 +1665,10 @@ namespace IronPython.Runtime.Operations {
                             b.Append('\\'); b.Append(ch);
                         } else if (ch < ' ' || (ch >= 0x7f && ch <= 0xff)) {
                             ReprInit(ref b, s, i);
-                            b.AppendFormat("\\x{0:x2}", (int)ch);
+                            b.AppendFormat(ResourceManager.Default.GetResource("x0x2", "\\x{0:x2}"), (int)ch);
                         } else if (ch > 0xff) {
                             ReprInit(ref b, s, i);
-                            b.AppendFormat("\\u{0:x4}", (int)ch);
+                            b.AppendFormat(ResourceManager.Default.GetResource("u0x4", "\\u{0:x4}"), (int)ch);
                         } else if (b != null) {
                             b.Append(ch);
                         }

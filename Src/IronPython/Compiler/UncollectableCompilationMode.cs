@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -113,7 +113,7 @@ namespace IronPython.Compiler.Ast {
                 MSAst.Expression expr;
                 FieldInfo fieldInfo;
                 if (arrIndex < 0) {
-                    fieldInfo = storageType.GetField(string.Format("Context{0:000}", index % StorageData.StaticFields));
+                    fieldInfo = storageType.GetField(string.Format(ResourceManager.Default.GetResource("context0000", "Context{0:000}"), index % StorageData.StaticFields));
                     expr = Ast.Field(null, fieldInfo);
                 } else {
                     fieldInfo = typeof(StorageData).GetField("Contexts");
@@ -185,7 +185,7 @@ namespace IronPython.Compiler.Ast {
                 MSAst.Expression expr;
                 FieldInfo fieldInfo;
                 if (arrIndex < 0) {
-                    fieldInfo = storageType.GetField(string.Format("Site{0:000}", index % StorageData.StaticFields));
+                    fieldInfo = storageType.GetField(string.Format(ResourceManager.Default.GetResource("site0000", "Site{0:000}"), index % StorageData.StaticFields));
                     expr = Ast.Field(null, fieldInfo);
                 } else {
                     fieldInfo = typeof(SiteStorage<T>).GetField("Sites");
@@ -213,7 +213,7 @@ namespace IronPython.Compiler.Ast {
                 MSAst.Expression expr;
                 FieldInfo fieldInfo;
                 if (arrIndex < 0) {
-                    fieldInfo = storageType.GetField(string.Format("Site{0:000}", index % StorageData.StaticFields));
+                    fieldInfo = storageType.GetField(string.Format(ResourceManager.Default.GetResource("site0000", "Site{0:000}"), index % StorageData.StaticFields));
                     expr = Ast.Field(null, fieldInfo);
                 } else {
                     fieldInfo = siteType.GetField("Sites");
@@ -363,7 +363,7 @@ namespace IronPython.Compiler.Ast {
                     int index = _offset + _start;
                     Type storageType = GetStorageType(index);
                     if (storageType != typeof(StorageData)) {
-                        _fieldInfo = storageType.GetField(Name + string.Format("{0:000}", index % StorageData.StaticFields));
+                        _fieldInfo = storageType.GetField(Name + string.Format(ResourceManager.Default.GetResource("0000", "{0:000}"), index % StorageData.StaticFields));
                     } else {
                         _fieldInfo = typeof(StorageData).GetField(Name + "s");
                     }

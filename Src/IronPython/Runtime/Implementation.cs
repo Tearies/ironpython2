@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection;
 
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime {
     [PythonHidden, PythonType("sys.implementation")]
@@ -26,12 +27,12 @@ namespace IronPython.Runtime {
         public string __repr__(CodeContext context) {
             var attrs = from attr in PythonOps.GetAttrNames(context, this)
                         where !attr.ToString().StartsWith("_")
-                        select string.Format("{0}={1}",
+                        select string.Format(ResourceManager.Default.GetResource("01", "{0}={1}"),
                             attr,
                             PythonOps.Repr(context, PythonOps.GetBoundAttr(context, this, attr.ToString()))
                         );
 
-            return string.Format("{0}({1})",
+            return string.Format(ResourceManager.Default.GetResource("01", "{0}({1})"),
                 PythonOps.GetPythonTypeName(this),
                 string.Join(",", attrs.ToArray())
             );
@@ -63,7 +64,7 @@ namespace IronPython.Runtime {
                    CurrentVersion.ReleaseSerial) { }
 
         public override string __repr__(CodeContext context) {
-            return string.Format("sys.version_info(major={0}, minor={1}, micro={2}, releaselevel='{3}', serial={4})",
+            return string.Format(ResourceManager.Default.GetResource("sysversioninfomajor0minor1micro2releaselevel3serial4", "sys.version_info(major={0}, minor={1}, micro={2}, releaselevel='{3}', serial={4})"),
                 major, minor, micro, releaselevel, serial);
         }
 
@@ -105,7 +106,7 @@ namespace IronPython.Runtime {
         }
 
         internal string GetVersionString() {
-            return string.Format("{0}.{1}.{2}{3}{4}",
+            return string.Format(ResourceManager.Default.GetResource("01234", "{0}.{1}.{2}{3}{4}"),
                 major,
                 minor,
                 micro,

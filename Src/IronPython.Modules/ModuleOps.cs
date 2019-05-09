@@ -191,7 +191,7 @@ namespace IronPython.Modules {
             PythonContext pc = ((PythonType)type).Context;
             return PythonExceptions.CreateThrowable(
                 (PythonType)pc.GetModuleState("ArgumentError"),
-                string.Format("expected {0}, got {1}", expected, DynamicHelpers.GetPythonType(got).Name)
+                string.Format(ResourceManager.Default.GetResource("expected0got1", "expected {0}, got {1}"), expected, DynamicHelpers.GetPythonType(got).Name)
             );
         }
 

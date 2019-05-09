@@ -969,7 +969,7 @@ namespace IronPython.Modules {
 
 
             public override string __repr__(CodeContext context) {
-                return String.Format("defaultdict({0}, {1})", PythonOps.Repr(context, default_factory), base.__repr__(context));
+                return String.Format(ResourceManager.Default.GetResource("defaultdict01", "defaultdict({0}, {1})"), PythonOps.Repr(context, default_factory), base.__repr__(context));
             }
 
             public PythonTuple __reduce__() {

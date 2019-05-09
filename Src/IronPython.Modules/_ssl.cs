@@ -551,7 +551,7 @@ namespace IronPython.Modules {
             int version = ReadUnivesalInt(x, ref offset);
             if (version != 0) {
                 // unsupported version
-                throw new InvalidOperationException(String.Format("bad vesion: {0}", version));
+                throw new InvalidOperationException(String.Format(ResourceManager.Default.GetResource("badvesion0", "bad vesion: {0}"), version));
             }
 
             // read in parameters and initialize provider
@@ -595,7 +595,7 @@ namespace IronPython.Modules {
         private static void ReadIntType(byte[] x, ref int offset) {
             int versionType = x[offset++];
             if (versionType != UniversalInteger) {
-                throw new InvalidOperationException(String.Format("expected version, fonud {0}", versionType));
+                throw new InvalidOperationException(String.Format(ResourceManager.Default.GetResource("expectedversionfonud0", "expected version, fonud {0}"), versionType));
             }            
         }
         private static int ReadUnivesalInt(byte[] x, ref int offset) {

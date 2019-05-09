@@ -248,12 +248,12 @@ namespace IronPython.Runtime {
             }
 
             if (_inst != null) {
-                return string.Format("<bound method {0}.{1} of {2}>",
+                return string.Format(ResourceManager.Default.GetResource("boundmethod01of2", "<bound method {0}.{1} of {2}>"),
                     DeclaringClassAsString(),
                     name,
                     PythonOps.Repr(context, _inst));
             } else {
-                return string.Format("<unbound method {0}.{1}>", DeclaringClassAsString(), name);
+                return string.Format(ResourceManager.Default.GetResource("unboundmethod01", "<unbound method {0}.{1}>"), DeclaringClassAsString(), name);
             }
         }
 

@@ -50,12 +50,12 @@ namespace IronPython.Runtime {
         public virtual string/*!*/ __repr__(CodeContext/*!*/ context) {
             BuiltinFunction bf = _func as BuiltinFunction;
             if (bf != null) {
-                return String.Format("<method {0} of {1} objects>",
+                return String.Format(ResourceManager.Default.GetResource("method0of1objects", "<method {0} of {1} objects>"),
                     PythonOps.Repr(context, bf.Name),
                     PythonOps.Repr(context, DynamicHelpers.GetPythonTypeFromType(bf.DeclaringType).Name));
             }
 
-            return String.Format("<classmethod object at {0}>",
+            return String.Format(ResourceManager.Default.GetResource("classmethodobjectat0", "<classmethod object at {0}>"),
                 IdDispenser.GetId(this));
         }
 

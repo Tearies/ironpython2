@@ -662,7 +662,7 @@ namespace IronPython.Modules {
                 Debug.Assert(DynamicHelpers.GetPythonType(obj).Equals(TypeCache.Boolean), "arg must be bool");
                 if (pickler._protocol < 2) {
                     pickler.Write(context, Opcode.Int);
-                    pickler.Write(context, String.Format("0{0}", ((bool)obj) ? 1 : 0));
+                    pickler.Write(context, String.Format(ResourceManager.Default.GetResource("00", "0{0}"), ((bool)obj) ? 1 : 0));
                     pickler.Write(context, Newline);
                 } else {
                     if ((bool)obj) {
@@ -1829,7 +1829,7 @@ namespace IronPython.Modules {
                     return value;
                 }
                 
-                throw PythonExceptions.CreateThrowable(BadPickleGet(context), String.Format("memo key {0} not found", key));
+                throw PythonExceptions.CreateThrowable(BadPickleGet(context), String.Format(ResourceManager.Default.GetResource("memokey0notfound", "memo key {0} not found"), key));
             }
 
             private void MemoPut(int key, object value) {

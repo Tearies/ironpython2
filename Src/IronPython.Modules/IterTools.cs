@@ -323,7 +323,7 @@ namespace IronPython.Modules {
                 object cur = _cur == null ? _curInt : _cur;
 
                 if (StepIsOne()) {
-                    return string.Format("count({0})", PythonOps.Repr(context, cur));
+                    return string.Format(ResourceManager.Default.GetResource("count0", "count({0})"), PythonOps.Repr(context, cur));
                 }
 
                 return string.Format(
@@ -1013,9 +1013,9 @@ namespace IronPython.Modules {
 
             public virtual string/*!*/ __repr__(CodeContext/*!*/ context) {
                 if (_fInfinite) {
-                    return String.Format("{0}({1})", PythonOps.GetPythonTypeName(this), PythonOps.Repr(context, _obj));
+                    return String.Format(ResourceManager.Default.GetResource("01", "{0}({1})"), PythonOps.GetPythonTypeName(this), PythonOps.Repr(context, _obj));
                 }
-                return String.Format("{0}({1}, {2})", PythonOps.GetPythonTypeName(this), PythonOps.Repr(context, _obj), _remaining);
+                return String.Format(ResourceManager.Default.GetResource("012", "{0}({1}, {2})"), PythonOps.GetPythonTypeName(this), PythonOps.Repr(context, _obj), _remaining);
             }
 
             #endregion

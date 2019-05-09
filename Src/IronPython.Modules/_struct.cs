@@ -105,7 +105,7 @@ namespace IronPython.Modules {
             [Documentation("returns a string consisting of the values serialized according to the format of the struct object")]
             public string/*!*/ pack(CodeContext/*!*/ context, params object[] values) {
                 if (values.Length != _encodingCount) {
-                    throw Error(context, String.Format("pack requires exactly {0} arguments", _encodingCount));
+                    throw Error(context, String.Format(ResourceManager.Default.GetResource("packrequiresexactly0arguments", "pack requires exactly {0} arguments"), _encodingCount));
                 }
 
                 int curObj = 0;
@@ -215,7 +215,7 @@ namespace IronPython.Modules {
                 byte[] existing = buffer.ToByteArray();
 
                 if (offset + size > existing.Length) {
-                    throw Error(context, String.Format("pack_into requires a buffer of at least {0} bytes", size));
+                    throw Error(context, String.Format(ResourceManager.Default.GetResource("packintorequiresabufferofatleast0bytes", "pack_into requires a buffer of at least {0} bytes"), size));
                 }
 
                 string data = pack(context, args);
@@ -232,7 +232,7 @@ namespace IronPython.Modules {
                 IList<byte> existing = buffer._bytes;
 
                 if (offset + size > existing.Count) {
-                    throw Error(context, String.Format("pack_into requires a buffer of at least {0} bytes", size));
+                    throw Error(context, String.Format(ResourceManager.Default.GetResource("packintorequiresabufferofatleast0bytes", "pack_into requires a buffer of at least {0} bytes"), size));
                 }
 
                 string data = pack(context, args);
@@ -245,7 +245,7 @@ namespace IronPython.Modules {
             [Documentation("deserializes the string using the structs specified format")]
             public PythonTuple/*!*/ unpack(CodeContext/*!*/ context, [NotNull]string @string) {
                 if (@string.Length != size) {
-                    throw Error(context, String.Format("unpack requires a string argument of length {0}", size));
+                    throw Error(context, String.Format(ResourceManager.Default.GetResource("unpackrequiresastringargumentoflength0", "unpack requires a string argument of length {0}"), size));
                 }
 
                 string data = @string;
@@ -365,7 +365,7 @@ namespace IronPython.Modules {
             public PythonTuple/*!*/ unpack_from(CodeContext/*!*/ context, [NotNull]string/*!*/ buffer, [DefaultParameterValue(0)] int offset) {
                 int bytesAvail = buffer.Length - offset;
                 if (bytesAvail < size) {
-                    throw Error(context, String.Format("unpack_from requires a buffer of at least {0} bytes", size));
+                    throw Error(context, String.Format(ResourceManager.Default.GetResource("unpackfromrequiresabufferofatleast0bytes", "unpack_from requires a buffer of at least {0} bytes"), size));
                 }
 
                 return unpack(context, buffer.Substring(offset, size));
@@ -1004,7 +1004,7 @@ namespace IronPython.Modules {
         }
 
         private static void OutOfRange(CodeContext context, string type) {
-            throw Error(context, string.Format("integer out of range for '{0}' format code", type == "unsigned long" ? "L" : "I"));
+            throw Error(context, string.Format(ResourceManager.Default.GetResource("integeroutofrangefor0formatcode", "integer out of range for '{0}' format code"), type == "unsigned long" ? "L" : "I"));
         }
 
         internal static IntPtr GetPointer(CodeContext/*!*/ context, int index, object[] args) {

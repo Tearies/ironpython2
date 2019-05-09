@@ -122,7 +122,7 @@ namespace IronPython.Runtime.Types {
                     if (!removed) {
                         // we've iterated through the list once w/o removing anything
                         PythonType other = null;
-                        string error = String.Format("Cannot create a consistent method resolution\norder (MRO) for bases {0}", lastHead.Name);
+                        string error = String.Format(ResourceManager.Default.GetResource("cannotcreateaconsistentmethodresolutionnordermroforbases0", "Cannot create a consistent method resolution\norder (MRO) for bases {0}"), lastHead.Name);
 
                         for (int i = 0; i < mroList.Count; i++) {
                             if (mroList[i].Count != 0 && !mroList[i][0].Equals(lastHead)) {

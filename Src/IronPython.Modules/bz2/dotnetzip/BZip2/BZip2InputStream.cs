@@ -202,13 +202,13 @@ namespace Ionic.BZip2
         public override int Read(byte[] buffer, int offset, int count)
         {
             if (offset < 0)
-                throw new IndexOutOfRangeException(String.Format("offset ({0}) must be > 0", offset));
+                throw new IndexOutOfRangeException(String.Format(ResourceManager.Default.GetResource("offset0mustbe0", "offset ({0}) must be > 0"), offset));
 
             if (count < 0)
-                throw new IndexOutOfRangeException(String.Format("count ({0}) must be > 0", count));
+                throw new IndexOutOfRangeException(String.Format(ResourceManager.Default.GetResource("count0mustbe0", "count ({0}) must be > 0"), count));
 
             if (offset + count > buffer.Length)
-                throw new IndexOutOfRangeException(String.Format("offset({0}) count({1}) bLength({2})",
+                throw new IndexOutOfRangeException(String.Format(ResourceManager.Default.GetResource("offset0count1blength2", "offset({0}) count({1}) bLength({2})"),
                                                                  offset, count, buffer.Length));
 
             if (this.input == null)
@@ -459,7 +459,7 @@ namespace Ionic.BZip2
             int magic = this.input.ReadByte();
             if (magic != (int)expected)
             {
-                var msg = String.Format("Not a valid BZip2 stream. byte {0}, expected '{1}', got '{2}'",
+                var msg = String.Format(ResourceManager.Default.GetResource("notavalidbzip2streambyte0expected1got2", "Not a valid BZip2 stream. byte {0}, expected '{1}', got '{2}'"),
                                         position, (int)expected, magic);
                 throw new IOException(msg);
             }
@@ -488,7 +488,7 @@ namespace Ionic.BZip2
                      magic5 != 0x59)
             {
                 this.currentState = CState.EOF;
-                var msg = String.Format("bad block header at offset 0x{0:X}",
+                var msg = String.Format(ResourceManager.Default.GetResource("badblockheaderatoffset0x0x", "bad block header at offset 0x{0:X}"),
                                       this.input.Position);
                 throw new IOException(msg);
             }
@@ -525,7 +525,7 @@ namespace Ionic.BZip2
                 //     | (this.storedCombinedCRC >> 31);
                 // this.computedCombinedCRC ^= this.storedBlockCRC;
 
-                var msg = String.Format("BZip2 CRC error (expected {0:X8}, computed {1:X8})",
+                var msg = String.Format(ResourceManager.Default.GetResource("bzip2crcerrorexpected0x8computed1x8", "BZip2 CRC error (expected {0:X8}, computed {1:X8})"),
                                         this.storedBlockCRC, this.computedBlockCRC);
                 throw new IOException(msg);
             }
@@ -548,7 +548,7 @@ namespace Ionic.BZip2
 
             if (this.storedCombinedCRC != this.computedCombinedCRC)
             {
-                var msg = String.Format("BZip2 CRC error (expected {0:X8}, computed {1:X8})",
+                var msg = String.Format(ResourceManager.Default.GetResource("bzip2crcerrorexpected0x8computed1x8", "BZip2 CRC error (expected {0:X8}, computed {1:X8})"),
                                       this.storedCombinedCRC, this.computedCombinedCRC);
 
                 throw new IOException(msg);

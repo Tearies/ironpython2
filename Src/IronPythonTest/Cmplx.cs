@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+using Microsoft.Scripting;
 
 namespace IronPythonTest {
     public class Cmplx {
@@ -40,7 +41,7 @@ namespace IronPythonTest {
         }
 
         public override string ToString() {
-            return String.Format("({0} + {1}i)", _r, _i);
+            return String.Format(ResourceManager.Default.GetResource("01i", "({0} + {1}i)"), _r, _i);
         }
 
         public double Real {

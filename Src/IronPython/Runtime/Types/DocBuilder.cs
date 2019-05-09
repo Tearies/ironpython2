@@ -214,7 +214,7 @@ namespace IronPython.Runtime.Types {
                         var dictTypeAttrs = mi.ReturnParameter.GetCustomAttributes(typeof(DictionaryTypeInfoAttribute), true);
                         if (dictTypeAttrs.Any()) {
                             var dictTypeAttr = (DictionaryTypeInfoAttribute)dictTypeAttrs.First();
-                            retType.Append(String.Format(" (of {0} to {1})", GetPythonTypeName(dictTypeAttr.KeyType), GetPythonTypeName(dictTypeAttr.ValueType)));
+                            retType.Append(String.Format(ResourceManager.Default.GetResource("of0to1", " (of {0} to {1})"), GetPythonTypeName(dictTypeAttr.KeyType), GetPythonTypeName(dictTypeAttr.ValueType)));
                         }
                     }
                     catch (IndexOutOfRangeException) { } // swallow bug in .NET Core

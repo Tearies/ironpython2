@@ -648,7 +648,7 @@ namespace IronPython.Runtime.Operations {
                         break;
                     default:
                         if (ch < ' ' || (ch >= 0x7f && ch <= 0xff)) {
-                            res.AppendFormat("\\x{0:x2}", ch);
+                            res.AppendFormat(ResourceManager.Default.GetResource("x0x2", "\\x{0:x2}"), ch);
                         } else {
                             res.Append((char)ch);
                         }

@@ -13,6 +13,7 @@ using Microsoft.Scripting.Utils;
 
 using IronPython.Runtime;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 
 namespace IronPythonTest {
     [Flags]
@@ -454,7 +455,7 @@ namespace IronPythonTest {
         }
         private static void Report(string op, ComparisonTest x, ComparisonTest y) {
             if (report != null) {
-                report(string.Format("{0} on [{1}, {2}]", op, x, y));
+                report(string.Format(ResourceManager.Default.GetResource("0on12", "{0} on [{1}, {2}]"), op, x, y));
             }
         }
     }

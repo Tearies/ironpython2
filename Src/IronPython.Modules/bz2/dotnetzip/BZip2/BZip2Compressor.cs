@@ -86,6 +86,7 @@
 
 using System;
 using System.IO;
+using Microsoft.Scripting;
 
 // flymake: csc.exe /t:module BZip2InputStream.cs BZip2OutputStream.cs Rand.cs BCRC32.cs @@FILE@@
 
@@ -328,7 +329,7 @@ namespace Ionic.BZip2
             // should never ever happen.
             if (previousLast >= this.outBlockFillThreshold && !final)
             {
-                var msg = String.Format("block overrun(final={2}): {0} >= threshold ({1})",
+                var msg = String.Format(ResourceManager.Default.GetResource("blockoverrunfinal20threshold1", "block overrun(final={2}): {0} >= threshold ({1})"),
                                         previousLast, this.outBlockFillThreshold, final);
                 throw new Exception(msg);
             }

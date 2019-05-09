@@ -151,7 +151,7 @@ namespace IronPython.Hosting {
                 case "-X:GCStress":
                     int gcStress;
                     if (!StringUtils.TryParseInt32(PopNextArg(), out gcStress) || (gcStress < 0 || gcStress > GC.MaxGeneration)) {
-                        throw new InvalidOptionException(String.Format("The argument for the {0} option must be between 0 and {1}.", arg, GC.MaxGeneration));
+                        throw new InvalidOptionException(String.Format(ResourceManager.Default.GetResource("theargumentforthe0optionmustbebetween0and1", "The argument for the {0} option must be between 0 and {1}."), arg, GC.MaxGeneration));
                     }
 
                     LanguageSetup.Options["GCStress"] = gcStress;
@@ -161,7 +161,7 @@ namespace IronPython.Hosting {
                     // we need about 6 frames for starting up, so 10 is a nice round number.
                     int limit;
                     if (!StringUtils.TryParseInt32(PopNextArg(), out limit) || limit < 10) {
-                        throw new InvalidOptionException(String.Format("The argument for the {0} option must be an integer >= 10.", arg));
+                        throw new InvalidOptionException(String.Format(ResourceManager.Default.GetResource("theargumentforthe0optionmustbeaninteger10", "The argument for the {0} option must be an integer >= 10."), arg));
                     }
 
                     LanguageSetup.Options["RecursionLimit"] = limit;

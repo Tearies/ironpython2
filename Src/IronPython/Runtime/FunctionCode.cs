@@ -334,7 +334,7 @@ namespace IronPython.Runtime {
                         context._nextCodeCleanup += 500;
                     }
 
-                    Debug.Assert(context._nextCodeCleanup >= context._codeCount, String.Format("{0} vs {1} ({2})", context._nextCodeCleanup, context._codeCount, targetRatio));
+                    Debug.Assert(context._nextCodeCleanup >= context._codeCount, String.Format(ResourceManager.Default.GetResource("0vs12", "{0} vs {1} ({2})"), context._nextCodeCleanup, context._codeCount, targetRatio));
                 }
             }
         }
@@ -562,7 +562,7 @@ namespace IronPython.Runtime {
                 "<code object {0} at {1}, file {2}, line {3}>",
                 co_name,
                 PythonOps.HexId(this),
-                !string.IsNullOrEmpty(co_filename) ? string.Format("\"{0}\"", co_filename) : "???",
+                !string.IsNullOrEmpty(co_filename) ? string.Format(ResourceManager.Default.GetResource("0", "\"{0}\""), co_filename) : "???",
                 co_firstlineno != 0 ? co_firstlineno : -1);
         }
 

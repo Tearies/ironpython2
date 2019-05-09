@@ -155,7 +155,7 @@ namespace IronPython.Runtime.Types {
                 throw PythonOps.TypeError(ResourceManager.Default.GetResource("reprreturnednonstringtype0", "__repr__ returned non-string type ({0})"), PythonTypeOps.GetName(ret));
             }
 
-            return string.Format("<{0} instance at {1}>", _class.FullName, PythonOps.HexId(this));
+            return string.Format(ResourceManager.Default.GetResource("0instanceat1", "<{0} instance at {1}>"), _class.FullName, PythonOps.HexId(this));
         }
 
         #endregion

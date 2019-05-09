@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -677,7 +677,7 @@ namespace IronPython.Runtime.Binding {
         }
 
         public override string ToString() {
-            return String.Format("Python GetMember {0} IsNoThrow: {1} LightThrow: {2}", Name, _options, SupportsLightThrow);
+            return String.Format(ResourceManager.Default.GetResource("pythongetmember0isnothrow1lightthrow2", "Python GetMember {0} IsNoThrow: {1} LightThrow: {2}"), Name, _options, SupportsLightThrow);
         }
 
         #region IExpressionSerializable Members

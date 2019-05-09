@@ -189,9 +189,9 @@ namespace IronPython.Runtime {
             string name = nameObj as string ?? "?";
 
             if (file == null) {
-                return String.Format("<module '{0}' (built-in)>", name);
+                return String.Format(ResourceManager.Default.GetResource("module0builtin", "<module '{0}' (built-in)>"), name);
             }
-            return String.Format("<module '{0}' from '{1}'>", name, file);
+            return String.Format(ResourceManager.Default.GetResource("module0from1", "<module '{0}' from '{1}'>"), name, file);
         }
 
         internal PythonDictionary __dict__ {

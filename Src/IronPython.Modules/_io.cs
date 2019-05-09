@@ -400,7 +400,7 @@ namespace IronPython.Modules {
             internal Exception UnsupportedOperation(CodeContext/*!*/ context, string attr) {
                 throw PythonExceptions.CreateThrowable(
                     (PythonType)context.LanguageContext.GetModuleState(_unsupportedOperationKey),
-                    string.Format("{0}.{1} not supported", PythonTypeOps.GetName(this), attr)
+                    string.Format(ResourceManager.Default.GetResource("01notsupported", "{0}.{1} not supported"), PythonTypeOps.GetName(this), attr)
                 );
             }
 
@@ -2614,7 +2614,7 @@ namespace IronPython.Modules {
             #region ICodeFormattable Members
 
             public string __repr__(CodeContext/*!*/ context) {
-                return string.Format("<_io.TextIOWrapper encoding='{0}'>", _encoding);
+                return string.Format(ResourceManager.Default.GetResource("iotextiowrapperencoding0", "<_io.TextIOWrapper encoding='{0}'>"), _encoding);
             }
 
             #endregion

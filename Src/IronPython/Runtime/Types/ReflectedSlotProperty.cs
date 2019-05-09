@@ -10,6 +10,7 @@ using Microsoft.Scripting.Runtime;
 using Microsoft.Scripting.Utils;
 
 using IronPython.Runtime.Operations;
+using Microsoft.Scripting;
 
 namespace IronPython.Runtime.Types {
     
@@ -59,7 +60,7 @@ namespace IronPython.Runtime.Types {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return String.Format("<member '{0}' of '{1}' objects>", _name, _typeName);
+            return String.Format(ResourceManager.Default.GetResource("member0of1objects", "<member '{0}' of '{1}' objects>"), _name, _typeName);
         }
 
         #endregion

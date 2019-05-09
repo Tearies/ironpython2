@@ -305,7 +305,7 @@ namespace IronPython.Runtime {
         private static int CharValue(char ch, int b) {
             int val = HexValue(ch);
             if (val >= b) {
-                throw new ValueErrorException(String.Format("bad char for the integer value: '{0}' (base {1})", ch, b));
+                throw new ValueErrorException(String.Format(ResourceManager.Default.GetResource("badcharfortheintegervalue0base1", "bad char for the integer value: '{0}' (base {1})"), ch, b));
             }
             return val;
         }
@@ -377,7 +377,7 @@ namespace IronPython.Runtime {
                     int digit;
                     if (start >= end) {
                         if (saveStart == start) {
-                            throw new ValueErrorException(string.Format("invalid literal for int() with base {0}: {1}", b, StringOps.__repr__(text)));
+                            throw new ValueErrorException(string.Format(ResourceManager.Default.GetResource("invalidliteralforintwithbase01", "invalid literal for int() with base {0}: {1}"), b, StringOps.__repr__(text)));
                         }
                         break;
                     }
@@ -386,7 +386,7 @@ namespace IronPython.Runtime {
                         if (text[start] == 'l' || text[start] == 'L') {
                             break;
                         }
-                        throw new ValueErrorException(string.Format("invalid literal for int() with base {0}: {1}", b, StringOps.__repr__(text)));
+                        throw new ValueErrorException(string.Format(ResourceManager.Default.GetResource("invalidliteralforintwithbase01", "invalid literal for int() with base {0}: {1}"), b, StringOps.__repr__(text)));
                     }
 
                     checked {
@@ -511,7 +511,7 @@ namespace IronPython.Runtime {
                 int digit;
                 if (start >= end) {
                     if (start == saveStart) {
-                        throw new ValueErrorException(string.Format("invalid literal for long() with base {0}: {1}", b, StringOps.__repr__(text)));
+                        throw new ValueErrorException(string.Format(ResourceManager.Default.GetResource("invalidliteralforlongwithbase01", "invalid literal for long() with base {0}: {1}"), b, StringOps.__repr__(text)));
                     }
                     break;
                 }
@@ -520,7 +520,7 @@ namespace IronPython.Runtime {
                     if (text[start] == 'l' || text[start] == 'L') {
                         break;
                     }
-                    throw new ValueErrorException(string.Format("invalid literal for long() with base {0}: {1}", b, StringOps.__repr__(text)));
+                    throw new ValueErrorException(string.Format(ResourceManager.Default.GetResource("invalidliteralforlongwithbase01", "invalid literal for long() with base {0}: {1}"), b, StringOps.__repr__(text)));
                 }
                 ret = ret * b + digit;
                 start++;

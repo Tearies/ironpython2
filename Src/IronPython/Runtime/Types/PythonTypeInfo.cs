@@ -1,4 +1,4 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the Apache 2.0 License.
 // See the LICENSE file in the project root for more information.
 
@@ -51,7 +51,7 @@ namespace IronPython.Runtime.Types {
         public static MemberGroup/*!*/ GetMemberAll(PythonBinder/*!*/ binder, MemberRequestKind/*!*/ action, Type/*!*/ type, string/*!*/ name) {
             Assert.NotNull(binder, action, type, name);
 
-            PerfTrack.NoteEvent(PerfTrack.Categories.ReflectedTypes, String.Format("ResolveMember: {0} {1}", type.Name, name));
+            PerfTrack.NoteEvent(PerfTrack.Categories.ReflectedTypes, String.Format(ResourceManager.Default.GetResource("resolvemember01", "ResolveMember: {0} {1}"), type.Name, name));
             return GetMemberGroup(new ResolveBinder(binder), action, type, name);
         }
 
@@ -72,7 +72,7 @@ namespace IronPython.Runtime.Types {
         public static MemberGroup/*!*/ GetMember(PythonBinder/*!*/ binder, MemberRequestKind/*!*/ action, Type/*!*/ type, string/*!*/ name) {
             Assert.NotNull(binder, action, type, name);
 
-            PerfTrack.NoteEvent(PerfTrack.Categories.ReflectedTypes, String.Format("LookupMember: {0} {1}", type.Name, name));
+            PerfTrack.NoteEvent(PerfTrack.Categories.ReflectedTypes, String.Format(ResourceManager.Default.GetResource("lookupmember01", "LookupMember: {0} {1}"), type.Name, name));
             return GetMemberGroup(new LookupBinder(binder), action, type, name);
         }
 

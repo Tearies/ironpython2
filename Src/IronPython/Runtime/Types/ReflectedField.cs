@@ -223,7 +223,7 @@ namespace IronPython.Runtime.Types {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return string.Format("<field# {0} on {1}>", _info.Name, _info.DeclaringType.Name);
+            return string.Format(ResourceManager.Default.GetResource("field0on1", "<field# {0} on {1}>"), _info.Name, _info.DeclaringType.Name);
         }
 
         #endregion

@@ -408,7 +408,7 @@ the assembly object.")]
                 return;
             }
 
-            throw new TypeErrorException(String.Format("Invalid assembly type. Expected string or Assembly, got {0}.", reference));
+            throw new TypeErrorException(String.Format(ResourceManager.Default.GetResource("invalidassemblytypeexpectedstringorassemblygot0", "Invalid assembly type. Expected string or Assembly, got {0}."), reference));
         }
 
         private static void AddReference(CodeContext/*!*/ context, Assembly assembly) {
@@ -435,7 +435,7 @@ the assembly object.")]
 #endif
 
             if (asm == null) {
-                throw new IOException(String.Format("Could not add reference to assembly {0}", name));
+                throw new IOException(String.Format(ResourceManager.Default.GetResource("couldnotaddreferencetoassembly0", "Could not add reference to assembly {0}"), name));
             }
             AddReference(context, asm);
         }
@@ -449,7 +449,7 @@ the assembly object.")]
             Assembly asm = context.LanguageContext.DomainManager.Platform.LoadAssemblyFromPath(file);
 #endif
             if (asm == null) {
-                throw new IOException(String.Format("Could not add reference to assembly {0}", file));
+                throw new IOException(String.Format(ResourceManager.Default.GetResource("couldnotaddreferencetoassembly0", "Could not add reference to assembly {0}"), file));
             }
 
             AddReference(context, asm);
@@ -462,7 +462,7 @@ the assembly object.")]
 
             Assembly asm = LoadAssemblyByPartialName(name);
             if (asm == null) {
-                throw new IOException(String.Format("Could not add reference to assembly {0}", name));
+                throw new IOException(String.Format(ResourceManager.Default.GetResource("couldnotaddreferencetoassembly0", "Could not add reference to assembly {0}"), name));
             }
 
             AddReference(context, asm);
@@ -474,7 +474,7 @@ the assembly object.")]
             Assembly asm = LoadAssemblyByName(context, name);
 
             if (asm == null) {
-                throw new IOException(String.Format("Could not add reference to assembly {0}", name));
+                throw new IOException(String.Format(ResourceManager.Default.GetResource("couldnotaddreferencetoassembly0", "Could not add reference to assembly {0}"), name));
             }
 
             AddReference(context, asm);

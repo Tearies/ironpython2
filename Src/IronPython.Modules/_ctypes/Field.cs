@@ -141,9 +141,9 @@ namespace IronPython.Modules {
 
             public string __repr__(CodeContext context) {
                 if (_bits == -1) {
-                    return String.Format("<Field type={0}, ofs={1}, size={2}>", ((PythonType)_fieldType).Name, offset, size);
+                    return String.Format(ResourceManager.Default.GetResource("fieldtype0ofs1size2", "<Field type={0}, ofs={1}, size={2}>"), ((PythonType)_fieldType).Name, offset, size);
                 }
-                return String.Format("<Field type={0}, ofs={1}:{2}, bits={3}>", ((PythonType)_fieldType).Name, offset, _bitsOffset, _bits);
+                return String.Format(ResourceManager.Default.GetResource("fieldtype0ofs12bits3", "<Field type={0}, ofs={1}:{2}, bits={3}>"), ((PythonType)_fieldType).Name, offset, _bitsOffset, _bits);
             }
 
 #endregion

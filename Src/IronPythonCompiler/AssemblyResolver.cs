@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using IKVM.Reflection;
+using Microsoft.Scripting;
 
 namespace IronPythonCompiler {
     class AssemblyResolver {
@@ -90,7 +91,7 @@ namespace IronPythonCompiler {
                     ConsoleOps.Error(true, "Assembly '{0}' was requested which is a higher version than referenced assembly '{1}'", name.FullName, previousMatch.FullName);
                 }
             } else {
-                ConsoleOps.Error(true, "unable to find assembly '{0}' {1}", args.Name, args.RequestingAssembly != null ? string.Format("    (a dependency of '{0}')", args.RequestingAssembly.FullName) : string.Empty);
+                ConsoleOps.Error(true, "unable to find assembly '{0}' {1}", args.Name, args.RequestingAssembly != null ? string.Format(ResourceManager.Default.GetResource("adependencyof0", "    (a dependency of '{0}')"), args.RequestingAssembly.FullName) : string.Empty);
             }
             return null;
         }

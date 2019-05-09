@@ -722,10 +722,10 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                 if (PythonTypeOps.IsRuntimeAssembly(UnderlyingSystemType.Assembly) || IsPythonType) {
                     object module = Get__module__(context, this);
                     if (!module.Equals("__builtin__")) {
-                        return string.Format("<type '{0}.{1}'>", module, Name);
+                        return string.Format(ResourceManager.Default.GetResource("type01", "<type '{0}.{1}'>"), module, Name);
                     }
                 }
-                return string.Format("<type '{0}'>", Name);
+                return string.Format(ResourceManager.Default.GetResource("type0", "<type '{0}'>"), Name);
             } else {
                 PythonTypeSlot dts;
                 string module = "unknown";
@@ -734,7 +734,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                     dts.TryGetValue(context, this, this, out modObj)) {
                     module = modObj as string;
                 }
-                return string.Format("<class '{0}.{1}'>", module, name);
+                return string.Format(ResourceManager.Default.GetResource("class01", "<class '{0}.{1}'>"), module, name);
             }
         }
 
@@ -746,7 +746,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                 dts.TryGetValue(Context.SharedContext, this, this, out modObj)) {
                 module = modObj as string;
             }
-            return string.Format("{0}.{1} instance", module, Name);
+            return string.Format(ResourceManager.Default.GetResource("01instance", "{0}.{1} instance"), module, Name);
         }
 
         public void __setattr__(CodeContext/*!*/ context, string name, object value) {
@@ -1470,7 +1470,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
             }
 
             if (IsSystemType) {
-                throw new MissingMemberException(String.Format("'{0}' object has no attribute '{1}'", Name, name));
+                throw new MissingMemberException(String.Format(ResourceManager.Default.GetResource("0objecthasnoattribute1", "'{0}' object has no attribute '{1}'"), Name, name));
             }
 
             PythonTypeSlot curSlot;
@@ -1511,7 +1511,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
             }
 
             if (IsSystemType) {
-                throw new MissingMemberException(String.Format("can't delete attributes of built-in/extension type '{0}'", Name));
+                throw new MissingMemberException(String.Format(ResourceManager.Default.GetResource("cantdeleteattributesofbuiltinextensiontype0", "can't delete attributes of built-in/extension type '{0}'"), Name));
             }
 
             if (!_dict.Remove(name)) {
@@ -2372,7 +2372,7 @@ type(name, bases, dict) -> creates a new type instance with the given name, base
                 PythonType pt = newBases[i] as PythonType;
                 if (pt != null && pt.IsSystemType && pt != TypeCache.Object) {
                     // The only supported CLR base class w/o refemit is object
-                    throw new NotSupportedException(string.Format("{0} is not a valid CLR base class. Only object is supported w/o refemit.", pt.UnderlyingSystemType.FullName));
+                    throw new NotSupportedException(string.Format(ResourceManager.Default.GetResource("0isnotavalidclrbaseclassonlyobjectissupportedworefemit", "{0} is not a valid CLR base class. Only object is supported w/o refemit."), pt.UnderlyingSystemType.FullName));
                 }
 #endif
 

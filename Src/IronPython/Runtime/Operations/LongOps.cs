@@ -611,7 +611,7 @@ namespace IronPython.Runtime.Operations {
 #if DEBUG
             int i;
             if (self.AsInt32(out i)) {
-                Debug.Assert(i == hash, String.Format("hash({0}) == {1}", i, hash));
+                Debug.Assert(i == hash, String.Format(ResourceManager.Default.GetResource("hash01", "hash({0}) == {1}"), i, hash));
             }
 #endif
             return hash;

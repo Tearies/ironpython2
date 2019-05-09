@@ -38,9 +38,9 @@ namespace IronPython.Runtime.Operations {
 
         public static string __str__(NamespaceTracker self) {
             if (self.PackageAssemblies.Count != 1) {
-                return String.Format("<module '{0}' (CLS module, {1} assemblies loaded)>", Get__name__(self.Name), self.PackageAssemblies.Count);
+                return String.Format(ResourceManager.Default.GetResource("module0clsmodule1assembliesloaded", "<module '{0}' (CLS module, {1} assemblies loaded)>"), Get__name__(self.Name), self.PackageAssemblies.Count);
             }
-            return String.Format("<module '{0}' (CLS module from {1})>", Get__name__(self.Name), self.PackageAssemblies[0].FullName);
+            return String.Format(ResourceManager.Default.GetResource("module0clsmodulefrom1", "<module '{0}' (CLS module from {1})>"), Get__name__(self.Name), self.PackageAssemblies[0].FullName);
         }
 
         [SpecialName, PropertyMethod]

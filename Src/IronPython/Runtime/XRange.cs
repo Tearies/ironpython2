@@ -129,12 +129,12 @@ namespace IronPython.Runtime {
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
             if (_step == 1) {
                 if (_start == 0) {
-                    return string.Format("xrange({0})", _stop);
+                    return string.Format(ResourceManager.Default.GetResource("xrange0", "xrange({0})"), _stop);
                 } else {
-                    return string.Format("xrange({0}, {1})", _start, _stop);
+                    return string.Format(ResourceManager.Default.GetResource("xrange01", "xrange({0}, {1})"), _start, _stop);
                 }
             } else {
-                return string.Format("xrange({0}, {1}, {2})", _start, _stop, _step);
+                return string.Format(ResourceManager.Default.GetResource("xrange012", "xrange({0}, {1}, {2})"), _start, _stop, _step);
             }
         }
 

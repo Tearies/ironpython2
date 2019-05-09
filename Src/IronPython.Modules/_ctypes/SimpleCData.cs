@@ -147,7 +147,7 @@ namespace IronPython.Modules {
             public string __repr__(CodeContext context) {
                 if (DynamicHelpers.GetPythonType(this).BaseTypes[0] == _SimpleCData) {
                     // direct subtypes have a custom repr
-                    return String.Format("{0}({1})", DynamicHelpers.GetPythonType(this).Name, GetDataRepr(context));
+                    return String.Format(ResourceManager.Default.GetResource("01", "{0}({1})"), DynamicHelpers.GetPythonType(this).Name, GetDataRepr(context));
                 }
 
                 return ObjectOps.__repr__(this);

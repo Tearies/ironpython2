@@ -327,10 +327,10 @@ namespace IronPython.Runtime.Types {
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
             if (IsUnbound || IsBuiltinModuleMethod) {
-                return string.Format("<built-in function {0}>", Name);
+                return string.Format(ResourceManager.Default.GetResource("builtinfunction0", "<built-in function {0}>"), Name);
             }
 
-            return string.Format("<built-in method {0} of {1} object at {2}>",
+            return string.Format(ResourceManager.Default.GetResource("builtinmethod0of1objectat2", "<built-in method {0} of {1} object at {2}>"),
                 __name__,
                 PythonOps.GetPythonTypeName(__self__),
                 PythonOps.HexId(__self__));
@@ -916,9 +916,9 @@ namespace IronPython.Runtime.Types {
                     }
 
                     if (hasGenerics) {
-                        throw PythonOps.TypeError(string.Format("bad type args to this generic method {0}", Name));
+                        throw PythonOps.TypeError(string.Format(ResourceManager.Default.GetResource("badtypeargstothisgenericmethod0", "bad type args to this generic method {0}"), Name));
                     } else {
-                        throw PythonOps.TypeError(string.Format("{0} is not a generic method and is unsubscriptable", Name));
+                        throw PythonOps.TypeError(string.Format(ResourceManager.Default.GetResource("0isnotagenericmethodandisunsubscriptable", "{0} is not a generic method and is unsubscriptable"), Name));
                     }
                 }
 

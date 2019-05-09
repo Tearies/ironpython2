@@ -1440,7 +1440,7 @@ namespace IronPython.Runtime
                     PythonOps.PrintWithDest(
                         SharedContext,
                         SystemStandardError,
-                        String.Format("Exception {0} ignored", FormatException(e))
+                        String.Format(ResourceManager.Default.GetResource("exception0ignored", "Exception {0} ignored"), FormatException(e))
                     );
                 }
             } 
@@ -1609,7 +1609,7 @@ namespace IronPython.Runtime
             DynamicStackFrame[] dfs = PythonExceptions.GetDynamicStackFrames(e);
             for (int i = 0; i < dfs.Length; ++i) {
                 DynamicStackFrame frame = dfs[i];
-                result.AppendFormat("  at {0} in {1}, line {2}\n", frame.GetMethodName(), frame.GetFileName(), frame.GetFileLineNumber());
+                result.AppendFormat(ResourceManager.Default.GetResource("at0in1line2n", "  at {0} in {1}, line {2}\n"), frame.GetMethodName(), frame.GetFileName(), frame.GetFileLineNumber());
             }
 
             if (Options.ExceptionDetail) {
@@ -1687,7 +1687,7 @@ namespace IronPython.Runtime
             if (fileName == "-c")
                 fileName = "<string>";
 
-            return String.Format("  File \"{0}\", line {1}, in {2}",
+            return String.Format(ResourceManager.Default.GetResource("file0line1in2", "File \"{0}\", line {1}, in {2}"),
                 fileName,
                 lineNumber == 0 ? "unknown" : lineNumber.ToString(),
                 methodName);

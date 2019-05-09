@@ -505,7 +505,7 @@ namespace IronPython.Runtime.Types {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return string.Format("<class {0} at {1}>", FullName, PythonOps.HexId(this));
+            return string.Format(ResourceManager.Default.GetResource("class0at1", "<class {0} at {1}>"), FullName, PythonOps.HexId(this));
         }
 
         #endregion

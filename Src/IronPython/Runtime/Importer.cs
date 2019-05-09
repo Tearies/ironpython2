@@ -786,7 +786,7 @@ namespace IronPython.Runtime {
 
                     if (context.DomainManager.Platform.FileExists(fullPath)) {
                         if (candidatePath != null) {
-                            throw PythonOps.ImportError(String.Format("Found multiple modules of the same name '{0}': '{1}' and '{2}'",
+                            throw PythonOps.ImportError(String.Format(ResourceManager.Default.GetResource("foundmultiplemodulesofthesamename01and2", "Found multiple modules of the same name '{0}': '{1}' and '{2}'"),
                                 name, candidatePath, fullPath));
                         }
 

@@ -10,6 +10,7 @@ using Microsoft.Scripting.Runtime;
 
 using IronPython.Runtime;
 using IronPython.Runtime.Types;
+using Microsoft.Scripting;
 
 namespace IronPython.Modules {
     /// <summary>
@@ -36,7 +37,7 @@ namespace IronPython.Modules {
             #region ICodeFormattable Members
 
             public string __repr__(CodeContext context) {
-                return String.Format("<cparam '{0}' ({1})>",
+                return String.Format(ResourceManager.Default.GetResource("cparam01", "<cparam '{0}' ({1})>"),
                     _type,
                     IdDispenser.GetId(__obj));// TODO: should be a real address
             }

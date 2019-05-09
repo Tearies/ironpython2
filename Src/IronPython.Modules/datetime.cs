@@ -233,10 +233,10 @@ namespace IronPython.Modules {
                         sb.Append(" days, ");
                 }
 
-                sb.AppendFormat("{0}:{1:d2}:{2:d2}", TimeSpanWithSeconds.Hours, TimeSpanWithSeconds.Minutes, TimeSpanWithSeconds.Seconds);
+                sb.AppendFormat(ResourceManager.Default.GetResource("01d22d2", "{0}:{1:d2}:{2:d2}"), TimeSpanWithSeconds.Hours, TimeSpanWithSeconds.Minutes, TimeSpanWithSeconds.Seconds);
 
                 if (_microseconds != 0)
-                    sb.AppendFormat(".{0:d6}", _microseconds);
+                    sb.AppendFormat(ResourceManager.Default.GetResource("0d6", ".{0:d6}"), _microseconds);
 
                 return sb.ToString();
             }
@@ -279,11 +279,11 @@ namespace IronPython.Modules {
 
             public virtual string/*!*/ __repr__(CodeContext/*!*/ context) {
                 if (_seconds == 0 && _microseconds == 0) {
-                    return String.Format("datetime.timedelta({0})", _days);
+                    return String.Format(ResourceManager.Default.GetResource("datetimetimedelta0", "datetime.timedelta({0})"), _days);
                 } else if (_microseconds == 0) {
-                    return String.Format("datetime.timedelta({0}, {1})", _days, _seconds);
+                    return String.Format(ResourceManager.Default.GetResource("datetimetimedelta01", "datetime.timedelta({0}, {1})"), _days, _seconds);
                 } else {
-                    return String.Format("datetime.timedelta({0}, {1}, {2})", _days, _seconds, _microseconds);
+                    return String.Format(ResourceManager.Default.GetResource("datetimetimedelta012", "datetime.timedelta({0}, {1}, {2})"), _days, _seconds, _microseconds);
                 }
             }
 
@@ -671,7 +671,7 @@ namespace IronPython.Modules {
             #region ICodeFormattable Members
 
             public virtual string/*!*/ __repr__(CodeContext/*!*/ context) {
-                return string.Format("datetime.date({0}, {1}, {2})", _dateTime.Year, _dateTime.Month, _dateTime.Day);
+                return string.Format(ResourceManager.Default.GetResource("datetimedate012", "datetime.date({0}, {1}, {2})"), _dateTime.Year, _dateTime.Month, _dateTime.Day);
             }
 
             public virtual string __format__(CodeContext/*!*/ context, string dateFormat){
@@ -1037,16 +1037,16 @@ namespace IronPython.Modules {
 
             public string isoformat([DefaultParameterValue('T')]char sep) {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("{0:d4}-{1:d2}-{2:d2}{3}{4:d2}:{5:d2}:{6:d2}", year, month, day, sep, hour, minute, second);
+                sb.AppendFormat(ResourceManager.Default.GetResource("0d41d22d234d25d26d2", "{0:d4}-{1:d2}-{2:d2}{3}{4:d2}:{5:d2}:{6:d2}"), year, month, day, sep, hour, minute, second);
 
-                if (microsecond != 0) sb.AppendFormat(".{0:d6}", microsecond);
+                if (microsecond != 0) sb.AppendFormat(ResourceManager.Default.GetResource("0d6", ".{0:d6}"), microsecond);
 
                 timedelta delta = utcoffset();
                 if (delta != null) {
                     if (delta.TimeSpanWithDaysAndSeconds >= TimeSpan.Zero) {
-                        sb.AppendFormat("+{0:d2}:{1:d2}", delta.TimeSpanWithDaysAndSeconds.Hours, delta.TimeSpanWithDaysAndSeconds.Minutes);
+                        sb.AppendFormat(ResourceManager.Default.GetResource("0d21d2", "+{0:d2}:{1:d2}"), delta.TimeSpanWithDaysAndSeconds.Hours, delta.TimeSpanWithDaysAndSeconds.Minutes);
                     } else {
-                        sb.AppendFormat("-{0:d2}:{1:d2}", -delta.TimeSpanWithDaysAndSeconds.Hours, -delta.TimeSpanWithDaysAndSeconds.Minutes);
+                        sb.AppendFormat(ResourceManager.Default.GetResource("0d21d2", "-{0:d2}:{1:d2}"), -delta.TimeSpanWithDaysAndSeconds.Hours, -delta.TimeSpanWithDaysAndSeconds.Minutes);
                     }
                 }
 
@@ -1152,7 +1152,7 @@ namespace IronPython.Modules {
             public override string/*!*/ __repr__(CodeContext/*!*/ context) {
                 StringBuilder sb = new StringBuilder();
                 // TODO: need to determine how to get the actual class name if a derived type (CP21478)
-                sb.AppendFormat("datetime.datetime({0}, {1}, {2}, {3}, {4}",
+                sb.AppendFormat(ResourceManager.Default.GetResource("datetimedatetime01234", "datetime.datetime({0}, {1}, {2}, {3}, {4}"),
                     InternalDateTime.Year,
                     InternalDateTime.Month,
                     InternalDateTime.Day,
@@ -1160,15 +1160,15 @@ namespace IronPython.Modules {
                     InternalDateTime.Minute);
 
                 if (microsecond != 0) {
-                    sb.AppendFormat(", {0}, {1}", second, microsecond);
+                    sb.AppendFormat(ResourceManager.Default.GetResource("01", ", {0}, {1}"), second, microsecond);
                 } else {
                     if (second != 0) {
-                        sb.AppendFormat(", {0}", second);
+                        sb.AppendFormat(ResourceManager.Default.GetResource("0", ", {0}"), second);
                     }
                 }
 
                 if (_tz != null) {
-                    sb.AppendFormat(", tzinfo={0}", PythonOps.Repr(context, _tz));
+                    sb.AppendFormat(ResourceManager.Default.GetResource("tzinfo0", ", tzinfo={0}"), PythonOps.Repr(context, _tz));
                 }
                 sb.AppendFormat(")");
                 return sb.ToString();
@@ -1347,16 +1347,16 @@ namespace IronPython.Modules {
 
             public override string ToString() {
                 StringBuilder sb = new StringBuilder();
-                sb.AppendFormat("{0:d2}:{1:d2}:{2:d2}", hour, minute, second);
+                sb.AppendFormat(ResourceManager.Default.GetResource("0d21d22d2", "{0:d2}:{1:d2}:{2:d2}"), hour, minute, second);
 
-                if (microsecond != 0) sb.AppendFormat(".{0:d6}", microsecond);
+                if (microsecond != 0) sb.AppendFormat(ResourceManager.Default.GetResource("0d6", ".{0:d6}"), microsecond);
 
                 timedelta delta = utcoffset();
                 if (delta != null) {
                     if (delta.TimeSpanWithDaysAndSeconds >= TimeSpan.Zero) {
-                        sb.AppendFormat("+{0:d2}:{1:d2}", delta.TimeSpanWithDaysAndSeconds.Hours, delta.TimeSpanWithDaysAndSeconds.Minutes);
+                        sb.AppendFormat(ResourceManager.Default.GetResource("0d21d2", "+{0:d2}:{1:d2}"), delta.TimeSpanWithDaysAndSeconds.Hours, delta.TimeSpanWithDaysAndSeconds.Minutes);
                     } else {
-                        sb.AppendFormat("-{0:d2}:{1:d2}", -delta.TimeSpanWithDaysAndSeconds.Hours, -delta.TimeSpanWithDaysAndSeconds.Minutes);
+                        sb.AppendFormat(ResourceManager.Default.GetResource("0d21d2", "-{0:d2}:{1:d2}"), -delta.TimeSpanWithDaysAndSeconds.Hours, -delta.TimeSpanWithDaysAndSeconds.Minutes);
                     }
                 }
 
@@ -1460,16 +1460,16 @@ namespace IronPython.Modules {
             public virtual string/*!*/ __repr__(CodeContext/*!*/ context) {
                 StringBuilder sb = new StringBuilder();
                 if (microsecond != 0)
-                    sb.AppendFormat("datetime.time({0}, {1}, {2}, {3}", hour, minute, second, microsecond);
+                    sb.AppendFormat(ResourceManager.Default.GetResource("datetimetime0123", "datetime.time({0}, {1}, {2}, {3}"), hour, minute, second, microsecond);
                 else if (second != 0)
-                    sb.AppendFormat("datetime.time({0}, {1}, {2}", hour, minute, second);
+                    sb.AppendFormat(ResourceManager.Default.GetResource("datetimetime012", "datetime.time({0}, {1}, {2}"), hour, minute, second);
                 else
-                    sb.AppendFormat("datetime.time({0}, {1}", hour, minute);
+                    sb.AppendFormat(ResourceManager.Default.GetResource("datetimetime01", "datetime.time({0}, {1}"), hour, minute);
 
                 string ltzname = tzname() as string;
                 if (ltzname != null) {
                     // TODO: calling __repr__?
-                    sb.AppendFormat(", tzinfo={0}", ltzname.ToLower());
+                    sb.AppendFormat(ResourceManager.Default.GetResource("tzinfo0", ", tzinfo={0}"), ltzname.ToLower());
                 }
 
                 sb.AppendFormat(")");

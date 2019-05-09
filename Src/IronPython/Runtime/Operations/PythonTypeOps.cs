@@ -305,7 +305,7 @@ namespace IronPython.Runtime.Operations {
                 default:
                     // if we have a new slot in the derived class filter out the 
                     // members from the base class.
-                    throw new InvalidOperationException(String.Format("Bad member type {0} on {1}.{2}", tt.ToString(), group[0].DeclaringType, name));
+                    throw new InvalidOperationException(String.Format(ResourceManager.Default.GetResource("badmembertype0on12", "Bad member type {0} on {1}.{2}"), tt.ToString(), group[0].DeclaringType, name));
             }
         }
 

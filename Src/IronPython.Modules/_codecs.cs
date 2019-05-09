@@ -193,7 +193,7 @@ namespace IronPython.Modules {
                     case '\'': res.Append("\\'"); break;
                     default:
                         if (text[i] < 0x20 || text[i] >= 0x7f) {
-                            res.AppendFormat("\\x{0:x2}", (int)text[i]);
+                            res.AppendFormat(ResourceManager.Default.GetResource("x0x2", "\\x{0:x2}"), (int)text[i]);
                         } else {
                             res.Append(text[i]);
                         }

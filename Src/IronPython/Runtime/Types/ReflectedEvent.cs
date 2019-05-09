@@ -56,9 +56,9 @@ namespace IronPython.Runtime.Types {
                     PythonType dt = bea.Owner as PythonType;
                     if (dt != null) {
                         if (bea.Instance == null) {
-                            throw new MissingMemberException(String.Format("attribute '{1}' of '{0}' object is read-only", dt.Name, _tracker.Name));
+                            throw new MissingMemberException(String.Format(ResourceManager.Default.GetResource("attribute1of0objectisreadonly", "attribute '{1}' of '{0}' object is read-only"), dt.Name, _tracker.Name));
                         } else {
-                            throw new MissingMemberException(String.Format("'{0}' object has no attribute '{1}'", dt.Name, _tracker.Name));
+                            throw new MissingMemberException(String.Format(ResourceManager.Default.GetResource("0objecthasnoattribute1", "'{0}' object has no attribute '{1}'"), dt.Name, _tracker.Name));
                         }
                     }
                 }
@@ -237,7 +237,7 @@ namespace IronPython.Runtime.Types {
 
         private MissingMemberException/*!*/ ReadOnlyException(PythonType/*!*/ dt) {
             Assert.NotNull(dt);
-            return new MissingMemberException(String.Format("attribute '{1}' of '{0}' object is read-only", dt.Name, _tracker.Name));
+            return new MissingMemberException(String.Format(ResourceManager.Default.GetResource("attribute1of0objectisreadonly", "attribute '{1}' of '{0}' object is read-only"), dt.Name, _tracker.Name));
         }
 
         #endregion
@@ -245,7 +245,7 @@ namespace IronPython.Runtime.Types {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return string.Format("<event# {0} on {1}>", Info.Name, Info.DeclaringType.Name);
+            return string.Format(ResourceManager.Default.GetResource("event0on1", "<event# {0} on {1}>"), Info.Name, Info.DeclaringType.Name);
         }
 
         #endregion

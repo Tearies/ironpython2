@@ -222,7 +222,7 @@ namespace IronPython.Runtime {
         #region ICodeFormattable Members
 
         public string/*!*/ __repr__(CodeContext/*!*/ context) {
-            return string.Format("<read-only buffer for 0x{0:X16}, size {1}, offset {2} at 0x{3:X16}>",
+            return string.Format(ResourceManager.Default.GetResource("readonlybufferfor0x0x16size1offset2at0x3x16", "<read-only buffer for 0x{0:X16}, size {1}, offset {2} at 0x{3:X16}>"),
                 PythonOps.Id(_object), Size, _offset, PythonOps.Id(this));
         }
 
