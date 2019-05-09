@@ -148,7 +148,7 @@ namespace IronPython.Modules {
                                         }
                                         continue;
                                     default:
-                                        throw PythonOps.ValueError("decoding error; unknown error handling code: " + errors);
+                                        throw PythonOps.ValueError(ResourceManager.Default.GetResource("ecodingerrorunknownerrorhandlingcode", "decoding error; unknown error handling code: {0}") , errors);
                                 }
                             }
 

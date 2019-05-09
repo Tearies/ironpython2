@@ -229,8 +229,7 @@ namespace IronPython.Modules {
                         PythonLocale.GetLocaleInfo(context).Time.DateTimeFormat,
                         DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.NoCurrentDateDefault,
                         out res)) {
-                        throw PythonOps.ValueError("time data does not match format" + Environment.NewLine + 
-                            "data=" + @string + ", fmt=" + format + ", to: " + formats[0]);
+                        throw PythonOps.ValueError(string.Format(ResourceManager.Default.GetResource("timedatadoesnotmatchformat", "time data does not match format {0} data={1}, fmt={2}, to: {3}"), Environment.NewLine, @string, format, formats[0]));
                     }
                 } catch (FormatException e) {
                     throw PythonOps.ValueError(e.Message + Environment.NewLine + 

@@ -528,7 +528,7 @@ namespace IronPython.Modules {
                     return data.Count;
                 }
 
-                throw PythonOps.TypeError("must be read-write buffer, not " + PythonTypeOps.GetName(buf));
+                throw PythonOps.TypeError(ResourceManager.Default.GetResource("mustbereadwritebuffernot0", "must be read-write buffer, not {0}"), PythonTypeOps.GetName(buf));
             }
 
             public override BigInteger write(CodeContext/*!*/ context, object buf) {

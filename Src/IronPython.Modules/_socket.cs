@@ -630,7 +630,7 @@ namespace IronPython.Modules {
 
             private static int byteBufferSize(string funcName, int nbytes, int bufLength, int itemSize) {
                 if (nbytes < 0) {
-                    throw PythonOps.ValueError("negative buffersize in " + funcName);
+                    throw PythonOps.ValueError("negative buffersize in {0}" , funcName);
                 } else if (nbytes == 0) {
                     return bufLength * itemSize;
                 } else {

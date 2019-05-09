@@ -362,13 +362,11 @@ The Dialect type records CSV parsing and generation options.")]
                     string.Compare(name, "quotechar") == 0 ||
                     string.Compare(name, "quoting") == 0)
                 {
-                    throw PythonOps.AttributeError("attribute '{0}' of " +
-                        "'_csv.Dialect' objects is not writable", name);
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("attribute0ofcsvdialectobjectsisnotwritable", "attribute '{0}' of '_csv.Dialect' objects is not writable"), name);
                 }
                 else
                 {
-                    throw PythonOps.AttributeError("'_csv.Dialect' object " +
-                        "has no attribute '{0}'", name);
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("csvdialectobjecthasnoattribute0", "'_csv.Dialect' object has no attribute '{0}'"), name);
                 }
             }
 
@@ -387,13 +385,11 @@ The Dialect type records CSV parsing and generation options.")]
                     string.Compare(name, "quotechar") == 0 ||
                     string.Compare(name, "quoting") == 0)
                 {
-                    throw PythonOps.AttributeError("attribute '{0}' of " +
-                        "'_csv.Dialect' objects is not writable", name);
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("attribute0ofcsvdialectobjectsisnotwritable", "attribute '{0}' of '_csv.Dialect' objects is not writable"), name);
                 }
                 else
                 {
-                    throw PythonOps.AttributeError("'_csv.Dialect' object " +
-                        "has no attribute '{0}'", name);
+                    throw PythonOps.AttributeError(ResourceManager.Default.GetResource("csvdialectobjecthasnoattribute0", "'_csv.Dialect' object has no attribute '{0}'"), name);
                 }
             }
 
@@ -495,8 +491,7 @@ The Dialect type records CSV parsing and generation options.")]
                 {
                     if (Array.IndexOf(VALID_KWARGS, key) < 0)
                     {
-                        throw PythonOps.TypeError("'{0}' is an invalid " +
-                            "keyword argument for this function", key);
+                        throw PythonOps.TypeError(ResourceManager.Default.GetResource("0isaninvalidkeywordargumentforthisfunction", "'{0}' is an invalid keyword argument for this function"), key);
                     }
                 }
 
@@ -716,8 +711,7 @@ in CSV format.")]
 
                         if (!(lineobj is string))
                         {
-                            throw PythonOps.TypeError("expected string or " +
-                                "Unicode object, {0} found",
+                            throw PythonOps.TypeError(ResourceManager.Default.GetResource("expectedstringorunicodeobject0found", "expected string or Unicode object, {0} found"),
                                 DynamicHelpers.GetPythonType(lineobj.GetType()));
                         }
 
@@ -945,9 +939,7 @@ in CSV format.")]
                                 _state = State.StartRecord;
                             else
                             {
-                                throw MakeError("new-line character seen " +
-                                    "in unquoted field - do you need to open" +
-                                    " the file in universal-newline mode?");
+                                throw MakeError(ResourceManager.Default.GetResource("newlinecharacterseeninunquotedfielddoyouneedtoopenthefileinuniversalnewlinemode", "new-line character seen in unquoted field - do you need to open the file in universal-newline mode?"));
                             }
                             break;
                     }
