@@ -545,8 +545,7 @@ namespace IronPython.SQLite
             {
                 if(this.check_same_thread)
                     if(this.thread_ident != System.Threading.Thread.CurrentThread.ManagedThreadId)
-                        throw MakeProgrammingError("SQLite objects created in a thread can only be used in that same thread." +
-                            "The object was created in thread id {0} and this is thread id {1}".Format(
+                        throw MakeProgrammingError(string.Format(ResourceManager.Default.GetResource("sqliteobjectscreatedinathreadcanonlybeusedinthatsamethread", "SQLite objects created in a thread can only be used in that same thread. The object was created in thread id {0} and this is thread id {1}"),
                             this.thread_ident, System.Threading.Thread.CurrentThread.ManagedThreadId));
             }
 

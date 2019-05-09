@@ -142,7 +142,7 @@ namespace IronPython.SQLite
             {
                 string binding_name = Sqlite3.sqlite3_bind_parameter_name(this.st, i);
                 if(string.IsNullOrEmpty(binding_name))
-                    throw PythonSQLite.MakeProgrammingError("Binding {0} has no name, but you supplied a dictionary (which has only names).".Format(i));
+                    throw PythonSQLite.MakeProgrammingError(string.Format(ResourceManager.Default.GetResource("bindinghasnonamebutyousuppliedadictionary", "Binding {0} has no name, but you supplied a dictionary (which has only names)."),i));
 
                 // remove the leading colon
                 binding_name = binding_name.Substring(1);
@@ -150,7 +150,7 @@ namespace IronPython.SQLite
                 if(args.Contains(binding_name))
                     BindParameter(context, i, maybeAdapt(context, args[binding_name]));
                 else
-                    throw PythonSQLite.MakeProgrammingError("You did not supply a value for binding {0}.".Format(i));
+                    throw PythonSQLite.MakeProgrammingError(string.Format(ResourceManager.Default.GetResource("youdidnotsupplyavalueforbinding", "You did not supply a value for binding {0}."),i));
             }
         }
 
@@ -196,10 +196,10 @@ namespace IronPython.SQLite
                 rc = Sqlite3.sqlite3_bind_blob(this.st, index, bytes, -1, Sqlite3.SQLITE_TRANSIENT);
             }
             else
-                throw PythonSQLite.MakeInterfaceError("Unable to bind parameter {0} - unsupported type {1}".Format(index, arg.GetType()));
+                throw PythonSQLite.MakeInterfaceError(string.Format(ResourceManager.Default.GetResource("unabletobindparameterunsupportedtype", "Unable to bind parameter {0} - unsupported type {1}"),index, arg.GetType()));
 
             if(rc != Sqlite3.SQLITE_OK)
-                throw PythonSQLite.MakeInterfaceError("Unable to bind parameter {0}: {1}".Format(index, Sqlite3.sqlite3_errmsg(db)));
+                throw PythonSQLite.MakeInterfaceError(string.Format(ResourceManager.Default.GetResource("unabletobindparameter", "Unable to bind parameter {0}: {1}"),index, Sqlite3.sqlite3_errmsg(db)));
         }
 
         private object maybeAdapt(CodeContext context, object value)
