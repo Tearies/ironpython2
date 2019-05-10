@@ -2523,7 +2523,7 @@ namespace IronPython.Compiler {
                 // the error is on the next token which has a useful location, unlike the indent - note we don't have an
                 // indent if we're at an EOF.  It'a also an indentation error instead of a syntax error.
                 NextToken();
-                ReportSyntaxError(GetStart(), GetEnd(), "unexpected indent", ErrorCodes.IndentationError);
+                ReportSyntaxError(GetStart(), GetEnd(), ResourceManager.Default.GetResource("unexpectedindent", "unexpected indent"), ErrorCodes.IndentationError);
             } else {
                 ReportSyntaxError(_lookahead);
             }
