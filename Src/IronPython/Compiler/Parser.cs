@@ -338,7 +338,7 @@ namespace IronPython.Compiler {
             } else if (t.Kind != TokenKind.EndOfFile) {
                 msg = Resources.UnexpectedToken;
             } else {
-                msg = "unexpected EOF while parsing";
+                msg = ResourceManager.Default.GetResource("unexpectedEOFwhileparsing","unexpected EOF while parsing");
             }
             
             return msg;
